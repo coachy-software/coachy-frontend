@@ -29,7 +29,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-
 # Logs
 logs
 *.log
@@ -91,3 +90,5 @@ typings/
 
 # next.js build output
 .next
+
+package-lock.json
