@@ -12,7 +12,7 @@ export default new Router({
         {
           path: '',
           name: 'landing',
-          component: () => import('@/views/landing/HomeView'),
+          component: () => import('@/views/landing/HomeView')
         }
       ]
     },
@@ -23,14 +23,20 @@ export default new Router({
         {
           path: '',
           name: 'dashboard',
-          component: () => import('@/views/dashboard/home/HomeView'),
+          component: () => import('@/views/dashboard/home/HomeView')
         }
       ]
     },
     {
       path: '/login',
-      name: 'login',
-      component: () => import('@/views/login/login/LoginVue')
+      component: () => import('@/views/login/LoginLayout'),
+      children: [
+        {
+          path: '',
+          name: 'login',
+          component: () => import('@/views/login/login/LoginView')
+        }
+      ]
     }
   ]
 })
