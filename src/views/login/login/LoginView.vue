@@ -38,17 +38,19 @@
                     .card-title Login to your account
                     .form-group
                       label.form-label Username
-                      input.form-control(type="text", id="username", placeholder="Enter username" v-model="username")
+                      input.form-control(:class="{'is-invalid': !$v.username.required}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
+                      .invalid-feedback(v-if="!$v.username.required") Field is required
                     .form-group
                       label.form-label Password
                         a#float-right.float-right.small(href="#") I forgot password
-                      input.form-control(type="password", id="password", placeholder="Enter password" v-model="password")
+                      input.form-control(:class="{'is-invalid': !$v.password.required}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
+                      .invalid-feedback(v-if="!$v.password.required") Field is required
                     .form-group
                       label#rememberme.custom-control.custom-checkbox
                         input.custom-control-input(type="checkbox")
                         span.custom-control-label Remember me
                     .form-footer
-                      button#submit.btn.btn-primary.btn-block(type="submit") Sign in
+                      button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
               #signup.text-center.text-muted
                 p.
                   Don't have account yet? #[a(href="#") Sing up]
@@ -56,6 +58,7 @@
 
 <script>
   import {notification} from "@/utils/toastr.utils";
+  import {required} from "vuelidate/src/validators";
 
   export default {
     name: 'login',
@@ -66,11 +69,11 @@
     methods: {
       login() {
         this.$store.dispatch('login', this)
-        .then(response => {
+        .then(() => {
           this.$router.push("/");
           notification.success('Zalogowano pomyślnie');
         })
-        .catch(error => {
+        .catch(() => {
           notification.error('Niepoprawny login lub hasło')
         })
       }
@@ -78,7 +81,14 @@
     computed: {
       isLoggingIn() {
         return this.$store.getters.isLoggingIn;
+      },
+      isInvalid() {
+        return this.$v.$invalid;
       }
+    },
+    validations: {
+      username: {required},
+      password: {required}
     }
   }
 </script>
