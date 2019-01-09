@@ -22,17 +22,20 @@
  * SOFTWARE.
  */
 
-import router from '@/router.js'
 import axios from "axios";
 
 const SET_TOKEN = 'SET_TOKEN';
 const SET_USER = 'SET_USER';
 const SET_STATUS = 'SET_STATUS';
 
+const NOT_LOGGED_IN = "NOT_LOGGED_IN";
+const LOGGING_IN = "LOGGING_IN";
+const LOGGED_IN = "LOGGED_IN";
+
 const state = {
-  token: "",
-  user: {},
-  status: ""
+  token: localStorage.getItem("token") || undefined,
+  user: JSON.parse(localStorage.getItem("user")) || undefined,
+  status: NOT_LOGGED_IN
 };
 
 const mutations = {
@@ -40,7 +43,7 @@ const mutations = {
     state.token = payload;
   },
 
-  [SET_USER]: (state, {payload}) => {
+  [SET_USER]: (state, payload) => {
     state.user = payload;
   },
 
@@ -51,22 +54,31 @@ const mutations = {
 
 const actions = {
   login: ({commit}, {username, password}) => {
-    axios.post("http://localhost:3000/api/authenticate", {username: username, password: password}, {
+    commit(SET_STATUS, LOGGING_IN);
+
+    axios.post('http://localhost:3000/api/authenticate', {username: username, password: password}, {
       headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
     .then(response => {
       if (response.data) {
-        commit(SET_TOKEN, window.btoa(username + ":" + password));
-        localStorage.setItem("token", JSON.stringify(response.data));
+        let base64Credentials = window.btoa(username + ":" + password);
+
+        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("token", window.btoa(username + ":" + password));
+
+        commit(SET_STATUS, LOGGED_IN);
+        commit(SET_USER, response.data);
+        commit(SET_TOKEN, base64Credentials);
       }
 
-      router.push("/");
       return response;
     })
-    .catch(router.push("/login"));
+    .catch(error => {
+      commit(SET_STATUS, NOT_LOGGED_IN);
+    });
   },
 
   register: () => {
@@ -74,7 +86,14 @@ const actions = {
   }
 };
 
-const getters = {};
+const getters = {
+  isLoggedIn: (state) => {
+    return state.user !== undefined;
+  },
+  isLoggingIn: (state) => {
+    return state.status === LOGGING_IN
+  }
+};
 
 export default {
   state,

@@ -32,20 +32,23 @@
               img(src="@/assets/dark-logo.svg")
             form.card.mt-auto(@submit.prevent="login")
               #card-body.card-body.p-6
-                .card-title Login to your account
-                .form-group
-                  label.form-label Username
-                  input.form-control(type="text", id="username", placeholder="Enter username" v-model="username")
-                .form-group
-                  label.form-label Password
-                    a#float-right.float-right.small(href="#") I forgot password
-                  input.form-control(type="password", id="password", placeholder="Enter password" v-model="password")
-                .form-group
-                  label#rememberme.custom-control.custom-checkbox
-                    input.custom-control-input(type="checkbox")
-                    span.custom-control-label Remember me
-                .form-footer
-                  button#submit.btn.btn-primary.btn-block(type="submit") Sign in
+                #dimmer.dimmer(:class="{'active': isLoggingIn}")
+                  .loader
+                  .dimmer-content
+                    .card-title Login to your account
+                    .form-group
+                      label.form-label Username
+                      input.form-control(type="text", id="username", placeholder="Enter username" v-model="username")
+                    .form-group
+                      label.form-label Password
+                        a#float-right.float-right.small(href="#") I forgot password
+                      input.form-control(type="password", id="password", placeholder="Enter password" v-model="password")
+                    .form-group
+                      label#rememberme.custom-control.custom-checkbox
+                        input.custom-control-input(type="checkbox")
+                        span.custom-control-label Remember me
+                    .form-footer
+                      button#submit.btn.btn-primary.btn-block(type="submit") Sign in
               #signup.text-center.text-muted
                 p.
                   Don't have account yet? #[a(href="#") Sing up]
@@ -61,6 +64,11 @@
     methods: {
       login() {
         this.$store.dispatch('login', this);
+      }
+    },
+    computed: {
+      isLoggingIn() {
+        return this.$store.getters.isLoggingIn;
       }
     }
   }
