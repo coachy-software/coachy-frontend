@@ -30,16 +30,16 @@
           #col.col.col-login.mx-auto
             #logo.text-center
               img(src="@/assets/dark-logo.svg")
-            form.card.mt-auto
+            form.card.mt-auto(@submit.prevent="login")
               #card-body.card-body.p-6
                 .card-title Login to your account
                 .form-group
                   label.form-label Username
-                  input.form-control(type="text", id="username", placeholder="Enter username")
+                  input.form-control(type="text", id="username", placeholder="Enter username" v-model="username")
                 .form-group
                   label.form-label Password
                     a#float-right.float-right.small(href="#") I forgot password
-                  input.form-control(type="password", id="password", placeholder="Enter password")
+                  input.form-control(type="password", id="password", placeholder="Enter password" v-model="password")
                 .form-group
                   label#rememberme.custom-control.custom-checkbox
                     input.custom-control-input(type="checkbox")
@@ -53,6 +53,15 @@
 
 <script>
   export default {
-    name: 'login'
+    name: 'login',
+    data: () => ({
+      username: "",
+      password: ""
+    }),
+    methods: {
+      login() {
+        this.$store.dispatch('login', this);
+      }
+    }
   }
 </script>

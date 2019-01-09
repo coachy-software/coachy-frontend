@@ -22,19 +22,63 @@
  * SOFTWARE.
  */
 
-import Vue from 'vue'
-import Vuex from 'vuex'
+import router from '@/router.js'
+import axios from "axios";
 
-Vue.use(Vuex)
+const SET_TOKEN = 'SET_TOKEN';
+const SET_USER = 'SET_USER';
+const SET_STATUS = 'SET_STATUS';
 
-export default new Vuex.Store({
-  state: {
+const state = {
+  token: "",
+  user: {},
+  status: ""
+};
 
+const mutations = {
+  [SET_TOKEN]: (state, payload) => {
+    state.token = payload;
   },
-  mutations: {
 
+  [SET_USER]: (state, {payload}) => {
+    state.user = payload;
   },
-  actions: {
+
+  [SET_STATUS]: (state, payload) => {
+    state.status = payload;
+  }
+};
+
+const actions = {
+  login: ({commit}, {username, password}) => {
+    axios.post("http://localhost:3000/api/authenticate", {username: username, password: password}, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.data) {
+        commit(SET_TOKEN, window.btoa(username + ":" + password));
+        localStorage.setItem("token", JSON.stringify(response.data));
+      }
+
+      router.push("/");
+      return response;
+    })
+    .catch(router.push("/login"));
+  },
+
+  register: () => {
 
   }
-})
+};
+
+const getters = {};
+
+export default {
+  state,
+  mutations,
+  actions,
+  getters
+}

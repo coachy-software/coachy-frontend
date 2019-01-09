@@ -22,14 +22,18 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import Vuex from "vuex";
-import user from "./user.store";
+import axios from 'axios';
+import Vue from 'vue'
+import VueAxios from 'vue-axios'
 
-Vue.use(Vuex);
+Vue.use(VueAxios, axios);
 
-export default new Vuex.Store({
-  modules: {
-    user
+const API_URL = 'http://localhost:3000/api';
+
+export default axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + localStorage.getItem('token')
   }
 });
