@@ -30,7 +30,7 @@
           #col.col.col-login.mx-auto
             #logo.text-center
               img(src="@/assets/dark-logo.svg")
-            form.card.mt-auto(@submit.prevent="login")
+            form#card.card.mt-auto(@submit.prevent="login")
               #card-body.card-body.p-6
                 #dimmer.dimmer(:class="{'active': isLoggingIn}")
                   .loader
@@ -38,12 +38,12 @@
                     .card-title Login to your account
                     .form-group
                       label.form-label Username
-                      input.form-control(:class="{'is-invalid': !$v.username.required}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
+                      input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
                       .invalid-feedback(v-if="!$v.username.required") Field is required
                     .form-group
                       label.form-label Password
                         a#float-right.float-right.small(href="#") I forgot password
-                      input.form-control(:class="{'is-invalid': !$v.password.required}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
+                      input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
                       .invalid-feedback(v-if="!$v.password.required") Field is required
                     .form-group
                       label#rememberme.custom-control.custom-checkbox
@@ -53,7 +53,7 @@
                       button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
               #signup.text-center.text-muted
                 p.
-                  Don't have account yet? #[a(href="#") Sing up]
+                  Don't have account yet? #[router-link(to="/register") Sign up]
 </template>
 
 <script>
@@ -71,10 +71,10 @@
         this.$store.dispatch('login', this)
         .then(() => {
           this.$router.push("/");
-          notification.success('Zalogowano pomyślnie');
+          notification.success('Logged in');
         })
         .catch(() => {
-          notification.error('Niepoprawny login lub hasło')
+          notification.error('Bad credentials')
         })
       }
     },

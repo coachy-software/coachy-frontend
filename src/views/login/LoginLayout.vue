@@ -34,13 +34,13 @@
   .page {
     margin-top: -3%;
   }
+
   #logo {
-    margin-bottom: -10%;
+    margin-bottom: -16%;
   }
 
 </style>
 
 <script>
-  export default {
-  }
+  export default {}
 </script>

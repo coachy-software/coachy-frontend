@@ -22,18 +22,4 @@
  * SOFTWARE.
  */
 
-import axios from 'axios';
-import Vue from 'vue'
-import VueAxios from 'vue-axios'
-import {API_URL} from "@/utils/constants";
-
-Vue.use(VueAxios, axios);
-
-
-export default axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + localStorage.getItem('token')
-  }
-});
+export const API_URL = "http://localhost:3000/api";

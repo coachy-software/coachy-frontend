@@ -23,6 +23,7 @@
  */
 
 import axios from "axios";
+import {API_URL} from "../utils/constants";
 
 const SET_TOKEN = 'SET_TOKEN';
 const SET_USER = 'SET_USER';
@@ -57,7 +58,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(SET_STATUS, LOGGING_IN);
 
-      axios.post('http://localhost:3000/api/authenticate', {username: username, password: password}, {
+      axios.post(`${API_URL}/authenticate`, {username: username, password: password}, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -85,8 +86,35 @@ const actions = {
     });
   },
 
-  register: () => {
+  register: ({commit}, {username, password, matchingPassword, email, accountType}) => {
+    return new Promise((resolve, reject) => {
+      commit(SET_STATUS, LOGGING_IN);
 
+      axios.post(`${API_URL}/register`, {username, password, matchingPassword, email, accountType}, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        commit(SET_STATUS, NOT_LOGGED_IN);
+        resolve(response);
+      })
+      .catch(error => {
+        commit(SET_STATUS, NOT_LOGGED_IN);
+        reject(error);
+      });
+
+    });
+  },
+
+  logout: ({commit}) => {
+    localStorage.removeItem("item");
+    localStorage.removeItem("token");
+
+    commit(SET_STATUS, NOT_LOGGED_IN);
+    commit(SET_USER, undefined);
+    commit(SET_TOKEN, undefined);
   }
 };
 

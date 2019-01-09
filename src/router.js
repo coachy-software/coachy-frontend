@@ -52,13 +52,18 @@ export default new Router({
       ]
     },
     {
-      path: '/login',
+      path: '/auth',
       component: () => import('@/views/login/LoginLayout'),
       children: [
         {
-          path: '',
+          path: '/login',
           name: 'login',
           component: () => import('@/views/login/login/LoginView')
+        },
+        {
+          path: '/register',
+          name: 'register',
+          component: () => import('@/views/login/register/RegisterView')
         }
       ]
     }
