@@ -54,30 +54,34 @@ const mutations = {
 
 const actions = {
   login: ({commit}, {username, password}) => {
-    commit(SET_STATUS, LOGGING_IN);
+    return new Promise((resolve, reject) => {
+      commit(SET_STATUS, LOGGING_IN);
 
-    axios.post('http://localhost:3000/api/authenticate', {username: username, password: password}, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.data) {
-        let base64Credentials = window.btoa(username + ":" + password);
+      axios.post('http://localhost:3000/api/authenticate', {username: username, password: password}, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.data) {
+          let base64Credentials = window.btoa(username + ":" + password);
 
-        localStorage.setItem("user", JSON.stringify(response.data));
-        localStorage.setItem("token", window.btoa(username + ":" + password));
+          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("token", window.btoa(username + ":" + password));
 
-        commit(SET_STATUS, LOGGED_IN);
-        commit(SET_USER, response.data);
-        commit(SET_TOKEN, base64Credentials);
-      }
+          commit(SET_STATUS, LOGGED_IN);
+          commit(SET_USER, response.data);
+          commit(SET_TOKEN, base64Credentials);
+        }
 
-      return response;
-    })
-    .catch(error => {
-      commit(SET_STATUS, NOT_LOGGED_IN);
+        resolve(response);
+      })
+      .catch(error => {
+        commit(SET_STATUS, NOT_LOGGED_IN);
+        reject(error);
+      });
+
     });
   },
 

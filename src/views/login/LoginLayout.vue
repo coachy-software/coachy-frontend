@@ -29,6 +29,7 @@
 
 <style>
   @import url('~tabler-ui/dist/assets/css/dashboard.css');
+  @import url(~toastr/toastr.scss);
 
   .page {
     margin-top: -3%;

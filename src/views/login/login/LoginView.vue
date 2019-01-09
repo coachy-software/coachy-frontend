@@ -55,6 +55,8 @@
 </template>
 
 <script>
+  import {notification} from "@/utils/toastr.utils";
+
   export default {
     name: 'login',
     data: () => ({
@@ -63,7 +65,14 @@
     }),
     methods: {
       login() {
-        this.$store.dispatch('login', this);
+        this.$store.dispatch('login', this)
+        .then(response => {
+          this.$router.push("/");
+          notification.success('Zalogowano pomyślnie');
+        })
+        .catch(error => {
+          notification.error('Niepoprawny login lub hasło')
+        })
       }
     },
     computed: {
