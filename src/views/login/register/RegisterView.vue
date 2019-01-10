@@ -100,7 +100,7 @@
     }),
     methods: {
       register() {
-        this.$store.dispatch('register', {
+        this.$store.dispatch('user/register', {
           "username": this.username,
           "password": this.password,
           "matchingPassword": this.confirmPassword,

@@ -68,7 +68,7 @@
     }),
     methods: {
       login() {
-        this.$store.dispatch('login', this)
+        this.$store.dispatch('user/login', this)
         .then(() => {
           this.$router.push("/");
           notification.success('Logged in');
