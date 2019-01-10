@@ -23,7 +23,7 @@
  */
 
 import axios from "axios";
-import {API_URL} from "../utils/constants";
+import {API_URL} from "../../../utils/constants";
 
 const SET_TOKEN = 'SET_TOKEN';
 const SET_USER = 'SET_USER';

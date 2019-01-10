@@ -64,6 +64,17 @@ export default new Router({
           path: '/register',
           name: 'register',
           component: () => import('@/views/login/register/RegisterView')
+        },
+        {
+          path: '/forgot-password',
+          name: 'forgot-password',
+          component: () => import('@/views/login/forgot_password/ForgotPasswordView'),
+        },
+        {
+          path: '/reset-password',
+          name: 'reset-password',
+          component: () => import('@/views/login/reset_password/ResetPasswordView'),
+          props: (route) => ({query: route.query.token})
         }
       ]
     }

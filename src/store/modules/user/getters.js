@@ -22,14 +22,12 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import Vuex from "vuex";
-import user from "./modules/user/user.store";
+import {LOGGING_IN} from "./index";
 
-Vue.use(Vuex);
+const isLoggedIn = (state) => state.user !== undefined;
+const isLoggingIn = (state) => state.status === LOGGING_IN;
 
-export default new Vuex.Store({
-  modules: {
-    user
-  }
-});
+export default {
+  isLoggedIn,
+  isLoggingIn
+}

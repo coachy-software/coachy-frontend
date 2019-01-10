@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import Vuex from "vuex";
-import user from "./modules/user/user.store";
 
-Vue.use(Vuex);
+const [SET_TOKEN]: (state, payload) => state.token = payload;
+const [SET_USER]: (state, payload) => state.user = payload;
+const [SET_STATUS]: (state, payload) => state.status = payload;
 
-export default new Vuex.Store({
-  modules: {
-    user
-  }
-});
+export default {
+  SET_TOKEN,
+  SET_USER,
+  SET_STATUS
+}
