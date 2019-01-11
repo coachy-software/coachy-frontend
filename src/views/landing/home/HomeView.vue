@@ -22,13 +22,5 @@
   - SOFTWARE.
   -->
 
-<template lang="pug">
-  div
-    p You are now in Landing
-</template>
-
-<script>
-  export default {
-    name: 'landing'
-  }
-</script>
+<template lang="pug" src="./template.pug"></template>
+<script src="./component.js"></script>

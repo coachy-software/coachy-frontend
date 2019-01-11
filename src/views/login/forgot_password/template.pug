@@ -1,0 +1,19 @@
+.page
+  .page-singlel
+    .container
+      .row
+        #col.col.col-login.mx-auto
+          #logo.text-center
+            img(src="@/assets/dark-logo.svg")
+          form#card.card.mt-auto(@submit.prevent="login")
+            #card-body.card-body.p-6
+              #dimmer.dimmer(:class="{'active': isLoggingIn}")
+                .loader
+                .dimmer-content
+                  .card-title Forgot password?
+                  .form-group
+                    label.form-label Email
+                    input.form-control(:class="{'is-invalid': $v.email.$error}", type="email", id="email", placeholder="Enter email", v-model.trim="$v.email.$model")
+                    .invalid-feedback(v-if="!$v.email.required") Field is required
+                  .form-footer
+                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
