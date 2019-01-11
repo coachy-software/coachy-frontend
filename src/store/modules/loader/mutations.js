@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-
-const SET_TOKEN =  (state, payload) => state.token = payload;
-const SET_USER = (state, payload) => state.user = payload;
+const SET_STATUS =  (state, payload) => state.status = payload;
 
 export default {
-  SET_TOKEN,
-  SET_USER
+  SET_STATUS
 }

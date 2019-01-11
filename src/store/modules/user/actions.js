@@ -24,11 +24,12 @@
 
 import axios from "axios";
 import {API_URL} from "@/utils/constants";
-import {LOGGED_IN, LOGGING_IN, NOT_LOGGED_IN, SET_STATUS, SET_TOKEN, SET_USER} from "./index";
+import {SET_TOKEN, SET_USER} from "./index";
+import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 
 const login = ({commit}, {username, password}) => {
   return new Promise((resolve, reject) => {
-    commit(SET_STATUS, LOGGING_IN);
+    commit(SET_STATUS, LOADING, {root: true});
 
     axios.post(`${API_URL}/authenticate`, {username, password}, {
       headers: {
@@ -43,7 +44,7 @@ const login = ({commit}, {username, password}) => {
         localStorage.setItem("user", JSON.stringify(response.data));
         localStorage.setItem("token", window.btoa(username + ":" + password));
 
-        commit(SET_STATUS, LOGGED_IN);
+        commit(SET_STATUS, NOT_LOADING, {root: true});
         commit(SET_USER, response.data);
         commit(SET_TOKEN, base64Credentials);
       }
@@ -51,7 +52,7 @@ const login = ({commit}, {username, password}) => {
       resolve(response);
     })
     .catch(error => {
-      commit(SET_STATUS, NOT_LOGGED_IN);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
       reject(error);
     });
 
@@ -60,7 +61,7 @@ const login = ({commit}, {username, password}) => {
 
 const register = ({commit}, {username, password, matchingPassword, email, accountType}) => {
   return new Promise((resolve, reject) => {
-    commit(SET_STATUS, LOGGING_IN);
+    commit(SET_STATUS, LOADING, {root: true});
 
     axios.post(`${API_URL}/register`, {username, password, matchingPassword, email, accountType}, {
       headers: {
@@ -69,11 +70,11 @@ const register = ({commit}, {username, password, matchingPassword, email, accoun
       }
     })
     .then(response => {
-      commit(SET_STATUS, NOT_LOGGED_IN);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
       resolve(response);
     })
     .catch(error => {
-      commit(SET_STATUS, NOT_LOGGED_IN);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
       reject(error);
     });
 
@@ -84,7 +85,6 @@ const logout = ({commit}) => {
   localStorage.removeItem("item");
   localStorage.removeItem("token");
 
-  commit(SET_STATUS, NOT_LOGGED_IN);
   commit(SET_USER, undefined);
   commit(SET_TOKEN, undefined);
 };

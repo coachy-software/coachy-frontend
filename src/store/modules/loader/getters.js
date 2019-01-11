@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
+import {LOADING} from "./index";
 
-const SET_TOKEN =  (state, payload) => state.token = payload;
-const SET_USER = (state, payload) => state.user = payload;
+const isLoading = (state) => state.status === LOADING;
 
 export default {
-  SET_TOKEN,
-  SET_USER
+  isLoading
 }

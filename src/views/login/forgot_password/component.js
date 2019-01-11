@@ -35,8 +35,8 @@ export default {
     email: {required, email}
   },
   computed: {
-    isLoggingIn() {
-      return this.$store.getters.isLoggingIn;
+    isLoading() {
+      return this.$store.getters['loader/isLoading'];
     },
     isInvalid() {
       return this.$v.$invalid;

@@ -22,12 +22,8 @@
  * SOFTWARE.
  */
 
-import {LOGGING_IN} from "./index";
-
 const isLoggedIn = (state) => state.user !== undefined;
-const isLoggingIn = (state) => state.status === LOGGING_IN;
 
 export default {
-  isLoggedIn,
-  isLoggingIn
+  isLoggedIn
 }

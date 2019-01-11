@@ -7,7 +7,7 @@
             img(src="@/assets/dark-logo.svg")
           form#card.card.mt-auto(@submit.prevent="login")
             #card-body.card-body.p-6
-              #dimmer.dimmer(:class="{'active': isLoggingIn}")
+              #dimmer.dimmer(:class="{'active': isLoading}")
                 .loader
                 .dimmer-content
                   .card-title Login to your account

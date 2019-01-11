@@ -24,11 +24,20 @@
 
 import axios from "axios";
 import {API_URL} from "@/utils/constants";
+import {LOADING, NOT_LOADING, SET_STATUS} from "@/store/modules/loader";
+import store from '@/store'
 
 export function createResetPasswordToken({email}) {
   return new Promise((resolve, reject) => {
+    store.commit(SET_STATUS, LOADING);
     axios.post(`${API_URL}/create-token/${email}`)
-    .then(response => resolve(response))
-    .catch(error => reject(error));
+    .then(response => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      resolve(response)
+    })
+    .catch(error => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      reject(error)
+    });
   });
 }
