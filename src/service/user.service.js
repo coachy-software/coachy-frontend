@@ -41,3 +41,18 @@ export function createResetPasswordToken({email}) {
     });
   });
 }
+
+export function resetPassword({token, password}) {
+  return new Promise((resolve, reject) => {
+    store.commit(SET_STATUS, LOADING);
+    axios.post(`${API_URL}/reset-password/${token}`, {newPassword: password})
+    .then(response => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      resolve(response)
+    })
+    .catch(error => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      reject(error)
+    });
+  });
+}

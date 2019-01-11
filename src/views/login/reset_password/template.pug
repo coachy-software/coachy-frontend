@@ -1,0 +1,21 @@
+.page
+  .page-singlel
+    .container
+      .row
+        #col.col.col-login.mx-auto
+          #logo.text-center
+            img(src="@/assets/dark-logo.svg")
+          form#card.card.mt-auto(@submit.prevent="resetPassword")
+            #card-body.card-body.p-6
+              #dimmer.dimmer(:class="{'active': isLoading}")
+                .loader
+                .dimmer-content
+                  .card-title Reset your password
+                  .form-group
+                    label.form-label Password
+                    input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
+                    .invalid-feedback(v-if="!$v.password.required") Field is required
+                    .invalid-feedback(v-if="!$v.password.minLength") Password must have at least 6 letters.
+                    .invalid-feedback(v-if="!$v.password.maxLength") Name must have at most 64 letters.
+                  .form-footer
+                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Submit

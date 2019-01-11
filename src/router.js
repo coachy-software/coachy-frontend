@@ -74,7 +74,15 @@ export default new Router({
           path: '/reset-password',
           name: 'reset-password',
           component: () => import('@/views/login/reset_password/ResetPasswordView'),
-          props: (route) => ({query: route.query.token})
+          props: (route) => ({query: route.query.token}),
+          beforeEnter(to, from, next) {
+            if (to.query.hasOwnProperty('token')) {
+              next();
+              return;
+            }
+
+            next('/forgot-password');
+          }
         }
       ]
     }

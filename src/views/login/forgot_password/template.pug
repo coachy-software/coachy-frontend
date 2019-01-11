@@ -18,3 +18,6 @@
                     .invalid-feedback(v-if="!$v.email.email") Must be a well-formed email address.
                   .form-footer
                     button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Submit
+            #signup.text-center.text-muted
+              p.
+                #[router-link(to="/login") Return to login page]
