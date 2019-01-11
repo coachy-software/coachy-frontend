@@ -36,7 +36,7 @@ export default new Router({
         {
           path: '',
           name: 'landing',
-          component: () => import('@/views/landing/HomeView')
+          component: () => import('@/views/landing/home/HomeView')
         }
       ]
     },
