@@ -22,31 +22,13 @@
  * SOFTWARE.
  */
 
-import {required, email} from "vuelidate/src/validators";
-import {notification} from "@/utils/toastr.utils";
-import {createResetPasswordToken} from "@/service/user.service.js";
+import axios from "axios";
+import {API_URL} from "@/utils/constants";
 
-export default {
-  name: 'forgot-password',
-  data: () => ({
-    email: ""
-  }),
-  validations: {
-    email: {required, email}
-  },
-  computed: {
-    isLoggingIn() {
-      return this.$store.getters.isLoggingIn;
-    },
-    isInvalid() {
-      return this.$v.$invalid;
-    }
-  },
-  methods: {
-    createToken() {
-      createResetPasswordToken({email: this.email})
-      .then(() => notification.success('Email successfully sent'))
-      .catch((error) => notification.error(error.message));
-    }
-  }
+export function createResetPasswordToken({email}) {
+  return new Promise((resolve, reject) => {
+    axios.post(`${API_URL}/create-token/${email}`)
+    .then(response => resolve(response))
+    .catch(error => reject(error));
+  });
 }

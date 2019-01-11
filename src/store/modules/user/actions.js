@@ -30,7 +30,7 @@ const login = ({commit}, {username, password}) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOGGING_IN);
 
-    axios.post(`${API_URL}/authenticate`, {username: username, password: password}, {
+    axios.post(`${API_URL}/authenticate`, {username, password}, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
