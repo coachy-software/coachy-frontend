@@ -29,7 +29,6 @@
     "pug": "^2.0.3",
     "tabler-ui": "0.0.32",
     "toastr": "^2.1.4",
-    "vue-axios": "^2.1.4",
     "vue-template-compiler": "^2.5.17",
     "vuelidate": "^0.7.4",
     "webpack": "^4.28.3"
