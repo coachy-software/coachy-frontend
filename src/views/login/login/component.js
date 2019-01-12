@@ -24,6 +24,7 @@
 
 import {notification} from "@/utils/toastr.utils";
 import {required} from "vuelidate/src/validators";
+import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
 
 export default {
   name: 'login',
@@ -33,7 +34,7 @@ export default {
   }),
   methods: {
     login() {
-      this.$store.dispatch('user/login', this)
+      this.$store.dispatch('user/login', {username: this.username, password: this.password})
       .then(() => {
         this.$router.push("/");
         notification.success('Logged in');
@@ -52,7 +53,7 @@ export default {
     }
   },
   validations: {
-    username: {required},
-    password: {required}
+    username: {NO_SPACE_AND_SPECIAL_CHARS, required},
+    password: {NO_SPACE, required}
   }
 }

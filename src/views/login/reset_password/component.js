@@ -25,6 +25,7 @@
 import {required, minLength, maxLength, sameAs} from "vuelidate/src/validators";
 import {notification} from "@/utils/toastr.utils";
 import {resetPassword} from "@/service/user.service";
+import {NO_SPACE} from "@/utils/constants";
 
 export default {
   name: 'reset-password',
@@ -33,7 +34,7 @@ export default {
     confirmPassword: ""
   }),
   validations: {
-    password: {required, minLength: minLength(6), maxLength: maxLength(64)},
+    password: {NO_SPACE, required, minLength: minLength(6), maxLength: maxLength(64)},
     confirmPassword: {required, sameAsPassword: sameAs('password')}
   },
   computed: {

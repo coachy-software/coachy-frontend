@@ -27,11 +27,11 @@ import {API_URL} from "@/utils/constants";
 import {SET_TOKEN, SET_USER} from "./index";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 
-const login = ({commit}, {username, password}) => {
+const login = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.post(`${API_URL}/authenticate`, {username, password}, {
+    axios.post(`${API_URL}/authenticate`, {username: payload.username, password: payload.password}, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -39,10 +39,10 @@ const login = ({commit}, {username, password}) => {
     })
     .then(response => {
       if (response.data) {
-        let base64Credentials = window.btoa(username + ":" + password);
+        let base64Credentials = window.btoa(payload.username + ":" + payload.password);
 
         localStorage.setItem("user", JSON.stringify(response.data));
-        localStorage.setItem("token", window.btoa(username + ":" + password));
+        localStorage.setItem("token", window.btoa(payload.username + ":" + payload.password));
 
         commit(SET_STATUS, NOT_LOADING, {root: true});
         commit(SET_USER, response.data);
@@ -59,11 +59,17 @@ const login = ({commit}, {username, password}) => {
   });
 };
 
-const register = ({commit}, {username, password, matchingPassword, email, accountType}) => {
+const register = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.post(`${API_URL}/register`, {username, password, matchingPassword, email, accountType}, {
+    axios.post(`${API_URL}/register`, {
+      username: payload.username,
+      password: payload.password,
+      matchingPassword: payload.matchingPassword,
+      email: payload.email,
+      accountType: payload.accountType
+    }, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

@@ -23,7 +23,8 @@
  */
 
 import {notification} from "@/utils/toastr.utils";
-import {required, maxLength, minLength, email, sameAs} from "vuelidate/src/validators";
+import {required, maxLength, minLength, email, sameAs, helpers} from "vuelidate/src/validators";
+import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
 
 export default {
   name: 'register',
@@ -38,11 +39,11 @@ export default {
   methods: {
     register() {
       this.$store.dispatch('user/register', {
-        "username": this.username,
-        "password": this.password,
-        "matchingPassword": this.confirmPassword,
-        "email": this.email,
-        "accountType": this.accountType
+        username: this.username,
+        password: this.password,
+        matchingPassword: this.confirmPassword,
+        email: this.email,
+        accountType: this.accountType
       })
       .then(() => {
         this.$router.push("/login");
@@ -62,8 +63,8 @@ export default {
     }
   },
   validations: {
-    username: {required, minLength: minLength(3), maxLength: maxLength(32)},
-    password: {required, minLength: minLength(6), maxLength: maxLength(64)},
+    username: {NO_SPACE_AND_SPECIAL_CHARS, required, minLength: minLength(3), maxLength: maxLength(32)},
+    password: {NO_SPACE, required, minLength: minLength(6), maxLength: maxLength(64)},
     confirmPassword: {required, sameAsPassword: sameAs('password')},
     email: {required, email}
   }

@@ -15,11 +15,13 @@
                     label.form-label Username
                     input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
                     .invalid-feedback(v-if="!$v.username.required") Field is required
+                    .invalid-feedback(v-if="!$v.username.noSpaceAndSpecialCharacters") Forbidden character(s) in username
                   .form-group
                     label.form-label Password
                       a#float-right.float-right.small #[router-link(to='/forgot-password') I forgot password]
                     input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
                     .invalid-feedback(v-if="!$v.password.required") Field is required
+                    .invalid-feedback(v-if="!$v.password.noSpace") Password can't contains spaces
                   .form-footer
                     button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
             #signup.text-center.text-muted

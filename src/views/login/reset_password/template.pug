@@ -16,7 +16,8 @@
                     input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
                     .invalid-feedback(v-if="!$v.password.required") Field is required
                     .invalid-feedback(v-if="!$v.password.minLength") Password must have at least 6 letters.
-                    .invalid-feedback(v-if="!$v.password.maxLength") Name must have at most 64 letters.
+                    .invalid-feedback(v-if="!$v.password.maxLength") Password must have at most 64 letters.
+                    .invalid-feedback(v-if="!$v.password.noSpace") Password can't contains spaces
                   .form-group
                     label.form-label Confirm password
                     input.form-control(:class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", placeholder="Confirm password", v-model.trim="$v.confirmPassword.$model")
