@@ -17,5 +17,9 @@
                     .invalid-feedback(v-if="!$v.password.required") Field is required
                     .invalid-feedback(v-if="!$v.password.minLength") Password must have at least 6 letters.
                     .invalid-feedback(v-if="!$v.password.maxLength") Name must have at most 64 letters.
+                  .form-group
+                    label.form-label Confirm password
+                    input.form-control(:class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", placeholder="Confirm password", v-model.trim="$v.confirmPassword.$model")
+                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") Passwords must be identical.
                   .form-footer
                     button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Submit
