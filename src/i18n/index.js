@@ -25,7 +25,6 @@
 import en from './en'
 import pl from './pl'
 
-export const defaultLocale = 'pl';
 export const fallbackLocale = 'en';
 
 export const languages = {

@@ -28,15 +28,16 @@ import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
 import VueI18n from 'vue-i18n'
-import {defaultLocale, fallbackLocale, languages} from "./i18n";
+import VueCookie from 'vue-cookie'
+import {fallbackLocale, languages} from "./i18n";
 
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
+Vue.use(VueCookie);
 Vue.use(VueI18n);
 
-// TODO save locale in cookies instead of this =)
 let i18n = new VueI18n({
-  locale: defaultLocale,
+  locale: VueCookie.get('lang') || navigator.language.substring(0, 2),
   fallbackLocale: fallbackLocale,
   messages: Object.assign(languages)
 });
