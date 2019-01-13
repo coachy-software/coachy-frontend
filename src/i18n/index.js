@@ -22,29 +22,13 @@
  * SOFTWARE.
  */
 
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import Vuelidate from 'vuelidate'
-import VueI18n from 'vue-i18n'
-import {defaultLocale, fallbackLocale, languages} from "./i18n";
+import en from './en'
+import pl from './pl'
 
-Vue.config.productionTip = false;
-Vue.use(Vuelidate);
-Vue.use(VueI18n);
+export const defaultLocale = 'pl';
+export const fallbackLocale = 'en';
 
-// TODO save locale in cookies instead of this =)
-let i18n = new VueI18n({
-  locale: defaultLocale,
-  fallbackLocale: fallbackLocale,
-  messages: Object.assign(languages)
-});
-
-
-new Vue({
-  router,
-  store,
-  i18n,
-  render: h => h(App)
-}).$mount('#app');
+export const languages = {
+  en: en,
+  pl: pl
+};
