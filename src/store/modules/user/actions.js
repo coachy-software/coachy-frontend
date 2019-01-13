@@ -31,16 +31,11 @@ const login = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.post(`${API_URL}/authenticate`, {username: payload.username, password: payload.password}, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    let base64Credentials = window.btoa(payload.username + ":" + payload.password);
+
+    axios.get(`${API_URL}/users/me`, {headers: {'Authorization': 'Basic ' + base64Credentials}})
     .then(response => {
       if (response.data) {
-        let base64Credentials = window.btoa(payload.username + ":" + payload.password);
-
         localStorage.setItem("user", JSON.stringify(response.data));
         localStorage.setItem("token", window.btoa(payload.username + ":" + payload.password));
 

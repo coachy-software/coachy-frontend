@@ -23,7 +23,7 @@
  */
 
 import {notification} from "@/utils/toastr.utils";
-import {required} from "vuelidate/src/validators";
+import {helpers, required} from "vuelidate/src/validators";
 import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
 
 export default {
