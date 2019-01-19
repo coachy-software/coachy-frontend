@@ -1,11 +1,10 @@
 .app
   .page
     .page-main
-      .header.py-4
+      #headerMenuCollapse.header.collapse.d-lg-flex.p-0
         .container
-          .d-flex
-            a.header-brand(href='./index.html')
-              img.header-brand-img(src='@/assets/dark-logo.svg', alt='tabler logo')
+          .row.align-items-center
+            Menu
             .d-flex.order-lg-2.ml-auto
               .dropdown.d-none.d-md-flex.dropdown-element(:class="{'show': dropdowns.notification.open}", @click="toggleDropdown('notification')")
                 .a.nav-link.icon.dropdown-element
@@ -60,5 +59,6 @@
                   a.dropdown-item(href='#')
                     i.dropdown-icon.fe.fe-log-out
                     |  Sign out
-      Menu
+          a.header-toggler.d-lg-none.ml-3.ml-lg-0(href='#', data-toggle='collapse', data-target='#headerMenuCollapse')
+            span.header-toggler-icon
     router-view

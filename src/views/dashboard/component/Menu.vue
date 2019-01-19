@@ -23,21 +23,18 @@
   -->
 
 <template lang="pug">
-  .header.collapse.d-lg-flex.p-0
-    .container
-      .row.align-items-center
-        .col-lg.order-lg-first
-          ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
-            li.nav-item
-              a.nav-link.active
-                i.fe.fe-home
-                |  Home
-            li.nav-item
-              a.nav-link
-                i.fe.fe-box
-                |  Interface
-              .dropdown-menu.dropdown-menu-arrow
-                a.dropdown-item Example
-                a.dropdown-item Example
-                a.dropdown-item Example
+  .col-lg.order-lg-first
+    ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
+      li.nav-item
+        a.nav-link.active
+          i.fe.fe-home
+          |  Home
+      li.nav-item
+        a.nav-link
+          i.fe.fe-box
+          |  Interface
+        .dropdown-menu.dropdown-menu-arrow
+          a.dropdown-item Example
+          a.dropdown-item Example
+          a.dropdown-item Example
 </template>
