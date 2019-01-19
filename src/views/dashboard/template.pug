@@ -1,64 +1,13 @@
 .app
   .page
     .page-main
-      #headerMenuCollapse.header.collapse.d-lg-flex.p-0
+      .header.d-lg-flex.p-0
         .container
           .row.align-items-center
-            Menu
+            Menu.menu-collapse
             .d-flex.order-lg-2.ml-auto
-              .dropdown.d-none.d-md-flex.dropdown-element(:class="{'show': dropdowns.notification.open}", @click="toggleDropdown('notification')")
-                .a.nav-link.icon.dropdown-element
-                  i.fe.fe-bell
-                  span.nav-unread
-                .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': dropdowns.notification.open}")
-                  a.dropdown-item.d-flex(href='#')
-                    span.avatar.mr-3.align-self-center(style='background-image: url(demo/faces/male/41.jpg)')
-                    div
-                      strong Nathan
-                      |  pushed new commit: Fix page load performance issue.
-                      .small.text-muted 10 minutes ago
-                  a.dropdown-item.d-flex(href='#')
-                    span.avatar.mr-3.align-self-center(style='background-image: url(demo/faces/female/1.jpg)')
-                    div
-                      strong Alice
-                      |  started new task: Tabler UI design.
-                      .small.text-muted 1 hour ago
-                  a.dropdown-item.d-flex(href='#')
-                    span.avatar.mr-3.align-self-center(style='background-image: url(demo/faces/female/18.jpg)')
-                    div
-                      strong Rose
-                      |  deployed new version of NodeJS REST Api V3
-                      .small.text-muted 2 hours ago
-                  .dropdown-divider
-                  a.dropdown-item.text-center.text-muted-dark(href='#') Mark all as read
-              .dropdown.dropdown-element(@click="toggleDropdown('profile')", :class="{'show': dropdowns.profile.open}")
-                a.nav-link.pr-0.leading-none.dropdown-element
-                  span.avatar
-                  span.ml-2.d-none.d-lg-block.dropdown-element
-                    span.text-default Bartłomiej Stefański
-                    small.text-muted.d-block.mt-1 Coach
-                .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': dropdowns.profile.open}")
-                  a.dropdown-item(href='#')
-                    i.dropdown-icon.fe.fe-user
-                    |  Profile
-                  a.dropdown-item(href='#')
-                    i.dropdown-icon.fe.fe-settings
-                    |  Settings
-                  a.dropdown-item(href='#')
-                    span.float-right
-                      span.badge.badge-primary 6
-                    i.dropdown-icon.fe.fe-mail
-                    |  Inbox
-                  a.dropdown-item(href='#')
-                    i.dropdown-icon.fe.fe-send
-                    |  Message
-                  .dropdown-divider
-                  a.dropdown-item(href='#')
-                    i.dropdown-icon.fe.fe-help-circle
-                    |  Need help?
-                  a.dropdown-item(href='#')
-                    i.dropdown-icon.fe.fe-log-out
-                    |  Sign out
-          a.header-toggler.d-lg-none.ml-3.ml-lg-0(href='#', data-toggle='collapse', data-target='#headerMenuCollapse')
-            span.header-toggler-icon
-    router-view
+              NotificationDropdown
+              ProfileDropdown
+            a.header-toggler.d-lg-none.ml-3.ml-lg-0(href='#', data-toggle='collapse', data-target='#headerMenuCollapse')
+              span.header-toggler-icon
+      router-view

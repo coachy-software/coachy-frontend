@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import Menu from "./component/Menu"
-
 export default {
   data: () => ({
     dropdowns: {
@@ -63,6 +61,8 @@ export default {
     document.removeEventListener('click', this.onClick)
   },
   components: {
-    Menu
+    Menu: () => import ('./component/Menu'),
+    NotificationDropdown: () => import ('./component/NotificationDropdown'),
+    ProfileDropdown: () => import('./component/ProfileDropdown')
   }
 }

@@ -21,7 +21,30 @@
   - OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   - SOFTWARE.
   -->
-
-<template lang="pug" src="./template.pug"></template>
-<style src="./style.css"></style>
-<script src="./layout.js"></script>
+<template lang="pug">
+  .dropdown.d-none.d-md-flex.dropdown-element(:class="{'show': this.$parent.dropdowns.notification.open}", @click="$parent.toggleDropdown('notification')")
+    .a.nav-link.icon.dropdown-element
+      i.fe.fe-bell
+      span.nav-unread
+    .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.notification.open}")
+      a.dropdown-item.d-flex(href='#')
+        span.avatar.mr-3.align-self-center
+        div
+          strong Nathan
+          |  pushed new commit: Fix page load performance issue.
+          .small.text-muted 10 minutes ago
+      a.dropdown-item.d-flex(href='#')
+        span.avatar.mr-3.align-self-center
+        div
+          strong Alice
+          |  started new task: Tabler UI design.
+          .small.text-muted 1 hour ago
+      a.dropdown-item.d-flex(href='#')
+        span.avatar.mr-3.align-self-center
+        div
+          strong Rose
+          |  deployed new version of NodeJS REST Api V3
+          .small.text-muted 2 hours ago
+      .dropdown-divider
+      a.dropdown-item.text-center.text-muted-dark(href='#') Mark all as read
+</template>

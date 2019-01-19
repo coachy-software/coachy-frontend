@@ -22,6 +22,33 @@
   - SOFTWARE.
   -->
 
-<template lang="pug" src="./template.pug"></template>
-<style src="./style.css"></style>
-<script src="./layout.js"></script>
+<template lang="pug">
+  .dropdown.dropdown-element(@click="$parent.toggleDropdown('profile')", :class="{'show': this.$parent.dropdowns.profile.open}")
+    a.nav-link.pr-0.leading-none.dropdown-element
+      span.avatar
+      span.ml-2.d-none.d-lg-block.dropdown-element
+        span.text-default Bartłomiej Stefański
+        small.text-muted.d-block.mt-1 Coach
+    .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.profile.open}")
+      a.dropdown-item(href='#')
+        i.dropdown-icon.fe.fe-user
+        |  Profile
+      a.dropdown-item(href='#')
+        i.dropdown-icon.fe.fe-settings
+        |  Settings
+      a.dropdown-item(href='#')
+        span.float-right
+          span.badge.badge-primary 6
+        i.dropdown-icon.fe.fe-mail
+        |  Inbox
+      a.dropdown-item(href='#')
+        i.dropdown-icon.fe.fe-send
+        |  Message
+      .dropdown-divider
+      a.dropdown-item(href='#')
+        i.dropdown-icon.fe.fe-help-circle
+        |  Need help?
+      a.dropdown-item(href='#')
+        i.dropdown-icon.fe.fe-log-out
+        |  Sign out
+</template>
