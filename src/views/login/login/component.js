@@ -12,7 +12,7 @@ export default {
     login() {
       this.$store.dispatch('user/login', {username: this.username, password: this.password})
       .then(() => {
-        this.$router.push("/");
+        this.$router.push("/dashboard");
         notification.success('Logged in');
       })
       .catch(() => {

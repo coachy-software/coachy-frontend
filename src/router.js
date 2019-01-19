@@ -14,7 +14,8 @@ export default new Router({
           name: 'landing',
           component: () => import('@/views/landing/home/HomeView')
         }
-      ]
+      ],
+      alias: ['/home']
     },
     {
       path: '/dashboard',
@@ -45,6 +46,12 @@ export default new Router({
           path: '/forgot-password',
           name: 'forgot-password',
           component: () => import('@/views/login/forgot_password/ForgotPasswordView'),
+        },
+        {
+          path: '/logout',
+          name: 'logout',
+          component: () => import('@/views/login/logout/LogoutView'),
+          alias: ['/signout']
         },
         {
           path: '/reset-password',
