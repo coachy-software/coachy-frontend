@@ -31,7 +31,7 @@
         small.text-muted.d-block.mt-1 Coach
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.profile.open}")
       div(v-for="value in menu")
-        a.dropdown-item
+        router-link.dropdown-item(:to="value.link")
           i.dropdown-icon(:class="value.icon")
           |  {{value.name}}
         .dropdown-divider(v-if="value.divider")

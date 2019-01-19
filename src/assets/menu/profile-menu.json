@@ -1,19 +1,23 @@
 [
   {
     "name": "Settings",
-    "icon": "fe fe-settings"
+    "icon": "fe fe-settings",
+    "link": "/settings"
   },
   {
     "name": "Message",
     "icon": "fe fe-send",
-    "divider": true
+    "divider": true,
+    "link": "/message"
   },
   {
     "name": "Need help?",
-    "icon": "fe fe-help-circle"
+    "icon": "fe fe-help-circle",
+    "link": "/faq"
   },
   {
     "name": "Sign out",
-    "icon": "fe fe-log-out"
+    "icon": "fe fe-log-out",
+    "link": "/signout"
   }
 ]
