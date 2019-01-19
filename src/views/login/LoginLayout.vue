@@ -3,7 +3,7 @@
     router-view
 </template>
 
-<style>
+<style scoped>
   @import url('~tabler-ui/dist/assets/css/dashboard.css');
   @import url(~toastr/toastr.scss);
 
