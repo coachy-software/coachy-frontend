@@ -1,7 +1,7 @@
 <template lang="pug">
   .dropdown.dropdown-element(@click="$parent.toggleDropdown('profile')", :class="{'show': this.$parent.dropdowns.profile.open}")
     a.nav-link.pr-0.leading-none.dropdown-element
-      span.avatar
+      span.avatar(:style="{'background-image': `url(${this.avatar})`}")
       span.ml-2.d-none.d-lg-block.dropdown-element
         span.text-default {{this.name}}
         small.text-muted.d-block.mt-1 {{this.accountType}}
@@ -16,12 +16,16 @@
 <script>
   import menu from '@/assets/menu/profile-menu.json';
   import store from '@/store';
+  import defaultAvatar from '@/assets/dark-logo.svg';
+
+  let user = store.state.user.user;
 
   export default {
     data: () => ({
       menu: menu,
-      name: store.getters.user.username || 'N/A',
-      accountType: store.getters.user.accountType || 'N/A'
+      name: user.username || 'N/A',
+      accountType: user.accountType || 'N/A',
+      avatar: user.avatar || defaultAvatar
     })
   }
 </script>
