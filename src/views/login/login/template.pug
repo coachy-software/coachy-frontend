@@ -13,13 +13,13 @@
                   .card-title Login to your account
                   .form-group
                     label.form-label Username
-                    input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
+                    input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model", autocomplete="username")
                     .invalid-feedback(v-if="!$v.username.required") Field is required
                     .invalid-feedback(v-if="!$v.username.NO_SPACE_AND_SPECIAL_CHARS") Forbidden character(s) in username
                   .form-group
                     label.form-label Password
                       a#float-right.float-right.small #[router-link(to='/forgot-password') I forgot password]
-                    input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
+                    input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model", autocomplete="current-password")
                     .invalid-feedback(v-if="!$v.password.required") Field is required
                     .invalid-feedback(v-if="!$v.password.NO_SPACE") Password can't contains spaces
                   .form-footer
