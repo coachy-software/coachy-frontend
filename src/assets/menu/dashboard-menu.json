@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Home",
+    "icon": "fe fe-home",
+    "type": "NORMAL"
+  },
+  {
+    "name": "Test",
+    "icon": "fe fe-box",
+    "type": "DROPDOWN",
+    "dropdown": [
+      "Test 1",
+      "Test 2"
+    ]
+  },
+  {
+    "name": "Test2",
+    "icon": "fe fe-user",
+    "type": "DROPDOWN",
+    "dropdown": [
+      "Test 1",
+      "Test 2",
+      "Test 3",
+      "Test 4",
+      "Test 5"
+    ]
+  }
+]
