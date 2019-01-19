@@ -3,7 +3,7 @@
     ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
       div(v-for="item in menu")
         li.nav-item(v-if="item.type === 'NORMAL'")
-          a.nav-link.active
+          router-link.nav-link.active(:to="item.link")
             i(:class="item.icon")
             |  Home
         div(v-if="item.type === 'DROPDOWN'")
@@ -13,7 +13,7 @@
               |  {{item.name}}
             .dropdown-menu(:id="'menu' + item.name")
               div(v-for="dropdownItem in item.dropdown")
-                a.dropdown-item {{dropdownItem}}
+                router-link.dropdown-item(:to="dropdownItem.link", @click="hideDropdown(item.name)") {{dropdownItem.name}}
 </template>
 
 <style scoped>

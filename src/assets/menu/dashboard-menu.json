@@ -2,15 +2,23 @@
   {
     "name": "Home",
     "icon": "fe fe-home",
-    "type": "NORMAL"
+    "type": "NORMAL",
+    "link": "/"
   },
   {
     "name": "Test",
     "icon": "fe fe-box",
     "type": "DROPDOWN",
+    "link": "/test",
     "dropdown": [
-      "Test 1",
-      "Test 2"
+      {
+        "name": "Test 1",
+        "link": "/"
+      },
+      {
+        "name": "Test 2",
+        "link": "/"
+      }
     ]
   },
   {
@@ -18,11 +26,22 @@
     "icon": "fe fe-user",
     "type": "DROPDOWN",
     "dropdown": [
-      "Test 1",
-      "Test 2",
-      "Test 3",
-      "Test 4",
-      "Test 5"
+      {
+        "name": "Test 1",
+        "link": "/"
+      },
+      {
+        "name": "Test 2",
+        "link": "/"
+      },
+      {
+        "name": "Test 3",
+        "link": "/"
+      },
+      {
+        "name": "Test 4",
+        "link": "/"
+      }
     ]
   }
 ]
