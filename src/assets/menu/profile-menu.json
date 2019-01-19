@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Settings",
+    "icon": "fe fe-settings"
+  },
+  {
+    "name": "Message",
+    "icon": "fe fe-send",
+    "divider": true
+  },
+  {
+    "name": "Need help?",
+    "icon": "fe fe-help-circle"
+  },
+  {
+    "name": "Sign out",
+    "icon": "fe fe-log-out"
+  }
+]

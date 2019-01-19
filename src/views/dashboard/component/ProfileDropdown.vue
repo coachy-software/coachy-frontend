@@ -30,25 +30,19 @@
         span.text-default Bartłomiej Stefański
         small.text-muted.d-block.mt-1 Coach
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.profile.open}")
-      a.dropdown-item(href='#')
-        i.dropdown-icon.fe.fe-user
-        |  Profile
-      a.dropdown-item(href='#')
-        i.dropdown-icon.fe.fe-settings
-        |  Settings
-      a.dropdown-item(href='#')
-        span.float-right
-          span.badge.badge-primary 6
-        i.dropdown-icon.fe.fe-mail
-        |  Inbox
-      a.dropdown-item(href='#')
-        i.dropdown-icon.fe.fe-send
-        |  Message
-      .dropdown-divider
-      a.dropdown-item(href='#')
-        i.dropdown-icon.fe.fe-help-circle
-        |  Need help?
-      a.dropdown-item(href='#')
-        i.dropdown-icon.fe.fe-log-out
-        |  Sign out
+      div(v-for="value in menu")
+        a.dropdown-item
+          i.dropdown-icon(:class="value.icon")
+          |  {{value.name}}
+        .dropdown-divider(v-if="value.divider")
 </template>
+
+<script>
+  import menu from '@/assets/menu/profile-menu.json';
+
+  export default {
+    data: () => ({
+      menu: menu
+    })
+  }
+</script>

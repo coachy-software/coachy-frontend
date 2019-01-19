@@ -27,24 +27,23 @@
       i.fe.fe-bell
       span.nav-unread
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.notification.open}")
-      a.dropdown-item.d-flex(href='#')
-        span.avatar.mr-3.align-self-center
-        div
-          strong Nathan
-          |  pushed new commit: Fix page load performance issue.
-          .small.text-muted 10 minutes ago
-      a.dropdown-item.d-flex(href='#')
-        span.avatar.mr-3.align-self-center
-        div
-          strong Alice
-          |  started new task: Tabler UI design.
-          .small.text-muted 1 hour ago
-      a.dropdown-item.d-flex(href='#')
-        span.avatar.mr-3.align-self-center
-        div
-          strong Rose
-          |  deployed new version of NodeJS REST Api V3
-          .small.text-muted 2 hours ago
+      div(v-for="value in notifications")
+        router-link.dropdown-item.d-flex(:to="value.link")
+          span.avatar.mr-3.align-self-center(:style="{'background-image': `url(${value.avatar})`}")
+          div
+            strong {{value.author}}
+            |  {{value.message}}
+            .small.text-muted {{value.time}}
       .dropdown-divider
-      a.dropdown-item.text-center.text-muted-dark(href='#') Mark all as read
+      router-link.dropdown-item.text-center.text-muted-dark(to='/') Mark all as read
 </template>
+
+<script>
+  import notificationMock from '@/assets/mock/notification-mock.json';
+
+  export default {
+    data: () => ({
+      notifications: notificationMock
+    })
+  }
+</script>
