@@ -1,7 +1,31 @@
 <template lang="pug">
-  .card-body(v-if="$parent.isActive($parent.tabs.account.name)")
-    .text-wrap.p-lg-6
-      h2.mt-0.mb-4 Account
-      p
-        | Account content
+  div(v-if="$parent.isActive($parent.tabs.account.name)")
+    .card-body
+      h3.card-title Edit Account
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label.form-label Email address
+            input.form-control(type='email', placeholder='Email')
+        .col-sm-6.col-md-6
+          .form-group
+            label.form-label Username
+            input.form-control(type='text', placeholder='Username')
+        .col-sm-6.col-md-6
+          .form-group
+            label.form-label Display name
+            input.form-control(type='text', placeholder='Display name')
+    .card-footer.text-right
+      button.btn.btn-primary(type='submit') Update Profile
+
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      username: null,
+      email: null,
+      displayName: null
+    })
+  }
+</script>

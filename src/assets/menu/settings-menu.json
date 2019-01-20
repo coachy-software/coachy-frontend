@@ -3,8 +3,8 @@
     "name": "Account",
     "icon": "fe fe-settings"
   },
-  "test": {
-    "name": "Test",
-    "icon": "fe fe-user"
+  "avatar": {
+    "name": "Avatar",
+    "icon": "fa fa-user-circle"
   }
 }

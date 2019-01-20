@@ -13,7 +13,7 @@ export default {
   },
   components: {
     AccountTab: () => import('./component/AccountTab'),
-    TestTab: () => import('./component/TestTab'),
+    TestTab: () => import('./component/AvatarTab'),
     Tabs: () => import('./component/Tabs')
   }
 }
