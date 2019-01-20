@@ -22,9 +22,13 @@ export default new Router({
       component: () => import('@/views/dashboard/DashboardLayout'),
       children: [
         {
-          path: '',
-          name: 'dashboard',
-          component: () => import('@/views/dashboard/home/HomeView')
+          path: 'home',
+          component: () => import('@/views/dashboard/home/HomeView'),
+          alias: ['']
+        },
+        {
+          path: 'settings',
+          component: () => import('@/views/dashboard/settings/SettingsView')
         }
       ]
     },
