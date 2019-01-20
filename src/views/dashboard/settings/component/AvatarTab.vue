@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(v-if="$parent.isActive($parent.tabs.avatar.name)")
+  div
     .card-body
       h3.card-title Change or reset avatar
       .alert.alert-warning(role='alert')
@@ -13,3 +13,11 @@
     .card-footer.text-right
       button.btn.btn-primary(type='submit') Update
 </template>
+
+<script>
+  export default {
+    mounted() {
+      this.$parent.currentTab = this.$parent.tabs.avatar.name;
+    }
+  }
+</script>

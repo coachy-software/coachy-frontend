@@ -1,10 +1,12 @@
 {
   "account": {
     "name": "Account",
-    "icon": "fe fe-settings"
+    "icon": "fe fe-settings",
+    "link": "/dashboard/settings/account"
   },
   "avatar": {
     "name": "Avatar",
-    "icon": "fa fa-user-circle"
+    "icon": "fa fa-user-circle",
+    "link": "/dashboard/settings/avatar"
   }
 }

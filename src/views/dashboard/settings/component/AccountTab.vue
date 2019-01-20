@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(v-if="$parent.isActive($parent.tabs.account.name)")
+  div
     .card-body
       h3.card-title Edit Account
       .row
@@ -26,6 +26,9 @@
       username: null,
       email: null,
       displayName: null
-    })
+    }),
+    mounted() {
+      this.$parent.currentTab = this.$parent.tabs.account.name;
+    }
   }
 </script>
