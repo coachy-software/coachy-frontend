@@ -1,11 +1,10 @@
+import settingsMenu from '@/assets/menu/settings-menu.json';
+
 export default {
   name: 'settings',
   data: () => ({
-    tabs: {
-      account: 'TAB_ACCOUNT',
-      test: 'TAB_TEST'
-    },
-    currentTab: "TAB_ACCOUNT"
+    tabs: settingsMenu,
+    currentTab: "Account"
   }),
   methods: {
     isActive(tabName) {
@@ -15,5 +14,6 @@ export default {
   components: {
     AccountTab: () => import('./component/AccountTab'),
     TestTab: () => import('./component/TestTab'),
+    Tabs: () => import('./component/Tabs')
   }
 }

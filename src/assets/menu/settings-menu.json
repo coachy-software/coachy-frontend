@@ -1,0 +1,10 @@
+{
+  "account": {
+    "name": "Account",
+    "icon": "fe fe-settings"
+  },
+  "test": {
+    "name": "Test",
+    "icon": "fe fe-user"
+  }
+}

@@ -5,16 +5,7 @@
         | Settings
     .row
       .col-lg-3.order-lg-1.mb-4
-        .list-group.list-group-transparent.mb-0
-          a.list-group-item.list-group-item-action(href="javascript:;", :class="{'active': this.isActive(this.tabs.account)}", @click="currentTab = tabs.account")
-            span.icon.mr-3
-              i.fe.fe-settings
-            | Account
-        .list-group.list-group-transparent.mb-0
-          a.list-group-item.list-group-item-action(href="javascript:;", :class="{'active': this.isActive(this.tabs.test)}", @click="currentTab = tabs.test")
-            span.icon.mr-3
-              i.fe.fe-alert-triangle
-            | Test
+        Tabs
       .col-lg-9
         .card
           AccountTab
