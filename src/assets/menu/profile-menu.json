@@ -2,13 +2,13 @@
   {
     "name": "Settings",
     "icon": "fe fe-settings",
-    "link": "/settings"
+    "link": "/dashboard/settings"
   },
   {
     "name": "Message",
     "icon": "fe fe-send",
     "divider": true,
-    "link": "/message"
+    "link": "/dashboard/message"
   },
   {
     "name": "Need help?",
