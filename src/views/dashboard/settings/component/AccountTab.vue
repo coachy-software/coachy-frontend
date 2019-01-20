@@ -16,7 +16,7 @@
             label.form-label Display name
             input.form-control(type='text', placeholder='Display name')
     .card-footer.text-right
-      button.btn.btn-primary(type='submit') Update Profile
+      button.btn.btn-primary(type='submit') Update
 
 </template>
 
