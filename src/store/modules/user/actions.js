@@ -59,7 +59,7 @@ const register = ({commit}, payload) => {
 };
 
 const logout = ({commit}) => {
-  localStorage.removeItem("item");
+  localStorage.removeItem("user");
   localStorage.removeItem("token");
 
   commit(SET_USER, undefined);
