@@ -14,12 +14,12 @@ export default [{
       children: [
         {
           path: 'account',
-          component: () => import('@/views/dashboard/settings/component/AccountTab'),
+          component: () => import('@/views/dashboard/settings/component/account_tab/AccountTab'),
           alias: ['']
         },
         {
           path: 'avatar',
-          component: () => import('@/views/dashboard/settings/component/AvatarTab')
+          component: () => import('@/views/dashboard/settings/component/avatar_tab/AvatarTab')
         }
       ]
     }

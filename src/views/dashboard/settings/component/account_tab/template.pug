@@ -1,0 +1,21 @@
+div
+  form(@submit.prevent="update")
+    .card-body
+      h3.card-title Edit Account
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label.form-label Email address
+            input.form-control(type='email', placeholder='Email', v-model="email")
+        .col-sm-6.col-md-6
+          .form-group
+            label.form-label Display name
+            input.form-control(type='text', placeholder='Display name', v-model="displayName")
+        .col-sm6.col-md-6
+          .form-group
+            label.form-label Language
+            select.form-control.custom-select(v-model="language")
+              option(value='en') English
+              option(value='pl') Polish
+    .card-footer.text-right
+      button.btn.btn-primary(type='submit') Update
