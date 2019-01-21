@@ -1,5 +1,6 @@
 @import url('~tabler-ui/dist/assets/css/dashboard.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url(~toastr/toastr.scss);
 
 @media screen and (max-width: 768px) {
   .header {

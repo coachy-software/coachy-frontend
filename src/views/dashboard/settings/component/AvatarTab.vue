@@ -11,7 +11,8 @@
             .custom-file
               input(type="file", id="avatar", name="avatar", accept="image/png, image/jpeg")
     .card-footer.text-right
-      button.btn.btn-primary(type='submit') Update
+      button.btn.btn-primary(type='submit') Reset avatar
+      button.btn.btn-primary.ml-2(type='submit') Update
 </template>
 
 <script>

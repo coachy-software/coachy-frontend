@@ -13,7 +13,7 @@ const login = ({commit}, payload) => {
     .then(response => {
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
-        localStorage.setItem("token", window.btoa(payload.username + ":" + payload.password));
+        localStorage.setItem("token", base64Credentials);
 
         commit(SET_STATUS, NOT_LOADING, {root: true});
         commit(SET_USER, response.data);
