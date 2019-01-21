@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
 import Vuelidate from 'vuelidate'
 import VueI18n from 'vue-i18n'
 import VueCookie from 'vue-cookie'
@@ -18,10 +18,9 @@ let i18n = new VueI18n({
   messages: Object.assign(languages)
 });
 
-
 new Vue({
-  router,
   store,
+  router,
   i18n,
   render: h => h(App)
 }).$mount('#app');

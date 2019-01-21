@@ -12,7 +12,8 @@ export default {
     login() {
       this.$store.dispatch('user/login', {username: this.username, password: this.password})
       .then(() => {
-        this.$router.push("/dashboard");
+        let location = this.$route.query.redirect || '/dashboard';
+        this.$router.push(location);
         notification.success('Logged in');
       })
       .catch(() => {

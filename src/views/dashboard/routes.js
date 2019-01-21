@@ -1,0 +1,27 @@
+export default [{
+  path: '/dashboard',
+  component: () => import('@/views/dashboard/DashboardLayout'),
+  meta: {requiresAuth: true},
+  children: [
+    {
+      path: 'home',
+      component: () => import('@/views/dashboard/home/HomeView'),
+      alias: ['']
+    },
+    {
+      path: 'settings',
+      component: () => import('@/views/dashboard/settings/SettingsView'),
+      children: [
+        {
+          path: 'account',
+          component: () => import('@/views/dashboard/settings/component/AccountTab'),
+          alias: ['']
+        },
+        {
+          path: 'avatar',
+          component: () => import('@/views/dashboard/settings/component/AvatarTab')
+        }
+      ]
+    }
+  ]
+}];
