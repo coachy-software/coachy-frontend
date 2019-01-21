@@ -51,7 +51,7 @@ export function updateAccountDetails(payload) {
     axios.patch(`${API_URL}/users/${userIdentifier}`, data, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {
       store.commit(SET_STATUS, NOT_LOADING);
-      updateUserStore(payload);
+      store.dispatch('user/update');
       resolve(response);
     })
     .catch(error => {
@@ -59,15 +59,4 @@ export function updateAccountDetails(payload) {
       reject(error);
     })
   })
-}
-
-function updateUserStore(payload) {
-  let user = JSON.parse(localStorage.getItem('user'));
-
-  user.email = payload.email;
-  user.displayName = payload.displayName;
-  user.avatar = payload.avatar;
-
-  localStorage.setItem('user', JSON.stringify(user));
-  store.commit(`user/${SET_USER}`, user);
 }

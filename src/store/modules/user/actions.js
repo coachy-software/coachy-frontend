@@ -66,8 +66,26 @@ const logout = ({commit}) => {
   commit(SET_TOKEN, undefined);
 };
 
+const update = ({commit}) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`${API_URL}/users/me`, {headers: {'Authorization': 'Basic ' + localStorage.getItem('token')}})
+    .then(response => {
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        commit(SET_USER, response.data);
+      }
+
+      resolve(response);
+    })
+    .catch(error => {
+      reject(error);
+    })
+  });
+};
+
 export default {
   login,
   register,
-  logout
+  logout,
+  update
 }
