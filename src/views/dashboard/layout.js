@@ -2,7 +2,8 @@ export default {
   data: () => ({
     dropdowns: {
       profile: {open: false},
-      notification: {open: false}
+      notification: {open: false},
+      mobile: {open: false}
     }
   }),
   methods: {
@@ -16,8 +17,11 @@ export default {
           this.dropdowns.profile.open = !this.dropdowns.profile.open;
           this.dropdowns.notification.open = false;
           break;
+        case 'mobile':
+          this.dropdowns.mobile.open = !this.dropdowns.mobile.open;
+          this.dropdowns.profile.open = false;
+          break;
       }
-
     },
     closeDropdowns() {
       for (let dropdown in this.dropdowns) {

@@ -13,7 +13,7 @@
     "dropdown": [
       {
         "name": "Test 1",
-        "link": "/"
+        "link": "/dashboard/home"
       },
       {
         "name": "Test 2",

@@ -3,11 +3,11 @@
     ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
       div(v-for="item in menu")
         li.nav-item(v-if="item.type === 'NORMAL'")
-          router-link.nav-link.active(:to="item.link")
+          router-link.nav-link.active(:to="item.link", :class="{'dropdown-element': $parent.dropdowns.mobile.open}")
             i(:class="item.icon")
             |  Home
         div(v-if="item.type === 'DROPDOWN'")
-          li.nav-item(@mouseover="showDropdown(item.name)", @mouseleave="hideDropdown(item.name)", :id="item.name")
+          li.nav-item(@mouseover="showDropdown(item.name)", @mouseleave="hideDropdown(item.name)", :id="item.name", :class="{'dropdown-element': $parent.dropdowns.mobile.open}")
             a.nav-link
               i(:class="item.icon")
               |  {{item.name}}
@@ -35,6 +35,7 @@
         document.getElementById(`menu${name}`).classList.add('show');
       },
       hideDropdown(name) {
+        this.$parent.dropdowns.mobile.open = false;
         document.getElementById(name).classList.remove('show');
         document.getElementById(`menu${name}`).classList.remove('show');
       }

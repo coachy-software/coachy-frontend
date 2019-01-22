@@ -1,13 +1,19 @@
 .app
   .page
     .page-main
-      .header.d-lg-flex.p-0
+      .header.py-4.header-mobile
+        .container
+          .d-flex
+            a.header-brand(href='./index.html')
+            .d-flex.order-lg-2.ml-auto
+              ProfileDropdown
+            a.header-toggler.d-lg-none.ml-3.ml-lg-0.dropdown-element(@click="toggleDropdown('mobile')")
+              span.header-toggler-icon
+      .header.d-lg-flex.p-0.collapse(:class="{'show': this.dropdowns.mobile.open}")
         .container
           .row.align-items-center
-            Menu.menu-collapse
-            .d-flex.order-lg-2.ml-auto
+            Menu
+            .d-flex.order-lg-2.ml-auto.dropdowns-pc
               NotificationDropdown
               ProfileDropdown
-            a.header-toggler.d-lg-none.ml-3.ml-lg-0
-              span.header-toggler-icon
       router-view
