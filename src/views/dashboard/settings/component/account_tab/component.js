@@ -1,5 +1,6 @@
 import {updateAccountDetails} from '@/service/user.service';
 import {notification} from "@/utils/toastr.utils";
+import {email, maxLength, minLength} from "vuelidate/src/validators";
 
 export default {
   data: () => ({
@@ -20,5 +21,9 @@ export default {
       .then(() => notification.success('Updated'))
       .catch(error => notification.error(error.message))
     }
+  },
+  validations: {
+    email: {email},
+    displayName: {minLength: minLength(3), maxLength: maxLength(32)}
   }
 }

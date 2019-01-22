@@ -6,11 +6,14 @@ div
         .col-sm-6.col-md-6
           .form-group
             label.form-label Email address
-            input.form-control(type='email', placeholder='Email', v-model="email")
+            input.form-control(:class="{'is-invalid': $v.email.$error}", type='email', placeholder='Email', v-model.trim="$v.email.$model")
+            .invalid-feedback(v-if="!$v.email.email") Must be a well-formed email address.
         .col-sm-6.col-md-6
           .form-group
             label.form-label Display name
-            input.form-control(type='text', placeholder='Display name', v-model="displayName")
+            input.form-control(:class="{'is-invalid': $v.displayName.$error}", type='text', placeholder='Display name', v-model.trim="$v.displayName.$model")
+            .invalid-feedback(v-if="!$v.displayName.maxLength") Username must have at most 32 letters.
+            .invalid-feedback(v-if="!$v.displayName.minLength") Username must have at least 3 letters.
         .col-sm6.col-md-6
           .form-group
             label.form-label Language
@@ -18,4 +21,4 @@ div
               option(value='en') English
               option(value='pl') Polish
     .card-footer.text-right
-      button.btn.btn-primary(type='submit') Update
+      button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") Update

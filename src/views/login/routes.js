@@ -21,6 +21,9 @@ export default [{
       path: '/logout',
       name: 'logout',
       component: () => import('@/views/login/logout/LogoutView'),
+      meta: {
+        requiresAuth: true
+      },
       alias: ['/signout']
     },
     {
