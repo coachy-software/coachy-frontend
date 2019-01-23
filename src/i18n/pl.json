@@ -17,32 +17,103 @@
     "email_E04": "Adres e-mail nie jest poprawny",
     "avatar_E01": "Adres avataru nie może być pusty",
     "avatar_E02": "Adres avataru nie może być pusty",
-    "avatar_E04": "Adres avataru nie spełnia wymagań"
+    "avatar_E04": "Adres avataru nie spełnia wymagań",
+    "email_format": "Adres email nie jest poprawny",
+    "displayName_minLength": "Nazwa wyświetlana musi mieć minimum 3 znaki",
+    "displayName_maxLength": "Nazwa wyświetlana może mieć maksymalnie 32 znaki",
+    "email_required": "Adres e-mail jest wymagany",
+    "username_required": "Nazwa użytkownika jest wymagana",
+    "username_format": "Nazwa użytkownika zawiera zabronione znaki",
+    "username_maxLength": "Nazwa użytkownika może mieć maksymalnie 32 znaki",
+    "username_minLength": "Nazwa użytownika musi mieć minimum 3 znaki",
+    "password_required": "Hasło jest wymagane",
+    "password_format": "Hasło nie może zawierać spacji",
+    "password_maxLength": "Hasło może mieć maksymalnie 64 znaki",
+    "password_minLength": "Hasło musi mieć minimum 6 znaki",
+    "confirm_password": "Hasła muszą być takie same"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",
-    "logged_in": "Pomyślnie zalogowano"
+    "logged_in": "Pomyślnie zalogowano",
+    "card_title": "Zaloguj się do konta",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "username_placeholder": "Wprowadź nazwę użytkownika",
+    "password_placeholder": "Wprowadź hasło",
+    "submit": "Zaloguj",
+    "signup-1": "Nie masz jeszcze konta?",
+    "signup-2": "Zarejestruj się",
+    "forgot_password": "Zapomniałem hasła"
   },
   "forgot_password": {
     "email_sent": "Wiadomość e-mail pomyślnie wysłana",
     "409": "Prośba została niedawno wysłana",
-    "404": "Adres e-mail nie istnieje"
+    "404": "Adres e-mail nie istnieje",
+    "card_title": "Zapomniałeś hasła?",
+    "email": "Adres e-mail",
+    "email_placeholder": "Wprowadź e-mail",
+    "submit": "Wyślij",
+    "return": "Wróc do logowania"
   },
   "logout": {
     "logged_out": "Wylogowano"
   },
   "register": {
     "registered": "Pomyślnie zarejestrowano",
-    "409": "Taki użytkownik już istnieje"
+    "409": "Taki użytkownik już istnieje",
+    "card_title": "Załóż konto",
+    "username": "Nazwa użytkownika",
+    "username_placeholder": "Nazwa użytkownika",
+    "password": "Hasło",
+    "password_placeholder": "Hasło",
+    "confirm_password": "Powtórz hasło",
+    "confirm_password_placeholder": "Powtórz hasło",
+    "email": "Adres e-mail",
+    "email_placeholder": "Adres e-mail",
+    "account_type": "Typ konta",
+    "account_type-1": "TRENER / PODOPIECZNY",
+    "accept_terms": "Akceptuję ",
+    "accept_terms-1": "regulamin i politykę",
+    "submit": "Zarejestruj",
+    "sign_in": "Masz już konto?",
+    "sign_in-1": "Zaloguj się"
   },
   "reset_password": {
     "reset": "Pomyślnie zresetowano hasło",
-    "404": "Token wygasł"
+    "404": "Token wygasł",
+    "card_title": "Zmień hasło",
+    "password": "Hasło",
+    "password_placeholder": "Hasło",
+    "confirm_password": "Potwierdź hasło",
+    "confirm_password_placeholder": "Potwierdź hasło",
+    "submit": "Zmień"
   },
   "account_tab": {
-    "updated": "Pomyślnie zaktualizowano"
+    "updated": "Pomyślnie zaktualizowano",
+    "card_title": "Edytuj konto",
+    "email": "Adres e-mail",
+    "email_placeholder": "Email",
+    "displayName": "Nazwa wyświetlania",
+    "displayName_placeholder": "Nazwa wyświetlana",
+    "language": "Język",
+    "update": "Zaktualizuj"
   },
   "avatar_tab": {
-    "updated": "Pomyślnie zaktualizowano"
+    "updated": "Pomyślnie zaktualizowano",
+    "card_title": "Zmień lub usuń avatar",
+    "notification-1": "Avatar nie może być",
+    "notification-1-1": "większy niż 3MB",
+    "notification-2": "Tylko pliki z tymi rozszerzeniami są dozwolone",
+    "notification-2-1": "png jpg jpeg",
+    "notification-3": "Jeśli chcesz usunąć avatar, kliknij ",
+    "notification-3-1": "bez wybierania avataru",
+    "415": "Niedozwolone rozszerzenie pliku",
+    "file": "Plik",
+    "preview": "Podgląd",
+    "reset": "Zresetuj",
+    "update": "Zaktualizuj"
+  },
+  "dropdowns": {
+    "mark_all": "Oznacz wszystkie jako przeczytane"
   }
 }

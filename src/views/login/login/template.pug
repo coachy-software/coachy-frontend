@@ -10,20 +10,20 @@
               #dimmer.dimmer(:class="{'active': isLoading}")
                 .loader
                 .dimmer-content
-                  .card-title Login to your account
+                  .card-title {{$t('login.card_title')}}
                   .form-group
-                    label.form-label Username
-                    input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model", autocomplete="username")
-                    .invalid-feedback(v-if="!$v.username.required") Field is required
-                    .invalid-feedback(v-if="!$v.username.NO_SPACE_AND_SPECIAL_CHARS") Forbidden character(s) in username
+                    label.form-label {{$t('login.username')}}
+                    input.form-control(:class="{'is-invalid': $v.username.$error}", type="text", id="username", :placeholder="$t('login.username_placeholder')", v-model.trim="$v.username.$model", autocomplete="username")
+                    .invalid-feedback(v-if="!$v.username.required") {{$t('validation.username_required')}}
+                    .invalid-feedback(v-if="!$v.username.NO_SPACE_AND_SPECIAL_CHARS") {{$t('validation.username_format')}}
                   .form-group
-                    label.form-label Password
-                      a#float-right.float-right.small #[router-link(to='/forgot-password') I forgot password]
-                    input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model", autocomplete="current-password")
-                    .invalid-feedback(v-if="!$v.password.required") Field is required
-                    .invalid-feedback(v-if="!$v.password.NO_SPACE") Password can't contains spaces
+                    label.form-label {{$t('login.password')}}
+                      a#float-right.float-right.small #[router-link(to='/forgot-password') {{$t('login.forgot_password')}}]
+                    input.form-control(:class="{'is-invalid': $v.password.$error}", type="password", id="password", :placeholder="$t('login.password_placeholder')", v-model.trim="$v.password.$model", autocomplete="current-password")
+                    .invalid-feedback(v-if="!$v.password.required") {{$t('validation.password_required')}}
+                    .invalid-feedback(v-if="!$v.password.NO_SPACE") {{$t('validation.password_format')}}
                   .form-footer
-                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
+                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('login.submit')}}
             #signup.text-center.text-muted
               p.
-                Don't have account yet? #[router-link(to="/register") Sign up]
+                {{$t('login.signup-1')}} #[router-link(to="/register") {{$t('login.signup-2')}}]

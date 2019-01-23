@@ -10,31 +10,31 @@
               #dimmer.dimmer(:class="{'active': isLoading}")
                 .loader
                 .dimmer-content
-                  .card-title Create new account
+                  .card-title {{$t('register.card_title')}}
                   .form-group
-                    label.form-label Username
-                    input.form-control(autocomplete="username" :class="{'is-invalid': $v.username.$error}", type="text", id="username", placeholder="Enter username", v-model.trim="$v.username.$model")
-                    .invalid-feedback(v-if="!$v.username.required") Field is required
-                    .invalid-feedback(v-if="!$v.username.maxLength") Username must have at most 32 letters.
-                    .invalid-feedback(v-if="!$v.username.minLength") Username must have at least 3 letters.
-                    .invalid-feedback(v-if="!$v.username.NO_SPACE_AND_SPECIAL_CHARS") Forbidden character(s) in username
+                    label.form-label {{$t('register.username')}}
+                    input.form-control(autocomplete="username" :class="{'is-invalid': $v.username.$error}", type="text", id="username", :placeholder="$t('register.username_placeholder')", v-model.trim="$v.username.$model")
+                    .invalid-feedback(v-if="!$v.username.required") {{$t('validation.username_required')}}
+                    .invalid-feedback(v-if="!$v.username.maxLength") {{$t('validation.username_maxLength')}}
+                    .invalid-feedback(v-if="!$v.username.minLength") {{$t('validation.username_minLength')}}
+                    .invalid-feedback(v-if="!$v.username.NO_SPACE_AND_SPECIAL_CHARS") {{$t('validation.username_format')}}
                   .form-group
-                    label.form-label Password
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
-                    .invalid-feedback(v-if="!$v.password.required") Field is required
-                    .invalid-feedback(v-if="!$v.password.minLength") Password must have at least 6 letters.
-                    .invalid-feedback(v-if="!$v.password.maxLength") Password must have at most 64 letters.
-                    .invalid-feedback(v-if="!$v.password.NO_SPACE") Password can't contains spaces
+                    label.form-label {{$t('register.password')}}
+                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", :placeholder="$t('register.password_placeholder')", v-model.trim="$v.password.$model")
+                    .invalid-feedback(v-if="!$v.password.required") {{$t('validation.password_required')}}
+                    .invalid-feedback(v-if="!$v.password.minLength") {{$t('validation.password_minLength')}}
+                    .invalid-feedback(v-if="!$v.password.maxLength") {{$t('validation.password_maxLength')}}
+                    .invalid-feedback(v-if="!$v.password.NO_SPACE") {{$t('validation.password_format')}}
                   .form-group
-                    label.form-label Confirm password
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", placeholder="Confirm password", v-model.trim="$v.confirmPassword.$model")
-                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") Passwords must be identical.
+                    label.form-label {{$t('register.confirm_password')}}
+                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", :placeholder="$t('register.confirm_password_placeholder')", v-model.trim="$v.confirmPassword.$model")
+                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") {{$t('validation.confirm_password')}}
                   .form-group
-                    label.form-label Email
-                    input.form-control(:class="{'is-invalid': $v.email.$error}", type="email", id="email", placeholder="Enter email", v-model.trim="$v.email.$model")
-                    .invalid-feedback(v-if="!$v.email.email") Must be a well-formed email address.
+                    label.form-label {{$t('register.email')}}
+                    input.form-control(:class="{'is-invalid': $v.email.$error}", type="email", id="email", :placeholder="$t('register.email_placeholder')", v-model.trim="$v.email.$model")
+                    .invalid-feedback(v-if="!$v.email.email") {{$t('validation.email_format')}}
                   .form-group
-                    label.form-label Account type #[p#badge.badge.badge-primary COACH / CHARGE]
+                    label.form-label {{$t('register.account_type')}} #[p#badge.badge.badge-primary {{$t('register.account_type-1')}}]
                     #selectgroup.selectgroup.w-100
                       label.selectgroup-item
                         input.selectgroup-input(type="radio", name="value", value="COACH", v-model="accountType")
@@ -47,9 +47,9 @@
                   .form-group
                     label#custom-control.custom-control.custom-checkbox
                       input.custom-control-input(type="checkbox", v-model="policy" required)
-                      span.custom-control-label Agree the #[router-link(to="/privacy-policy") terms and policy]
+                      span.custom-control-label {{$t('register.accept_terms')}} #[router-link(to="/privacy-policy") {{$t('register.accept_terms-1')}}]
                   .form-footer
-                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Sign in
+                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('register.submit')}}
             #signup.text-center.text-muted
               p.
-                Already have account? #[router-link(to="/login") Sign in]
+                {{$t('register.sign_in')}} #[router-link(to="/login") {{$t('register.sign_in-1')}}]

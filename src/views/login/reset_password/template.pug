@@ -10,18 +10,18 @@
               #dimmer.dimmer(:class="{'active': isLoading}")
                 .loader
                 .dimmer-content
-                  .card-title Reset your password
+                  .card-title {{$t('reset_password.card_title')}}
                   .form-group
                     input(type="text" name="email" hidden="true" autocomplete="username")
-                    label.form-label Password
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", placeholder="Enter password", v-model.trim="$v.password.$model")
-                    .invalid-feedback(v-if="!$v.password.required") Field is required
-                    .invalid-feedback(v-if="!$v.password.minLength") Password must have at least 6 letters.
-                    .invalid-feedback(v-if="!$v.password.maxLength") Password must have at most 64 letters.
-                    .invalid-feedback(v-if="!$v.password.NO_SPACE") Password can't contains spaces
+                    label.form-label {{$t('reset_password.password')}}
+                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", :placeholder="$t('reset_password.password_placeholder')", v-model.trim="$v.password.$model")
+                    .invalid-feedback(v-if="!$v.password.required") {{$t('validation.password_required')}}
+                    .invalid-feedback(v-if="!$v.password.minLength") {{$t('validation.password_minLength')}}
+                    .invalid-feedback(v-if="!$v.password.maxLength") {{$t('validation.password_maxLength')}}
+                    .invalid-feedback(v-if="!$v.password.NO_SPACE") {{$t('validation.password_format')}}
                   .form-group
-                    label.form-label Confirm password
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", placeholder="Confirm password", v-model.trim="$v.confirmPassword.$model")
-                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") Passwords must be identical.
+                    label.form-label {{$t('reset_password.confirm_password')}}
+                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", :placeholder="$t('reset_password.confirm_password_placeholder')", v-model.trim="$v.confirmPassword.$model")
+                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") {{$t('validation.confirm_password')}}
                   .form-footer
-                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") Submit
+                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('reset_password.submit')}}

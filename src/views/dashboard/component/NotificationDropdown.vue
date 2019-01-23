@@ -12,7 +12,7 @@
             |  {{value.message}}
             .small.text-muted {{value.time}}
       .dropdown-divider
-      router-link.dropdown-item.text-center.text-muted-dark(to='/') Mark all as read
+      router-link.dropdown-item.text-center.text-muted-dark(to='/') {{$t('dropdowns.mark_all')}}
 </template>
 
 <script>
