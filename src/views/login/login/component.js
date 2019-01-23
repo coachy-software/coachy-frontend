@@ -1,5 +1,5 @@
 import {notification} from "@/utils/toastr.utils";
-import {helpers, required} from "vuelidate/src/validators";
+import {required} from "vuelidate/src/validators";
 import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
 
 export default {
@@ -14,10 +14,10 @@ export default {
       .then(() => {
         let location = this.$route.query.redirect || '/dashboard';
         this.$router.push(location);
-        notification.success('Logged in');
+        notification.success(this.$t('login.logged_in'));
       })
-      .catch(() => {
-        notification.error('Bad credentials')
+      .catch(error => {
+        notification.error(this.$t('login.bad_credentials'))
       })
     }
   },

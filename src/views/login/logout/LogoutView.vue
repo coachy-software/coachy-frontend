@@ -10,7 +10,7 @@
     mounted() {
       this.$store.dispatch('user/logout')
       .then(() => {
-        notification.success('Logged out!');
+        notification.success(this.$t('logout.logged_out'));
         this.$router.push('/login');
       });
     }

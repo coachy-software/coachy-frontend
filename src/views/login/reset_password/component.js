@@ -2,6 +2,7 @@ import {required, minLength, maxLength, sameAs} from "vuelidate/src/validators";
 import {notification} from "@/utils/toastr.utils";
 import {resetPassword} from "@/service/user.service";
 import {NO_SPACE} from "@/utils/constants";
+import {getErrorMessage} from "@/utils/validation.utils";
 
 export default {
   name: 'reset-password',
@@ -25,10 +26,10 @@ export default {
     resetPassword() {
       resetPassword({token: this.$route.query.token, password: this.password, confirmPassword: this.confirmPassword})
       .then(() => {
-        notification.success('Password changed');
+        notification.success(this.$t('reset_password.reset'));
         this.$router.push('/login');
       })
-      .catch((error) => notification.error(error.message));
+      .catch((error) => notification.error(getErrorMessage('register', error)));
     }
   }
 }

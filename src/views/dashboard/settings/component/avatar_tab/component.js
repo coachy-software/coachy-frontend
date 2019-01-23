@@ -3,13 +3,14 @@ import axios from "axios";
 import {notification} from "@/utils/toastr.utils";
 import store from '@/store';
 import {updateAccountDetails} from '@/service/user.service';
+import {getErrorMessage} from "@/utils/validation.utils";
 
 let user = store.state.user.user;
 
 function updateUser(avatar) {
   updateAccountDetails({avatar: avatar})
-  .then(() => notification.success("Updated avatar"))
-  .catch(error => notification.error(error.message))
+  .then(() => notification.success(this.$t('avatar_tab.updated')))
+  .catch(error => notification.error(getErrorMessage('avatar_tab', error)));
 }
 
 export default {
@@ -52,7 +53,7 @@ export default {
 
       axios.post(`${API_URL}/uploads`, formData, config)
       .then(response => updateUser(response.data.fileUrl))
-      .catch(error => notification.error(error.message));
+      .catch(error => notification.error(getErrorMessage('avatar_tab', error)));
     },
     handleFileChange() {
       this.file = this.$refs.file.files[0];

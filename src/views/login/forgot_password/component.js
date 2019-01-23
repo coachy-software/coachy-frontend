@@ -1,6 +1,7 @@
 import {required, email} from "vuelidate/src/validators";
 import {notification} from "@/utils/toastr.utils";
 import {createResetPasswordToken} from "@/service/user.service.js";
+import {getErrorMessage} from "@/utils/validation.utils";
 
 export default {
   name: 'forgot-password',
@@ -21,8 +22,8 @@ export default {
   methods: {
     createToken() {
       createResetPasswordToken({email: this.email})
-      .then(() => notification.success('Email successfully sent'))
-      .catch((error) => notification.error(error.message));
+      .then(() => notification.success(this.$t('forgot_password.email_sent')))
+      .catch((error) => notification.error(getErrorMessage('register', error)));
     }
   }
 }

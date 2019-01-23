@@ -1,3 +1,48 @@
 {
-  "hello": "Cześć"
+  "validation": {
+    "username_E01": "Nazwa użytkownika nie może być pusta",
+    "username_E02": "Nazwa użytkownika nie może być pusta",
+    "username_E03": "Nazwa użytkownia nie spełnia wymagań",
+    "username_E04": "Nazwa użytkownia nie spełnia wymagań",
+    "displayName_E01": "Nazwa wyświetlana nie może być pusta",
+    "displayName_E02": "Nazwa wyświetlana nie może być pusta",
+    "displayName_E03": "Nazwa wyświetlana nie spełnia wymagań",
+    "password_E01": "Hasło nie może być puste",
+    "password_E02": "Hasło nie może być puste",
+    "password_E03": "Hasło nie spełnia wymagań",
+    "password_E04": "Hasło nie spełnia wymagań",
+    "matchingPassword_E05": "Hasła się nie zgadzają",
+    "email_E01": "Adres e-mail nie może być pusty",
+    "email_E02": "Adres e-mail nie może być pusty",
+    "email_E04": "Adres e-mail nie jest poprawny",
+    "avatar_E01": "Adres avataru nie może być pusty",
+    "avatar_E02": "Adres avataru nie może być pusty",
+    "avatar_E04": "Adres avataru nie spełnia wymagań"
+  },
+  "login": {
+    "bad_credentials": "Niepoprawne dane logowania",
+    "logged_in": "Pomyślnie zalogowano"
+  },
+  "forgot_password": {
+    "email_sent": "Wiadomość e-mail pomyślnie wysłana",
+    "409": "Prośba została niedawno wysłana",
+    "404": "Adres e-mail nie istnieje"
+  },
+  "logout": {
+    "logged_out": "Wylogowano"
+  },
+  "register": {
+    "registered": "Pomyślnie zarejestrowano",
+    "409": "Taki użytkownik już istnieje"
+  },
+  "reset_password": {
+    "reset": "Pomyślnie zresetowano hasło",
+    "404": "Token wygasł"
+  },
+  "account_tab": {
+    "updated": "Pomyślnie zaktualizowano"
+  },
+  "avatar_tab": {
+    "updated": "Pomyślnie zaktualizowano"
+  }
 }

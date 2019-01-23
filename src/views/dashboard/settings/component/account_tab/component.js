@@ -1,6 +1,7 @@
 import {updateAccountDetails} from '@/service/user.service';
 import {notification} from "@/utils/toastr.utils";
 import {email, maxLength, minLength} from "vuelidate/src/validators";
+import {getErrorMessage} from "@/utils/validation.utils";
 
 export default {
   data: () => ({
@@ -18,8 +19,8 @@ export default {
       }
 
       updateAccountDetails({email: this.email, displayName: this.displayName})
-      .then(() => notification.success('Updated'))
-      .catch(error => notification.error(error.message))
+      .then(() => notification.success(this.$t('account_tab.updated')))
+      .catch(error => notification.error(getErrorMessage('account_tab', error)))
     }
   },
   validations: {

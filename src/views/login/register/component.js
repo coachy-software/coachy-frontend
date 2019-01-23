@@ -1,6 +1,7 @@
 import {notification} from "@/utils/toastr.utils";
 import {required, maxLength, minLength, email, sameAs, helpers} from "vuelidate/src/validators";
 import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
+import {getErrorMessage} from "@/utils/validation.utils";
 
 export default {
   name: 'register',
@@ -23,11 +24,9 @@ export default {
       })
       .then(() => {
         this.$router.push("/login");
-        notification.success('Successfully registered');
+        notification.success(this.$t('register_registered'));
       })
-      .catch((error) => {
-        notification.error(error.message);
-      })
+      .catch((error) => notification.error(getErrorMessage('register', error)))
     }
   },
   computed: {
