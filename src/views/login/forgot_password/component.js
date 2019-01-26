@@ -23,7 +23,7 @@ export default {
     createToken() {
       createResetPasswordToken({email: this.email})
       .then(() => notification.success(this.$t('forgot_password.email_sent')))
-      .catch((error) => notification.error(getErrorMessage('register', error)));
+      .catch((error) => notification.error(getErrorMessage('forgot_password', error)));
     }
   }
 }
