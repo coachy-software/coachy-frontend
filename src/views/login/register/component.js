@@ -24,7 +24,7 @@ export default {
       })
       .then(() => {
         this.$router.push("/login");
-        notification.success(this.$t('register_registered'));
+        notification.success(this.$t('register.registered'));
       })
       .catch((error) => notification.error(getErrorMessage('register', error)))
     }
