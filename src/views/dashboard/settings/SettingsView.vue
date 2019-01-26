@@ -3,7 +3,7 @@
     .container
       .page-header
         h1.page-title
-          | Settings
+          | {{this.$t('settings.page_title')}}
       .row
         .col-lg-3.order-lg-1.mb-4
           Tabs

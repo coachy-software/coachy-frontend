@@ -115,5 +115,8 @@
   },
   "dropdowns": {
     "mark_all": "Oznacz wszystkie jako przeczytane"
+  },
+  "settings": {
+    "page_title": "Ustawienia"
   }
 }
