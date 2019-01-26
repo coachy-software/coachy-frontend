@@ -1,6 +1,6 @@
 {
   "account": {
-    "name": "Account",
+    "name": "Konto",
     "icon": "fe fe-settings",
     "link": "/dashboard/settings/account"
   },

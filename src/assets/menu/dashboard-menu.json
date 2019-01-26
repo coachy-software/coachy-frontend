@@ -20,28 +20,5 @@
         "link": "/"
       }
     ]
-  },
-  {
-    "name": "Test2",
-    "icon": "fe fe-user",
-    "type": "DROPDOWN",
-    "dropdown": [
-      {
-        "name": "Test 1",
-        "link": "/"
-      },
-      {
-        "name": "Test 2",
-        "link": "/"
-      },
-      {
-        "name": "Test 3",
-        "link": "/"
-      },
-      {
-        "name": "Test 4",
-        "link": "/"
-      }
-    ]
   }
 ]

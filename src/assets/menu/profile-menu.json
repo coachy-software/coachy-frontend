@@ -1,22 +1,22 @@
 [
   {
-    "name": "Settings",
+    "name": "Ustawienia",
     "icon": "fe fe-settings",
     "link": "/dashboard/settings"
   },
   {
-    "name": "Message",
+    "name": "Wiadomości",
     "icon": "fe fe-send",
     "divider": true,
     "link": "/dashboard/message"
   },
   {
-    "name": "Need help?",
+    "name": "FAQ",
     "icon": "fe fe-help-circle",
     "link": "/faq"
   },
   {
-    "name": "Sign out",
+    "name": "Wyloguj",
     "icon": "fe fe-log-out",
     "link": "/signout"
   }
