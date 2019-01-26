@@ -5,11 +5,11 @@
         .display-1.text-muted.mb-5
           i.si.si-exclamation
           |  404
-        h1.h2.mb-3 Oops.. You just found an error page..
-        p.h4.text-muted.font-weight-normal.mb-7 We are sorry but our service is currently not available&hellip;
+        h1.h2.mb-3 {{this.$t('error.title')}}
+        p.h4.text-muted.font-weight-normal.mb-7 {{this.$t('error.brief')}}
         button.btn.btn-primary(@click="$router.back()")
           i.fe.fe-arrow-left.mr-2
-          | Go back
+          | {{this.$t('error.back_button')}}
 </template>
 
 <style scoped>

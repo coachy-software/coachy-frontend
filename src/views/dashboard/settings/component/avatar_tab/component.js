@@ -4,13 +4,13 @@ import {notification} from "@/utils/toastr.utils";
 import store from '@/store';
 import {updateAccountDetails} from '@/service/user.service';
 import {getErrorMessage} from "@/utils/validation.utils";
+import i18n from "@/i18n";
 
 let user = store.state.user.user;
 
 function updateUser(avatar) {
   updateAccountDetails({avatar: avatar})
-  .then(() => notification.success(this.$t('avatar_tab.updated')))
-  .catch(error => notification.error(getErrorMessage('avatar_tab', error)));
+  .then(() => notification.success(i18n.t('avatar_tab.updated')));
 }
 
 export default {
@@ -23,6 +23,11 @@ export default {
   }),
   mounted() {
     this.$parent.currentTab = this.$parent.tabs.avatar.name;
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['loader/isLoading'];
+    }
   },
   methods: {
     resetInput() {

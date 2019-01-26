@@ -23,6 +23,11 @@ export default {
       .catch(error => notification.error(getErrorMessage('account_tab', error)))
     }
   },
+  computed: {
+    isLoading() {
+      return this.$store.getters['loader/isLoading'];
+    }
+  },
   validations: {
     email: {email},
     displayName: {minLength: minLength(3), maxLength: maxLength(32)}

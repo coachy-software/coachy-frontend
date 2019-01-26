@@ -118,5 +118,10 @@
   },
   "settings": {
     "page_title": "Ustawienia"
+  },
+  "error": {
+    "title": "Oops.. znalazłeś stronę błędu",
+    "brief": "Przepraszamy, ale strona, której szukasz jest aktualnie niedostępna...",
+    "back_button": "Wróc"
   }
 }

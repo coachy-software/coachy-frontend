@@ -1,24 +1,27 @@
 div
   form(@submit.prevent="update")
     .card-body
-      h3.card-title {{$t('account_tab.card_title')}}
-      .row
-        .col-sm-6.col-md-6
-          .form-group
-            label.form-label {{$t('account_tab.email')}}
-            input.form-control(:class="{'is-invalid': $v.email.$error}", type='email', :placeholder="$t('account_tab.email_placeholder')", v-model.trim="$v.email.$model")
-            .invalid-feedback(v-if="!$v.email.email") {{$t('validation.email_format')}}
-        .col-sm-6.col-md-6
-          .form-group
-            label.form-label {{$t('account_tab.displayName')}}
-            input.form-control(:class="{'is-invalid': $v.displayName.$error}", type='text', :placeholder="$t('account_tab.displayName_placeholder')", v-model.trim="$v.displayName.$model")
-            .invalid-feedback(v-if="!$v.displayName.maxLength") {{$t('validation.displayName_maxLength')}}
-            .invalid-feedback(v-if="!$v.displayName.minLength") {{$t('validation.displayName_minLength')}}
-        .col-sm6.col-md-6
-          .form-group
-            label.form-label {{$t('account_tab.language')}}
-            select.form-control.custom-select(v-model="language")
-              option(value='en') English
-              option(value='pl') Polski
-    .card-footer.text-right
-      button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{$t('account_tab.update')}}
+      #dimmer.dimmer(:class="{'active': isLoading}")
+        .loader
+        .dimmer-content
+          h3.card-title {{$t('account_tab.card_title')}}
+          .row
+            .col-sm-6.col-md-6
+              .form-group
+                label.form-label {{$t('account_tab.email')}}
+                input.form-control(:class="{'is-invalid': $v.email.$error}", type='email', :placeholder="$t('account_tab.email_placeholder')", v-model.trim="$v.email.$model")
+                .invalid-feedback(v-if="!$v.email.email") {{$t('validation.email_format')}}
+            .col-sm-6.col-md-6
+              .form-group
+                label.form-label {{$t('account_tab.displayName')}}
+                input.form-control(:class="{'is-invalid': $v.displayName.$error}", type='text', :placeholder="$t('account_tab.displayName_placeholder')", v-model.trim="$v.displayName.$model")
+                .invalid-feedback(v-if="!$v.displayName.maxLength") {{$t('validation.displayName_maxLength')}}
+                .invalid-feedback(v-if="!$v.displayName.minLength") {{$t('validation.displayName_minLength')}}
+            .col-sm6.col-md-6
+              .form-group
+                label.form-label {{$t('account_tab.language')}}
+                select.form-control.custom-select(v-model="language")
+                  option(value='en') English
+                  option(value='pl') Polski
+        .card-footer.text-right
+          button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{$t('account_tab.update')}}
