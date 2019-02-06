@@ -3,7 +3,7 @@ import mutations from "./mutations";
 import getters from "./getters";
 
 const state = {
-  schedules: []
+  schedules: JSON.parse(localStorage.getItem('schedules')) || []
 };
 
 export default {

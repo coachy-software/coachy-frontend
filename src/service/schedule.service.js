@@ -15,6 +15,7 @@ export function fetchAll() {
     })
     .then(response => {
       if (response.data) {
+        localStorage.setItem('schedules', JSON.stringify(response.data.content));
         store.commit("schedule/SET_SCHEDULES", response.data.content);
       }
 
