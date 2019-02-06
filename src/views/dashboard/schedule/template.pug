@@ -1,0 +1,37 @@
+.container
+	.page-header
+		h1.page-title {{this.$t('schedule.page_title')}}
+		.page-options.d-flex
+			.btn-list.text-right
+				button.btn.btn-outline-primary(:class="{'btn-loading': isLoading}", type='button', @click="fetchAll")
+					i.fe.fe-rotate-cw.mr-2
+					| {{this.$t('schedule.refresh')}}
+	.card
+		.table-responsive
+			table.table.card-table.table-vcenter.text-nowrap
+				thead
+					tr
+						th {{this.$t('schedule.name')}}
+						th {{this.$t('schedule.active')}}
+						th {{this.$t('schedule.created')}}
+						th {{this.$t('schedule.updated')}}
+						th
+						th(:class="{'hide': !isCoach}")
+				tbody(v-if="!isEmpty")
+					tr(v-for="schedule in this.$store.state.schedule.schedules")
+						td
+							span.text-muted {{schedule.name}}
+						td
+							| {{$t(`boolean.${schedule.active}`)}}
+						td
+							| {{schedule.createdAt | moment}}
+						td
+							| {{schedule.updatedAt | moment}}
+						td.text-right
+							a.btn.btn-secondary.btn-sm(href='javascript:void(0)') {{$t('schedule.show')}}
+						td(v-if="isCoach")
+							a.icon(href='javascript:;')
+								i.fe.fe-edit
+				tbody(v-else)
+					tr
+						th {{this.$t('schedule.no_schedules')}}

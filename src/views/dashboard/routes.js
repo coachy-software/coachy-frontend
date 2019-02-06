@@ -22,6 +22,10 @@ export default [{
           component: () => import('@/views/dashboard/settings/component/avatar_tab/AvatarTab')
         }
       ]
+    },
+    {
+      path: 'schedules',
+      component: () => import('@/views/dashboard/schedule/ScheduleView')
     }
   ]
 }];

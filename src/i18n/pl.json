@@ -1,4 +1,8 @@
 {
+  "boolean": {
+    "false": "Nie",
+    "true": "Tak"
+  },
   "validation": {
     "username_E01": "Nazwa użytkownika nie może być pusta",
     "username_E02": "Nazwa użytkownika nie może być pusta",
@@ -123,5 +127,15 @@
     "title": "Oops.. znalazłeś stronę błędu",
     "brief": "Przepraszamy, ale strona, której szukasz jest aktualnie niedostępna...",
     "back_button": "Wróc"
+  },
+  "schedule": {
+    "page_title": "Twoje plany treningowe",
+    "name": "Nazwa",
+    "active": "Aktywny",
+    "created": "Utworzony",
+    "updated": "Zaktualizowany",
+    "show": "Pokaż",
+    "refresh": "Zaktualizuj",
+    "no_schedules": "Brak planów"
   }
 }

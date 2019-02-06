@@ -1,10 +1,13 @@
 <template lang="pug">
-  span.avatar(v-if="$store.state.user.user.avatar !== ''", :style="{'background-image': `url(${this.$store.state.user.user.avatar})`}")
+  span.avatar(v-if="isNotNullAndEmpty($store.state.user.user)", :style="{'background-image': `url(${this.$store.state.user.user.avatar})`}")
   span.avatar.avatar-blue(v-else) {{this.getInitials(this.$store.state.user.user)}}
 </template>
 <script>
   export default {
     methods: {
+      isNotNullAndEmpty(user) {
+        return user.avatar !== '' && user.avatar !== null;
+      },
       getInitials(user) {
         let name = user.displayName || user.username;
         let splittedName = name.split(' ');

@@ -2,7 +2,6 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {LOADING, NOT_LOADING, SET_STATUS} from "@/store/modules/loader";
 import store from '@/store'
-import {SET_USER} from "@/store/modules/user";
 
 export function createResetPasswordToken(payload) {
   return new Promise((resolve, reject) => {
