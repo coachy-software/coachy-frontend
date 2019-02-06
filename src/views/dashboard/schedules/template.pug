@@ -6,7 +6,7 @@
 				button.btn.btn-outline-primary(:class="{'btn-loading': isLoading}", type='button', @click="fetchAll")
 					i.fe.fe-rotate-cw.mr-2
 					| {{this.$t('schedule.refresh')}}
-				button.btn.btn-primary(type='button', v-if="isCoach", @click="$router.push('new')")
+				button.btn.btn-primary(type='button', v-if="isCoach", @click="$router.push('/dashboard/schedules/new')")
 					i.fe.fe-plus.mr-2
 					| {{this.$t('schedule.create')}}
 	.card
