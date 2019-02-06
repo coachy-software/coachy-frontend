@@ -1,3 +1,49 @@
 .container
 	.page-header
 		h1.page-title {{this.$t('create_schedule.page_title')}}
+	.card.col-lg-12
+		.card-header
+			h3.card-title {{this.$t('create_schedule.card_title')}}
+		.card-body
+			.row
+				.form-group.col-sm-8.col-md-5
+					label.form-label
+						| {{this.$t('create_schedule.name')}}
+						span.form-required *
+					input.form-control(name='url', type='text', :placeholder="this.$t('create_schedule.name_placeholder')")
+				.form-group.col-sm-8.col-md-5
+					label.form-label
+						| {{this.$t('create_schedule.charge')}}
+						span.form-required *
+					.input-group
+						span.input-group-prepend
+							span.input-group-text @
+						input.form-control(type='text', :placeholder="this.$t('create_schedule.username_placeholder')")
+				.form-group.col-sm-4.col-md-2
+					label.form-label
+						| {{this.$t('create_schedule.training_days')}}
+					select.custom-select
+						option(value='1') 1
+						option(value='2') 2
+						option(value='3') 3
+						option(value='4') 4
+						option(value='5') 5
+						option(value='6') 6
+						option(value='7' selected) 7
+				.form-group.col-sm-10.col-md-5.mt-5
+					.custom-switches-stacked
+						label.custom-switch
+							input.custom-switch-input(type='checkbox', name='custom-switch-checkbox')
+							span.custom-switch-indicator
+							span.custom-switch-description {{this.$t('create_schedule.display_non_training')}}
+						label.custom-switch
+							input.custom-switch-input(type='checkbox', name='custom-switch-checkbox' checked)
+							span.custom-switch-indicator
+							span.custom-switch-description {{this.$t('create_schedule.active')}}
+				.form-group.col-sm-12.col-md-7
+					label.form-label
+						| {{this.$t('create_schedule.note')}}
+						span.form-label-small 0/100
+					textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')")
+		.card-footer.text-right
+			button.btn.btn-primary(type='submit') {{this.$t('create_schedule.create')}}

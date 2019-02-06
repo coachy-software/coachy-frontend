@@ -140,6 +140,17 @@
     "create": "Stwórz nowy"
   },
   "create_schedule": {
-    "page_title": "Stwórz nowy plan treningowy"
+    "page_title": "Twoje plany treningowe",
+    "create": "Stwórz",
+    "card_title": "Stwórz plan treningowy",
+    "name": "Nazwa",
+    "name_placeholder": "Nazwa",
+    "charge": "Podopieczny",
+    "training_days": "Dni treningowe",
+    "display_non_training": "Wyświetlaj dni nietreningowe",
+    "active": "Aktywny",
+    "username_placeholder": "Nazwa użytkownika",
+    "complete_note": "Uzupełnij notatkę...",
+    "note": "Notatka"
   }
 }
