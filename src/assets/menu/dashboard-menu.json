@@ -6,8 +6,14 @@
     "link": "/dashboard/home"
   },
   {
-    "name": "Test",
-    "icon": "fe fe-box",
+    "name": "Plany",
+    "icon": "fe fe-clipboard",
+    "type": "NORMAL",
+    "link": "/dashboard/schedules"
+  },
+  {
+    "name": "Kalkulatory",
+    "icon": "fa fa-calculator",
     "type": "DROPDOWN",
     "link": "/test",
     "dropdown": [

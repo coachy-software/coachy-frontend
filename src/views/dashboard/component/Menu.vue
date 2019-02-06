@@ -3,9 +3,9 @@
     ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
       div(v-for="item in menu")
         li.nav-item(v-if="item.type === 'NORMAL'")
-          router-link.nav-link.active(:to="item.link", :class="{'dropdown-element': $parent.dropdowns.mobile.open}")
+          router-link.nav-link(:to="item.link", :class="{'dropdown-element': $parent.dropdowns.mobile.open}")
             i(:class="item.icon")
-            |  Home
+            |  {{item.name}}
         div(v-if="item.type === 'DROPDOWN'")
           li.nav-item(@mouseover="showDropdown(item.name)", @mouseleave="hideDropdown(item.name)", :id="item.name", :class="{'dropdown-element': $parent.dropdowns.mobile.open}")
             a.nav-link

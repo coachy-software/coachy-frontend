@@ -136,6 +136,10 @@
     "updated": "Zaktualizowany",
     "show": "Pokaż",
     "refresh": "Zaktualizuj",
-    "no_schedules": "Brak planów"
+    "no_schedules": "Brak planów",
+    "create": "Stwórz nowy"
+  },
+  "create_schedule": {
+    "page_title": "Stwórz nowy plan treningowy"
   }
 }
