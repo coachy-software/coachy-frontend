@@ -43,7 +43,7 @@
 				.form-group.col-sm-12.col-md-7
 					label.form-label
 						| {{this.$t('create_schedule.note')}}
-						span.form-label-small 0/100
-					textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')")
+						span.form-label-small {{note.length}}/100
+					textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model="note")
 		.card-footer.text-right
 			button.btn.btn-primary(type='submit') {{this.$t('create_schedule.create')}}
