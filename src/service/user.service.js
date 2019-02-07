@@ -59,3 +59,11 @@ export function updateAccountDetails(payload) {
     })
   })
 }
+
+export function get(payload) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${API_URL}/users/?username=${payload.username}`)
+    .then(response => resolve(response))
+    .catch(error => reject(error));
+  });
+}

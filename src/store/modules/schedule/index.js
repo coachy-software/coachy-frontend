@@ -2,6 +2,8 @@ import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
 
+export const SET_SCHEDULES = 'SET_SCHEDULES';
+
 const state = {
   schedules: JSON.parse(localStorage.getItem('schedules')) || []
 };
