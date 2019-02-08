@@ -34,7 +34,10 @@
     "password_format": "Hasło nie może zawierać spacji",
     "password_maxLength": "Hasło może mieć maksymalnie 64 znaki",
     "password_minLength": "Hasło musi mieć minimum 6 znaki",
-    "confirm_password": "Hasła muszą być takie same"
+    "confirm_password": "Hasła muszą być takie same",
+    "name_E01": "Nazwa nie może być pusta",
+    "name_E02": "Nazwa nie może być pusta",
+    "charge_E01": "Nazwa podopiecznego nie może być pusta"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",
@@ -151,6 +154,8 @@
     "active": "Aktywny",
     "username_placeholder": "Nazwa użytkownika",
     "complete_note": "Uzupełnij notatkę...",
-    "note": "Notatka"
+    "note": "Notatka",
+    "404": "Użytkownik nie istnieje",
+    "created": "Pomyślnie utworzono"
   }
 }

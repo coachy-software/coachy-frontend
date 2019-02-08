@@ -16,7 +16,8 @@ export default {
     createSchedule() {
       get({username: this.charge})
       .then(response => {
-        if (response.data.content.length === 1) {
+        let result = response.data.content;
+        if (result.length === 1 && result[0].username === this.charge) {
           store.dispatch('schedule/create', {
             name: this.name,
             creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
@@ -24,14 +25,19 @@ export default {
             note: this.note,
             active: this.active
           })
-          .then(() => notification.success('Utworzono'))
+          .then(() => notification.success(this.$t('create_schedule.created')))
           .catch(error => notification.error(getErrorMessage('create_schedule', error)));
 
           return;
         }
 
-        notification.error('Nie ma takiego użytkownika');
+        notification.error(this.$t('create_schedule.404'));
       })
+    }
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['loader/isLoading'];
     }
   }
 }
