@@ -37,7 +37,9 @@
     "confirm_password": "Hasła muszą być takie same",
     "name_E01": "Nazwa nie może być pusta",
     "name_E02": "Nazwa nie może być pusta",
-    "charge_E01": "Nazwa podopiecznego nie może być pusta"
+    "name_required": "Nazwa planu jest wymagana",
+    "charge_E01": "Nazwa podopiecznego nie może być pusta",
+    "charge_required": "Nazwa konta podopiecznego jest wymagana"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",

@@ -14,7 +14,8 @@
 								label.form-label
 									| {{this.$t('create_schedule.name')}}
 									span.form-required *
-								input.form-control(type='text', :placeholder="this.$t('create_schedule.name_placeholder')", v-model="name")
+								input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="this.$t('create_schedule.name_placeholder')", v-model.trim="$v.name.$model")
+								.invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
 							.form-group.col-sm-8.col-md-5
 								label.form-label
 									| {{this.$t('create_schedule.charge')}}
@@ -22,7 +23,8 @@
 								.input-group
 									span.input-group-prepend
 										span.input-group-text @
-									input.form-control(type='text', :placeholder="this.$t('create_schedule.username_placeholder')", v-model="charge")
+									input.form-control(:class="{'is-invalid': $v.charge.$error}", type='text', :placeholder="this.$t('create_schedule.username_placeholder')", v-model.trim="$v.charge.$model")
+									.invalid-feedback(v-if="!$v.charge.required") {{$t('validation.charge_required')}}
 							.form-group.col-sm-4.col-md-2
 								label.form-label
 									| {{this.$t('create_schedule.training_days')}}
@@ -50,4 +52,4 @@
 									span.form-label-small {{note.length}}/100
 								textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model="note")
 			.card-footer.text-right
-				button.btn.btn-primary(type='submit') {{this.$t('create_schedule.create')}}
+				button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{this.$t('create_schedule.create')}}
