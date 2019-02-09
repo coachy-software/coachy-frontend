@@ -30,6 +30,10 @@ export default [{
     {
       path: 'schedules/new',
       component: () => import('@/views/dashboard/create_schedule/CreateScheduleView')
+    },
+    {
+      path: 'schedules/:id',
+      component: () => import('@/views/dashboard/schedule/ScheduleView')
     }
   ]
 }];

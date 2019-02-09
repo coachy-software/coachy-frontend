@@ -1,0 +1,51 @@
+.schedule-panel {
+  display: inline-table;
+  padding: 8px;
+  vertical-align: top;
+  background-color: #fff;
+  border-radius: 3px;
+}
+.exercise-list {
+  position: relative;
+  margin: 4px 0px 0px 0px;
+}
+.exercise {
+  position: relative;
+  background-color: #eaeaea;
+  text-align: left;
+  padding: 0px 0px 0px 4px;
+  margin: 0px 0px 1px 0px;
+  border-width: 1px 1px 0px 1px;
+}
+.exercise:last-child {
+  border-width: 1px;
+}
+.exercise > p {
+  color: #808080;
+  margin: 0;
+  padding: 0;
+  line-height: 30px;
+  display: inline-block;
+  width: 90%;
+  vertical-align: top;
+}
+.exercise.over {
+  border-top: 3px dashed #dadada;
+}
+@media (min-width: 992px) {
+  .container-scroll {
+    overflow-x: auto;
+  }
+  .container-scroll .columns-14 {
+    width: 61.40350877192984vw;  /* = 100vw * 14/12 */
+  }
+  .container-scroll .col-md-2 {
+    width: 8.771929824561406vw !important;
+  }
+}
+
+.container-scroll > .row > .col-md-2 {
+  font-weight: bold;
+  text-align: center;
+}
+
