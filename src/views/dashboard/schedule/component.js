@@ -1,10 +1,12 @@
 import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
+import store from "@/store";
 
 export default {
   data: () => ({
-    schedule: {}
+    schedule: {},
+    isCoach: store.state.user.user.accountType === 'COACH'
   }),
   components: {
     draggable

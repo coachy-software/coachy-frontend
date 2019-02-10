@@ -10,5 +10,8 @@
 							draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
 								div.exercise(v-for='element in day.exercises', :key='element.name')
 									.card.p-3.mb-1
-										small {{element.name}} #[a.tag-addon.bg-blue-lightest.float-right(href='#') #[i.fe.fe-x]]
-							.card.p-3.align-items-center.bg-blue-lightest #[i.fe.fe-plus(style="color: #2b2b2b")]
+										small {{element.name}}
+											a.tag-addon.bg-blue-lightest.float-right(v-if="isCoach", href="javascript:;")
+												i.fe.fe-x
+							span.card.p-3.align-items-center.bg-blue-lightest(v-if="isCoach")
+								i.fe.fe-plus(style="color: #2b2b2b")
