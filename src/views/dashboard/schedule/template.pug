@@ -1,14 +1,14 @@
 .container
 	.page-header
 		h1.page-title {{this.schedule.name}}
-	.container-fluid.container-scroll
-		.row.columns-14
-			.span(v-if="this.schedule.days !== undefined")
-				.schedule-panel.col-md-2(v-for="day in schedule.days")
-					h4.user-name {{day.name}}
-					.exercise-list
-						draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
-							div.exercise(v-for='element in day.exercises', :key='element.id')
-								.card.p-3.mb-1
-									.d-flex.align-items-center
-										small {{element.name}}
+	.page-main
+		ul.container-fluid.container-scroll.columns-14
+				.span(v-if="this.schedule.days !== undefined")
+					.schedule-panel.col-md-2(v-for="day in schedule.days")
+						h4.text-center {{day.name}}
+						.exercise-list
+							draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+								div.exercise(v-for='element in day.exercises', :key='element.name')
+									.card.p-3.mb-1
+										small {{element.name}} #[a.tag-addon.bg-blue-lightest.float-right(href='#') #[i.fe.fe-x]]
+							.card.p-3.align-items-center.bg-blue-lightest #[i.fe.fe-plus(style="color: #2b2b2b")]
