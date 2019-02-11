@@ -2,6 +2,7 @@ import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
 import store from "@/store";
+import exerciseModal from "./component/ExerciseModal";
 
 export default {
   data: () => ({
@@ -9,7 +10,8 @@ export default {
     isCoach: store.state.user.user.accountType === 'COACH'
   }),
   components: {
-    draggable
+    draggable,
+    exerciseModal
   },
   mounted() {
     let identifier = this.$route.params.id;
@@ -22,5 +24,17 @@ export default {
       notification.error('Nie znaleziono planu'); // todo
       this.$router.back();
     });
+  },
+  methods: {
+    addExercise(dayIndex) {
+      this.schedule.days[dayIndex].exercises.push({name: "Test" + Math.random()});
+    },
+    removeExercise(dayIndex, exerciseName) {
+      this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises
+      .filter(exercise => exercise.name !== exerciseName);
+    },
+    openExerciseModal() {
+      this.$refs.exerciseModal.openModal();
+    }
   }
 }

@@ -1,17 +1,23 @@
 .container
 	.page-header
 		h1.page-title {{this.schedule.name}}
+		.page-options.d-flex
+			.btn-list.text-right
+				button.btn.btn-outline-primary(type='button')
+					i.fe.fe-eye.mr-2
+					| Zobacz jako podopieczny
 	.page-main
 		ul.container-fluid.container-scroll.columns-14
-				.span(v-if="this.schedule.days !== undefined")
-					.schedule-panel.col-md-2(v-for="day in schedule.days")
-						h4.text-center {{day.name}}
-						.exercise-list
-							draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
-								div.exercise(v-for='element in day.exercises', :key='element.name')
-									.card.p-3.mb-1
-										small {{element.name}}
-											a.tag-addon.bg-blue-lightest.float-right(v-if="isCoach", href="javascript:;")
-												i.fe.fe-x
-							span.card.p-3.align-items-center.bg-blue-lightest(v-if="isCoach")
-								i.fe.fe-plus(style="color: #2b2b2b")
+			.span(v-if="this.schedule.days !== undefined")
+				.schedule-panel.col-md-2(v-for="(day, index) in schedule.days")
+					h4.text-center {{day.name}}
+					.exercise-list
+						draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+							div.exercise(v-for='exercise in day.exercises', :key='exercise.name')
+								.card.p-3.mb-1
+									span.exercise-text {{exercise.name}}
+										span.tag-addon.bg-blue-lightest.float-right(v-if="isCoach", @click="removeExercise(index, exercise.name)")
+											i.fe.fe-x
+						button.card.p-3.align-items-center.bg-blue-lightest(v-if="isCoach", @click="openExerciseModal")
+							i.fe.fe-plus(style="color: #2b2b2b")
+	exercise-modal(ref="exerciseModal")
