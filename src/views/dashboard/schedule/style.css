@@ -7,6 +7,10 @@
   background-color: #fff;
   border-radius: 3px;
 }
+.hidden {
+  display: none;
+}
+
 .exercise-list {
   position: relative;
   margin: 4px 0px 0px 0px;

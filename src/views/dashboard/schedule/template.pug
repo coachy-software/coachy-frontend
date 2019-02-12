@@ -9,7 +9,7 @@
 	.page-main
 		ul.container-fluid.container-scroll.columns-14
 			.span(v-if="this.schedule.days !== undefined")
-				.schedule-panel(v-for="(day, index) in schedule.days")
+				.schedule-panel(v-for="(day, index) in schedule.days", :class="{'hidden': !day.trainingDay}")
 					h4.text-center {{day.name}}
 					.exercise-list
 						draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')

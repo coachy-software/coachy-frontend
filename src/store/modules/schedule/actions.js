@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {SET_SCHEDULES} from "./index";
+import i18n from "@/i18n"
 
 const create = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
@@ -14,13 +15,13 @@ const create = ({commit}, payload) => {
       note: payload.note,
       active: payload.active,
       days: [
-        {name: this.$t('days.monday'), trainingDay: payload.monday},
-        {name: this.$t('days.tuesday'), trainingDay: payload.tuesday},
-        {name: this.$t('days.wednesday'), trainingDay: payload.wednesday},
-        {name: this.$t('days.thursday'), trainingDay: payload.thursday},
-        {name: this.$t('days.friday'), trainingDay: payload.friday},
-        {name: this.$t('days.saturday'), trainingDay: payload.saturday},
-        {name: this.$t('days.sunday'), trainingDay: payload.sunday}
+        {name: i18n.t('days.monday'), trainingDay: payload.monday},
+        {name: i18n.t('days.tuesday'), trainingDay: payload.tuesday},
+        {name: i18n.t('days.wednesday'), trainingDay: payload.wednesday},
+        {name: i18n.t('days.thursday'), trainingDay: payload.thursday},
+        {name: i18n.t('days.friday'), trainingDay: payload.friday},
+        {name: i18n.t('days.saturday'), trainingDay: payload.saturday},
+        {name: i18n.t('days.sunday'), trainingDay: payload.sunday}
       ]
     }, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {
