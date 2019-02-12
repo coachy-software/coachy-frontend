@@ -2,42 +2,10 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {SET_SCHEDULES} from "./index";
-import ObjectID from "bson-objectid";
 
 const create = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
-
-    let exercises = [
-      {
-        identifier: ObjectID.generate(),
-        name: "Wyciskanie",
-        sets: 4,
-        reps: 15,
-        miniSets: 3
-      },
-      {
-        identifier: ObjectID.generate(),
-        name: "Wyciskanie skos",
-        sets: 4,
-        reps: 15,
-        miniSets: 3
-      },
-      {
-        identifier: ObjectID.generate(),
-        name: "Francuzy",
-        sets: 4,
-        reps: 15,
-        miniSets: 3
-      },
-      {
-        identifier: ObjectID.generate(),
-        name: "Biceps",
-        sets: 4,
-        reps: 15,
-        miniSets: 3
-      }
-    ];
 
     axios.post(`${API_URL}/schedules`, {
       name: payload.name,
@@ -46,13 +14,13 @@ const create = ({commit}, payload) => {
       note: payload.note,
       active: payload.active,
       days: [
-        {name: "Poniedziałek", trainingDay: true, exercises: exercises},
-        {name: "Wtorek", trainingDay: true, exercises: exercises},
-        {name: "Środa", trainingDay: true, exercises: exercises},
-        {name: "Czwartek", trainingDay: true, exercises: exercises},
-        {name: "Piatek", trainingDay: true, exercises: exercises},
-        {name: "Sobota", trainingDay: true, exercises: exercises},
-        {name: "Niedziela", trainingDay: true, exercises: exercises},
+        {name: "Poniedziałek", trainingDay: true},
+        {name: "Wtorek", trainingDay: true},
+        {name: "Środa", trainingDay: true},
+        {name: "Czwartek", trainingDay: true},
+        {name: "Piatek", trainingDay: true},
+        {name: "Sobota", trainingDay: true},
+        {name: "Niedziela", trainingDay: true},
       ]
     }, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {
