@@ -142,7 +142,14 @@
     "show": "Pokaż",
     "refresh": "Zaktualizuj",
     "no_schedules": "Brak planów",
-    "create": "Stwórz nowy"
+    "create": "Stwórz nowy",
+    "not_found": "Nie znaleziono planu",
+    "name_placeholder": "Nazwa",
+    "sets": "Serie",
+    "reps": "Powtórzenia",
+    "miniSets": "Miniserie",
+    "submit": "Stwórz",
+    "add_exercise": "Dodaj ćwiczenie"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
@@ -159,5 +166,14 @@
     "note": "Notatka",
     "404": "Użytkownik nie istnieje",
     "created": "Pomyślnie utworzono"
+  },
+  "days": {
+    "monday": "Poniedziałek",
+    "tuesday": "Wtorek",
+    "wednesday": "Środa",
+    "thursday": "Czwartek",
+    "friday": "Piątek",
+    "saturday": "Sobota",
+    "sunday": "Niedziela"
   }
 }

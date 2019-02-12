@@ -19,7 +19,7 @@ export default {
     get({identifier: identifier})
     .then(response => this.schedule = response.data)
     .catch(() => {
-      notification.error('Nie znaleziono planu'); // todo
+      notification.error(this.$t('schedule.not_found'));
       this.$router.push('/dashboard/schedules');
     });
   },

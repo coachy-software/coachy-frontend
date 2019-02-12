@@ -14,13 +14,13 @@ const create = ({commit}, payload) => {
       note: payload.note,
       active: payload.active,
       days: [
-        {name: "Poniedziałek", trainingDay: true},
-        {name: "Wtorek", trainingDay: true},
-        {name: "Środa", trainingDay: true},
-        {name: "Czwartek", trainingDay: true},
-        {name: "Piatek", trainingDay: true},
-        {name: "Sobota", trainingDay: true},
-        {name: "Niedziela", trainingDay: true},
+        {name: this.$t('days.monday'), trainingDay: true},
+        {name: this.$t('days.tuesday'), trainingDay: true},
+        {name: this.$t('days.wednesday'), trainingDay: true},
+        {name: this.$t('days.thursday'), trainingDay: true},
+        {name: this.$t('days.friday'), trainingDay: true},
+        {name: this.$t('days.saturday'), trainingDay: true},
+        {name: this.$t('days.sunday'), trainingDay: true}
       ]
     }, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {
