@@ -21,7 +21,7 @@
             label.form-label Reps
             input.form-control(type='number', placeholder='Reps', v-model="reps", min=1)
     .card-footer
-      button.btn.btn-outline-primary.float-right(slot='button', @click="closeModal") Submit
+      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid") Submit
 </template>
 <script>
   import {SweetModal, SweetModalTab} from 'sweet-modal-vue'
@@ -32,7 +32,8 @@
       name: '',
       sets: 1,
       miniSets: 0,
-      reps: 1
+      reps: 1,
+      dayIndex: null
     }),
     name: 'exercise-modal',
     components: {
@@ -40,11 +41,9 @@
       sweetModalTab: SweetModalTab,
     },
     methods: {
-      openModal() {
+      openModal(dayIndex) {
+        this.dayIndex = dayIndex;
         this.$refs.exerciseModal.open();
-      },
-      closeModal() {
-        this.$refs.exerciseModal.close();
       }
     },
     validations: {

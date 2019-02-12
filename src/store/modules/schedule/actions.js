@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {SET_SCHEDULES} from "./index";
+import ObjectID from "bson-objectid";
 
 const create = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
@@ -9,24 +10,28 @@ const create = ({commit}, payload) => {
 
     let exercises = [
       {
+        identifier: ObjectID.generate(),
         name: "Wyciskanie",
         sets: 4,
         reps: 15,
         miniSets: 3
       },
       {
+        identifier: ObjectID.generate(),
         name: "Wyciskanie skos",
         sets: 4,
         reps: 15,
         miniSets: 3
       },
       {
+        identifier: ObjectID.generate(),
         name: "Francuzy",
         sets: 4,
         reps: 15,
         miniSets: 3
       },
       {
+        identifier: ObjectID.generate(),
         name: "Biceps",
         sets: 4,
         reps: 15,
@@ -93,19 +98,19 @@ const remove = ({commit}, payload) => {
   });
 };
 
-export function update(payload) {
+export function update({commit}, payload) {
   return new Promise((resolve, reject) => {
-    store.commit(SET_STATUS, LOADING);
+    commit(SET_STATUS, LOADING);
 
     axios.delete(`${API_URL}/schedules/${payload.identifier}`, {
       headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}
     })
     .then(response => {
-      store.commit(SET_STATUS, NOT_LOADING);
+      commit(SET_STATUS, NOT_LOADING);
       resolve(response);
     })
     .catch(error => {
-      store.commit(SET_STATUS, NOT_LOADING);
+      commit(SET_STATUS, NOT_LOADING);
       reject(error);
     })
   });

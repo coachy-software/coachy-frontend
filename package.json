@@ -21,6 +21,7 @@
     "autoprefixer": "^9.4.4",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
+    "bson-objectid": "^1.2.4",
     "css-loader": "^2.1.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",

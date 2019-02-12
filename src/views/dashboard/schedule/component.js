@@ -3,6 +3,7 @@ import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
 import store from "@/store";
 import exerciseModal from "./component/ExerciseModal";
+import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
@@ -27,14 +28,23 @@ export default {
   },
   methods: {
     addExercise(dayIndex) {
-      this.schedule.days[dayIndex].exercises.push({name: "Test" + Math.random()});
+      let modal = this.$refs.exerciseModal;
+      let exercise = {
+        identifier: ObjectID.generate(),
+        name: modal.name,
+        sets: modal.sets,
+        reps: modal.reps,
+        miniSets: modal.miniSets
+      };
+
+      this.schedule.days[dayIndex].exercises.push(exercise);
     },
-    removeExercise(dayIndex, exerciseName) {
-      this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises
-      .filter(exercise => exercise.name !== exerciseName);
+    removeExercise(dayIndex, exerciseIdentifier) {
+      this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises.filter(
+          exercise => exercise.identifier !== exerciseIdentifier);
     },
-    openExerciseModal() {
-      this.$refs.exerciseModal.openModal();
+    openExerciseModal(dayIndex) {
+      this.$refs.exerciseModal.openModal(dayIndex);
     }
   }
 }
