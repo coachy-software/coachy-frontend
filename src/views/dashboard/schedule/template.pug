@@ -9,12 +9,12 @@
 	.page-main
 		ul.container-fluid.container-scroll.columns-14
 			.span(v-if="this.schedule.days !== undefined")
-				.schedule-panel.col-md-2(v-for="(day, index) in schedule.days")
+				.schedule-panel(v-for="(day, index) in schedule.days")
 					h4.text-center {{day.name}}
 					.exercise-list
 						draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
 							div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
-								.card.p-3.mb-1
+								.card.p-3.mr-3.mb-1
 									span.exercise-text {{exercise.name}}
 										span.tag-addon.bg-blue-lightest.float-right(v-if="isCoach", @click="removeExercise(index, exercise.identifier)")
 											i.fe.fe-x

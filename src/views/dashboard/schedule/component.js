@@ -38,6 +38,7 @@ export default {
       };
 
       this.schedule.days[dayIndex].exercises.push(exercise);
+      this.$refs.exerciseModal.closeModal();
     },
     removeExercise(dayIndex, exerciseIdentifier) {
       this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises.filter(

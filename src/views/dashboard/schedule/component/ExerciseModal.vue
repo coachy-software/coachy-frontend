@@ -44,6 +44,9 @@
       openModal(dayIndex) {
         this.dayIndex = dayIndex;
         this.$refs.exerciseModal.open();
+      },
+      closeModal() {
+        this.$refs.exerciseModal.close();
       }
     },
     validations: {
