@@ -26,7 +26,10 @@ export default {
             note: this.note,
             active: this.active
           })
-          .then(() => notification.success(this.$t('create_schedule.created')))
+          .then((response) => {
+            notification.success(this.$t('create_schedule.created'));
+            this.$router.push(`/dashboard/schedules/${response.data.identifier}`);
+          })
           .catch(error => notification.error(getErrorMessage('create_schedule', error)));
 
           return;
