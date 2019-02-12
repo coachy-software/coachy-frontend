@@ -11,7 +11,15 @@ export default {
     charge: "",
     trainingDays: 0,
     active: true,
-    showNontrainingDays: false
+    showNontrainingDays: false,
+    monday: true,
+    tuesday: true,
+    wednesday: true,
+    thursday: true,
+    friday: true,
+    saturday: true,
+    sunday: true
+
   }),
   methods: {
     createSchedule() {
@@ -24,7 +32,14 @@ export default {
             creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
             charge: {identifier: response.data.content[0].identifier},
             note: this.note,
-            active: this.active
+            active: this.active,
+            monday: this.monday,
+            tuesday: this.tuesday,
+            wednesday: this.wednesday,
+            thursday: this.thursday,
+            friday: this.friday,
+            saturday: this.saturday,
+            sunday: this.sunday
           })
           .then((response) => {
             notification.success(this.$t('create_schedule.created'));

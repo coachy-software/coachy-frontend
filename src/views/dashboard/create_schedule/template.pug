@@ -16,7 +16,7 @@
 									span.form-required *
 								input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="this.$t('create_schedule.name_placeholder')", v-model.trim="$v.name.$model")
 								.invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
-							.form-group.col-sm-8.col-md-5
+							.form-group.col-sm-8.col-md-7
 								label.form-label
 									| {{this.$t('create_schedule.charge')}}
 									span.form-required *
@@ -25,23 +25,8 @@
 										span.input-group-text @
 									input.form-control(:class="{'is-invalid': $v.charge.$error}", type='text', :placeholder="this.$t('create_schedule.username_placeholder')", v-model.trim="$v.charge.$model")
 									.invalid-feedback(v-if="!$v.charge.required") {{$t('validation.charge_required')}}
-							.form-group.col-sm-4.col-md-2
-								label.form-label
-									| {{this.$t('create_schedule.training_days')}}
-								select.custom-select(v-model="trainingDays")
-									option(value='1') 1
-									option(value='2') 2
-									option(value='3') 3
-									option(value='4') 4
-									option(value='5') 5
-									option(value='6') 6
-									option(value='7' selected) 7
 							.form-group.col-sm-10.col-md-5.mt-5
 								.custom-switches-stacked
-									label.custom-switch
-										input.custom-switch-input(type='checkbox', name='custom-switch-checkbox', v-model="showNontrainingDays")
-										span.custom-switch-indicator
-										span.custom-switch-description {{this.$t('create_schedule.display_non_training')}}
 									label.custom-switch
 										input.custom-switch-input(type='checkbox', name='custom-switch-checkbox' checked, v-model="active")
 										span.custom-switch-indicator
@@ -51,5 +36,29 @@
 									| {{this.$t('create_schedule.note')}}
 									span.form-label-small {{note.length}}/100
 								textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model="note")
+							.form-group.col-sm-12.col-md-12
+								label.form-label {{this.$t('create_schedule.training_days')}}
+								.selectgroup.selectgroup-pills
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='monday', v-model="monday")
+										span.selectgroup-button {{this.$t('days.monday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='tuesday', v-model="tuesday")
+										span.selectgroup-button {{this.$t('days.tuesday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='wednesday', v-model="wednesday")
+										span.selectgroup-button {{this.$t('days.wednesday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='thursday', v-model="thursday")
+										span.selectgroup-button {{this.$t('days.thursday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='friday', v-model="friday")
+										span.selectgroup-button {{this.$t('days.friday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='saturday', v-model="saturday")
+										span.selectgroup-button {{this.$t('days.saturday')}}
+									label.selectgroup-item
+										input.selectgroup-input(type='checkbox', name='sunday', v-model="sunday")
+										span.selectgroup-button {{this.$t('days.sunday')}}
 			.card-footer.text-right
 				button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{this.$t('create_schedule.create')}}
