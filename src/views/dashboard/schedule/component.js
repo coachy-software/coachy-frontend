@@ -14,16 +14,13 @@ export default {
     draggable,
     exerciseModal
   },
-  mounted() {
+  created() {
     let identifier = this.$route.params.id;
     get({identifier: identifier})
-    .then(response => {
-          this.schedule = response.data;
-        }
-    )
+    .then(response => this.schedule = response.data)
     .catch(() => {
       notification.error('Nie znaleziono planu'); // todo
-      this.$router.back();
+      this.$router.push('/dashboard/schedules');
     });
   },
   methods: {
