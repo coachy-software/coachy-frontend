@@ -36,10 +36,12 @@ export default {
 
       this.schedule.days[dayIndex].exercises.push(exercise);
       this.$refs.exerciseModal.closeModal();
+      store.dispatch('schedule/update', this.schedule);
     },
     removeExercise(dayIndex, exerciseIdentifier) {
       this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises.filter(
           exercise => exercise.identifier !== exerciseIdentifier);
+      store.dispatch('schedule/update', this.schedule);
     },
     openExerciseModal(dayIndex) {
       this.$refs.exerciseModal.openModal(dayIndex);

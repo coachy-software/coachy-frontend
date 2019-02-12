@@ -67,25 +67,29 @@ const remove = ({commit}, payload) => {
   });
 };
 
-export function update({commit}, payload) {
+const update = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
-    commit(SET_STATUS, LOADING);
+    commit(SET_STATUS, LOADING, {root: true});
 
-    axios.delete(`${API_URL}/schedules/${payload.identifier}`, {
+    axios.patch(`${API_URL}/schedules/${payload.identifier}`, payload, {
       headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}
     })
     .then(response => {
-      commit(SET_STATUS, NOT_LOADING);
+      localStorage.setItem('schedules', JSON.stringify(payload));
+
+      commit(SET_SCHEDULES, payload);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
       resolve(response);
     })
     .catch(error => {
-      commit(SET_STATUS, NOT_LOADING);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
       reject(error);
     })
   });
-}
+};
 
 export default {
   create,
-  remove
+  remove,
+  update
 }
