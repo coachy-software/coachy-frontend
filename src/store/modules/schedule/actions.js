@@ -75,9 +75,13 @@ const update = ({commit}, payload) => {
       headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}
     })
     .then(response => {
-      localStorage.setItem('schedules', JSON.stringify(payload));
+      let schedules = JSON.parse(localStorage.getItem('schedules'));
+      let resetSchedules = schedules.filter(schedule => schedule.identifier !== payload.identifier);
+      let updatedSchedules = resetSchedules.concat(payload);
 
-      commit(SET_SCHEDULES, payload);
+      localStorage.setItem('schedules', JSON.stringify(updatedSchedules));
+
+      commit(SET_SCHEDULES, updatedSchedules);
       commit(SET_STATUS, NOT_LOADING, {root: true});
       resolve(response);
     })
