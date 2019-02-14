@@ -6,9 +6,14 @@ import exerciseModal from "./component/ExerciseModal";
 import ObjectID from "bson-objectid";
 
 export default {
+  props: {
+    viewAs: {
+      required: false
+    }
+  },
   data: () => ({
     schedule: {},
-    isCoach: store.state.user.user.accountType === 'COACH'
+    isCoach: store.state.user.user.accountType === 'COACH',
   }),
   components: {
     draggable,
@@ -45,6 +50,12 @@ export default {
     },
     openExerciseModal(dayIndex) {
       this.$refs.exerciseModal.openModal(dayIndex);
+    },
+    viewAsCharge() {
+      this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
+    },
+    hasViewAsChargeQuery() {
+      return this.$props.viewAs === 'charge';
     }
   }
 }

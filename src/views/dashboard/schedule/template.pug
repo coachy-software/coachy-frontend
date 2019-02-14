@@ -3,21 +3,30 @@
 		h1.page-title {{this.schedule.name}}
 		.page-options.d-flex
 			.btn-list.text-right
-				button.btn.btn-outline-primary(type='button')
+				button.btn.btn-outline-primary(v-if="$props.viewAs !== 'charge' && isCoach", type='button', @click="viewAsCharge")
 					i.fe.fe-eye.mr-2
 					| Zobacz jako podopieczny
 	.page-main
+		.alert.alert-secondary(role='alert', v-if="$props.viewAs === 'charge'")
+			| Aktualnie przeglądasz tę stronę jako #[strong Podopieczny],
+			| kliknij #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") tutaj],
+			| aby wrócić do normalnego widoku
 		ul.container-fluid.container-scroll.columns-14
 			.span(v-if="this.schedule.days !== undefined")
 				.schedule-panel(v-for="(day, index) in schedule.days", :class="{'hidden': !day.trainingDay}")
 					h4.text-center {{day.name}}
 					.exercise-list
-						draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+						template(v-if="$props.viewAs !== 'charge' && isCoach")
+							draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+								div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
+									.card.p-3.mr-3.mb-1
+										span.exercise-text {{exercise.name}}
+											span.tag-addon.bg-blue-lightest.float-right(@click="removeExercise(index, exercise.identifier)")
+												i.fe.fe-x
+							button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseModal(index)")
+								i.fe.fe-plus(style="color: #2b2b2b")
+						template(v-else)
 							div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
 								.card.p-3.mr-3.mb-1
 									span.exercise-text {{exercise.name}}
-										span.tag-addon.bg-blue-lightest.float-right(v-if="isCoach", @click="removeExercise(index, exercise.identifier)")
-											i.fe.fe-x
-						button.card.p-3.align-items-center.bg-blue-lightest(v-if="isCoach", @click="openExerciseModal(index)")
-							i.fe.fe-plus(style="color: #2b2b2b")
 	exercise-modal(ref="exerciseModal")

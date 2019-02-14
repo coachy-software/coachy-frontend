@@ -33,7 +33,8 @@ export default [{
     },
     {
       path: 'schedules/:id',
-      component: () => import('@/views/dashboard/schedule/ScheduleView')
+      component: () => import('@/views/dashboard/schedule/ScheduleView'),
+      props: (route) => ({viewAs: route.query.viewAs})
     }
   ]
 }];
