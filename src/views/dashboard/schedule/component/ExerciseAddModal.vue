@@ -1,5 +1,5 @@
 <template lang="pug">
-  sweet-modal(blocking='', overlay-theme='light', modal-theme='light', ref="exerciseModal")
+  sweet-modal(blocking='', overlay-theme='light', modal-theme='light', ref="exerciseAddModal")
     h3.card-title {{$t('schedule.add_exercise')}}
     .card-body
       .row
@@ -35,7 +35,7 @@
       reps: 1,
       dayIndex: null
     }),
-    name: 'exercise-modal',
+    name: 'exercise-add-modal',
     components: {
       sweetModal: SweetModal,
       sweetModalTab: SweetModalTab,
@@ -43,10 +43,10 @@
     methods: {
       openModal(dayIndex) {
         this.dayIndex = dayIndex;
-        this.$refs.exerciseModal.open();
+        this.$refs.exerciseAddModal.open();
       },
       closeModal() {
-        this.$refs.exerciseModal.close();
+        this.$refs.exerciseAddModal.close();
       }
     },
     validations: {

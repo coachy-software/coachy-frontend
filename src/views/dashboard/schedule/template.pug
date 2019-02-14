@@ -23,10 +23,11 @@
 										span.exercise-text {{exercise.name}}
 											span.tag-addon.bg-blue-lightest.float-right(@click="removeExercise(index, exercise.identifier)")
 												i.fe.fe-x
-							button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseModal(index)")
+							button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseAddModal(index)")
 								i.fe.fe-plus(style="color: #2b2b2b")
 						template(v-else)
 							div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
-								.card.p-3.mr-3.mb-1
+								.fake-link.card.p-3.mr-3.mb-1(@click="openExerciseShowModal(exercise)")
 									span.exercise-text {{exercise.name}}
-	exercise-modal(ref="exerciseModal")
+	exercise-add-modal(ref="exerciseAddModal")
+	exercise-show-modal(ref="exerciseShowModal")

@@ -2,7 +2,8 @@ import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
 import store from "@/store";
-import exerciseModal from "./component/ExerciseModal";
+import exerciseAddModal from "./component/ExerciseAddModal";
+import exerciseShowModal from "./component/ExerciseShowModal";
 import ObjectID from "bson-objectid";
 
 export default {
@@ -17,7 +18,8 @@ export default {
   }),
   components: {
     draggable,
-    exerciseModal
+    exerciseAddModal,
+    exerciseShowModal
   },
   created() {
     let identifier = this.$route.params.id;
@@ -30,7 +32,7 @@ export default {
   },
   methods: {
     addExercise(dayIndex) {
-      let modal = this.$refs.exerciseModal;
+      let modal = this.$refs.exerciseAddModal;
       let exercise = {
         identifier: ObjectID.generate(),
         name: modal.name,
@@ -40,7 +42,7 @@ export default {
       };
 
       this.schedule.days[dayIndex].exercises.push(exercise);
-      this.$refs.exerciseModal.closeModal();
+      this.$refs.exerciseAddModal.closeModal();
       store.dispatch('schedule/update', this.schedule);
     },
     removeExercise(dayIndex, exerciseIdentifier) {
@@ -48,8 +50,11 @@ export default {
           exercise => exercise.identifier !== exerciseIdentifier);
       store.dispatch('schedule/update', this.schedule);
     },
-    openExerciseModal(dayIndex) {
-      this.$refs.exerciseModal.openModal(dayIndex);
+    openExerciseAddModal(dayIndex) {
+      this.$refs.exerciseAddModal.openModal(dayIndex);
+    },
+    openExerciseShowModal(exercise) {
+      this.$refs.exerciseShowModal.openModal(exercise);
     },
     viewAsCharge() {
       this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
