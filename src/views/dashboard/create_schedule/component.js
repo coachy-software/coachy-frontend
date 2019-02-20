@@ -2,7 +2,7 @@ import store from "@/store";
 import {get} from "@/service/user.service";
 import {getErrorMessage} from "@/utils/validation.utils";
 import {notification} from "@/utils/toastr.utils";
-import {required} from "vuelidate/src/validators";
+import {maxLength, required} from "vuelidate/src/validators";
 
 export default {
   data: () => ({
@@ -64,6 +64,7 @@ export default {
   },
   validations: {
     name: {required},
-    charge: {required}
+    charge: {required},
+    note: {maxLength: maxLength(300)}
   }
 }

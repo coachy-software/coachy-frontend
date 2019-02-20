@@ -34,8 +34,8 @@
 							.form-group.col-sm-12.col-md-7
 								label.form-label
 									| {{this.$t('create_schedule.note')}}
-									span.form-label-small {{note.length}}/100
-								textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model="note")
+									span.form-label-small {{note.length}}/300
+								textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model.trim="$v.note.$model", maxlength=300)
 							.form-group.col-sm-12.col-md-12
 								label.form-label {{this.$t('create_schedule.training_days')}}
 								.selectgroup.selectgroup-pills
