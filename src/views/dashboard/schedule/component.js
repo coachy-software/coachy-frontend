@@ -61,6 +61,9 @@ export default {
     },
     hasViewAsChargeQuery() {
       return this.$props.viewAs === 'charge';
+    },
+    collapseNote() {
+      document.getElementById('note').classList.toggle('card-collapsed');
     }
   }
 }

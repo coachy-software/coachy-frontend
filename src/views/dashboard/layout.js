@@ -29,7 +29,8 @@ export default {
       }
     },
     onClick(event) {
-      if (!event.target.parentNode.classList.contains('dropdown-element')) {
+      let parentNode = event.target.parentNode;
+      if (parentNode && !parentNode.classList.contains('dropdown-element')) {
         this.closeDropdowns();
       }
     }

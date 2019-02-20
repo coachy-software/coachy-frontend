@@ -11,6 +11,15 @@
 			| Aktualnie przeglądasz tę stronę jako #[strong Podopieczny],
 			| kliknij #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") tutaj],
 			| aby wrócić do normalnego widoku
+		.col-md-6.col-lg-12
+			.card.card-collapsed#note
+				.card-header.fake-link(@click="collapseNote")
+					h3.card-title Notatka
+					.card-options
+						a.card-options-collapse
+							i.fe.fe-chevron-up
+				.card-body
+					| {{this.schedule.note}}
 		ul.container-fluid.container-scroll.columns-14
 			.span(v-if="this.schedule.days !== undefined")
 				.schedule-panel(v-for="(day, index) in schedule.days", :class="{'hidden': !day.trainingDay}")
