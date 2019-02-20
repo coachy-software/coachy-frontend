@@ -65,6 +65,6 @@ export default {
   validations: {
     name: {required},
     charge: {required},
-    note: {maxLength: maxLength(300)}
+    note: {maxLength: maxLength(1000)}
   }
 }
