@@ -1,41 +1,41 @@
 .container
-	.page-header
-		h1.page-title {{this.schedule.name}}
-		.page-options.d-flex
-			.btn-list.text-right
-				button.btn.btn-outline-primary(v-if="$props.viewAs !== 'charge' && isCoach", type='button', @click="viewAsCharge")
-					i.fe.fe-eye.mr-2
-					| Zobacz jako podopieczny
-	.page-main
-		.alert.alert-secondary(role='alert', v-if="$props.viewAs === 'charge'")
-			| Aktualnie przeglądasz tę stronę jako #[strong Podopieczny],
-			| kliknij #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") tutaj],
-			| aby wrócić do normalnego widoku
-		.col-md-6.col-lg-12
-			.card.card-collapsed#note
-				.card-header.fake-link(@click="collapseNote")
-					h3.card-title Notatka
-					.card-options
-						a.card-options-collapse
-							i.fe.fe-chevron-up
-				.card-body
-					| {{this.schedule.note}}
-		ul.container-fluid.container-scroll.columns-14
-			.span(v-if="this.schedule.days !== undefined")
-				.schedule-panel(v-for="(day, index) in schedule.days", :class="{'hidden': !day.trainingDay}")
-					h4.text-center {{day.name}}
-					.exercise-list
-						template(v-if="$props.viewAs !== 'charge' && isCoach")
-							draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
-								div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
-									.fake-link.card.p-3.mr-3.mb-1(@click="openExerciseEditModal(index, exercise)")
-										span.exercise-text {{exercise.name}}
-							button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseAddModal(index)")
-								i.fe.fe-plus(style="color: #2b2b2b")
-						template(v-else)
-							div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
-								.fake-link.card.p-3.mr-3.mb-1(@click="openExerciseShowModal(exercise)")
-									span.exercise-text {{exercise.name}}
-	exercise-add-modal(ref="exerciseAddModal")
-	exercise-show-modal(ref="exerciseShowModal")
-	exercise-edit-modal(ref="exerciseEditModal")
+  .page-header
+    h1.page-title {{this.schedule.name}}
+    .page-options.d-flex
+      .btn-list.text-right
+        button.btn.btn-outline-primary(v-if="$props.viewAs !== 'charge' && isCoach", type='button', @click="viewAsCharge")
+          i.fe.fe-eye.mr-2
+          | Zobacz jako podopieczny
+  .page-main
+    .alert.alert-secondary(role='alert', v-if="$props.viewAs === 'charge'")
+      | Aktualnie przeglądasz tę stronę jako #[strong Podopieczny],
+      | kliknij #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") tutaj],
+      | aby wrócić do normalnego widoku
+    .col-md-6.col-lg-12
+      .card.card-collapsed#note
+        .card-header.fake-link(@click="collapseNote")
+          h3.card-title Notatka
+          .card-options
+            a.card-options-collapse
+              i.fe.fe-chevron-up
+        .card-body
+          | {{this.schedule.note}}
+    ul.container-fluid.container-scroll.columns-14
+      .span(v-if="this.schedule.days !== undefined")
+        .schedule-panel(v-for="(day, index) in schedule.days", :class="{'hidden': !day.trainingDay}")
+          h4.text-center {{day.name}}
+          .exercise-list
+            template(v-if="$props.viewAs !== 'charge' && isCoach")
+              draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+                div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
+                  .fake-link.card.p-3.mr-3.mb-1(@click="openExerciseEditModal(index, exercise)")
+                    span.exercise-text {{exercise.name}}
+              button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseAddModal(index)")
+                i.fe.fe-plus(style="color: #2b2b2b")
+            template(v-else)
+              div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
+                .fake-link.card.p-3.mr-3.mb-1(@click="openExerciseShowModal(exercise)")
+                  span.exercise-text {{exercise.name}}
+  exercise-add-modal(ref="exerciseAddModal")
+  exercise-show-modal(ref="exerciseShowModal")
+  exercise-edit-modal(ref="exerciseEditModal")

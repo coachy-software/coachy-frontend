@@ -1,33 +1,33 @@
 .page
-	.page-main
-		.header.py-4.header-mobile
-			.container
-				.d-flex
-					a.header-brand
-					.d-flex.order-lg-2.ml-auto
-						ProfileDropdown
-					a.header-toggler.d-lg-none.ml-3.ml-lg-0.dropdown-element(@click="toggleDropdown('mobile')")
-						span.header-toggler-icon
-		.header.d-lg-flex.p-0.collapse(:class="{'show': this.dropdowns.mobile.open}")
-			.container
-				.row.align-items-center
-					Menu
-					.d-flex.order-lg-2.ml-auto.dropdowns-pc
-						NotificationDropdown
-						ProfileDropdown
-		router-view
-	footer.footer
-		.container
-			.row.align-items-center.flex-row-reverse
-				.col-auto.ml-lg-auto
-					.row.align-items-center
-						.col-auto
-							ul.list-inline.list-inline-dots.mb-0
-								li.list-inline-item
-									a(href='javascript:;') Documentation
-								li.list-inline-item
-									a(href='javascript:;') FAQ
-				.col-12.col-lg-auto.mt-3.mt-lg-0.text-center
-					| Copyright © 2019
-					a(href='javascript:;')  Coachy.
-					|  All rights reserved.
+  .page-main
+    .header.py-4.header-mobile
+      .container
+        .d-flex
+          a.header-brand
+          .d-flex.order-lg-2.ml-auto
+            ProfileDropdown
+          a.header-toggler.d-lg-none.ml-3.ml-lg-0.dropdown-element(@click="toggleDropdown('mobile')")
+            span.header-toggler-icon
+    .header.d-lg-flex.p-0.collapse(:class="{'show': this.dropdowns.mobile.open}")
+      .container
+        .row.align-items-center
+          Menu
+          .d-flex.order-lg-2.ml-auto.dropdowns-pc
+            NotificationDropdown
+            ProfileDropdown
+    router-view
+  footer.footer
+    .container
+      .row.align-items-center.flex-row-reverse
+        .col-auto.ml-lg-auto
+          .row.align-items-center
+            .col-auto
+              ul.list-inline.list-inline-dots.mb-0
+                li.list-inline-item
+                  a(href='javascript:;') Documentation
+                li.list-inline-item
+                  a(href='javascript:;') FAQ
+        .col-12.col-lg-auto.mt-3.mt-lg-0.text-center
+          | Copyright © 2019
+          a(href='javascript:;')  Coachy.
+          |  All rights reserved.

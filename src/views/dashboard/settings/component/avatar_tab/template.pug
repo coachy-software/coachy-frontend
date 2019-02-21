@@ -1,30 +1,30 @@
 div
-	form(@submit.prevent="update")
-		.card-body
-			#dimmer.dimmer(:class="{'active': isLoading}")
-				.loader
-				.dimmer-content
-					h3.card-title {{$t('avatar_tab.card_title')}}
-					.alert.alert-warning(role='alert')
-						| #[i.fe.fe-bell.mr-2] {{$t('avatar_tab.notification-1')}} #[strong {{$t('avatar_tab.notification-1-1')}}].
-						| {{$t('avatar_tab.notification-2')}} #[strong {{$t('avatar_tab.notification-2-1')}}]
-						br
-						| {{$t('avatar_tab.notification-3')}} #[strong {{$t('avatar_tab.update')}}] {{$t('avatar_tab.notification-3-1')}}
-					.row
-						.col-sm-6.col-md-6
-							.form-group
-								.custom-file
-									label.form-label {{$t('avatar_tab.file')}}
-									input(v-if="uploadReady" type="file", id="avatar", name="avatar", accept="image/png, image/jpeg", ref="file", @change="handleFileChange")
-							.card-body.center
-						.col-sm-6.col-md-6
-							.form-group
-								label.form-label {{$t('avatar_tab.preview')}}
-								.media
-									span.avatar.avatar-xl.mr-5(:style="{'background-image': `url(${this.filePreview})`}")
-									.media-body
-										h4.m-0 {{this.username}}
-										p.text-muted.mb-0 {{this.accountType}}
-		.card-footer.text-right
-			button.btn.btn-primary.ml-2(v-if="file !== null", type='button', @click="resetInput") {{$t('avatar_tab.reset')}}
-			button.btn.btn-primary.ml-2(type='submit') {{$t('avatar_tab.update')}}
+  form(@submit.prevent="update")
+    .card-body
+      #dimmer.dimmer(:class="{'active': isLoading}")
+        .loader
+        .dimmer-content
+          h3.card-title {{$t('avatar_tab.card_title')}}
+          .alert.alert-warning(role='alert')
+            | #[i.fe.fe-bell.mr-2] {{$t('avatar_tab.notification-1')}} #[strong {{$t('avatar_tab.notification-1-1')}}].
+            | {{$t('avatar_tab.notification-2')}} #[strong {{$t('avatar_tab.notification-2-1')}}]
+            br
+            | {{$t('avatar_tab.notification-3')}} #[strong {{$t('avatar_tab.update')}}] {{$t('avatar_tab.notification-3-1')}}
+          .row
+            .col-sm-6.col-md-6
+              .form-group
+                .custom-file
+                  label.form-label {{$t('avatar_tab.file')}}
+                  input(v-if="uploadReady" type="file", id="avatar", name="avatar", accept="image/png, image/jpeg", ref="file", @change="handleFileChange")
+              .card-body.center
+            .col-sm-6.col-md-6
+              .form-group
+                label.form-label {{$t('avatar_tab.preview')}}
+                .media
+                  span.avatar.avatar-xl.mr-5(:style="{'background-image': `url(${this.filePreview})`}")
+                  .media-body
+                    h4.m-0 {{this.username}}
+                    p.text-muted.mb-0 {{this.accountType}}
+    .card-footer.text-right
+      button.btn.btn-primary.ml-2(v-if="file !== null", type='button', @click="resetInput") {{$t('avatar_tab.reset')}}
+      button.btn.btn-primary.ml-2(type='submit') {{$t('avatar_tab.update')}}
