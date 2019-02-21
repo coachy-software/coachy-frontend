@@ -13,5 +13,5 @@
 </template>
 
 <style scoped>
-  @import url('~tabler-ui/dist/assets/css/dashboard.css');
+  @import url('~coachy-tabler-ui/dist/assets/css/dashboard.css');
 </style>
