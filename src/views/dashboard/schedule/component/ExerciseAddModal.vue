@@ -1,5 +1,5 @@
 <template lang="pug">
-  sweet-modal(blocking='', overlay-theme='light', modal-theme='light', ref="exerciseAddModal")
+  sweet-modal(overlay-theme='light', modal-theme='light', ref="exerciseAddModal")
     h3.card-title {{$t('schedule.add_exercise')}}
     .card-body
       .row
