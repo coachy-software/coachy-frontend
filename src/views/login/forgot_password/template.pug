@@ -1,23 +1,23 @@
 .page
-  .page-singlel
-    .container
-      .row
-        #col.col.col-login.mx-auto
-          #logo.text-center
-            img(src="@/assets/dark-logo.svg")
-          form#card.card.mt-auto(@submit.prevent="createToken")
-            #card-body.card-body.p-6
-              #dimmer.dimmer(:class="{'active': isLoading}")
-                .loader
-                .dimmer-content
-                  .card-title {{$t('forgot_password.card_title')}}
-                  .form-group
-                    label.form-label {{$t('forgot_password.email')}}
-                    input.form-control(:class="{'is-invalid': $v.email.$error}", type="email", id="email", :placeholder="$t('forgot_password.email_placeholder')", v-model.trim="$v.email.$model")
-                    .invalid-feedback(v-if="!$v.email.required") {{$t('validation.email_required')}}
-                    .invalid-feedback(v-if="!$v.email.email") {{$t('validation.email_format')}}
-                  .form-footer
-                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('forgot_password.submit')}}
-            #signup.text-center.text-muted
-              p.
-                #[router-link(to="/login") {{$t('forgot_password.return')}}]
+	.page-singlel
+		.container
+			.row
+				#col.col.col-login.mx-auto
+					#logo.text-center
+						img(src="@/assets/dark-logo.svg")
+					form#card.card.mt-auto(@submit.prevent="createToken")
+						#card-body.card-body.p-6
+							#dimmer.dimmer(:class="{'active': isLoading}")
+								.loader
+								.dimmer-content
+									.card-title {{$t('forgot_password.card_title')}}
+									.form-group
+										label.form-label {{$t('forgot_password.email')}}
+										input.form-control(:class="{'is-invalid': $v.email.$error}", type="email", id="email", :placeholder="$t('forgot_password.email_placeholder')", v-model.trim="$v.email.$model")
+										.invalid-feedback(v-if="!$v.email.required") {{$t('validation.email_required')}}
+										.invalid-feedback(v-if="!$v.email.email") {{$t('validation.email_format')}}
+									.form-footer
+										button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('forgot_password.submit')}}
+						#signup.text-center.text-muted
+							p.
+								#[router-link(to="/login") {{$t('forgot_password.return')}}]

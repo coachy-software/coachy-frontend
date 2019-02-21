@@ -1,27 +1,27 @@
 .page
-  .page-singlel
-    .container
-      .row
-        #col.col.col-login.mx-auto
-          #logo.text-center
-            img(src="@/assets/dark-logo.svg")
-          form#card.card.mt-auto(@submit.prevent="resetPassword")
-            #card-body.card-body.p-6
-              #dimmer.dimmer(:class="{'active': isLoading}")
-                .loader
-                .dimmer-content
-                  .card-title {{$t('reset_password.card_title')}}
-                  .form-group
-                    input(type="text" name="email" hidden="true" autocomplete="username")
-                    label.form-label {{$t('reset_password.password')}}
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", :placeholder="$t('reset_password.password_placeholder')", v-model.trim="$v.password.$model")
-                    .invalid-feedback(v-if="!$v.password.required") {{$t('validation.password_required')}}
-                    .invalid-feedback(v-if="!$v.password.minLength") {{$t('validation.password_minLength')}}
-                    .invalid-feedback(v-if="!$v.password.maxLength") {{$t('validation.password_maxLength')}}
-                    .invalid-feedback(v-if="!$v.password.NO_SPACE") {{$t('validation.password_format')}}
-                  .form-group
-                    label.form-label {{$t('reset_password.confirm_password')}}
-                    input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", :placeholder="$t('reset_password.confirm_password_placeholder')", v-model.trim="$v.confirmPassword.$model")
-                    .invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") {{$t('validation.confirm_password')}}
-                  .form-footer
-                    button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('reset_password.submit')}}
+	.page-singlel
+		.container
+			.row
+				#col.col.col-login.mx-auto
+					#logo.text-center
+						img(src="@/assets/dark-logo.svg")
+					form#card.card.mt-auto(@submit.prevent="resetPassword")
+						#card-body.card-body.p-6
+							#dimmer.dimmer(:class="{'active': isLoading}")
+								.loader
+								.dimmer-content
+									.card-title {{$t('reset_password.card_title')}}
+									.form-group
+										input(type="text" name="email" hidden="true" autocomplete="username")
+										label.form-label {{$t('reset_password.password')}}
+										input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.password.$error}", type="password", id="password", :placeholder="$t('reset_password.password_placeholder')", v-model.trim="$v.password.$model")
+										.invalid-feedback(v-if="!$v.password.required") {{$t('validation.password_required')}}
+										.invalid-feedback(v-if="!$v.password.minLength") {{$t('validation.password_minLength')}}
+										.invalid-feedback(v-if="!$v.password.maxLength") {{$t('validation.password_maxLength')}}
+										.invalid-feedback(v-if="!$v.password.NO_SPACE") {{$t('validation.password_format')}}
+									.form-group
+										label.form-label {{$t('reset_password.confirm_password')}}
+										input.form-control(autocomplete="new-password", :class="{'is-invalid': $v.confirmPassword.$error}", type="password", id="confirm-password", :placeholder="$t('reset_password.confirm_password_placeholder')", v-model.trim="$v.confirmPassword.$model")
+										.invalid-feedback(v-if="!$v.confirmPassword.sameAsPassword") {{$t('validation.confirm_password')}}
+									.form-footer
+										button#submit.btn.btn-primary.btn-block(type="submit", :disabled="isInvalid") {{$t('reset_password.submit')}}

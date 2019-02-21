@@ -47,7 +47,8 @@ export function updateAccountDetails(payload) {
       avatar: payload.avatar
     };
 
-    axios.patch(`${API_URL}/users/${userIdentifier}`, data, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
+    axios.patch(`${API_URL}/users/${userIdentifier}`, data,
+        {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {
       store.commit(SET_STATUS, NOT_LOADING);
       store.dispatch('user/update');
