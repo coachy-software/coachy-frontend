@@ -1,18 +1,15 @@
+import {route} from "@/utils/router.utils";
+
+import LandingLayout from '@/views/landing/LandingLayout';
+import HomeView from '@/views/landing/home/HomeView';
+import ErrorView from '@/views/landing/error/ErrorView';
+
 export default [
-  {
-    path: '/',
-    component: () => import('@/views/landing/LandingLayout'),
+  route('/', LandingLayout, {
     children: [
-      {
-        path: '',
-        name: 'landing',
-        meta: {requiresAuth: true},
-        component: () => import('@/views/landing/home/HomeView')
-      }
+      route('', HomeView)
     ],
     alias: ['/home']
-  },
-  {
-    path: '*',
-    component: () => import('@/views/landing/error/ErrorView')
-  }];
+  }),
+  route('*', ErrorView)
+];

@@ -1,40 +1,27 @@
-export default [{
-  path: '/dashboard',
-  component: () => import('@/views/dashboard/DashboardLayout'),
-  meta: {requiresAuth: true},
-  children: [
-    {
-      path: 'home',
-      component: () => import('@/views/dashboard/home/HomeView'),
-      alias: ['']
-    },
-    {
-      path: 'settings',
-      component: () => import('@/views/dashboard/settings/SettingsView'),
-      children: [
-        {
-          path: 'account',
-          component: () => import('@/views/dashboard/settings/component/account_tab/AccountTab'),
-          alias: ['']
-        },
-        {
-          path: 'avatar',
-          component: () => import('@/views/dashboard/settings/component/avatar_tab/AvatarTab')
-        }
-      ]
-    },
-    {
-      path: 'schedules',
-      component: () => import('@/views/dashboard/schedules/SchedulesView')
-    },
-    {
-      path: 'schedules/new',
-      component: () => import('@/views/dashboard/create_schedule/CreateScheduleView')
-    },
-    {
-      path: 'schedules/:id',
-      component: () => import('@/views/dashboard/schedule/ScheduleView'),
-      props: (route) => ({viewAs: route.query.viewAs})
-    }
-  ]
-}];
+import {route} from "@/utils/router.utils";
+
+import DashboardLayout from '@/views/dashboard/DashboardLayout';
+import HomeView from '@/views/dashboard/home/HomeView';
+import SettingsView from '@/views/dashboard/settings/SettingsView';
+import AccountTab from '@/views/dashboard/settings/component/account_tab/AccountTab';
+import AvatarTab from '@/views/dashboard/settings/component/avatar_tab/AvatarTab';
+import SchedulesView from '@/views/dashboard/schedules/SchedulesView';
+import CreateScheduleView from '@/views/dashboard/create_schedule/CreateScheduleView';
+import ScheduleView from '@/views/dashboard/schedule/ScheduleView';
+
+export default [
+  route('/dashboard', DashboardLayout, {
+    children: [
+      route('home', HomeView, {alias: ['']}),
+      route('settings', SettingsView, {
+        children: [
+          route('account', AccountTab, {alias: ['']}),
+          route('avatar', AvatarTab),
+        ]
+      }),
+      route('schedules', SchedulesView),
+      route('schedules/new', CreateScheduleView),
+      route('schedules/:id', ScheduleView, {props: (route) => ({viewAs: route.query.viewAs})})
+    ]
+  }, {requiresAuth: true})
+]
