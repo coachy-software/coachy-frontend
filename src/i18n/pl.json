@@ -149,7 +149,10 @@
     "reps": "Powtórzenia",
     "miniSets": "Miniserie",
     "submit": "Stwórz",
-    "add_exercise": "Dodaj ćwiczenie"
+    "add_exercise": "Dodaj ćwiczenie",
+    "edit_exercise": "Edytuj ćwiczenie",
+    "remove": "Usuń",
+    "update": "Zaktualizuj"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",

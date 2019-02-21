@@ -4,6 +4,7 @@ import draggable from 'vuedraggable'
 import store from "@/store";
 import exerciseAddModal from "./component/ExerciseAddModal";
 import exerciseShowModal from "./component/ExerciseShowModal";
+import exerciseEditModal from "./component/ExerciseEditModal";
 import ObjectID from "bson-objectid";
 
 export default {
@@ -19,7 +20,8 @@ export default {
   components: {
     draggable,
     exerciseAddModal,
-    exerciseShowModal
+    exerciseShowModal,
+    exerciseEditModal
   },
   created() {
     let identifier = this.$route.params.id;
@@ -49,6 +51,23 @@ export default {
       this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises.filter(
           exercise => exercise.identifier !== exerciseIdentifier);
       store.dispatch('schedule/update', this.schedule);
+      this.$refs.exerciseEditModal.closeModal();
+    },
+    editExercise(dayIndex) {
+      let modal = this.$refs.exerciseEditModal;
+
+      this.schedule.days[dayIndex].exercises.filter(
+          exercise => exercise === modal.exercise).map(
+          exercise => {
+            exercise.name = modal.name;
+            exercise.sets = modal.sets;
+            exercise.reps = modal.reps;
+            exercise.miniSets = modal.miniSets;
+          }
+      );
+
+      store.dispatch('schedule/update', this.schedule);
+      this.$refs.exerciseEditModal.closeModal();
     },
     openExerciseAddModal(dayIndex) {
       this.$refs.exerciseAddModal.openModal(dayIndex);
@@ -56,8 +75,12 @@ export default {
     openExerciseShowModal(exercise) {
       this.$refs.exerciseShowModal.openModal(exercise);
     },
+    openExerciseEditModal(dayIndex, exercise) {
+      this.$refs.exerciseEditModal.openModal(dayIndex, exercise);
+    },
     viewAsCharge() {
-      this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
+      this.$router.push(
+          {query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
     },
     hasViewAsChargeQuery() {
       return this.$props.viewAs === 'charge';
