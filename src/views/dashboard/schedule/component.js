@@ -79,14 +79,18 @@ export default {
       this.$refs.exerciseEditModal.openModal(dayIndex, exercise);
     },
     viewAsCharge() {
-      this.$router.push(
-          {query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
+      this.$router.push({
+        query: Object.assign({}, this.$route.query, {viewAs: 'charge'})
+      });
     },
     hasViewAsChargeQuery() {
       return this.$props.viewAs === 'charge';
     },
     collapseNote() {
       document.getElementById('note').classList.toggle('card-collapsed');
+    },
+    onChange() {
+      store.dispatch('schedule/update', this.schedule);
     }
   }
-}
+ }

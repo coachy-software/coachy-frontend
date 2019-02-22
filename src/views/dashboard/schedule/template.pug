@@ -26,7 +26,7 @@
           h4.text-center {{day.name}}
           .exercise-list
             template(v-if="$props.viewAs !== 'charge' && isCoach")
-              draggable(v-model='day.exercises', @start='drag=true', @end='drag=false')
+              draggable(v-model="day.exercises", :list='day.exercises', @start='drag=true', @end='drag=false', @change="onChange")
                 div.exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
                   .fake-link.card.p-3.mr-3.mb-1(@click="openExerciseEditModal(index, exercise)")
                     span.exercise-text {{exercise.name}}
