@@ -22,7 +22,7 @@
     "bson-objectid": "^1.2.4",
     "css-loader": "^2.1.0",
     "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint-plugin-vue": "^5.2.2",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "postcss": "^7.0.7",
