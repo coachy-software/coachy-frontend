@@ -33,7 +33,7 @@
             td.text-right
               router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
             td(v-if="isCoach")
-              a.icon(href='javascript:;')
+              router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
                 i.fe.fe-edit
         tbody(v-else)
           tr
