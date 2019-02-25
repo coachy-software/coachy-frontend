@@ -9,9 +9,7 @@ export default {
     name: "",
     note: "",
     charge: "",
-    trainingDays: 0, // todo
     active: true,
-    showNontrainingDays: false, // todo
     monday: true,
     tuesday: true,
     wednesday: true,
