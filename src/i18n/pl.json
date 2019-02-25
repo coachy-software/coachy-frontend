@@ -187,5 +187,9 @@
     "friday": "Piątek",
     "saturday": "Sobota",
     "sunday": "Niedziela"
+  },
+  "schedule_settings": {
+    "card_title": "Edytuj ustawienia planu",
+    "submit": "Zaktualizuj"
   }
 }

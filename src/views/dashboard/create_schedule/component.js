@@ -9,9 +9,9 @@ export default {
     name: "",
     note: "",
     charge: "",
-    trainingDays: 0,
+    trainingDays: 0, // todo
     active: true,
-    showNontrainingDays: false,
+    showNontrainingDays: false, // todo
     monday: true,
     tuesday: true,
     wednesday: true,
@@ -19,7 +19,6 @@ export default {
     friday: true,
     saturday: true,
     sunday: true
-
   }),
   methods: {
     createSchedule() {
@@ -46,7 +45,6 @@ export default {
             this.$router.push(`/dashboard/schedules/${response.data.identifier}`);
           })
           .catch(error => {
-            console.log(error);
             notification.error(getErrorMessage('create_schedule', error))
           });
 
