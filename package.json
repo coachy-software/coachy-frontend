@@ -16,7 +16,7 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.1",
-    "autoprefixer": "^9.4.4",
+    "autoprefixer": "^9.4.9",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "bson-objectid": "^1.2.4",
