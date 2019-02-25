@@ -24,7 +24,7 @@ div
                   span.avatar.avatar-xl.mr-5(:style="{'background-image': `url(${this.filePreview})`}")
                   .media-body
                     h4.m-0 {{this.username}}
-                    p.text-muted.mb-0 {{this.accountType}}
+                    p.text-muted.mb-0 {{this.$t('accountType.' + this.accountType)}}
     .card-footer.text-right
       button.btn.btn-primary.ml-2(v-if="file !== null", type='button', @click="resetInput") {{$t('avatar_tab.reset')}}
       button.btn.btn-primary.ml-2(type='submit') {{$t('avatar_tab.update')}}

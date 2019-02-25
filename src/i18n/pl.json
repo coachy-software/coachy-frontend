@@ -3,6 +3,10 @@
     "false": "Nie",
     "true": "Tak"
   },
+  "accountType": {
+    "COACH": "TRENER",
+    "CHARGE": "PODOPIECZNY"
+  },
   "validation": {
     "username_E01": "Nazwa użytkownika nie może być pusta",
     "username_E02": "Nazwa użytkownika nie może być pusta",

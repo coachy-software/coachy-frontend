@@ -4,7 +4,7 @@
       Avatar
       span.ml-2.d-none.d-lg-block.dropdown-element
         span.text-default {{this.$store.state.user.user.displayName || this.$store.state.user.user.username}}
-        small.text-muted.d-block.mt-1 {{this.accountType}}
+        small.text-muted.d-block.mt-1 {{this.$t('accountType.' + this.accountType)}}
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.profile.open}")
       div(v-for="value in menu")
         router-link.dropdown-item(:to="value.link")
