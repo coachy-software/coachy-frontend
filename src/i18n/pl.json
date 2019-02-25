@@ -152,7 +152,13 @@
     "add_exercise": "Dodaj ćwiczenie",
     "edit_exercise": "Edytuj ćwiczenie",
     "remove": "Usuń",
-    "update": "Zaktualizuj"
+    "update": "Zaktualizuj",
+    "see_as_charge": "Zobacz jako podopieczny",
+    "charge": "Podopieczny",
+    "charge_alert_1": "Aktualnie przeglądasz tę stronę jako",
+    "charge_alert_2": ". Kliknij tutaj",
+    "charge_alert_3": ", aby wrócić do normalnego widoku",
+    "note": "Notatka"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",

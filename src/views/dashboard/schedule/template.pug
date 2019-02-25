@@ -7,16 +7,16 @@
           i.fe.fe-settings
         button.btn.btn-outline-primary(type='button', @click="viewAsCharge")
           i.fe.fe-eye.mr-2
-          | Zobacz jako podopieczny
+          | {{this.$t('schedule.see_as_charge')}}
   .page-main
     .alert.alert-secondary(role='alert', v-if="$props.viewAs === 'charge'")
-      | Aktualnie przeglądasz tę stronę jako #[strong Podopieczny],
-      | kliknij #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") tutaj],
-      | aby wrócić do normalnego widoku
+      | {{this.$t('schedule.charge_alert_1')}} #[strong {{this.$t('schedule.charge')}}]
+      | #[router-link(:to="'/dashboard/schedules/' + this.schedule.identifier") {{this.$t('schedule.charge_alert_2')}}]
+      | {{this.$t('schedule.charge_alert_3')}}
     .col-md-6.col-lg-12
       .card.card-collapsed#note
         .card-header.fake-link(@click="collapseNote")
-          h3.card-title Notatka
+          h3.card-title {{this.$t('schedule.note')}}
           .card-options
             a.card-options-collapse
               i.fe.fe-chevron-up
