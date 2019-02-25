@@ -3,6 +3,7 @@ import {get} from "@/service/user.service";
 import {getErrorMessage} from "@/utils/validation.utils";
 import {notification} from "@/utils/toastr.utils";
 import {maxLength, required} from "vuelidate/src/validators";
+import {fetchAll} from "@/service/schedule.service";
 
 export default {
   data: () => ({
@@ -36,6 +37,7 @@ export default {
           })
           .then(response => {
             notification.success(this.$t('create_schedule.created'));
+            fetchAll();
             this.$router.push(`/dashboard/schedules/${response.data.identifier}`);
           })
           .catch(error => {
