@@ -30,13 +30,10 @@ export default {
       this.name = data.name;
       this.note = data.note;
       this.active = data.active;
-      this.days[0].trainingDay = days[0].trainingDay;
-      this.days[1].trainingDay = days[1].trainingDay;
-      this.days[2].trainingDay = days[2].trainingDay;
-      this.days[3].trainingDay = days[3].trainingDay;
-      this.days[4].trainingDay = days[4].trainingDay;
-      this.days[5].trainingDay = days[5].trainingDay;
-      this.days[6].trainingDay = days[6].trainingDay;
+
+      days.forEach((day, index) => {
+        this.days[index].trainingDay = day.trainingDay;
+      });
     })
     .catch(() => {
       notification.error(this.$t('schedule.not_found'));
@@ -48,13 +45,9 @@ export default {
       this.schedule.name = this.name;
       this.schedule.note = this.note;
       this.schedule.active = this.active;
-      this.schedule.days[0].trainingDay = this.days[0].trainingDay;
-      this.schedule.days[1].trainingDay = this.days[1].trainingDay;
-      this.schedule.days[2].trainingDay = this.days[2].trainingDay;
-      this.schedule.days[3].trainingDay = this.days[3].trainingDay;
-      this.schedule.days[4].trainingDay = this.days[4].trainingDay;
-      this.schedule.days[5].trainingDay = this.days[5].trainingDay;
-      this.schedule.days[6].trainingDay = this.days[6].trainingDay;
+      this.days.forEach((day, index) => {
+        this.schedule.days[index].trainingDay = day.trainingDay;
+      });
 
       store.dispatch('schedule/update', this.schedule)
       .then(() => {

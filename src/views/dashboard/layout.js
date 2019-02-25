@@ -30,7 +30,7 @@ export default {
     },
     onClick(event) {
       let parentNode = event.target.parentNode;
-      if (parentNode && !parentNode.classList.contains('dropdown-element')) {
+      if (parentNode.classList && !parentNode.classList.contains('dropdown-element')) {
         this.closeDropdowns();
       }
     }
