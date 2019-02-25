@@ -29,28 +29,10 @@
                   | test sdasda
               .form-group.col-sm-12.col-md-12
                 label.form-label {{this.$t('create_schedule.training_days')}}
-                // TODO
                 .selectgroup.selectgroup-pills
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='monday', v-model="monday")
-                    span.selectgroup-button {{this.$t('days.monday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='tuesday', v-model="tuesday")
-                    span.selectgroup-button {{this.$t('days.tuesday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='wednesday', v-model="wednesday")
-                    span.selectgroup-button {{this.$t('days.wednesday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='thursday', v-model="thursday")
-                    span.selectgroup-button {{this.$t('days.thursday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='friday', v-model="friday")
-                    span.selectgroup-button {{this.$t('days.friday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='saturday', v-model="saturday")
-                    span.selectgroup-button {{this.$t('days.saturday')}}
-                  label.selectgroup-item
-                    input.selectgroup-input(type='checkbox', name='sunday', v-model="sunday")
-                    span.selectgroup-button {{this.$t('days.sunday')}}
+                  template(v-for="(day, key, index) in this.$t('days')")
+                    label.selectgroup-item
+                      input.selectgroup-input(type='checkbox', :name="key", v-model="days[index].trainingDay")
+                      span.selectgroup-button {{day}}
       .card-footer.text-right
         button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{this.$t('schedule_settings.submit')}}

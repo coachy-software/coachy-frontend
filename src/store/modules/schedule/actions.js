@@ -15,13 +15,13 @@ const create = ({commit}, payload) => {
       note: payload.note,
       active: payload.active,
       days: [
-        {name: i18n.t('days.monday'), trainingDay: payload.monday, exercises: []},
-        {name: i18n.t('days.tuesday'), trainingDay: payload.tuesday, exercises: []},
-        {name: i18n.t('days.wednesday'), trainingDay: payload.wednesday, exercises: []},
-        {name: i18n.t('days.thursday'), trainingDay: payload.thursday, exercises: []},
-        {name: i18n.t('days.friday'), trainingDay: payload.friday, exercises: []},
-        {name: i18n.t('days.saturday'), trainingDay: payload.saturday, exercises: []},
-        {name: i18n.t('days.sunday'), trainingDay: payload.sunday, exercises: []}
+        {name: i18n.t('days.monday'), trainingDay: payload.days[0].trainingDay, exercises: []},
+        {name: i18n.t('days.tuesday'), trainingDay: payload.days[1].trainingDay, exercises: []},
+        {name: i18n.t('days.wednesday'), trainingDay: payload.days[2].trainingDay, exercises: []},
+        {name: i18n.t('days.thursday'), trainingDay: payload.days[3].trainingDay, exercises: []},
+        {name: i18n.t('days.friday'), trainingDay: payload.days[4].trainingDay, exercises: []},
+        {name: i18n.t('days.saturday'), trainingDay: payload.days[5].trainingDay, exercises: []},
+        {name: i18n.t('days.sunday'), trainingDay: payload.days[6].trainingDay, exercises: []}
       ]
     }, {headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}})
     .then(response => {

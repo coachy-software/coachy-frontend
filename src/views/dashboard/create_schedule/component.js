@@ -10,13 +10,15 @@ export default {
     note: "",
     charge: "",
     active: true,
-    monday: true,
-    tuesday: true,
-    wednesday: true,
-    thursday: true,
-    friday: true,
-    saturday: true,
-    sunday: true
+    days: [
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true}
+    ]
   }),
   methods: {
     createSchedule() {
@@ -30,13 +32,7 @@ export default {
             charge: {identifier: response.data.content[0].identifier},
             note: this.note,
             active: this.active,
-            monday: this.monday,
-            tuesday: this.tuesday,
-            wednesday: this.wednesday,
-            thursday: this.thursday,
-            friday: this.friday,
-            saturday: this.saturday,
-            sunday: this.sunday
+            days: this.days
           })
           .then(response => {
             notification.success(this.$t('create_schedule.created'));

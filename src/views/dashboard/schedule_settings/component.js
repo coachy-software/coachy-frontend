@@ -9,13 +9,15 @@ export default {
     name: "",
     note: "",
     active: true,
-    monday: true,
-    tuesday: true,
-    wednesday: true,
-    thursday: true,
-    friday: true,
-    saturday: true,
-    sunday: true
+    days: [
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true},
+      {trainingDay: true}
+    ]
   }),
   created() {
     let identifier = this.$route.params.id;
@@ -28,13 +30,13 @@ export default {
       this.name = data.name;
       this.note = data.note;
       this.active = data.active;
-      this.monday = days[0].trainingDay;
-      this.tuesday = days[1].trainingDay;
-      this.wednesday = days[2].trainingDay;
-      this.thursday = days[3].trainingDay;
-      this.friday = days[4].trainingDay;
-      this.saturday = days[5].trainingDay;
-      this.sunday = days[6].trainingDay;
+      this.days[0].trainingDay = days[0].trainingDay;
+      this.days[1].trainingDay = days[1].trainingDay;
+      this.days[2].trainingDay = days[2].trainingDay;
+      this.days[3].trainingDay = days[3].trainingDay;
+      this.days[4].trainingDay = days[4].trainingDay;
+      this.days[5].trainingDay = days[5].trainingDay;
+      this.days[6].trainingDay = days[6].trainingDay;
     })
     .catch(() => {
       notification.error(this.$t('schedule.not_found'));
@@ -46,13 +48,13 @@ export default {
       this.schedule.name = this.name;
       this.schedule.note = this.note;
       this.schedule.active = this.active;
-      this.schedule.days[0].trainingDay = this.monday;
-      this.schedule.days[1].trainingDay = this.tuesday;
-      this.schedule.days[2].trainingDay = this.wednesday;
-      this.schedule.days[3].trainingDay = this.thursday;
-      this.schedule.days[4].trainingDay = this.friday;
-      this.schedule.days[5].trainingDay = this.saturday;
-      this.schedule.days[6].trainingDay = this.sunday;
+      this.schedule.days[0].trainingDay = this.days[0].trainingDay;
+      this.schedule.days[1].trainingDay = this.days[1].trainingDay;
+      this.schedule.days[2].trainingDay = this.days[2].trainingDay;
+      this.schedule.days[3].trainingDay = this.days[3].trainingDay;
+      this.schedule.days[4].trainingDay = this.days[4].trainingDay;
+      this.schedule.days[5].trainingDay = this.days[5].trainingDay;
+      this.schedule.days[6].trainingDay = this.days[6].trainingDay;
 
       store.dispatch('schedule/update', this.schedule)
       .then(() => {
