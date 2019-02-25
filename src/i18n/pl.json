@@ -190,6 +190,7 @@
   },
   "schedule_settings": {
     "card_title": "Edytuj ustawienia planu",
-    "submit": "Zaktualizuj"
+    "submit": "Zaktualizuj",
+    "updated": "Zaktualizowano plan"
   }
 }

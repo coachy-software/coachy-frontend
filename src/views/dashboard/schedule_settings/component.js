@@ -56,7 +56,7 @@ export default {
 
       store.dispatch('schedule/update', this.schedule)
       .then(() => {
-        notification.success('Zaktualizowano plan');
+        notification.success(this.$t('schedule_settings.updated'));
         this.$router.push('/dashboard/schedules/' + this.schedule.identifier);
       });
     }
