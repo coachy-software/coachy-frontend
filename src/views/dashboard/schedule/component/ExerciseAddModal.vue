@@ -30,7 +30,7 @@
         .col-md-6(v-if="!customTemplate")
           .form-group
             label.form-label {{$t('schedule.template')}}
-            input.form-control(:placeholder="$t('schedule.template')", v-model.trim="template", min=1)
+            input.form-control(:placeholder="$t('schedule.template')", v-model.trim="$v.template.$model", min=1)
         .col-md-6(v-else)
         template(v-if="customTemplate")
           .col-md-6
@@ -86,6 +86,8 @@
     },
     validations: {
       name: {required},
+      brief: {maxLength: maxLength(1000)},
+      template: {required}
     }
   }
 </script>
