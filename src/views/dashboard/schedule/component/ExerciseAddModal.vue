@@ -9,53 +9,52 @@
             input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="$t('schedule.name_placeholder')", v-model.trim="$v.name.$model")
             .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
         .col-sm-6.col-md-4
-          // TODO
           .form-group
             label.form-label {{$t('schedule.sets')}}
-            input.form-control(type='number', placeholder='Sets', v-model="sets", min=1)
+            input.form-control(type='number', :placeholder="$t('schedule.sets')", v-model="sets", min=1)
         .col-sm-6.col-md-4
           .form-group
             label.form-label {{$t('schedule.miniSets')}}
-            input.form-control(type='number', placeholder='Minisets', v-model="miniSets")
+            input.form-control(type='number', :placeholder="$t('schedule.miniSets')", v-model="miniSets")
         .col-sm-6.col-md-4
           .form-group
             label.form-label {{$t('schedule.reps')}}
-            input.form-control(type='number', placeholder='Reps', v-model="reps", min=1)
+            input.form-control(type='number', :placeholder="$t('schedule.reps')", v-model="reps", min=1)
         .col-md-6
           .form-group
             .custom-switches-stacked.mt-5
               label.custom-switch
                 input.custom-switch-input(type='checkbox', name='custom-switch-checkbox', v-model="customTemplate")
                 span.custom-switch-indicator
-                span.custom-switch-description Dodaj własny szablon
+                span.custom-switch-description {{$t('schedule.add_own')}}
         .col-md-6(v-if="!customTemplate")
           .form-group
-            label.form-label Szablon
-            input.form-control(placeholder='Szablon', v-model="template", min=1)
+            label.form-label {{$t('schedule.template')}}
+            input.form-control(:placeholder="$t('schedule.template')", v-model.trim="template", min=1)
         .col-md-6(v-else)
         template(v-if="customTemplate")
           .col-md-6
             .form-group
-              label.form-label Partia mięśniowa
+              label.form-label {{$t('schedule.muscle_group')}}
               select.form-control.custom-select(v-model="muscleGroup")
                 option(v-for="item in musclesGroups", :value="item") {{item}}
           .col-md-6
             .form-group
               .custom-file
-                label.form-label {{$t('avatar_tab.file')}}
-                input(type="file", id="avatar", name="avatar", accept="image/png, image/jpeg", ref="file", multiple)
+                label.form-label {{$t('schedule.example_images')}}
+                input(type="file", id="avatar", accept="image/png, image/jpeg", ref="file", multiple)
           .col-md-12
             .form-group
-              label.form-label Opis
+              label.form-label {{$t('schedule.brief')}}
                 span.form-label-small {{brief.length}}/1000
-              textarea.form-control(rows='6', :placeholder="$t('')", v-model="brief", maxlength=1000)
+              textarea.form-control(rows='6', :placeholder="$t('schedule.brief')", v-model.trim="$v.brief.$model", maxlength=1000)
                 | test sdasda
     .card-footer
       button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid") {{$t('schedule.submit')}}
 </template>
 <script>
   import {SweetModal, SweetModalTab} from 'sweet-modal-vue'
-  import {required} from "vuelidate/src/validators";
+  import {required, maxLength} from "vuelidate/src/validators";
   import musclesGroups from "@/assets/mock/muscles-groups.json";
 
   export default {

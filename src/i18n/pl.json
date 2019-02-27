@@ -162,7 +162,13 @@
     "charge_alert_1": "Aktualnie przeglądasz tę stronę jako",
     "charge_alert_2": ". Kliknij tutaj",
     "charge_alert_3": ", aby wrócić do normalnego widoku",
-    "note": "Notatka"
+    "note": "Notatka",
+    "add_own": "Dodaj własny szablon",
+    "template": "Szablon",
+    "template_placeholder": "Szablon",
+    "muscle_group": "Partia mięśniowa",
+    "example_images": "Przykładowe grafiki",
+    "brief": "Opis"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
