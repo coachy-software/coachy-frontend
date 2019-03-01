@@ -2,9 +2,9 @@ import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
 import store from "@/store";
-import exerciseAddModal from "./component/ExerciseAddModal";
-import exerciseShowModal from "./component/ExerciseShowModal";
-import exerciseEditModal from "./component/ExerciseEditModal";
+import exerciseAddModal from "./component/add_modal/ExerciseAddModal";
+import exerciseShowModal from "./component/show_modal/ExerciseShowModal";
+import exerciseEditModal from "./component/edit_modal/ExerciseEditModal";
 import ObjectID from "bson-objectid";
 
 export default {
