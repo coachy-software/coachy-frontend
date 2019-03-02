@@ -10,6 +10,10 @@ Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.use(VueCookie);
 
+import 'vue-instant/dist/vue-instant.css'
+import VueInstant from 'vue-instant/dist/vue-instant.common';
+Vue.use(VueInstant);
+
 new Vue({
   store,
   router,

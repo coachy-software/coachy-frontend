@@ -30,7 +30,27 @@
         .col-md-6(v-if="!customTemplate")
           .form-group
             label.form-label {{$t('schedule.template')}}
-            input.form-control(:placeholder="$t('schedule.template')", v-model.trim="$v.template.$model", min=1)
+              vue-instant(
+                :suggestonallwords='true',
+                :suggestion-attribute='suggestionAttribute',
+                v-model='value',
+                :disabled='false',
+                @input='changed',
+                @click-input='clickInput',
+                @click-button='clickButton',
+                @selected='selected',
+                @enter='enter',
+                @key-up='keyUp',
+                @key-down='keyDown',
+                @key-right='keyRight',
+                @clear='clear',
+                @escape='escape',
+                :show-autocomplete='true',
+                :autofocus='false',
+                :suggestions='suggestions',
+                type='custom',
+                :placeholder="$t('schedule.template_placeholder')"
+              )
         .col-md-6(v-else)
         template(v-if="customTemplate")
           .col-md-6
@@ -52,10 +72,12 @@
     .card-footer
       button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid") {{$t('schedule.submit')}}
 </template>
+<style src="./style.css"></style>
 <script>
   import {SweetModal, SweetModalTab} from 'sweet-modal-vue'
   import {required, maxLength} from "vuelidate/src/validators";
   import musclesGroups from "@/assets/mock/muscles-groups.json";
+  import axios from "axios";
 
   export default {
     data: () => ({
@@ -68,12 +90,17 @@
       customTemplate: false,
       musclesGroups: musclesGroups,
       muscleGroup: musclesGroups[0],
-      brief: ''
+      brief: '',
+
+      value: '',
+      suggestionAttribute: 'original_title',
+      suggestions: [],
+      selectedEvent: ""
     }),
     name: 'exercise-add-modal',
     components: {
       sweetModal: SweetModal,
-      sweetModalTab: SweetModalTab,
+      sweetModalTab: SweetModalTab
     },
     methods: {
       openModal(dayIndex) {
@@ -82,6 +109,43 @@
       },
       closeModal() {
         this.$refs.exerciseAddModal.close();
+      },
+      clickInput: function () {
+        this.selectedEvent = 'click input'
+      },
+      clickButton: function () {
+        this.selectedEvent = 'click button'
+      },
+      selected: function () {
+        this.selectedEvent = 'selection changed'
+      },
+      enter: function () {
+        this.selectedEvent = 'enter'
+      },
+      keyUp: function () {
+        this.selectedEvent = 'keyup pressed'
+      },
+      keyDown: function () {
+        this.selectedEvent = 'keyDown pressed'
+      },
+      keyRight: function () {
+        this.selectedEvent = 'keyRight pressed'
+      },
+      clear: function () {
+        this.selectedEvent = 'clear input'
+      },
+      escape: function () {
+        this.selectedEvent = 'escape'
+      },
+      changed: function () {
+        var that = this;
+        this.suggestions = [];
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=342d3061b70d2747a1e159ae9a7e9a36&query=' + this.value)
+        .then(function (response) {
+          response.data.results.forEach(function (a) {
+            that.suggestions.push(a)
+          })
+        })
       }
     },
     validations: {
