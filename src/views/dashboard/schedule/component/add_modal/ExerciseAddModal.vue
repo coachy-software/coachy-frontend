@@ -31,24 +31,14 @@
           .form-group
             label.form-label {{$t('schedule.template')}}
               vue-instant(
-                :suggestonallwords='true',
+                :suggestOnAllWords='true',
                 :suggestion-attribute='suggestionAttribute',
-                v-model='value',
-                :disabled='false',
-                @input='changed',
-                @click-input='clickInput',
-                @click-button='clickButton',
-                @selected='selected',
-                @enter='enter',
-                @key-up='keyUp',
-                @key-down='keyDown',
-                @key-right='keyRight',
-                @clear='clear',
-                @escape='escape',
+                v-model='template',
                 :show-autocomplete='true',
                 :autofocus='false',
                 :suggestions='suggestions',
                 type='custom',
+                @input='changed',
                 :placeholder="$t('schedule.template_placeholder')"
               )
         .col-md-6(v-else)
@@ -70,13 +60,14 @@
               textarea.form-control(rows='6', :placeholder="$t('schedule.brief')", v-model.trim="$v.brief.$model", maxlength=1000)
                 | test sdasda
     .card-footer
-      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid") {{$t('schedule.submit')}}
+      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid || suggestions.length === 0") {{$t('schedule.submit')}}
 </template>
 <style src="./style.css"></style>
 <script>
   import {SweetModal, SweetModalTab} from 'sweet-modal-vue'
   import {required, maxLength} from "vuelidate/src/validators";
   import musclesGroups from "@/assets/mock/muscles-groups.json";
+  import {API_URL} from "@/utils/constants";
   import axios from "axios";
 
   export default {
@@ -86,16 +77,13 @@
       miniSets: 0,
       reps: 1,
       dayIndex: null,
-      template: null,
+      template: '',
       customTemplate: false,
       musclesGroups: musclesGroups,
       muscleGroup: musclesGroups[0],
       brief: '',
-
-      value: '',
-      suggestionAttribute: 'original_title',
+      suggestionAttribute: 'name',
       suggestions: [],
-      selectedEvent: ""
     }),
     name: 'exercise-add-modal',
     components: {
@@ -110,40 +98,14 @@
       closeModal() {
         this.$refs.exerciseAddModal.close();
       },
-      clickInput: function () {
-        this.selectedEvent = 'click input'
-      },
-      clickButton: function () {
-        this.selectedEvent = 'click button'
-      },
-      selected: function () {
-        this.selectedEvent = 'selection changed'
-      },
-      enter: function () {
-        this.selectedEvent = 'enter'
-      },
-      keyUp: function () {
-        this.selectedEvent = 'keyup pressed'
-      },
-      keyDown: function () {
-        this.selectedEvent = 'keyDown pressed'
-      },
-      keyRight: function () {
-        this.selectedEvent = 'keyRight pressed'
-      },
-      clear: function () {
-        this.selectedEvent = 'clear input'
-      },
-      escape: function () {
-        this.selectedEvent = 'escape'
-      },
       changed: function () {
-        var that = this;
+        let that = this;
+
         this.suggestions = [];
-        axios.get('https://api.themoviedb.org/3/search/movie?api_key=342d3061b70d2747a1e159ae9a7e9a36&query=' + this.value)
+        axios.get(`${API_URL}/exercises?name=${this.template}`)
         .then(function (response) {
-          response.data.results.forEach(function (a) {
-            that.suggestions.push(a)
+          response.data.content.forEach(function (rawTemplate) {
+            that.suggestions.push(rawTemplate);
           })
         })
       }
