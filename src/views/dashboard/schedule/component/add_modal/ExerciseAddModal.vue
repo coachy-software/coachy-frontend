@@ -58,7 +58,6 @@
               label.form-label {{$t('schedule.brief')}}
                 span.form-label-small {{brief.length}}/1000
               textarea.form-control(rows='6', :placeholder="$t('schedule.brief')", v-model.trim="$v.brief.$model", maxlength=1000)
-                | test sdasda
     .card-footer
       button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid || (!customTemplate && suggestions.length === 0)") {{$t('schedule.submit')}}
 </template>
