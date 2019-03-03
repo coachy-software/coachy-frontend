@@ -28,7 +28,7 @@
             .col-sm-12
               Carousel(:navigationEnabled="true", :scrollPerPage="true", :perPageCustom="[[480, 2], [768, 3]]").mt-5
                 Slide(v-for="(image, index) in exercise.template.exampleImages")
-                  img(:src="'https://picsum.photos/300/200/'", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
+                  img(:src="modalImage", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
     sweet-modal(ref="exerciseImage")
       img(:src="modalImage")
     sweet-modal(ref="exerciseBrief")
