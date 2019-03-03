@@ -60,7 +60,7 @@
               textarea.form-control(rows='6', :placeholder="$t('schedule.brief')", v-model.trim="$v.brief.$model", maxlength=1000)
                 | test sdasda
     .card-footer
-      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid || suggestions.length === 0") {{$t('schedule.submit')}}
+      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.addExercise(dayIndex)", :disabled="$v.$invalid || (!customTemplate && suggestions.length === 0)") {{$t('schedule.submit')}}
 </template>
 <style src="./style.css"></style>
 <script>
@@ -83,6 +83,7 @@
       muscleGroup: musclesGroups[0],
       brief: '',
       suggestionAttribute: 'name',
+      exampleImages: [],
       suggestions: [],
     }),
     name: 'exercise-add-modal',
@@ -112,8 +113,7 @@
     },
     validations: {
       name: {required},
-      brief: {maxLength: maxLength(1000)},
-      template: {required}
+      brief: {maxLength: maxLength(1000)}
     }
   }
 </script>
