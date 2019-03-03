@@ -52,7 +52,7 @@
             .form-group
               .custom-file
                 label.form-label {{$t('schedule.example_images')}}
-                input(type="file", id="avatar", accept="image/png, image/jpeg", ref="file", multiple)
+                input(type="file", id="avatar", accept="image/png, image/jpeg", ref="exampleImages", multiple)
           .col-md-12
             .form-group
               label.form-label {{$t('schedule.brief')}}

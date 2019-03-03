@@ -6,6 +6,8 @@ import exerciseAddModal from "./component/add_modal/ExerciseAddModal";
 import exerciseShowModal from "./component/show_modal/ExerciseShowModal";
 import exerciseEditModal from "./component/edit_modal/ExerciseEditModal";
 import ObjectID from "bson-objectid";
+import axios from "axios";
+import {API_URL} from "@/utils/constants";
 
 export default {
   props: {
@@ -36,6 +38,23 @@ export default {
     addExercise(dayIndex) {
       let modal = this.$refs.exerciseAddModal;
       let template;
+      let exampleImages = [];
+
+      console.log(modal.$refs.exampleImages.files);
+      for (let i = 0; i < modal.$refs.exampleImages.files.length; i++) {
+        let formData = new FormData();
+        formData.append('file', modal.$refs.exampleImages.files[i]);
+        formData.append('target', '/exercises/samples');
+
+        axios.post(`${API_URL}/uploads`, formData, {
+          headers: {
+            'Authorization': `Basic ${localStorage.getItem('token')}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => exampleImages.push(response.data.fileUrl));
+      }
+      console.log(modal.$refs.exampleImages.files);
 
       if (modal.customTemplate === false) {
         template = modal.suggestions[0];
@@ -43,7 +62,7 @@ export default {
         template = {
           identifier: ObjectID.generate(),
           name: modal.name,
-          exampleImages: modal.exampleImages,
+          exampleImages: exampleImages,
           briefDescription: modal.brief,
           muscleGroup: modal.muscleGroup
         }
