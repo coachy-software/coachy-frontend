@@ -35,12 +35,27 @@ export default {
   methods: {
     addExercise(dayIndex) {
       let modal = this.$refs.exerciseAddModal;
+      let template;
+
+      if (modal.customTemplate === false) {
+        template = modal.suggestions[0];
+      } else {
+        template = {
+          identifier: ObjectID.generate(),
+          name: modal.name,
+          exampleImages: modal.exampleImages,
+          briefDescription: modal.brief,
+          muscleGroup: modal.muscleGroup
+        }
+      }
+
       let exercise = {
         identifier: ObjectID.generate(),
         name: modal.name,
         sets: modal.sets,
         reps: modal.reps,
-        miniSets: modal.miniSets
+        miniSets: modal.miniSets,
+        template: template
       };
 
       this.schedule.days[dayIndex].exercises.push(exercise);
@@ -96,4 +111,4 @@ export default {
       store.dispatch('schedule/update', this.schedule);
     }
   }
- }
+}
