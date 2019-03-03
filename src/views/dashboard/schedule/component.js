@@ -70,6 +70,19 @@ export default {
     },
     editExercise(dayIndex) {
       let modal = this.$refs.exerciseEditModal;
+      let template;
+
+      if (modal.customTemplate === false) {
+        template = modal.suggestions[0];
+      } else {
+        template = {
+          identifier: ObjectID.generate(),
+          name: modal.name,
+          exampleImages: modal.exampleImages,
+          briefDescription: modal.brief,
+          muscleGroup: modal.muscleGroup
+        }
+      }
 
       this.schedule.days[dayIndex].exercises.filter(
           exercise => exercise === modal.exercise).map(
@@ -78,6 +91,7 @@ export default {
             exercise.sets = modal.sets;
             exercise.reps = modal.reps;
             exercise.miniSets = modal.miniSets;
+            exercise.template = template;
           }
       );
 
