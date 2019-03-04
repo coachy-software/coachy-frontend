@@ -40,7 +40,6 @@ export default {
       let template;
       let exampleImages = [];
 
-      console.log(modal.$refs.exampleImages.files);
       for (let i = 0; i < modal.$refs.exampleImages.files.length; i++) {
         let formData = new FormData();
         formData.append('file', modal.$refs.exampleImages.files[i]);
@@ -54,7 +53,6 @@ export default {
         })
         .then(response => exampleImages.push(response.data.fileUrl));
       }
-      console.log(modal.$refs.exampleImages.files);
 
       if (modal.customTemplate === false) {
         template = modal.suggestions[0];
