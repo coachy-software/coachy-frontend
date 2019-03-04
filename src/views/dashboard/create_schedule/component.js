@@ -1,5 +1,4 @@
 import store from "@/store";
-import {get} from "@/service/user.service";
 import {getErrorMessage} from "@/utils/validation.utils";
 import {notification} from "@/utils/toastr.utils";
 import {maxLength, required} from "vuelidate/src/validators";
@@ -23,7 +22,7 @@ export default {
   }),
   methods: {
     createSchedule() {
-      get({username: this.charge})
+      this.$store.dispatch('user/get', {username: this.charge})
       .then(response => {
         let result = response.data.content;
         if (result.length === 1 && result[0].username === this.charge) {

@@ -83,9 +83,26 @@ const update = ({commit}) => {
   });
 };
 
+const get = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    commit(SET_STATUS, LOADING, {root: true});
+
+    axios.get(`${API_URL}/users/?username=${payload.username}`)
+    .then(response => {
+      commit(SET_STATUS, NOT_LOADING, {root: true});
+      resolve(response)
+    })
+    .catch(error => {
+      commit(SET_STATUS, NOT_LOADING, {root: true});
+      reject(error)
+    });
+  });
+};
+
 export default {
   login,
   register,
   logout,
-  update
+  update,
+  get
 }

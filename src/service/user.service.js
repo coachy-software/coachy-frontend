@@ -60,19 +60,3 @@ export function updateAccountDetails(payload) {
     })
   })
 }
-
-export function get(payload) {
-  return new Promise((resolve, reject) => {
-    store.commit(SET_STATUS, LOADING);
-
-    axios.get(`${API_URL}/users/?username=${payload.username}`)
-    .then(response => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      resolve(response)
-    })
-    .catch(error => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      reject(error)
-    });
-  });
-}
