@@ -1,4 +1,3 @@
-import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import draggable from 'vuedraggable'
 import store from "@/store";
@@ -27,7 +26,7 @@ export default {
   },
   created() {
     let identifier = this.$route.params.id;
-    get({identifier: identifier})
+    this.$store.dispatch('user/get', {identifier: identifier})
     .then(response => this.schedule = response.data)
     .catch(() => {
       notification.error(this.$t('schedule.not_found'));

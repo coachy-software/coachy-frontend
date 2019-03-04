@@ -1,5 +1,4 @@
 import {maxLength, required} from "vuelidate/src/validators";
-import {get} from "@/service/schedule.service";
 import {notification} from "@/utils/toastr.utils";
 import store from "@/store";
 
@@ -21,7 +20,7 @@ export default {
   }),
   created() {
     let identifier = this.$route.params.id;
-    get({identifier: identifier})
+    this.$store.dispatch('user/get', {identifier: identifier})
     .then(response => {
       let data = response.data;
       let days = data.days;

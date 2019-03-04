@@ -30,18 +30,3 @@ export function fetchAll() {
   });
 }
 
-export function get(payload) {
-  return new Promise((resolve, reject) => {
-    store.commit(SET_STATUS, LOADING);
-
-    axios.get(`${API_URL}/schedules/${payload.identifier}`)
-    .then(response => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      resolve(response)
-    })
-    .catch(error => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      reject(error)
-    });
-  });
-}
