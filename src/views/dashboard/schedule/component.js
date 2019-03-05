@@ -4,11 +4,7 @@ import store from "@/store";
 import exerciseAddModal from "./component/add_modal/ExerciseAddModal";
 import exerciseShowModal from "./component/show_modal/ExerciseShowModal";
 import exerciseEditModal from "./component/edit_modal/ExerciseEditModal";
-import ObjectID from "bson-objectid";
-import axios from "axios";
-import {API_URL} from "@/utils/constants";
-import {obtainImage} from "@/utils/file.utils";
-import {multipartHeader} from "@/utils/headers.js";
+import {addExercise, editExercise, removeExercise} from "@/service/exercise.service";
 
 export default {
   props: {
@@ -37,69 +33,13 @@ export default {
   },
   methods: {
     addExercise(dayIndex) {
-      let exampleImages = [];
-      let modal = this.$refs.exerciseAddModal;
-      let files = modal.$refs.exampleImages.files;
-
-
-      for (let i = 0; i < files.length; i++) {
-        axios.post(`${API_URL}/uploads`, obtainImage(files[i], '/exercises/samples'), multipartHeader())
-        .then(response => exampleImages.push(response.data.fileUrl));
-      }
-
-      this.schedule.days[dayIndex].exercises.push({
-        identifier: ObjectID.generate(),
-        name: modal.name,
-        sets: modal.sets,
-        reps: modal.reps,
-        miniSets: modal.miniSets,
-        template: modal.customTemplate ? {
-          identifier: ObjectID.generate(),
-          name: modal.name,
-          exampleImages: exampleImages,
-          briefDescription: modal.brief,
-          muscleGroup: modal.muscleGroup
-        } : modal.suggestions[0]
-      });
-
-      this.$refs.exerciseAddModal.closeModal();
-      store.dispatch('schedule/update', this.schedule);
+      addExercise(dayIndex, this.$refs.exerciseAddModal, this.schedule);
     },
     removeExercise(dayIndex, exerciseIdentifier) {
-      this.schedule.days[dayIndex].exercises = this.schedule.days[dayIndex].exercises.filter(
-          exercise => exercise.identifier !== exerciseIdentifier);
-      store.dispatch('schedule/update', this.schedule);
-      this.$refs.exerciseEditModal.closeModal();
+      removeExercise(dayIndex, exerciseIdentifier, this.$refs.exerciseEditModal, this.schedule);
     },
     editExercise(dayIndex) {
-      let modal = this.$refs.exerciseEditModal;
-      let template;
-
-      if (modal.customTemplate === false) {
-        template = modal.suggestions[0];
-      } else {
-        template = {
-          identifier: ObjectID.generate(),
-          name: modal.name,
-          exampleImages: modal.exampleImages,
-          briefDescription: modal.brief,
-          muscleGroup: modal.muscleGroup
-        }
-      }
-
-      this.schedule.days[dayIndex].exercises.filter(
-          exercise => exercise === modal.exercise).map(
-          exercise => {
-            exercise.name = modal.name;
-            exercise.sets = modal.sets;
-            exercise.reps = modal.reps;
-            exercise.miniSets = modal.miniSets;
-            exercise.template = template;
-          }
-      );
-
-      store.dispatch('schedule/update', this.schedule);
-      this.$refs.exerciseEditModal.closeModal();
+      editExercise(dayIndex, this.$refs.exerciseEditModal, this.schedule);
     },
     openExerciseAddModal(dayIndex) {
       this.$refs.exerciseAddModal.openModal(dayIndex);
@@ -111,9 +51,7 @@ export default {
       this.$refs.exerciseEditModal.openModal(dayIndex, exercise);
     },
     viewAsCharge() {
-      this.$router.push({
-        query: Object.assign({}, this.$route.query, {viewAs: 'charge'})
-      });
+      this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
     },
     scheduleSettings() {
       this.$router.push(this.$route.path + '/settings');
