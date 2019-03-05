@@ -20,7 +20,7 @@ export default {
   }),
   created() {
     let identifier = this.$route.params.id;
-    this.$store.dispatch('user/get', {identifier: identifier})
+    this.$store.dispatch('schedule/get', {identifier: identifier})
     .then(response => {
       let data = response.data;
       let days = data.days;
