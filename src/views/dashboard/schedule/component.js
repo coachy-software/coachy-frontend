@@ -7,6 +7,8 @@ import exerciseEditModal from "./component/edit_modal/ExerciseEditModal";
 import ObjectID from "bson-objectid";
 import axios from "axios";
 import {API_URL} from "@/utils/constants";
+import {obtainImage} from "@/utils/file.utils";
+import {multipartHeader} from "@/utils/headers.js";
 
 export default {
   props: {
@@ -26,7 +28,7 @@ export default {
   },
   created() {
     let identifier = this.$route.params.id;
-    this.$store.dispatch('user/get', {identifier: identifier})
+    this.$store.dispatch('schedule/get', {identifier: identifier})
     .then(response => this.schedule = response.data)
     .catch(() => {
       notification.error(this.$t('schedule.not_found'));
@@ -35,46 +37,31 @@ export default {
   },
   methods: {
     addExercise(dayIndex) {
-      let modal = this.$refs.exerciseAddModal;
-      let template;
       let exampleImages = [];
+      let modal = this.$refs.exerciseAddModal;
+      let files = modal.$refs.exampleImages.files;
 
-      for (let i = 0; i < modal.$refs.exampleImages.files.length; i++) {
-        let formData = new FormData();
-        formData.append('file', modal.$refs.exampleImages.files[i]);
-        formData.append('target', '/exercises/samples');
 
-        axios.post(`${API_URL}/uploads`, formData, {
-          headers: {
-            'Authorization': `Basic ${localStorage.getItem('token')}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        })
+      for (let i = 0; i < files.length; i++) {
+        axios.post(`${API_URL}/uploads`, obtainImage(files[i], '/exercises/samples'), multipartHeader())
         .then(response => exampleImages.push(response.data.fileUrl));
       }
 
-      if (modal.customTemplate === false) {
-        template = modal.suggestions[0];
-      } else {
-        template = {
-          identifier: ObjectID.generate(),
-          name: modal.name,
-          exampleImages: exampleImages,
-          briefDescription: modal.brief,
-          muscleGroup: modal.muscleGroup
-        }
-      }
-
-      let exercise = {
+      this.schedule.days[dayIndex].exercises.push({
         identifier: ObjectID.generate(),
         name: modal.name,
         sets: modal.sets,
         reps: modal.reps,
         miniSets: modal.miniSets,
-        template: template
-      };
+        template: modal.customTemplate ? {
+          identifier: ObjectID.generate(),
+          name: modal.name,
+          exampleImages: exampleImages,
+          briefDescription: modal.brief,
+          muscleGroup: modal.muscleGroup
+        } : modal.suggestions[0]
+      });
 
-      this.schedule.days[dayIndex].exercises.push(exercise);
       this.$refs.exerciseAddModal.closeModal();
       store.dispatch('schedule/update', this.schedule);
     },
