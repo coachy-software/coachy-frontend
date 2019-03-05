@@ -27,8 +27,8 @@
                 h4 {{exercise.template.muscleGroup}}
             .col-sm-12
               Carousel(:navigationEnabled="true", :scrollPerPage="true", :perPageCustom="[[480, 2], [768, 3]]").mt-5
-                Slide(v-for="(image, index) in exercise.template.exampleImages")
-                  img(:src="modalImage", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
+                Slide(v-for="image in exercise.template.exampleImages", :key="image")
+                  img(:src="image", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
     sweet-modal(ref="exerciseImage")
       img(:src="modalImage")
     sweet-modal(ref="exerciseBrief")
@@ -56,6 +56,8 @@
       openModal(exercise) {
         this.exercise = exercise;
         this.$refs.exerciseShowModal.open();
+
+        console.log(exercise);
       },
       closeModal() {
         this.$refs.exerciseShowModal.close();
