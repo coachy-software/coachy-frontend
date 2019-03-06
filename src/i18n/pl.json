@@ -168,7 +168,8 @@
     "template_placeholder": "Szablon",
     "muscle_group": "Partia mięśniowa",
     "example_images": "Przykładowe grafiki",
-    "brief": "Opis"
+    "brief": "Opis",
+    "brief_placeholder": "Opcjonalny opis"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
