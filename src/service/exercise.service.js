@@ -59,11 +59,6 @@ export function editExercise(dayIndex, exerciseInstance, schedule) {
 
 export function removeExerciseImage(dayIndex, exerciseIndex, imageIndex, exerciseInstance, schedule) {
   let exampleImages = schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages;
-
-  console.log('*****');
-  exampleImages.forEach(value => console.log(value));
-  console.log('*****');
-
   schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages
   .filter(image => image !== exampleImages[imageIndex]);
 
