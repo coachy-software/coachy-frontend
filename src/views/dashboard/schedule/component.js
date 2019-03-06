@@ -47,8 +47,8 @@ export default {
     openExerciseShowModal(exercise) {
       this.$refs.exerciseShowModal.openModal(exercise);
     },
-    openExerciseEditModal(dayIndex, exercise) {
-      this.$refs.exerciseEditModal.openModal(dayIndex, exercise);
+    openExerciseEditModal(dayIndex, exercise, exerciseIndex) {
+      this.$refs.exerciseEditModal.openModal(dayIndex, exercise, exerciseIndex);
     },
     viewAsCharge() {
       this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});

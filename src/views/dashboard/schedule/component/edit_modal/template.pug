@@ -70,10 +70,10 @@ div
         button.btn.btn-primary {{$t('schedule.update')}}
     .dropdown-divider.mb-4
     .row.row-cards
-      .col-md-3(v-for="image in exercise.template.exampleImages", :key="image")
+      .col-md-3(v-for="(image, imageIndex) in exercise.template.exampleImages", :key="image")
         .card.p-2
           span.mb-1
             img.rounded(:src="image", :style="{'background-image': 'url(' + image + ')'}")
           .d-flex.align-items-center.px-2
-            button.btn.btn-danger.btn-block Usuń
+            button.btn.btn-danger.btn-block(@click="removeExerciseImage(imageIndex)") Usuń
               i.fe.fe-trash.ml-2

@@ -29,8 +29,8 @@
           .exercise-list
             template(v-if="$props.viewAs !== 'charge' && isCoach")
               draggable(v-model="day.exercises", :list='day.exercises', @start='drag=true', @end='drag=false', @change="onChange", :options="{animation: 150}")
-                .exercise(v-for='exercise in day.exercises', :key='exercise.identifier.toHexString')
-                  .card.p-3.mr-3.mb-1(@click="openExerciseEditModal(index, exercise)")
+                .exercise(v-for='(exercise, exerciseIndex) in day.exercises', :key='exercise.identifier.toHexString')
+                  .card.p-3.mr-3.mb-1(@click="openExerciseEditModal(index, exercise, exerciseIndex)")
                     span.exercise-text {{exercise.name}}
               button.card.p-3.align-items-center.bg-blue-lightest(@click="openExerciseAddModal(index)")
                 i.fe.fe-plus(style="color: #2b2b2b")
@@ -40,4 +40,4 @@
                   span.exercise-text {{exercise.name}}
   exercise-add-modal(ref="exerciseAddModal")
   exercise-show-modal(ref="exerciseShowModal")
-  exercise-edit-modal(ref="exerciseEditModal")
+  exercise-edit-modal(ref="exerciseEditModal", :schedule="this.schedule")
