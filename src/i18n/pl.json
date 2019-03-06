@@ -169,7 +169,8 @@
     "muscle_group": "Partia mięśniowa",
     "example_images": "Przykładowe grafiki",
     "brief": "Opis",
-    "brief_placeholder": "Opcjonalny opis"
+    "brief_placeholder": "Opcjonalny opis",
+    "manage_images": "Zarządzaj grafikami"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
