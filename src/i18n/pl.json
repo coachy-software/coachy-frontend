@@ -181,6 +181,7 @@
     "name": "Nazwa",
     "name_placeholder": "Nazwa",
     "charge": "Podopieczny",
+    "charge_placeholder": "Podopieczny",
     "training_days": "Dni treningowe",
     "active": "Aktywny",
     "username_placeholder": "Nazwa użytkownika",

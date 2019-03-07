@@ -16,15 +16,21 @@
                   span.form-required *
                 input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="this.$t('create_schedule.name_placeholder')", v-model.trim="$v.name.$model")
                 .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
-              .form-group.col-sm-8.col-md-7
+              .form-group.col-sm-8.col-md-5
                 label.form-label
                   | {{this.$t('create_schedule.charge')}}
                   span.form-required *
-                .input-group
-                  span.input-group-prepend
-                    span.input-group-text @
-                  input.form-control(:class="{'is-invalid': $v.charge.$error}", type='text', :placeholder="this.$t('create_schedule.username_placeholder')", v-model.trim="$v.charge.$model")
-                  .invalid-feedback(v-if="!$v.charge.required") {{$t('validation.charge_required')}}
+                  vue-instant(
+                    :suggestOnAllWords='true',
+                    :suggestion-attribute='suggestionAttribute',
+                    v-model='charge',
+                    :show-autocomplete='true',
+                    :autofocus='false',
+                    :suggestions='suggestions',
+                    type='custom',
+                    @input='changed',
+                    :placeholder="this.$t('create_schedule.charge_placeholder')"
+                  )
               .form-group.col-sm-10.col-md-5.mt-5
                 .custom-switches-stacked
                   label.custom-switch
@@ -44,4 +50,4 @@
                       input.selectgroup-input(type='checkbox', :name="key", v-model="days[index].trainingDay")
                       span.selectgroup-button {{day}}
       .card-footer.text-right
-        button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{this.$t('create_schedule.create')}}
+        button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid || suggestions.length === 0") {{this.$t('create_schedule.create')}}

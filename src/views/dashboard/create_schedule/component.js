@@ -3,6 +3,8 @@ import {getErrorMessage} from "@/utils/validation.utils";
 import {notification} from "@/utils/toastr.utils";
 import {maxLength, required} from "vuelidate/src/validators";
 import {fetchAll} from "@/service/schedule.service";
+import axios from "axios";
+import {API_URL} from "@/utils/constants";
 
 export default {
   data: () => ({
@@ -18,14 +20,16 @@ export default {
       {trainingDay: true},
       {trainingDay: true},
       {trainingDay: true}
-    ]
+    ],
+    suggestionAttribute: 'username',
+    suggestions: [],
   }),
   methods: {
     createSchedule() {
-      this.$store.dispatch('user/get', {username: this.charge})
+      this.$store.dispatch('user/get', {username: this.suggestions[0].username})
       .then(response => {
         let result = response.data.content;
-        if (result.length === 1 && result[0].username === this.charge) {
+        if (result.length === 1 && result[0].username === this.suggestions[0].username) {
           store.dispatch('schedule/create', {
             name: this.name,
             creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
@@ -48,6 +52,17 @@ export default {
 
         notification.error(this.$t('create_schedule.404'));
       })
+    },
+    changed: function () {
+      let that = this;
+
+      this.suggestions = [];
+      axios.get(`${API_URL}/users?username=${this.charge}`)
+      .then(function (response) {
+        response.data.content.forEach((rawCharge) => {
+          that.suggestions.push(rawCharge);
+        })
+      })
     }
   },
   computed: {
@@ -57,7 +72,6 @@ export default {
   },
   validations: {
     name: {required},
-    charge: {required},
     note: {maxLength: maxLength(1000)}
   }
 }
