@@ -170,7 +170,8 @@
     "example_images": "Przykładowe grafiki",
     "brief": "Opis",
     "brief_placeholder": "Opcjonalny opis",
-    "manage_images": "Zarządzaj grafikami"
+    "manage_images": "Zarządzaj grafikami",
+    "delete": "Usuń"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",

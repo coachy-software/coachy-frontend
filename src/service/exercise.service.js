@@ -65,11 +65,8 @@ export function addExerciseImage(dayIndex, exerciseIndex, exerciseInstance, imag
     uploadImages(files)
     .then((imageUrls) => {
       let exampleImages = schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages;
+
       schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages.concat(imageUrls);
-
-      console.log(schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages.concat(imageUrls));
-      console.log(`schedule before update: ${schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages.length}`);
-
       store.dispatch('schedule/update', schedule);
 
       return resolve(schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages);
