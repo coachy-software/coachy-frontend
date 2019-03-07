@@ -3,7 +3,7 @@ import {required, maxLength} from "vuelidate/src/validators";
 import musclesGroups from "@/assets/mock/muscles-groups.json";
 import axios from "axios";
 import {API_URL} from "@/utils/constants";
-import {removeExerciseImage} from "@/service/exercise.service";
+import {removeExerciseImage, addExerciseImage} from "@/service/exercise.service";
 
 export default {
   props: ['schedule'],
@@ -20,7 +20,7 @@ export default {
     customTemplate: false,
     musclesGroups: musclesGroups,
     muscleGroup: musclesGroups[0],
-    exampleImages: null,
+    exampleImages: [],
     brief: '',
     dayIndex: null,
     suggestionAttribute: 'name',
@@ -51,6 +51,10 @@ export default {
     removeExerciseImage(imageIndex) {
       removeExerciseImage(this.dayIndex, this.exerciseIndex, imageIndex, this.$refs.exerciseEditModal, this.schedule);
       this.exampleImages = this.schedule.days[this.dayIndex].exercises[this.exerciseIndex].template.exampleImages;
+    },
+    addExerciseImage() {
+      addExerciseImage(this.dayIndex, this.exerciseIndex, this.$refs.exerciseEditModal, this.$refs.exampleImages, this.schedule)
+      .then(result => this.exampleImages =  result);
     },
     changed: function () {
       let that = this;

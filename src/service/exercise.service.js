@@ -54,11 +54,32 @@ export function editExercise(dayIndex, exerciseInstance, schedule) {
   );
 
   store.dispatch('schedule/update', schedule);
+
   closeModal(exerciseInstance);
+}
+
+export function addExerciseImage(dayIndex, exerciseIndex, exerciseInstance, imagesInstance, schedule) {
+  let files = imagesInstance.files;
+
+  return new Promise(resolve => {
+    uploadImages(files)
+    .then((imageUrls) => {
+      let exampleImages = schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages;
+      schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages.concat(imageUrls);
+
+      console.log(schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages.concat(imageUrls));
+      console.log(`schedule before update: ${schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages.length}`);
+
+      store.dispatch('schedule/update', schedule);
+
+      return resolve(schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages);
+    });
+  })
 }
 
 export function removeExerciseImage(dayIndex, exerciseIndex, imageIndex, exerciseInstance, schedule) {
   let exampleImages = schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages;
+
   schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages
   .filter(image => image !== exampleImages[imageIndex]);
 
