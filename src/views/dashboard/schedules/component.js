@@ -4,7 +4,8 @@ import store from "@/store";
 
 export default {
   data: () => ({
-    isCoach: store.state.user.user.accountType === 'COACH'
+    isCoach: store.state.user.user.accountType === 'COACH',
+    userIdentifier: store.state.user.user.identifier
   }),
   methods: {
     fetchAll() {

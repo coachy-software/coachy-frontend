@@ -32,9 +32,10 @@
               | {{schedule.updatedAt | moment}}
             td.text-right
               router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
-            td(v-if="isCoach")
+            td(v-if="isCoach && userIdentifier === schedule.creator")
               router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
                 i.fe.fe-edit
+            td(v-else)
         tbody(v-else)
           tr
             th {{this.$t('schedule.no_schedules')}}
