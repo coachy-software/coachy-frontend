@@ -171,7 +171,8 @@
     "brief": "Opis",
     "brief_placeholder": "Opcjonalny opis",
     "manage_images": "Zarządzaj grafikami",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "lack": "Brak"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
@@ -204,6 +205,9 @@
     "404": "Plan nie istnieje",
     "delete": "Usuń plan",
     "close": "Zamknij",
-    "deleted": "Usunięto plan treningowy"
+    "deleted": "Usunięto plan treningowy",
+    "note_1": "Jesteś pewien, że chcesz to zrobić? Ta akcja permanentnie usunie:",
+    "note_2": "Proszę przepisz nazwę planu, aby kontynuować",
+    "confirmation_placeholder": "Przepisz nazwę planu"
   }
 }

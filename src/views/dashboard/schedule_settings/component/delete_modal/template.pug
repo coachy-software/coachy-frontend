@@ -2,11 +2,11 @@ sweet-modal(overlay-theme='dark', modal-theme='light', blocking, ref="scheduleDe
   .form-group
     .alert.alert-icon.alert-warning(role='alert')
       i.fe.fe-alert-triangle.mr-2(aria-hidden='true')
-      | Jesteś pewien, że chcesz to zrobić? Ta akcja permanentnie usunie: #[strong {{scheduleName}}]
+      | {{$t('schedule_settings.note_1')}} #[strong {{scheduleName}}]
       br/
       br/
-      | #[strong Proszę przepisz nazwę planu aby kontynuować]
-    input.form-control(type='text', placeholder='Przepisz nazwę planu', v-model="confirmation")
+      | #[strong {{$t('schedule_settings.note_2')}}]
+    input.form-control(type='text', :placeholder="this.$t('schedule_settings.confirmation_placeholder')", v-model="confirmation")
   .card-footer
     button.btn.btn-danger.float-right.ml-2(slot='button', @click="handleDelete", :disabled="!(confirmation === $parent.schedule.name)") {{$t('schedule_settings.delete')}}
     button.btn.btn-secondary.btn-gray.float-right(slot='button', @click="closeModal") {{$t('schedule_settings.close')}}

@@ -20,7 +20,7 @@ div
             .form-group
               label {{$t('schedule.brief')}}
               button.btn.btn-link(v-if="exercise.template.briefDescription.length > 0", @click="openBriefModal(exercise.template.briefDescription)") {{$t('schedule.show')}}
-              h4(v-else) Brak
+              h4(v-else) {{$t('schedule.lack')}}
           .col-sm-6.mt-4
             .form-group
               label {{$t('schedule.muscle_group')}}
