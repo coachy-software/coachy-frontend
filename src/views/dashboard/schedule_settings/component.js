@@ -1,6 +1,7 @@
 import {maxLength, required} from "vuelidate/src/validators";
 import {notification} from "@/utils/toastr.utils";
 import store from "@/store";
+import scheduleDeleteModal from "./component/delete_modal/ScheduleDeleteModal";
 
 export default {
   data: () => ({
@@ -53,6 +54,9 @@ export default {
         notification.success(this.$t('schedule_settings.updated'));
         this.$router.push('/dashboard/schedules/' + this.schedule.identifier);
       });
+    },
+    openDeleteModal() {
+      this.$refs.scheduleDeleteModal.openModal();
     }
   },
   computed: {
@@ -63,5 +67,8 @@ export default {
   validations: {
     name: {required},
     note: {maxLength: maxLength(1000)}
+  },
+  components: {
+    scheduleDeleteModal: scheduleDeleteModal
   }
 }

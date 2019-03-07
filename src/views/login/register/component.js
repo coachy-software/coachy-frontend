@@ -1,5 +1,5 @@
 import {notification} from "@/utils/toastr.utils";
-import {required, maxLength, minLength, email, sameAs, helpers} from "vuelidate/src/validators";
+import {required, maxLength, minLength, email, sameAs} from "vuelidate/src/validators";
 import {NO_SPACE, NO_SPACE_AND_SPECIAL_CHARS} from "@/utils/constants";
 import {getErrorMessage} from "@/utils/validation.utils";
 

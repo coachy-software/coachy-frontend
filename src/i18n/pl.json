@@ -200,6 +200,10 @@
   "schedule_settings": {
     "card_title": "Edytuj ustawienia planu",
     "submit": "Zaktualizuj",
-    "updated": "Zaktualizowano plan"
+    "updated": "Zaktualizowano plan",
+    "404": "Plan nie istnieje",
+    "delete": "Usuń plan",
+    "close": "Zamknij",
+    "deleted": "Usunięto plan treningowy"
   }
 }
