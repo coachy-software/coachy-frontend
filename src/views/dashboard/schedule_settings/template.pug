@@ -34,10 +34,13 @@
                     label.selectgroup-item
                       input.selectgroup-input(type='checkbox', :name="key", v-model="days[index].trainingDay")
                       span.selectgroup-button {{day}}
-              .form-group.col-md-6
+              .form-group.col-sm-2
                 label.form-label {{this.$t('schedule_settings.delete')}}
                 button.btn.btn-danger(type="button", @click="openDeleteModal") {{this.$t('schedule_settings.delete')}}
                   i.fe.fe-trash-2.ml-2
       .card-footer.text-right
-        button.btn.btn-primary(type='submit', :disabled="this.$v.$invalid") {{this.$t('schedule_settings.submit')}}
+        button.btn.btn-primary(type="button", @click="openCloneModal") Sklonuj
+          i.fe.fe-copy.ml-2
+        button.btn.btn-primary.ml-2(type='submit', :disabled="this.$v.$invalid") {{this.$t('schedule_settings.submit')}}
   schedule-delete-modal(ref="scheduleDeleteModal", :scheduleName="schedule.name")
+  schedule-clone-modal(ref="scheduleCloneModal")

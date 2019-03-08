@@ -2,6 +2,7 @@ import {maxLength, required} from "vuelidate/src/validators";
 import {notification} from "@/utils/toastr.utils";
 import store from "@/store";
 import scheduleDeleteModal from "./component/delete_modal/ScheduleDeleteModal";
+import scheduleCloneModal from "./component/clone_modal/ScheduleCloneModal";
 
 export default {
   data: () => ({
@@ -57,6 +58,9 @@ export default {
     },
     openDeleteModal() {
       this.$refs.scheduleDeleteModal.openModal();
+    },
+    openCloneModal() {
+      this.$refs.scheduleCloneModal.openModal();
     }
   },
   computed: {
@@ -69,6 +73,7 @@ export default {
     note: {maxLength: maxLength(1000)}
   },
   components: {
-    scheduleDeleteModal: scheduleDeleteModal
+    scheduleDeleteModal: scheduleDeleteModal,
+    scheduleCloneModal: scheduleCloneModal
   }
 }

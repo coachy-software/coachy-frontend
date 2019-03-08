@@ -209,6 +209,7 @@
     "deleted": "Usunięto plan treningowy",
     "note_1": "Jesteś pewien, że chcesz to zrobić? Ta akcja permanentnie usunie:",
     "note_2": "Proszę przepisz nazwę planu, aby kontynuować",
-    "confirmation_placeholder": "Przepisz nazwę planu"
+    "confirmation_placeholder": "Przepisz nazwę planu",
+    "clone": "Sklonuj"
   }
 }
