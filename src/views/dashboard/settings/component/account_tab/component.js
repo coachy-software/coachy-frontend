@@ -11,6 +11,7 @@ export default {
   }),
   mounted() {
     this.$parent.currentTab = this.$parent.tabs.account.name;
+    this.language = this.$cookie.get('lang') || navigator.language.substring(0, 2) || 'en'
   },
   methods: {
     update() {
