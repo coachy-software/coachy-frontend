@@ -213,6 +213,9 @@
     "clone": "Sklonuj"
   },
   "schedule_stats": {
-    "page_title": "Statystyki planu"
+    "page_title": "Statystyki planu",
+    "muscles_groups_title": "Procent ćwiczeń",
+    "reps_title": "Procent powtórzeń",
+    "sets_title": "Procent serii"
   }
 }
