@@ -14,14 +14,12 @@ export default {
     let chartData = new Map();
 
     for (let i = 0; i < musclesGroups.length; i++) {
-      let exerciseCount = 0;
 
       this.schedule.days.forEach(day => {
         day.exercises.forEach(exercise => {
           let muscleGroup = musclesGroups[i];
           if (exercise.template.muscleGroup === muscleGroup) {
-            exerciseCount++;
-            chartData.set(muscleGroup, exerciseCount);
+            chartData.set(muscleGroup, exercise.reps);
           }
         });
       });
@@ -47,7 +45,6 @@ export default {
         type: 'pie',
         colors: colors
       },
-      axis: {},
       legend: {
         show: true
       },
