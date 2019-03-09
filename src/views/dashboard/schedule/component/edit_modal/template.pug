@@ -62,7 +62,7 @@ div
       button.btn.btn-outline-primary.float-right.ml-2(slot='button', @click="$parent.editExercise(dayIndex)", :disabled="$v.$invalid || (!customTemplate && suggestions.length === 0)") {{$t('schedule.update')}}
       button.btn.btn-outline-danger.float-right(slot='button', @click="$parent.removeExercise(dayIndex, exercise.identifier)") {{$t('schedule.remove')}}
   sweet-modal(ref="imagesManagerModal")
-    template(v-if="exercise.template")
+    template(v-if="template")
       .row
         .col-md-4
           .form-group
@@ -71,7 +71,7 @@ div
           button.btn.btn-primary(@click="addExerciseImage") {{$t('schedule.update')}}
       .dropdown-divider.mb-4
       .row.row-cards
-        .col-md-3(v-for="(image, imageIndex) in exercise.template.exampleImages", :key="image")
+        .col-md-3(v-for="image in template.exampleImages", :key="image")
           .card.p-2
             span.mb-1
               img.rounded(:src="image", :style="{'background-image': 'url(' + image + ')'}")

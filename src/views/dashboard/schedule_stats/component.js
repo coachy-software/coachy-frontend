@@ -1,6 +1,7 @@
 import {notification} from '@/utils/toastr.utils';
 import MusclesGroupsChart from './component/muscles_groups/MusclesGroupsChart';
 import RepsChart from './component/reps/RepsChart';
+import SetsChart from './component/sets/SetsChart';
 
 export default {
   data: () => ({
@@ -9,7 +10,8 @@ export default {
   }),
   components: {
     'muscles-groups-chart': MusclesGroupsChart,
-    'reps-chart': RepsChart
+    'reps-chart': RepsChart,
+    'sets-chart': SetsChart
   },
   created() {
     let identifier = this.$route.params.id;

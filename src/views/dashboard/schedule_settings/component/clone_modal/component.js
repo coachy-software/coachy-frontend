@@ -26,7 +26,6 @@ export default {
       this.$refs.scheduleCloneModal.close();
     },
     cloneSchedule() {
-      console.log(this.schedule);
       store.dispatch('schedule/create', {
         name: this.schedule.name,
         creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
