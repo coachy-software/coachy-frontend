@@ -6,6 +6,7 @@ div
         .col-md-12
           .form-group
             label.form-label {{$t('schedule.name')}}
+              span.form-required *
             input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="$t('schedule.name_placeholder')", v-model.trim="$v.name.$model")
             .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
         .col-sm-6.col-md-4
@@ -30,6 +31,7 @@ div
         .col-md-6(v-if="!customTemplate")
           .form-group
             label.form-label {{$t('schedule.template')}}
+              span.form-required *
             vue-instant(
               :suggestOnAllWords='true',
               :suggestion-attribute='suggestionAttribute',
