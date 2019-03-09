@@ -1,15 +1,17 @@
 .container
   .page-header
     h1.page-title {{this.schedule.name}}
-    .page-options.d-flex(v-if="$props.viewAs !== 'charge' && isCoach")
+    .page-options.d-flex
       .btn-list.text-right
         button.btn.btn-icon.btn-primary(type='button', @click="pushToStatistics")
           i.fe.fe-bar-chart
-        button.btn.btn-icon.btn-primary(type='button', @click="pushToSettings")
-          i.fe.fe-settings
-        button.btn.btn-outline-primary(type='button', @click="viewAsCharge")
-          i.fe.fe-eye.mr-2
-          | {{this.$t('schedule.see_as_charge')}}
+      template(v-if="$props.viewAs !== 'charge' && isCoach")
+        .btn-list.text-right
+          button.btn.btn-icon.btn-primary.ml-1(type='button', @click="pushToSettings")
+            i.fe.fe-settings
+          button.btn.btn-outline-primary(type='button', @click="viewAsCharge")
+            i.fe.fe-eye.mr-2
+            | {{this.$t('schedule.see_as_charge')}}
   .page-main
     .alert.alert-secondary(role='alert', v-if="$props.viewAs === 'charge'")
       | {{this.$t('schedule.charge_alert_1')}} #[strong {{this.$t('schedule.charge')}}]
