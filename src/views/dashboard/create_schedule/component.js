@@ -13,13 +13,13 @@ export default {
     charge: "",
     active: true,
     days: [
-      {trainingDay: true},
-      {trainingDay: true},
-      {trainingDay: true},
-      {trainingDay: true},
-      {trainingDay: true},
-      {trainingDay: true},
-      {trainingDay: true}
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []},
+      {trainingDay: true, exercises: []}
     ],
     suggestionAttribute: 'username',
     suggestions: []

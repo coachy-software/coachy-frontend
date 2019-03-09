@@ -43,4 +43,4 @@
           i.fe.fe-copy.ml-2
         button.btn.btn-primary.ml-2(type='submit', :disabled="this.$v.$invalid") {{this.$t('schedule_settings.submit')}}
   schedule-delete-modal(ref="scheduleDeleteModal", :scheduleName="schedule.name")
-  schedule-clone-modal(ref="scheduleCloneModal")
+  schedule-clone-modal(ref="scheduleCloneModal", :schedule="schedule")

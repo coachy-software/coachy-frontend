@@ -12,7 +12,7 @@ export default {
     sweetModal: SweetModal,
     sweetModalTab: SweetModalTab
   },
-  props: ['scheduleName'],
+  props: ['schedule'],
   data: () => ({
     charge: '',
     suggestionAttribute: 'username',
@@ -26,15 +26,14 @@ export default {
       this.$refs.scheduleCloneModal.close();
     },
     cloneSchedule() {
-      let parentSchedule = this.$parent.schedule;
-
+      console.log(this.schedule);
       store.dispatch('schedule/create', {
-        name: parentSchedule.name,
+        name: this.schedule.name,
         creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
         charge: {identifier: this.suggestions[0].identifier},
-        note: parentSchedule.note,
-        active: parentSchedule.active,
-        days: parentSchedule.days
+        note: this.schedule.note,
+        active: this.schedule.active,
+        days: this.schedule.days
       })
       .then(response => {
         notification.success(this.$t('create_schedule.created'));
