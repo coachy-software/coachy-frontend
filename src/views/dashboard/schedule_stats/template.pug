@@ -1,0 +1,5 @@
+.container
+  .page-header
+    h1.page-title {{$t('schedule_stats.page_title')}}
+  .row.row-cards
+    muscles-groups-chart(v-if="isReady", :schedule="schedule")

@@ -211,5 +211,8 @@
     "note_2": "Proszę przepisz nazwę planu, aby kontynuować",
     "confirmation_placeholder": "Przepisz nazwę planu",
     "clone": "Sklonuj"
+  },
+  "schedule_stats": {
+    "page_title": "Statystyki planu"
   }
 }

@@ -53,8 +53,11 @@ export default {
     viewAsCharge() {
       this.$router.push({query: Object.assign({}, this.$route.query, {viewAs: 'charge'})});
     },
-    scheduleSettings() {
+    pushToSettings() {
       this.$router.push(this.$route.path + '/settings');
+    },
+    pushToStatistics() {
+      this.$router.push(this.$route.path + '/stats');
     },
     hasViewAsChargeQuery() {
       return this.$props.viewAs === 'charge';

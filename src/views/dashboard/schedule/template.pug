@@ -3,7 +3,9 @@
     h1.page-title {{this.schedule.name}}
     .page-options.d-flex(v-if="$props.viewAs !== 'charge' && isCoach")
       .btn-list.text-right
-        button.btn.btn-icon.btn-primary(type='button', @click="scheduleSettings")
+        button.btn.btn-icon.btn-primary(type='button', @click="pushToStatistics")
+          i.fe.fe-bar-chart
+        button.btn.btn-icon.btn-primary(type='button', @click="pushToSettings")
           i.fe.fe-settings
         button.btn.btn-outline-primary(type='button', @click="viewAsCharge")
           i.fe.fe-eye.mr-2
