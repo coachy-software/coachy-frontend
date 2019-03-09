@@ -15,11 +15,11 @@ div
           .form-group
             label {{$t('schedule.reps')}}
             h4 {{exercise.reps}}
-        template(v-if="template")
+        template(v-if="exercise.template")
           .col-sm-6.mt-4
             .form-group
               label {{$t('schedule.brief')}}
-              button.btn.btn-link(v-if="template.briefDescription.length > 0", @click="template.briefDescription") {{$t('schedule.show')}}
+              button.btn.btn-link(v-if="exercise.template.briefDescription.length > 0", @click="openBriefModal(exercise.template.briefDescription)") {{$t('schedule.show')}}
               h4(v-else) {{$t('schedule.lack')}}
           .col-sm-6.mt-4
             .form-group
@@ -27,7 +27,7 @@ div
               h4 {{exercise.template.muscleGroup}}
           .col-sm-12
             Carousel(:navigationEnabled="true", :scrollPerPage="true", :perPageCustom="[[480, 2], [768, 3]]").mt-5
-              Slide(v-for="image in template.exampleImages", :key="image")
+              Slide(v-for="image in exercise.template.exampleImages", :key="image")
                 img(:src="image", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
   sweet-modal(ref="exerciseImage")
     img(:src="modalImage")
