@@ -3,6 +3,7 @@ import {API_URL} from "@/utils/constants";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {SET_SCHEDULES} from "./index";
 import i18n from "@/i18n"
+import {authorization} from "@/utils/headers";
 
 const create = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
@@ -96,7 +97,7 @@ const get = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.get(`${API_URL}/schedules/${payload.identifier}`)
+    axios.get(`${API_URL}/schedules/${payload.identifier}`, authorization())
     .then(response => {
       commit(SET_STATUS, NOT_LOADING, {root: true});
       resolve(response)

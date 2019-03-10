@@ -19,7 +19,7 @@
             th {{this.$t('schedule.created')}}
             th {{this.$t('schedule.updated')}}
             th
-            th(:class="{'hide': !isCoach}")
+            th(v-if="isCoach")
         tbody(v-if="!isEmpty")
           tr(v-for="schedule in this.$store.state.schedule.schedules")
             td
@@ -35,7 +35,6 @@
             td(v-if="isCoach && userIdentifier === schedule.creator")
               router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
                 i.fe.fe-edit
-            td(v-else)
         tbody(v-else)
           tr
             th {{this.$t('schedule.no_schedules')}}

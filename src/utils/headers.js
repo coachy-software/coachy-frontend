@@ -6,3 +6,11 @@ export function multipartHeader() {
     }
   }
 }
+
+export function authorization() {
+  return {
+    headers: {
+      'Authorization': `Basic ${localStorage.getItem('token')}`
+    }
+  }
+}
