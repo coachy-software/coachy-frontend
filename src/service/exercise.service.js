@@ -93,7 +93,7 @@ function uploadImages(files) {
   return new Promise((resolve) => {
     for (let i = 0; i < files.length; i++) {
       let uploadPromise = axios.post(`${API_URL}/uploads`,
-          obtainImage(files[i], '/exercises/samples'),
+          obtainImage(files[i], 'exercises_samples'),
           multipartHeader()
       )
       .then(response => {
