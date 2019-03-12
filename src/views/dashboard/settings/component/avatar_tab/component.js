@@ -54,7 +54,7 @@ export default {
 
       let formData = new FormData();
       formData.append('file', this.file);
-      formData.append('target', '/users/avatars');
+      formData.append('target', 'avatars');
 
       axios.post(`${API_URL}/uploads`, formData, config)
       .then(response => updateUser(response.data.fileUrl))
