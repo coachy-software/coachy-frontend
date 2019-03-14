@@ -4,7 +4,7 @@
 </template>
 
 <style>
-  .app {
-    height: 100vh;
+  .app, html, body {
+    height: 100% !important;
   }
 </style>
