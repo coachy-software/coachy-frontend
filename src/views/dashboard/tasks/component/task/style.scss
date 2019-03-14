@@ -1,0 +1,17 @@
+@import "~bulma/bulma";
+
+.card {
+  position: relative;
+  border-radius: 3px;
+  cursor: default;
+}
+.item-description {
+  font-size: 0.7em;
+  overflow: hidden;
+  white-space: normal;
+}
+.item-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

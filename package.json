@@ -20,6 +20,7 @@
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "bson-objectid": "^1.2.4",
+    "bulma": "^0.7.4",
     "c3": "^0.6.13",
     "coachy-tabler-ui": "0.0.32",
     "css-loader": "^2.1.0",

@@ -12,6 +12,12 @@
     "link": "/dashboard/schedules"
   },
   {
+    "name": "Lista zadań",
+    "icon": "fa fa-list",
+    "type": "NORMAL",
+    "link": "/dashboard/tasks"
+  },
+  {
     "name": "Kalkulatory",
     "icon": "fa fa-calculator",
     "type": "DROPDOWN",

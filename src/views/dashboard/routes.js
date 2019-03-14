@@ -10,6 +10,7 @@ import CreateScheduleView from '@/views/dashboard/create_schedule/CreateSchedule
 import ScheduleView from '@/views/dashboard/schedule/ScheduleView';
 import ScheduleSettingsView from '@/views/dashboard/schedule_settings/ScheduleSettingsView';
 import ScheduleStatsView from '@/views/dashboard/schedule_stats/ScheduleStatsView';
+import TasksView from '@/views/dashboard/tasks/TasksView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -25,7 +26,8 @@ export default [
       route('schedules/new', CreateScheduleView),
       route('schedules/:id', ScheduleView, {props: (route) => ({viewAs: route.query.viewAs})}),
       route('schedules/:id/settings', ScheduleSettingsView),
-      route('schedules/:id/stats', ScheduleStatsView)
+      route('schedules/:id/stats', ScheduleStatsView),
+      route('tasks', TasksView)
     ]
   }, {requiresAuth: true})
 ]
