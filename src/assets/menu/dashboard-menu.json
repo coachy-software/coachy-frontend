@@ -15,7 +15,7 @@
     "name": "Lista zadań",
     "icon": "fa fa-list",
     "type": "NORMAL",
-    "link": "/dashboard/tasks"
+    "link": "/dashboard/board"
   },
   {
     "name": "Kalkulatory",
