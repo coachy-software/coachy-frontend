@@ -217,5 +217,9 @@
     "muscles_groups_title": "Procent ćwiczeń",
     "reps_title": "Procent powtórzeń",
     "sets_title": "Procent serii"
+  },
+  "board": {
+    "page_title": "Twoja lista zadań",
+    "new_task": "Dodaj nowe zadanie"
   }
 }
