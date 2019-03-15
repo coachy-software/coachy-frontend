@@ -1,9 +1,15 @@
 .my-3.my-md-5.ml-5
-  .board-container
+  template(v-if="!exists")
+    .container.text-center
+      h1.mt-9 Twoja tablica jeszcze nie istnieje!
+      button.btn.btn-primary(@click="createBoard")
+        i.fe.fe-plus-circle.mr-2
+        | Utwórz tablicę
+  .board-container(v-else)
     .board
       .lists-container
-        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.labels")
-          section.list-container
+        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.label")
+          section.list-container.move
             .list-header
               .row.mr-0
                 .col-auto
@@ -12,9 +18,9 @@
                     | {{label.name}}
                 .card-options.col-auto.mb-5
                   .item-action.dropdown
-                    span.icon.fake-link(:id="label.name", @click="toggleOptions(label.name)")
+                    span.icon.fake-link(:id="label.id", @click="toggleOptions(label.id)")
                       i.fe.fe-more-vertical
-                    .dropdown-menu.dropdown-menu-right(:id="label.name + '.settings'", @mouseleave="toggleOptions(label.name)")
+                    .dropdown-menu.dropdown-menu-right(:id="label.id + '.settings'", @mouseleave="toggleOptions(label.id)")
                       span.dropdown-item.fake-link
                         i.dropdown-icon.fe.fe-trash-2
                         |  {{$t('board.delete')}}
@@ -22,7 +28,7 @@
                         i.dropdown-icon.fe.fe-edit-3
                         |  {{$t('board.change_name')}}
               draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
-                Task(v-for="task in label.tasks", :key="task.name", :itemTitle="task.name", :itemDescription="task.content")
+                Task(v-for="task in label.tasks", :key="task.id", :itemTitle="task.name", :itemDescription="task.content")
             .item-entry
               .input-group
                 input.form-control(type='text', :placeholder="$t('board.new_task')")

@@ -1,49 +1,44 @@
 import Task from './component/task/Task';
 import draggable from 'vuedraggable'
+import axios from "axios";
+import {API_URL} from "@/utils/constants";
+import {createBoard, fetch} from "@/service/board.service";
+import {authorization} from "@/utils/headers";
 
 export default {
   data: () => ({
-    labels: [
-      {
-        name: "Do zrobienia", tasks: [
-          {name: "Test", content: "test content", color: "#2b2b2b"},
-          {name: "Test1", content: "test content", color: "#2b2b2b"},
-          {name: "Test3", content: "test content", color: "#2b2b2b"}
-        ]
-      },
-      {
-        name: "W trakcie", tasks: [
-          {name: "XD", content: "test content", color: "#2b2b2b"},
-          {name: "XD1", content: "test content", color: "#2b2b2b"},
-          {name: "XD3", content: "test content", color: "#2b2b2b"},
-          {name: "XD4", content: "test content", color: "#2b2b2b"}
-        ]
-      },
-      {
-        name: "Ukończone", tasks: [
-          {name: "DDD", content: "test content", color: "#2b2b2b"},
-          {name: "DDD1", content: "test content", color: "#2b2b2b"},
-          {name: "DDD3", content: "test content", color: "#2b2b2b"}
-        ]
-      },
-      {
-        name: "Ukończone", tasks: [
-          {name: "DDD", content: "test content", color: "#2b2b2b"},
-          {name: "DDD1", content: "test content", color: "#2b2b2b"},
-          {name: "DDD3", content: "test content", color: "#2b2b2b"}
-        ]
-      }
-    ]
+    board: {},
+    exists: false
   }),
   name: 'tasks',
   components: {
     Task,
     draggable
   },
+  mounted() {
+    let boardIdentifier = this.$store.state.user.user.boardIdentifier;
+
+    if (boardIdentifier === null) {
+      this.exists = false;
+      return;
+    }
+
+    fetch({identifier: boardIdentifier}).then(response => {
+      this.board = response.data;
+      this.exists = true;
+    });
+  },
   methods: {
     toggleOptions(labelName) {
       document.getElementById(labelName).classList.toggle('show');
       document.getElementById(labelName + ".settings").classList.toggle('show')
+    },
+    createBoard() {
+      createBoard().then((response) => {
+        console.log(response);
+        this.board = response.data;
+        this.exists = true;
+      });
     }
   }
 }
