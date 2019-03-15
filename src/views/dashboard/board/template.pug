@@ -17,10 +17,10 @@
                     .dropdown-menu.dropdown-menu-right(:id="label.name + '.settings'", @mouseleave="toggleOptions(label.name)")
                       span.dropdown-item.fake-link
                         i.dropdown-icon.fe.fe-trash-2
-                        |  Usuń
+                        |  {{$t('board.delete')}}
                       span.dropdown-item.fake-link
                         i.dropdown-icon.fe.fe-edit-3
-                        |  Zmień nazwę
+                        |  {{$t('board.change_name')}}
               draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
                 Task(v-for="task in label.tasks", :key="task.name", :itemTitle="task.name", :itemDescription="task.content")
             .item-entry
@@ -31,6 +31,6 @@
                     i.fe.fe-plus
         section.list-container.mdi-opacity
           .list-header
-            button.btn.btn-link.text-center Dodaj kolumnę
+            button.btn.btn-link.text-center {{$t('board.add_label')}}
               i.fe.fe-plus.ml-2
 

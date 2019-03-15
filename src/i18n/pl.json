@@ -219,7 +219,9 @@
     "sets_title": "Procent serii"
   },
   "board": {
-    "page_title": "Twoja lista zadań",
-    "new_task": "Dodaj nowe zadanie"
+    "new_task": "Dodaj nowe zadanie",
+    "delete": "Usuń",
+    "change_name": "Zmień nazwę",
+    "add_label": "Dodaj kolumnę"
   }
 }
