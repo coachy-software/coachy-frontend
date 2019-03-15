@@ -2,19 +2,20 @@
   .board-container
     .board
       .lists-container
-        section.list-container(v-for="label in this.labels")
-          .list-header
-            h4.text-center.mb-5.mt-2
-              span.badge.badge-default.mr-2 {{label.tasks.length}}
-              | {{label.name}}
-            draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
-              Task(v-for="task in label.tasks", :key="task.name", :itemTitle="task.name", :itemDescription="task.content")
-          .item-entry
-            .input-group
-              input.form-control(type='text', :placeholder="$t('board.new_task')")
-              span.input-group-append
-                button.btn.btn-primary(type='button')
-                  i.fe.fe-plus
+        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.labels")
+          section.list-container
+            .list-header
+              h4.text-center.mb-5.mt-2
+                span.badge.badge-default.mr-2 {{label.tasks.length}}
+                | {{label.name}}
+              draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
+                Task(v-for="task in label.tasks", :key="task.name", :itemTitle="task.name", :itemDescription="task.content")
+            .item-entry
+              .input-group
+                input.form-control(type='text', :placeholder="$t('board.new_task')")
+                span.input-group-append
+                  button.btn.btn-primary(type='button')
+                    i.fe.fe-plus
         section.list-container.mdi-opacity
           .list-header
             button.btn.btn-link.text-center Dodaj kolumnę
