@@ -39,5 +39,11 @@ export default {
   components: {
     Task,
     draggable
+  },
+  methods: {
+    toggleOptions(labelName) {
+      document.getElementById(labelName).classList.toggle('show');
+      document.getElementById(labelName + ".settings").classList.toggle('show')
+    }
   }
 }

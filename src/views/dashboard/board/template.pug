@@ -5,9 +5,22 @@
         draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.labels")
           section.list-container
             .list-header
-              h4.text-center.mb-5.mt-2
-                span.badge.badge-default.mr-2 {{label.tasks.length}}
-                | {{label.name}}
+              .row.mr-0
+                .col-auto
+                  h4.mb-5.mt-2
+                    span.badge.badge-default.mr-2 {{label.tasks.length}}
+                    | {{label.name}}
+                .card-options.col-auto.mb-5
+                  .item-action.dropdown
+                    span.icon.fake-link(:id="label.name", @click="toggleOptions(label.name)")
+                      i.fe.fe-more-vertical
+                    .dropdown-menu.dropdown-menu-right(:id="label.name + '.settings'", @mouseleave="toggleOptions(label.name)")
+                      span.dropdown-item.fake-link
+                        i.dropdown-icon.fe.fe-trash-2
+                        |  Usuń
+                      span.dropdown-item.fake-link
+                        i.dropdown-icon.fe.fe-edit-3
+                        |  Zmień nazwę
               draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
                 Task(v-for="task in label.tasks", :key="task.name", :itemTitle="task.name", :itemDescription="task.content")
             .item-entry
