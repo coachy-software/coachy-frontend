@@ -1,14 +1,11 @@
 import Task from './component/task/Task';
 import draggable from 'vuedraggable'
-import axios from "axios";
-import {API_URL} from "@/utils/constants";
 import {createBoard, fetch} from "@/service/board.service";
-import {authorization} from "@/utils/headers";
 
 export default {
   data: () => ({
     board: {},
-    exists: false
+    exists: true
   }),
   name: 'tasks',
   components: {
@@ -35,7 +32,6 @@ export default {
     },
     createBoard() {
       createBoard().then((response) => {
-        console.log(response);
         this.board = response.data;
         this.exists = true;
       });
