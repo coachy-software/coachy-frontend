@@ -6,8 +6,6 @@ import {updateAccountDetails} from '@/service/user.service';
 import {getErrorMessage} from "@/utils/validation.utils";
 import i18n from "@/i18n";
 
-let user = store.state.user.user;
-
 function updateUser(avatar) {
   updateAccountDetails({avatar: avatar})
   .then(() => notification.success(i18n.t('avatar_tab.updated')));
@@ -18,10 +16,14 @@ export default {
     uploadReady: true,
     file: null,
     filePreview: null,
-    username: user.displayName || user.username,
-    accountType: user.accountType
+    username: '',
+    accountType: ''
   }),
-  mounted() {
+  created() {
+    let user = store.state.user.user;
+
+    this.username = user.displayName || user.username;
+    this.accountType = user.accountType;
     this.$parent.currentTab = this.$parent.tabs.avatar.name;
   },
   computed: {

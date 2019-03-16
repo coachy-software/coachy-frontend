@@ -9,10 +9,10 @@ import rawTasks from "@/assets/mock/tasks.json";
 
 export function createBoard() {
   return new Promise(resolve => {
-    let user = store.state.user.user;
+    let userId = store.state.user.user.identifier;
     let data = {
       name: "Board",
-      owner: user,
+      owner: userId,
       labels: [
         {identifier: ObjectID.generate(), name: i18n.t('board.label_1'), tasks: generateExampleTasks()},
         {identifier: ObjectID.generate(), name: i18n.t('board.label_2'), tasks: generateExampleTasks()},
