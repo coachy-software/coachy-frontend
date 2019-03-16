@@ -1,4 +1,4 @@
-.task-card
+.task-card(:style="{'border-bottom': `2px solid ${task.color}`}")
   div
-    p.item-title {{itemTitle}}
-    p.item-description {{itemDescription}}
+    p.item-title {{task.name}}
+    p.item-description {{task.content}}

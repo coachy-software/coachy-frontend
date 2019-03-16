@@ -8,7 +8,7 @@
   .board-container(v-else)
     .board
       .lists-container
-        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.labels")
+        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.labels", :key="label.identifier")
           section.list-container.move
             .list-header
               .row.mr-0
@@ -28,7 +28,7 @@
                         i.dropdown-icon.fe.fe-edit-3
                         |  {{$t('board.change_name')}}
               draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
-                Task(v-for="task in label.tasks", :key="task.id", :itemTitle="task.name", :itemDescription="task.content")
+                task(v-for="task in label.tasks", :key="task.id", :task="task")
             .item-entry
               .input-group
                 input.form-control(type='text', :placeholder="$t('board.new_task')")
