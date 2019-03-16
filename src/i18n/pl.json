@@ -222,6 +222,11 @@
     "new_task": "Dodaj nowe zadanie",
     "delete": "Usuń",
     "change_name": "Zmień nazwę",
-    "add_label": "Dodaj kolumnę"
+    "add_label": "Dodaj kolumnę",
+    "edit_task": "Edytuj zadanie",
+    "name": "Nazwa",
+    "description": "Opis",
+    "color": "Kolor",
+    "update": "Zaktualizuj"
   }
 }

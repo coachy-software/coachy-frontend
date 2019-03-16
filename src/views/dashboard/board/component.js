@@ -1,7 +1,7 @@
 import Task from './component/task/Task';
 import EditTaskModal from "./component/edit_task/EditTaskModal";
 import draggable from 'vuedraggable'
-import {createBoard, fetch, addTask, addLabel, editTask} from "@/service/board.service";
+import {createBoard, fetch, addTask, addLabel, editTask, update} from "@/service/board.service";
 import ObjectID from "bson-objectid";
 
 export default {
@@ -15,7 +15,7 @@ export default {
     EditTaskModal,
     draggable
   },
-  mounted() {
+  created() {
     let boardIdentifier = this.$store.state.user.user.boardIdentifier;
 
     if (boardIdentifier === null) {
@@ -57,6 +57,9 @@ export default {
     },
     openEditTaskModal(task, labelIndex) {
       this.$refs.taskEditModal.openModal(task, labelIndex);
+    },
+    onChange() {
+      update(this.board);
     }
   }
 }

@@ -69,7 +69,7 @@ export function editTask(board, labelIndex, taskInstance) {
   .map(task => {
     task.name = taskInstance.name;
     task.color = taskInstance.color.hex || taskInstance.task.color;
-    task.content = taskInstance.task.content;
+    task.content = taskInstance.content;
   });
 
   update(board);

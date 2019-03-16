@@ -13,6 +13,7 @@ export default {
     task: {},
     name: '',
     color: '',
+    content: '',
     labelIndex: null
   }),
   methods: {
@@ -20,6 +21,7 @@ export default {
       this.task = task;
       this.name = task.name;
       this.color = task.color;
+      this.content = task.content;
       this.labelIndex = labelIndex;
 
       this.$refs.taskEditModal.open();
