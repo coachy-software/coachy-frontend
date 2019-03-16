@@ -1,0 +1,8 @@
+sweet-modal(overlay-theme='light', modal-theme='light', ref="changeNameModal")
+  .form-group
+    label.form-label {{$t('board.name')}}
+      span.form-required.ml-1 *
+    input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="$t('board.name')", v-model.trim="$v.name.$model")
+    .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
+  .card-footer
+    button.btn.btn-primary.float-right(slot='button', @click="$parent.editLabelName", :disabled="$v.invalid") Zmień

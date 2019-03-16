@@ -1,8 +1,18 @@
 import Task from './component/task/Task';
-import EditTaskModal from "./component/edit_task/EditTaskModal";
+import EditTaskModal from './component/edit_task/EditTaskModal';
+import ChangeNameModal from './component/change_name/ChangeNameModal';
 import draggable from 'vuedraggable'
-import {createBoard, fetch, addTask, addLabel, editTask, update} from "@/service/board.service";
-import ObjectID from "bson-objectid";
+import {
+  createBoard,
+  fetch,
+  addTask,
+  addLabel,
+  editTask,
+  update,
+  removeLabel,
+  editLabelName
+} from '@/service/board.service';
+import ObjectID from 'bson-objectid';
 
 export default {
   data: () => ({
@@ -13,6 +23,7 @@ export default {
   components: {
     Task,
     EditTaskModal,
+    ChangeNameModal,
     draggable
   },
   created() {
@@ -55,8 +66,17 @@ export default {
     addLabel() {
       addLabel(this.board);
     },
+    removeLabel(labelIdentifier) {
+      removeLabel(this.board, labelIdentifier);
+    },
+    editLabelName() {
+      editLabelName(this.board, this.$refs.changeNameModal);
+    },
     openEditTaskModal(task, labelIndex) {
       this.$refs.taskEditModal.openModal(task, labelIndex);
+    },
+    openChangeNameModal(label) {
+      this.$refs.changeNameModal.openModal(label);
     },
     onChange() {
       update(this.board);

@@ -64,6 +64,11 @@ export function addLabel(board) {
   update(board);
 }
 
+export function removeLabel(board, labelIdentifier) {
+  board.labels = board.labels.filter(label => labelIdentifier !== label.identifier);
+  update(board);
+}
+
 export function editTask(board, labelIndex, taskInstance) {
   board.labels[labelIndex].tasks.filter(task => taskInstance.task.identifier === task.identifier)
   .map(task => {
@@ -74,4 +79,12 @@ export function editTask(board, labelIndex, taskInstance) {
 
   update(board);
   taskInstance.closeModal();
+}
+
+export function editLabelName(board, labelInstance) {
+  board.labels.filter(label => label.identifier === labelInstance.label.identifier)
+  .map(label => label.name = labelInstance.name);
+
+  update(board);
+  labelInstance.closeModal();
 }
