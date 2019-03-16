@@ -1,6 +1,7 @@
 import Task from './component/task/Task';
+import EditTaskModal from "./component/edit_task/EditTaskModal";
 import draggable from 'vuedraggable'
-import {createBoard, fetch, addTask, addLabel} from "@/service/board.service";
+import {createBoard, fetch, addTask, addLabel, editTask} from "@/service/board.service";
 import ObjectID from "bson-objectid";
 
 export default {
@@ -11,6 +12,7 @@ export default {
   name: 'tasks',
   components: {
     Task,
+    EditTaskModal,
     draggable
   },
   mounted() {
@@ -44,16 +46,17 @@ export default {
         return;
       }
 
-      let task = {
-        name: elementValue,
-        color: 'black'
-      };
-
-      addTask(task, labelIndex, this.board);
+      addTask({identifier: ObjectID.generate(), name: elementValue, color: 'black'}, labelIndex, this.board);
       this.$refs[refName][0].value = '';
+    },
+    editTask(labelIndex) {
+      editTask(this.board, labelIndex, this.$refs.taskEditModal);
     },
     addLabel() {
       addLabel(this.board);
+    },
+    openEditTaskModal(task, labelIndex) {
+      this.$refs.taskEditModal.openModal(task, labelIndex);
     }
   }
 }

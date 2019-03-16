@@ -63,3 +63,15 @@ export function addLabel(board) {
   board.labels.push({identifier: ObjectID.generate(), name: 'Nowa kolumna', tasks: []});
   update(board);
 }
+
+export function editTask(board, labelIndex, taskInstance) {
+  board.labels[labelIndex].tasks.filter(task => taskInstance.task.identifier === task.identifier)
+  .map(task => {
+    task.name = taskInstance.name;
+    task.color = taskInstance.color.hex || taskInstance.task.color;
+    task.content = taskInstance.task.content;
+  });
+
+  update(board);
+  taskInstance.closeModal();
+}

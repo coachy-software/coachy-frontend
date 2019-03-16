@@ -1,0 +1,21 @@
+div
+  sweet-modal(overlay-theme='light', modal-theme='light', ref="taskEditModal")
+    h3.card-title Edytuj zadanie
+    .card-body
+      .row
+        .col-md-6
+          .form-group
+            label.form-label Nazwa
+              span.form-required.ml-1 *
+            input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', placeholder="Nazwa", v-model.trim="$v.name.$model")
+            .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
+        .col-md-6
+          .form-group
+            label.form-label Opis
+            textarea.form-control(rows='6', :placeholder="$t('schedule.brief_placeholder')", maxlength=1000, v-model="task.content")
+        .col-md-12
+          .form-group
+            label.form-label Kolor
+            color-picker(style="right: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 10%", v-model="color")
+    .card-footer
+      button.btn.btn-outline-primary.float-right(slot='button', @click="$parent.editTask(labelIndex)", :disabled="$v.$invalid") Zaktualizuj

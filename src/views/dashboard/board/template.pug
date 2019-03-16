@@ -30,7 +30,7 @@
                         i.dropdown-icon.fe.fe-edit-3
                         |  {{$t('board.change_name')}}
               draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks")
-                task(v-for="task in label.tasks", :key="task.id", :task="task")
+                task(v-for="task in label.tasks", :key="task.id", @click.native="openEditTaskModal(task, index)", :task="task")
             .item-entry
               .input-group
                 input.form-control(type='text', :placeholder="$t('board.new_task')", :ref="label.identifier + '_input'", @keyup.enter="addTask(label.identifier + '_input', index)", required)
@@ -41,4 +41,5 @@
           .list-header
             button.btn.btn-link.text-center(type="button", @click="addLabel") {{$t('board.add_label')}}
               i.fe.fe-plus.ml-2
+  edit-task-modal(ref="taskEditModal")
 
