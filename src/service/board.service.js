@@ -4,6 +4,8 @@ import {authorization} from "@/utils/headers";
 import store from "@/store";
 import {updateUserBoardIdentifier} from "./user.service";
 import ObjectID from "bson-objectid";
+import i18n from "@/i18n";
+import rawTasks from "@/assets/mock/tasks.json";
 
 export function createBoard() {
   return new Promise(resolve => {
@@ -12,30 +14,23 @@ export function createBoard() {
       name: "Board",
       owner: user,
       labels: [
-        {
-          identifier: ObjectID.generate(),
-          name: "Do zrobienia",
-          tasks: [
-            {identifier: ObjectID.generate(), color: "#ff2db3", name: "Test task", content: "That's a test content 😋"},
-            {identifier: ObjectID.generate(), color: "#06e7ff", name: "Test task", content: "That's a test content 😋"},
-            {identifier: ObjectID.generate(), color: "#2b2b2b", name: "Test task", content: "That's a test content 😋"}
-          ]
-        },
-        {
-          identifier: ObjectID.generate(),
-          name: "Gotowe",
-          tasks: [
-            {identifier: ObjectID.generate(), color: "#ff2db3", content: "That's a test content 😋"},
-            {identifier: ObjectID.generate(), color: "#06e7ff", content: "That's a test content 😋"},
-            {identifier: ObjectID.generate(), color: "#2b2b2b", content: "That's a test content 😋"}
-          ]
-        }
+        {identifier: ObjectID.generate(), name: i18n.t('board.label_1'), tasks: generateExampleTasks()},
+        {identifier: ObjectID.generate(), name: i18n.t('board.label_2'), tasks: generateExampleTasks()},
+        {identifier: ObjectID.generate(), name: i18n.t('board.label_3'), tasks: generateExampleTasks()}
       ]
     };
 
     axios.post(`${API_URL}/boards`, data, authorization())
     .then(response => resolve(updateUserAndFetch(response.data.identifier)));
   });
+}
+
+function generateExampleTasks() {
+  for (let i = 0; i < rawTasks.length; i++) {
+    rawTasks[i].identifier = ObjectID.generate();
+  }
+
+  return rawTasks;
 }
 
 export function fetch(payload) {

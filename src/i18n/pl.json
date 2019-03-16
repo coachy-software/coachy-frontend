@@ -227,6 +227,9 @@
     "name": "Nazwa",
     "description": "Opis",
     "color": "Kolor",
-    "update": "Zaktualizuj"
+    "update": "Zaktualizuj",
+    "label_1": "Do zrobienia",
+    "label_2": "W trakcie",
+    "label_3": "Ukończone"
   }
 }
