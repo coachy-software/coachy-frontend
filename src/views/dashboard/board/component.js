@@ -26,9 +26,9 @@ export default {
     });
   },
   methods: {
-    toggleOptions(labelName) {
-      document.getElementById(labelName).classList.toggle('show');
-      document.getElementById(labelName + ".settings").classList.toggle('show')
+    toggleOptions(labelId) {
+      document.getElementById(labelId).classList.toggle('show');
+      document.getElementById(labelId + ".settings").classList.toggle('show')
     },
     createBoard() {
       createBoard().then((response) => {

@@ -8,7 +8,7 @@
   .board-container(v-else)
     .board
       .lists-container
-        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.label")
+        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.labels")
           section.list-container.move
             .list-header
               .row.mr-0
@@ -18,9 +18,9 @@
                     | {{label.name}}
                 .card-options.col-auto.mb-5
                   .item-action.dropdown
-                    span.icon.fake-link(:id="label.id", @click="toggleOptions(label.id)")
+                    span.icon.fake-link(:id="label.identifier", @click="toggleOptions(label.identifier)")
                       i.fe.fe-more-vertical
-                    .dropdown-menu.dropdown-menu-right(:id="label.id + '.settings'", @mouseleave="toggleOptions(label.id)")
+                    .dropdown-menu.dropdown-menu-right(:id="label.identifier + '.settings'", @mouseleave="toggleOptions(label.identifier)")
                       span.dropdown-item.fake-link
                         i.dropdown-icon.fe.fe-trash-2
                         |  {{$t('board.delete')}}

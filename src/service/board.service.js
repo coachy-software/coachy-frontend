@@ -11,16 +11,20 @@ export function createBoard() {
     let data = {
       name: "Board",
       owner: user,
-      label: [
+      labels: [
         {
-          name: "Do zrobienia", tasks: [
+          identifier: ObjectID.generate(),
+          name: "Do zrobienia",
+          tasks: [
             {identifier: ObjectID.generate(), color: "#ff2db3", name: "Test task", content: "That's a test content 😋"},
             {identifier: ObjectID.generate(), color: "#06e7ff", name: "Test task", content: "That's a test content 😋"},
             {identifier: ObjectID.generate(), color: "#2b2b2b", name: "Test task", content: "That's a test content 😋"}
           ]
         },
         {
-          name: "Gotowe", tasks: [
+          identifier: ObjectID.generate(),
+          name: "Gotowe",
+          tasks: [
             {identifier: ObjectID.generate(), color: "#ff2db3", content: "That's a test content 😋"},
             {identifier: ObjectID.generate(), color: "#06e7ff", content: "That's a test content 😋"},
             {identifier: ObjectID.generate(), color: "#2b2b2b", content: "That's a test content 😋"}
