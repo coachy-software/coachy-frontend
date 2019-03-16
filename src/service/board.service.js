@@ -34,7 +34,7 @@ export function createBoard() {
     };
 
     axios.post(`${API_URL}/boards`, data, authorization())
-    .then(response => resolve(updateAndFetch(response.data.identifier)));
+    .then(response => resolve(updateUserAndFetch(response.data.identifier)));
   });
 }
 
@@ -45,8 +45,21 @@ export function fetch(payload) {
   })
 }
 
-export function updateAndFetch(identifier) {
+export function updateUserAndFetch(identifier) {
   return updateUserBoardIdentifier({boardIdentifier: identifier})
   .then(() => fetch({identifier: identifier}))
 }
 
+export function update(board) {
+  return axios.patch(`${API_URL}/boards/${board.identifier}`, board, authorization());
+}
+
+export function addTask(task, labelIndex, board) {
+  board.labels[labelIndex].tasks.push(task);
+  update(board);
+}
+
+export function addLabel(board) {
+  board.labels.push({identifier: ObjectID.generate(), name: 'Nowa kolumna', tasks: []});
+  update(board);
+}

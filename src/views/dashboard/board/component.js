@@ -1,6 +1,7 @@
 import Task from './component/task/Task';
 import draggable from 'vuedraggable'
-import {createBoard, fetch} from "@/service/board.service";
+import {createBoard, fetch, addTask, addLabel} from "@/service/board.service";
+import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
@@ -35,6 +36,24 @@ export default {
         this.board = response.data;
         this.exists = true;
       });
+    },
+    addTask(refName, labelIndex) {
+      let elementValue = this.$refs[refName][0].value;
+
+      if (elementValue.length < 1) {
+        return;
+      }
+
+      let task = {
+        name: elementValue,
+        color: 'black'
+      };
+
+      addTask(task, labelIndex, this.board);
+      this.$refs[refName][0].value = '';
+    },
+    addLabel() {
+      addLabel(this.board);
     }
   }
 }

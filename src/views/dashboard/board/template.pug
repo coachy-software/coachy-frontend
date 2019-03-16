@@ -8,8 +8,8 @@
   .board-container(v-else)
     .board
       .lists-container
-        draggable(:options="{animation: 150, group:'labels'}", v-for="label in this.board.labels", :key="label.identifier")
-          section.list-container.move
+        draggable(:options="{handle: '.move',animation: 150, group:'labels'}", v-for="(label, index) in this.board.labels", :key="label.identifier")
+          section.list-container
             .list-header
               .row.mr-0
                 .col-auto
@@ -18,6 +18,8 @@
                     | {{label.name}}
                 .card-options.col-auto.mb-5
                   .item-action.dropdown
+                    span.icon.move.mr-2
+                      i.fe.fe-move
                     span.icon.fake-link(:id="label.identifier", @click="toggleOptions(label.identifier)")
                       i.fe.fe-more-vertical
                     .dropdown-menu.dropdown-menu-right(:id="label.identifier + '.settings'", @mouseleave="toggleOptions(label.identifier)")
@@ -31,12 +33,12 @@
                 task(v-for="task in label.tasks", :key="task.id", :task="task")
             .item-entry
               .input-group
-                input.form-control(type='text', :placeholder="$t('board.new_task')")
+                input.form-control(type='text', :placeholder="$t('board.new_task')", :ref="label.identifier + '_input'", @keyup.enter="addTask(label.identifier + '_input', index)", required)
                 span.input-group-append
-                  button.btn.btn-primary(type='button')
+                  button.btn.btn-primary(type='button', @click="addTask(label.identifier + '_input', index)")
                     i.fe.fe-plus
         section.list-container.mdi-opacity
           .list-header
-            button.btn.btn-link.text-center {{$t('board.add_label')}}
+            button.btn.btn-link.text-center(type="button", @click="addLabel") {{$t('board.add_label')}}
               i.fe.fe-plus.ml-2
 
