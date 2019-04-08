@@ -28,8 +28,8 @@ export default {
     cloneSchedule() {
       store.dispatch('schedule/create', {
         name: this.schedule.name,
-        creator: {identifier: JSON.parse(localStorage.getItem('user')).identifier},
-        charge: {identifier: this.suggestions[0].identifier},
+        creator: JSON.parse(localStorage.getItem('user')).identifier,
+        charge: this.suggestions[0].identifier,
         note: this.schedule.note,
         active: this.schedule.active,
         days: this.schedule.days
@@ -37,7 +37,11 @@ export default {
       .then(response => {
         notification.success(this.$t('create_schedule.created'));
         fetchAll();
-        this.$router.push(`/dashboard/schedules/${response.data.identifier}`);
+
+        let locationHeaderValue = response.headers.location;
+        let scheduleId = locationHeaderValue.substring(locationHeaderValue.lastIndexOf('/') + 1);
+
+        this.$router.push(`/dashboard/schedules/${scheduleId}`);
       })
       .catch(error => notification.error(getErrorMessage('create_schedule', error)));
     },
@@ -47,9 +51,7 @@ export default {
       this.suggestions = [];
       axios.get(`${API_URL}/users?username=${this.charge}`)
       .then(function (response) {
-        response.data.content.forEach((rawCharge) => {
-          that.suggestions.push(rawCharge);
-        })
+        response.data.forEach((rawCharge) => that.suggestions.push(rawCharge))
       })
     }
   }

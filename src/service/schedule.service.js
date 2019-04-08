@@ -12,16 +12,14 @@ export function fetchAll() {
   let promises = [];
 
   let endpoints = [
-    `${API_URL}/schedules?charge.identifier=${userIdentifier}`,
-    `${API_URL}/schedules?creator.identifier=${userIdentifier}`
+    `${API_URL}/schedules?charge=${userIdentifier}`,
+    `${API_URL}/schedules?creator=${userIdentifier}`
   ];
 
   return new Promise((resolve) => {
     for (let i = 0; i < endpoints.length; i++) {
       let requestPromise = axios.get(endpoints[i], config)
-      .then(response => {
-        return response.data.content;
-      });
+      .then(response => response.data);
 
       promises.push(requestPromise);
     }

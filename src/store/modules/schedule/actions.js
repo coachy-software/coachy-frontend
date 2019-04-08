@@ -72,7 +72,7 @@ const update = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.patch(`${API_URL}/schedules/${payload.identifier}`, payload, {
+    axios.put(`${API_URL}/schedules/${payload.identifier}`, payload, {
       headers: {'Authorization': `Basic ${localStorage.getItem('token')}`}
     })
     .then(response => {
