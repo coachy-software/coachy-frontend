@@ -34,7 +34,7 @@ const register = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
-    axios.post(`${API_URL}/register`, {
+    axios.post(`${API_URL}/users/register`, {
       username: payload.username,
       password: payload.password,
       matchingPassword: payload.matchingPassword,
