@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {SET_TOKEN, SET_USER} from "./index";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
+import {authorization} from "../../../utils/headers";
 
 const login = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
@@ -68,7 +69,7 @@ const logout = ({commit}) => {
 
 const update = ({commit}) => {
   return new Promise((resolve, reject) => {
-    axios.get(`${API_URL}/users/me`, {headers: {'Authorization': 'Basic ' + localStorage.getItem('token')}})
+    axios.get(`${API_URL}/users/me`, authorization())
     .then(response => {
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -83,7 +84,7 @@ const update = ({commit}) => {
   });
 };
 
-const get = ({commit}, payload) => {
+const searchUserByUsername = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
@@ -99,10 +100,29 @@ const get = ({commit}, payload) => {
   });
 };
 
+const fetchOne = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    commit(SET_STATUS, LOADING, {root: true});
+
+    axios.get(`${API_URL}/users/${payload.identifier}`, authorization())
+    .then(response => {
+      localStorage.setItem("user", JSON.stringify(response.data));
+      commit(SET_USER, response.data);
+      commit(SET_STATUS, NOT_LOADING, {root: true});
+      resolve(response)
+    })
+    .catch(error => {
+      commit(SET_STATUS, NOT_LOADING, {root: true});
+      reject(error)
+    });
+  });
+};
+
 export default {
   login,
   register,
   logout,
   update,
-  get
+  searchUserByUsername,
+  fetchOne
 }

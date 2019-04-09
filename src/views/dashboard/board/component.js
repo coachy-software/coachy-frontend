@@ -3,21 +3,22 @@ import EditTaskModal from './component/edit_task/EditTaskModal';
 import ChangeNameModal from './component/change_name/ChangeNameModal';
 import draggable from 'vuedraggable'
 import {
-  createBoard,
-  fetch,
-  addTask,
   addLabel,
+  addTask,
+  createBoard,
+  editLabelName,
   editTask,
-  update,
+  fetch,
   removeLabel,
-  editLabelName
+  update
 } from '@/service/board.service';
 import ObjectID from 'bson-objectid';
 
 export default {
   data: () => ({
     board: {},
-    exists: true
+    exists: true,
+    loading: true
   }),
   name: 'tasks',
   components: {
@@ -27,7 +28,7 @@ export default {
     draggable
   },
   created() {
-    let boardIdentifier = this.$store.state.user.user.boardIdentifier;
+    let boardIdentifier = this.$store.state.user.user.boardId;
 
     if (boardIdentifier === null) {
       this.exists = false;
@@ -37,6 +38,7 @@ export default {
     fetch({identifier: boardIdentifier}).then(response => {
       this.board = response.data;
       this.exists = true;
+      this.loading = false;
     });
   },
   methods: {
@@ -48,6 +50,7 @@ export default {
       createBoard().then((response) => {
         this.board = response.data;
         this.exists = true;
+        this.loading = false;
       });
     },
     addTask(refName, labelIndex) {

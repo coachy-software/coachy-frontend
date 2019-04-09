@@ -39,45 +39,24 @@ export function resetPassword(payload) {
 
 export function updateAccountDetails(payload) {
   return new Promise((resolve, reject) => {
-    store.commit(SET_STATUS, LOADING);
-
-    let userIdentifier = store.state.user.user.identifier;
-    let data = {
-      email: payload.email,
-      displayName: payload.displayName,
-      avatar: payload.avatar
-    };
-
-    axios.patch(`${API_URL}/users/${userIdentifier}`, data, authorization())
-    .then(response => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      store.dispatch('user/update');
-      resolve(response);
-    })
-    .catch(error => {
-      store.commit(SET_STATUS, NOT_LOADING);
-      reject(error);
-    })
-  })
-}
-
-export function updateUserBoardIdentifier(payload) {
-  return new Promise((resolve, reject) => {
-    // todo
-    // store.commit(SET_STATUS, LOADING);
-    //
-    // let userIdentifier = store.state.user.user.identifier;
-    // let data = {boardIdentifier: payload.boardIdentifier};
-    //
-    // axios.patch(`${API_URL}/users/${userIdentifier}`, data, authorization())
-    // .then(response => {
-    //   store.commit(SET_STATUS, NOT_LOADING);
-    //   store.dispatch('user/update');
-    //   resolve(response);
-    // })
-    // .catch(error => {
-    //   store.commit(SET_STATUS, NOT_LOADING);
-    //   reject(error);
-    // })
+  //   store.commit(SET_STATUS, LOADING);
+  //
+  //   let userIdentifier = store.state.user.user.identifier;
+  //   let data = {
+  //     email: payload.email,
+  //     displayName: payload.displayName,
+  //     avatar: payload.avatar
+  //   };
+  //
+  //   axios.patch(`${API_URL}/users/${userIdentifier}`, data, authorization())
+  //   .then(response => {
+  //     store.commit(SET_STATUS, NOT_LOADING);
+  //     store.dispatch('user/update');
+  //     resolve(response);
+  //   })
+  //   .catch(error => {
+  //     store.commit(SET_STATUS, NOT_LOADING);
+  //     reject(error);
+  //   })
   })
 }

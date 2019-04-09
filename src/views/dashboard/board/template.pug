@@ -1,11 +1,15 @@
 .my-3.my-md-5.ml-5
+  template(v-if="exists && loading")
+    .container.text-center
+      .mt-9.dimmer.active
+        .loader
   template(v-if="!exists")
     .container.text-center
       h1.mt-9 Twoja tablica jeszcze nie istnieje!
       button.btn.btn-primary(@click="createBoard")
         i.fe.fe-plus-circle.mr-2
         | Utwórz tablicę
-  .board-container(v-else)
+  .board-container(v-else-if="!loading")
     .board
       .lists-container
         draggable(

@@ -2,7 +2,6 @@ import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {authorization} from "@/utils/headers";
 import store from "@/store";
-import {updateUserBoardIdentifier} from "./user.service";
 import ObjectID from "bson-objectid";
 import i18n from "@/i18n";
 import rawTasks from "@/assets/mock/tasks.json";
@@ -12,7 +11,7 @@ export function createBoard() {
     let userId = store.state.user.user.identifier;
     let data = {
       name: "Board",
-      owner: userId,
+      ownerId: userId,
       labels: [
         {identifier: ObjectID.generate(), name: i18n.t('board.label_1'), tasks: generateExampleTasks()},
         {identifier: ObjectID.generate(), name: i18n.t('board.label_2'), tasks: generateExampleTasks()},
@@ -21,7 +20,13 @@ export function createBoard() {
     };
 
     axios.post(`${API_URL}/boards`, data, authorization())
-    .then(response => resolve(updateUserAndFetch(response.data.identifier)));
+    .then((response) => {
+      axios.get(response.headers.location, authorization())
+      .then(response => {
+        store.dispatch('user/fetchOne', {identifier: response.data.ownerId});
+        resolve(response)
+      })
+    });
   });
 }
 
@@ -40,13 +45,8 @@ export function fetch(payload) {
   })
 }
 
-export function updateUserAndFetch(identifier) {
-  return updateUserBoardIdentifier({boardIdentifier: identifier})
-  .then(() => fetch({identifier: identifier}))
-}
-
 export function update(board) {
-  return axios.patch(`${API_URL}/boards/${board.identifier}`, board, authorization());
+  return axios.put(`${API_URL}/boards/${board.identifier}`, board, authorization());
 }
 
 export function addTask(task, labelIndex, board) {
