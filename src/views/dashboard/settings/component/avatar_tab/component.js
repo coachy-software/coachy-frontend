@@ -7,7 +7,9 @@ import {getErrorMessage} from "@/utils/validation.utils";
 import i18n from "@/i18n";
 
 function updateUser(avatar) {
-  updateAccountDetails({avatar: avatar})
+  let user = store.state.user.user;
+
+  updateAccountDetails({username: user.username, email: user.email, displayName: user.displayName, avatar: avatar})
   .then(() => notification.success(i18n.t('avatar_tab.updated')));
 }
 
@@ -59,7 +61,7 @@ export default {
       formData.append('target', 'avatars');
 
       axios.post(`${API_URL}/uploads`, formData, config)
-      .then(response => updateUser(response.data.fileUrl))
+      .then(response => updateUser(response.headers.location))
       .catch(error => notification.error(getErrorMessage('avatar_tab', error)));
     },
     handleFileChange() {
