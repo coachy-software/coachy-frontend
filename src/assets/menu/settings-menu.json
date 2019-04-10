@@ -6,8 +6,13 @@
   },
   "avatar": {
     "name": "Avatar",
-    "icon": "fa fa-user-circle",
+    "icon": "fe fe-image",
     "link": "/dashboard/settings/avatar"
+  },
+  "login": {
+    "name": "Login",
+    "icon": "fa fa-user-circle",
+    "link": "/dashboard/settings/login"
   },
   "password": {
     "name": "Hasło",
