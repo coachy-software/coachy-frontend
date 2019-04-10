@@ -5,13 +5,21 @@ import {getErrorMessage} from "@/utils/validation.utils";
 
 export default {
   data: () => ({
-    email: null,
+    email: '',
+    username: '',
     displayName: null,
-    language: null
+    avatar: null,
+    language: 'pl'
   }),
   mounted() {
     this.$parent.currentTab = this.$parent.tabs.account.name;
-    this.language = this.$cookie.get('lang') || navigator.language.substring(0, 2) || 'en'
+
+    let user = this.$store.state.user.user;
+    this.language = this.$cookie.get('lang') || navigator.language.substring(0, 2) || 'en';
+    this.username = user.username;
+    this.email = user.email;
+    this.avatar = user.avatar;
+    this.displayName = user.displayName;
   },
   methods: {
     update() {
@@ -19,7 +27,7 @@ export default {
         this.$cookie.set('lang', this.language);
       }
 
-      updateAccountDetails({email: this.email, displayName: this.displayName})
+      updateAccountDetails({username: this.username, email: this.email, displayName: this.displayName, avatar: this.avatar})
       .then(() => notification.success(this.$t('account_tab.updated')))
       .catch(error => notification.error(getErrorMessage('account_tab', error)))
     }

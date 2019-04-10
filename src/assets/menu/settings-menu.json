@@ -8,5 +8,10 @@
     "name": "Avatar",
     "icon": "fa fa-user-circle",
     "link": "/dashboard/settings/avatar"
+  },
+  "password": {
+    "name": "Hasło",
+    "icon": "fe fe-lock",
+    "link": "/dashboard/settings/password"
   }
 }

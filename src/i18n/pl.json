@@ -43,7 +43,8 @@
     "name_E02": "Nazwa nie może być pusta",
     "name_required": "Nazwa jest wymagana",
     "charge_E01": "Nazwa podopiecznego nie może być pusta",
-    "charge_required": "Nazwa konta podopiecznego jest wymagana"
+    "charge_required": "Nazwa konta podopiecznego jest wymagana",
+    "Bad Request": "Nieprawidłowe zapytanie"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",
@@ -104,12 +105,16 @@
   "account_tab": {
     "updated": "Pomyślnie zaktualizowano",
     "card_title": "Edytuj konto",
+    "username": "Nazwa użytkownika",
+    "username_placeholder": "Nazwa użytkownika",
     "email": "Adres e-mail",
     "email_placeholder": "Email",
     "displayName": "Nazwa wyświetlania",
     "displayName_placeholder": "Nazwa wyświetlana",
     "language": "Język",
-    "update": "Zaktualizuj"
+    "update": "Zaktualizuj",
+    "username_updated": "Zaloguj się ponownie",
+    "409": "Ten adres email jest już zajęty"
   },
   "avatar_tab": {
     "updated": "Pomyślnie zaktualizowano",
