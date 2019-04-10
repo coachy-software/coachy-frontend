@@ -13,10 +13,6 @@
         notification.success(this.$t('logout.logged_out'));
         this.$router.push('/login');
       });
-
-      localStorage.removeItem('user');
-      localStorage.removeItem('schedules');
-      localStorage.removeItem('token');
     }
   }
 </script>

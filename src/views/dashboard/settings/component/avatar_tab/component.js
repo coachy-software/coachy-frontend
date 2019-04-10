@@ -24,9 +24,9 @@ export default {
   created() {
     let user = store.state.user.user;
 
+    this.$parent.currentTab = this.$parent.tabs.avatar.name;
     this.username = user.displayName || user.username;
     this.accountType = user.accountType;
-    this.$parent.currentTab = this.$parent.tabs.avatar.name;
   },
   computed: {
     isLoading() {

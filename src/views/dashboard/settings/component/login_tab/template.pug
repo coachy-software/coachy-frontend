@@ -1,0 +1,17 @@
+div
+  form(@submit.prevent="update")
+    .card-body
+      #dimmer.dimmer(:class="{'active': isLoading}")
+        .loader
+        .dimmer-content
+          h3.card-title {{$t('login_tab.card_title')}}
+          .alert.alert-warning(role='alert')
+            | #[i.fe.fe-bell.mr-2] {{$t('login_tab.notification')}}
+          .row
+            .col-sm-6.col-md-6
+              .form-group
+                label.form-label {{$t('login_tab.username')}}
+                input.form-control(:class="{'is-invalid': $v.username.$error}", type='text', :placeholder="$t('login_tab.username_placeholder')", v-model.trim="$v.username.$model")
+                .invalid-feedback(v-if="!$v.username.maxLength") {{$t('validation.username_maxLength')}}
+    .card-footer.text-right
+      button.btn.btn-primary.ml-2(type='submit', :disabled="this.$store.state.user.user.username === username") {{$t('login_tab.update')}}

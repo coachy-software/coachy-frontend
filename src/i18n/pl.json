@@ -105,8 +105,6 @@
   "account_tab": {
     "updated": "Pomyślnie zaktualizowano",
     "card_title": "Edytuj konto",
-    "username": "Nazwa użytkownika",
-    "username_placeholder": "Nazwa użytkownika",
     "email": "Adres e-mail",
     "email_placeholder": "Email",
     "displayName": "Nazwa wyświetlania",
@@ -130,6 +128,15 @@
     "preview": "Podgląd",
     "reset": "Zresetuj",
     "update": "Zaktualizuj"
+  },
+  "login_tab": {
+    "updated": "Pomyślnie zaktualizowano",
+    "card_title": "Zmień nazwę użytkownika",
+    "username": "Nazwa użytkownika",
+    "username_placeholder": "Nazwa użytkownika",
+    "update": "Zaktualizuj",
+    "notification": "Po zaktualizowaniu nazwy użytkownika zostaniesz wylogowany z serwisu, aby zapobiec problemom z uwierzytelnieniem",
+    "409": "Ta nazwa użytkownika jest już zajeta"
   },
   "dropdowns": {
     "mark_all": "Oznacz wszystkie jako przeczytane"
