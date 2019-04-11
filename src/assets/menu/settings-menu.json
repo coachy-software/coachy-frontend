@@ -18,5 +18,11 @@
     "name": "Hasło",
     "icon": "fe fe-lock",
     "link": "/dashboard/settings/password"
+  },
+  "delete": {
+    "name": "Usuń konto",
+    "icon": "fe fe-trash-2",
+    "link": "/dashboard/settings/delete_account",
+    "style": "color: red; font-weight: 600;"
   }
 }

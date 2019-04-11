@@ -97,7 +97,7 @@ function uploadImages(files) {
           multipartHeader()
       )
       .then(response => {
-        return response.data.fileUrl;
+        return response.headers.location;
       });
 
       exampleImages.push(uploadPromise);
