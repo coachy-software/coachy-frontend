@@ -61,3 +61,25 @@ export function updateAccountDetails(payload) {
     })
   })
 }
+
+export function changePassword(payload) {
+  return new Promise(((resolve, reject) => {
+    store.commit(SET_STATUS, LOADING);
+
+    let data = {
+      oldPassword: payload.oldPassword,
+      newPassword: payload.newPassword,
+      confirmNewPassword: payload.confirmNewPassword
+    };
+
+    axios.post(`${API_URL}/users/change-password`, data, authorization())
+    .then(response => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      resolve(response);
+    })
+    .catch(error => {
+      store.commit(SET_STATUS, NOT_LOADING);
+      reject(error);
+    })
+  }))
+}

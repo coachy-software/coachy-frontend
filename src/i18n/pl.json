@@ -43,8 +43,7 @@
     "name_E02": "Nazwa nie może być pusta",
     "name_required": "Nazwa jest wymagana",
     "charge_E01": "Nazwa podopiecznego nie może być pusta",
-    "charge_required": "Nazwa konta podopiecznego jest wymagana",
-    "Bad Request": "Nieprawidłowe zapytanie"
+    "charge_required": "Nazwa konta podopiecznego jest wymagana"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",
@@ -137,6 +136,16 @@
     "update": "Zaktualizuj",
     "notification": "Po zaktualizowaniu nazwy użytkownika zostaniesz wylogowany z serwisu, aby zapobiec problemom z uwierzytelnieniem",
     "409": "Ta nazwa użytkownika jest już zajeta"
+  },
+  "password_tab": {
+    "update": "Zaktualizuj",
+    "updated": "Pomyślnie zaktualizowano",
+    "card_title": "Zmień hasło",
+    "old_password": "Stare hasło",
+    "new_password": "Nowe hasło",
+    "confirm_new_password": "Potwierdź nowe hasło",
+    "400": "Błędne stare hasło",
+    "notification": "Po zaktualizowaniu hasła zostaniesz wylogowany z serwisu, aby zapobiec problemom z uwierzytelnieniem"
   },
   "dropdowns": {
     "mark_all": "Oznacz wszystkie jako przeczytane"

@@ -1,0 +1,30 @@
+div
+  form(@submit.prevent="update")
+    .card-body
+      #dimmer.dimmer(:class="{'active': isLoading}")
+        .loader
+        .dimmer-content
+          h3.card-title {{$t('password_tab.card_title')}}
+          .alert.alert-warning(role='alert')
+            | #[i.fe.fe-bell.mr-2] {{$t('password_tab.notification')}}
+          .row
+            .col-sm-4.col-md-4
+              .form-group
+                label.form-label {{$t('password_tab.old_password')}}
+                input.form-control(:class="{'is-invalid': $v.oldPassword.$error}", type='password', :placeholder="$t('password_tab.old_password')", v-model.trim="$v.oldPassword.$model")
+                .invalid-feedback(v-if="!$v.oldPassword.required") {{$t('validation.password_required')}}
+            .col-sm-4.col-md-4
+              .form-group
+                label.form-label {{$t('password_tab.new_password')}}
+                input.form-control(:class="{'is-invalid': $v.newPassword.$error}", type='password', :placeholder="$t('password_tab.new_password')", v-model.trim="$v.newPassword.$model")
+                .invalid-feedback(v-if="!$v.newPassword.required") {{$t('validation.password_required')}}
+                .invalid-feedback(v-if="!$v.newPassword.minLength") {{$t('validation.password_minLength')}}
+                .invalid-feedback(v-if="!$v.newPassword.maxLength") {{$t('validation.password_maxLength')}}
+                .invalid-feedback(v-if="!$v.newPassword.NO_SPACE") {{$t('validation.password_format')}}
+            .col-sm-4.col-md-4
+              .form-group
+                label.form-label {{$t('password_tab.confirm_new_password')}}
+                input.form-control(:class="{'is-invalid': $v.confirmNewPassword.$error}", type='password', :placeholder="$t('password_tab.confirm_new_password')", v-model.trim="$v.confirmNewPassword.$model")
+                .invalid-feedback(v-if="!$v.confirmNewPassword.sameAsNewPassword") {{$t('validation.confirm_password')}}
+    .card-footer.text-right
+      button.btn.btn-primary.ml-2(type='submit', :disabled="$v.$invalid") {{$t('password_tab.update')}}
