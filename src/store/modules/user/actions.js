@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_URL} from "@/utils/constants";
 import {SET_TOKEN, SET_USER} from "./index";
-import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
+import {LOADING, NOT_LOADING, SET_STATUS} from "@/store/modules/loader";
 import {authorization} from "../../../utils/headers";
 
 const login = ({commit}, payload) => {
@@ -68,6 +68,14 @@ const logout = ({commit}) => {
   commit(SET_TOKEN, undefined);
 };
 
+const remove = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`${API_URL}/users/${payload.identifier}`, authorization())
+    .then(response => resolve(response))
+    .catch(error => reject(error));
+  });
+};
+
 const update = ({commit}) => {
   return new Promise((resolve, reject) => {
     axios.get(`${API_URL}/users/me`, authorization())
@@ -125,5 +133,6 @@ export default {
   logout,
   update,
   searchUserByUsername,
-  fetchOne
+  fetchOne,
+  remove
 }

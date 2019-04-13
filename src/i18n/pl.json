@@ -126,6 +126,15 @@
     "400": "Błędne stare hasło",
     "notification": "Po zaktualizowaniu hasła zostaniesz wylogowany z serwisu, aby zapobiec problemom z uwierzytelnieniem"
   },
+  "delete_account_tab": {
+    "card_title": "Usuń konto",
+    "notification": "Czy na pewno chcesz usunąć swoje konto? Zostaniesz natychmiast wylogowany ze swojego konta i nie będziesz w stanie zalogować się ponownie.",
+    "deleted": "Konto zostało usunięte",
+    "notification-2": "Podaj swoją nazwę użytkownika aby kontynuować: ",
+    "close": "Zamknij",
+    "delete": "Usuń",
+    "confirmation": "Przepisz nazwę użytkownika"
+  },
   "dropdowns": {
     "mark_all": "Oznacz wszystkie jako przeczytane"
   },

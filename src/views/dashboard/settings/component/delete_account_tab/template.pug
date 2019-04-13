@@ -1,0 +1,20 @@
+div
+  form(@submit.prevent="update")
+    .card-body
+      h3.card-title {{$t('password_tab.card_title')}}
+      .alert.alert-danger(role='alert')
+        | #[i.fe.fe-bell.mr-2] {{$t('delete_account_tab.notification')}}
+      .row
+        .col-sm-5
+        .col-sm-2.btn.btn-danger.mt-5(@click="openModal") #[i.fe.fe-trash-2.mr-2] Usuń konto
+        .col-sm-5
+  sweet-modal(overlay-theme='dark', modal-theme='light', blocking, ref="deleteTab")
+    form(@submit.prevent="handleDelete")
+      .card-body
+        .form-group
+          .alert.alert-warning(role='alert')
+            | #[i.fe.fe-alert-triangle.mr-2] {{$t('delete_account_tab.notification-2')}} #[strong {{username}}]
+          input.form-control(type='text', :placeholder="this.$t('delete_account_tab.confirmation')", v-model="confirmation")
+      .card-footer
+        button.btn.btn-danger.float-right.ml-2(type="submit", :disabled="confirmation !== username") {{$t('delete_account_tab.delete')}}
+        button.btn.btn-primary.float-right(type='button', slot='button', @click="closeModal") {{$t('delete_account_tab.close')}}

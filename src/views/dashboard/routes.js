@@ -13,6 +13,7 @@ import ScheduleStatsView from '@/views/dashboard/schedule_stats/ScheduleStatsVie
 import BoardView from '@/views/dashboard/board/BoardView';
 import LoginTab from '@/views/dashboard/settings/component/login_tab/LoginTab';
 import PasswordTab from '@/views/dashboard/settings/component/password_tab/PasswordTab';
+import AccountDeleteTab from '@/views/dashboard/settings/component/delete_account_tab/DeleteAccountTab';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -23,7 +24,8 @@ export default [
           route('account', AccountTab, {alias: ['']}),
           route('avatar', AvatarTab),
           route('login', LoginTab),
-          route('password', PasswordTab)
+          route('password', PasswordTab),
+          route('delete_account', AccountDeleteTab)
         ]
       }),
       route('schedules', SchedulesView),
