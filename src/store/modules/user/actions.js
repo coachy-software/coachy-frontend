@@ -60,12 +60,15 @@ const register = ({commit}, payload) => {
 };
 
 const logout = ({commit}) => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("token");
-  localStorage.removeItem("schedules");
+  axios.get(`${API_URL}/users/logout`, {withCredentials: true})
+  .then(() => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("schedules");
 
-  commit(SET_USER, undefined);
-  commit(SET_TOKEN, undefined);
+    commit(SET_USER, undefined);
+    commit(SET_TOKEN, undefined);
+  })
 };
 
 const remove = ({commit}, payload) => {

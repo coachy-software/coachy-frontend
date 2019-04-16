@@ -14,6 +14,7 @@ import BoardView from '@/views/dashboard/board/BoardView';
 import LoginTab from '@/views/dashboard/settings/component/login_tab/LoginTab';
 import PasswordTab from '@/views/dashboard/settings/component/password_tab/PasswordTab';
 import AccountDeleteTab from '@/views/dashboard/settings/component/delete_account_tab/DeleteAccountTab';
+import MessagesView from '@/views/dashboard/messages/MessagesView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -33,7 +34,8 @@ export default [
       route('schedules/:id', ScheduleView, {props: (route) => ({viewAs: route.query.viewAs})}),
       route('schedules/:id/settings', ScheduleSettingsView),
       route('schedules/:id/stats', ScheduleStatsView),
-      route('board', BoardView)
+      route('board', BoardView),
+      route('messages', MessagesView)
     ]
   }, {requiresAuth: true})
 ]
