@@ -1,0 +1,25 @@
+#chat-dialog.main
+  #nav-tabContent.tab-content
+    #list-chat.babble.tab-pane.fade.active.show(role='tabpanel')
+      #chat1.chat
+        .top
+          .container
+            .col-md-12
+              .inside
+                .status.online
+                .data
+                  h5
+                    a(href='#') Bartłomiej Stefański
+                  span Active now
+                button.btn.back-to-mesg(title='Back')
+                  i.ti-arrow-right
+        #content.content
+          .container
+            .col-md-12
+              .date
+                hr
+                span Yesterday
+                hr
+              balloon(:sentByOwner="false", avatar="https://i.ytimg.com/an_webp/uvhgK1X7C3I/mqdefault_6s.webp?du=3000&sqp=CMyE_eUF&rs=AOn4CLB-2eb3FX5zh5z10eG6WX94elQAkw", username="lol", message="your mama", date="13:37")
+              balloon(:sentByOwner="true", avatar="https://i.ytimg.com/an_webp/uvhgK1X7C3I/mqdefault_6s.webp?du=3000&sqp=CMyE_eUF&rs=AOn4CLB-2eb3FX5zh5z10eG6WX94elQAkw", username="lol", message="dupa driven development", date="21:37")
+        typing_area

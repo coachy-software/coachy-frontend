@@ -1,0 +1,7 @@
+.message(:class="{'me': this.sentByOwner}")
+  img.avatar-md(:src='this.avatar', data-toggle='tooltip', data-placement='top', :title='this.username', alt='avatar')
+  .text-main
+    .text-group
+      .text(:class="{'me': this.sentByOwner}")
+        p {{this.message}}
+    span {{this.date}}
