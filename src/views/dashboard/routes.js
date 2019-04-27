@@ -38,7 +38,7 @@ export default [
       route('board', BoardView),
       route('chats', ChatsView, {
         children: [
-          route('chats/:username', ChatView)
+          route(':username', ChatView)
         ]
       }),
     ]

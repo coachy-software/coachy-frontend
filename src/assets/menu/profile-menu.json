@@ -8,7 +8,7 @@
     "name": "Wiadomości",
     "icon": "fe fe-send",
     "divider": true,
-    "link": "/dashboard/messages"
+    "link": "/dashboard/chats"
   },
   {
     "name": "FAQ",
