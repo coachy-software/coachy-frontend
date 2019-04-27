@@ -14,7 +14,8 @@ import BoardView from '@/views/dashboard/board/BoardView';
 import LoginTab from '@/views/dashboard/settings/component/login_tab/LoginTab';
 import PasswordTab from '@/views/dashboard/settings/component/password_tab/PasswordTab';
 import AccountDeleteTab from '@/views/dashboard/settings/component/delete_account_tab/DeleteAccountTab';
-import MessagesView from '@/views/dashboard/messages/MessagesView';
+import ChatsView from '@/views/dashboard/chats/ChatsView';
+import ChatView from '@/views/dashboard/chat/ChatView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -35,7 +36,11 @@ export default [
       route('schedules/:id/settings', ScheduleSettingsView),
       route('schedules/:id/stats', ScheduleStatsView),
       route('board', BoardView),
-      route('messages', MessagesView)
+      route('chats', ChatsView, {
+        children: [
+          route('chats/:username', ChatView)
+        ]
+      }),
     ]
   }, {requiresAuth: true})
 ]
