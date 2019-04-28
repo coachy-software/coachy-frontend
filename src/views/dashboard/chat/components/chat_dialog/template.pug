@@ -6,11 +6,12 @@
           .container
             .col-md-12
               .inside
-                .status.online
+                .status(:class="{'online': online, 'offline': !online}")
                 .data
                   h5
-                    a(href='#') Bartłomiej Stefański
-                  span Active now
+                    router-link(:to="'/profile/' + this.$route.params.id") {{this.username}}
+                  span(v-if="online") Active now
+                  span(v-else) Offline now
                 button.btn.back-to-mesg(title='Back')
                   i.ti-arrow-right
         #content.content

@@ -112,14 +112,12 @@ const searchUserByUsername = ({commit}, payload) => {
   });
 };
 
-const fetchOne = ({commit}, payload) => {
+const get = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
 
     axios.get(`${API_URL}/users/${payload.identifier}`, authorization())
     .then(response => {
-      localStorage.setItem("user", JSON.stringify(response.data));
-      commit(SET_USER, response.data);
       commit(SET_STATUS, NOT_LOADING, {root: true});
       resolve(response)
     })
@@ -136,6 +134,6 @@ export default {
   logout,
   update,
   searchUserByUsername,
-  fetchOne,
+  get,
   remove
 }
