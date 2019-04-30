@@ -6,5 +6,5 @@ export default {
   components: {
     balloon: Balloon,
     'typing_area': TypingArea
-  }
+  },
 }
