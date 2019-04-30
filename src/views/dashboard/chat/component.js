@@ -7,12 +7,10 @@ import Stomp from "stompjs";
 
 export default {
   data: () => ({
-    username: '',
-    id: '',
-    avatar: '',
     stompClient: null,
     sender: '',
     recipient: '',
+    messages: []
   }),
   components: {
     'chat-dialog': ChatDialog
@@ -22,9 +20,7 @@ export default {
 
     this.$store.dispatch('user/get', {identifier: identifier})
     .then(response => {
-      this.username = response.data.username;
-      this.id = response.data.identifier;
-      this.avatar = response.data.avatar;
+      this.recipient = response.data;
 
       axios.get(`${API_URL}/users/me`, {
         headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
@@ -34,12 +30,12 @@ export default {
         let socket = new SockJS("http://localhost:3000/ws");
         this.stompClient = Stomp.over(socket);
 
-        this.sender = ownDetails.data.username;
-        this.recipient = response.data.username;
+        this.sender = ownDetails.data;
 
+        // this.stompClient.debug = () => {};
         this.stompClient.connect({}, () => {
           this.stompClient.subscribe('/user/queue/private', msgOut => {
-            console.log("received a message: " + msgOut)
+            this.messages.push(JSON.parse(msgOut.body));
           });
         });
       })
@@ -53,11 +49,13 @@ export default {
   methods: {
     performSubmit(messageContent) {
       let stompClient = this.stompClient;
-      let sender = this.sender;
-      let recipient = this.recipient;
-      let message = JSON.stringify({from: sender, to: recipient, text: messageContent});
+      let senderUsername = this.sender.username;
+
+      let recipientUsername = this.recipient.username;
+      let message = JSON.stringify({from: senderUsername, to: recipientUsername, text: messageContent});
 
       stompClient.send(`/app/chat.message.private`, {}, message);
+      this.messages.push(JSON.parse(message));
     }
   }
 }

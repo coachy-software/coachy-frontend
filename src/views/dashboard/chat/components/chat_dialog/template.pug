@@ -9,7 +9,7 @@
                 .status(:class="{'online': online, 'offline': !online}")
                 .data
                   h5
-                    router-link(:to="'/profile/' + this.$route.params.id") {{this.username}}
+                    router-link(:to="'/profile/' + this.$route.params.id") {{recipient.username}}
                   span(v-if="online") Active now
                   span(v-else) Offline now
                 button.btn.back-to-mesg(title='Back')
@@ -21,6 +21,7 @@
                 hr
                 span Yesterday
                 hr
-              balloon(:sentByOwner="false", avatar="https://i.ytimg.com/an_webp/uvhgK1X7C3I/mqdefault_6s.webp?du=3000&sqp=CMyE_eUF&rs=AOn4CLB-2eb3FX5zh5z10eG6WX94elQAkw", username="lol", message="your mama", date="13:37")
-              balloon(:sentByOwner="true", avatar="https://i.ytimg.com/an_webp/uvhgK1X7C3I/mqdefault_6s.webp?du=3000&sqp=CMyE_eUF&rs=AOn4CLB-2eb3FX5zh5z10eG6WX94elQAkw", username="lol", message="dupa driven development", date="21:37")
+              template(v-for="message in messages")
+                balloon(v-if="message.from === sender.username", :sentByOwner="true", :avatar="sender.avatar", :username="message.from", :message="message.text", :date="message.time")
+                balloon(v-else-if="message.from === recipient.username", :sentByOwner="false", :avatar="recipient.avatar", :username="message.from", :message="message.text", :date="message.time")
         typing_area

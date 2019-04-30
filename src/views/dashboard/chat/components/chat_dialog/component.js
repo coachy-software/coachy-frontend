@@ -2,9 +2,9 @@ import Balloon from '../balloon/Balloon'
 import TypingArea from "../typing_area/TypingArea"
 
 export default {
-  props: ['username', 'online'],
+  props: ['recipient', 'sender', 'online', 'messages'],
   components: {
     balloon: Balloon,
     'typing_area': TypingArea
-  },
+  }
 }
