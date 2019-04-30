@@ -29,7 +29,6 @@ export default {
       .then((ownDetails) => {
         let socket = new SockJS("http://localhost:3000/ws");
         this.stompClient = Stomp.over(socket);
-
         this.sender = ownDetails.data;
 
         // this.stompClient.debug = () => {};

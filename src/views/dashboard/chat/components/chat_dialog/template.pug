@@ -22,6 +22,6 @@
                 span Yesterday
                 hr
               template(v-for="message in messages")
-                balloon(v-if="message.from === sender.username && message.to !== sender.username", :sentByOwner="true", :avatar="sender.avatar", :username="message.from", :message="message.text", :date="message.time")
-                balloon(v-else-if="message.from === recipient.username && message.to !== sender.username", :sentByOwner="false", :avatar="recipient.avatar", :username="message.from", :message="message.text", :date="message.time")
+                balloon(v-if="message.from === sender.username && message.to !== sender.username", :sentByOwner="true", :user="sender", :message="message.text", :date="message.time")
+                balloon(v-else-if="message.from === recipient.username && message.to !== sender.username", :sentByOwner="false", :user="recipient", :message="message.text", :date="message.time")
         typing_area

@@ -1,5 +1,6 @@
 .message(:class="{'me': this.sentByOwner}")
-  img.avatar-md(:src='this.avatar', data-toggle='tooltip', data-placement='top', :title='this.username', alt='avatar')
+  img.avatar-md(v-if="this.user.avatar !== '' && this.user.avatar !== null", :src='this.user.avatar', data-toggle='tooltip', data-placement='top', :title='this.user.username', alt='avatar')
+  span.avatar-custom.avatar-md.avatar-blue.text-md-center(v-else) {{this.getInitials(this.user)}}
   .text-main
     .text-group
       .text(:class="{'me': this.sentByOwner}")
