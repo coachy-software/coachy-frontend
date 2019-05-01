@@ -1,11 +1,11 @@
 #discussions.tab-pane.fade.in.active.show
   .search
     form.form-inline.position-relative
-      input#conversations.form-control(type='search', placeholder='Search for conversations...')
+      input#conversations.form-control(type='search', :placeholder="$t('chat.search_conversations')")
       button.btn.btn-link.loop(type='button')
         i.fa.fa-search
   #scroller.discussions
-    h1 Chats
+    h1 {{$t('chat.chats')}}
     #chats.list-group(role='tablist')
       chat-sidebar
       chat-sidebar

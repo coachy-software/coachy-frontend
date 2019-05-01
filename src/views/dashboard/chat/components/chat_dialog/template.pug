@@ -10,8 +10,8 @@
                 .data
                   h5
                     router-link(:to="'/profile/' + this.$route.params.id") {{recipient.username}}
-                  span(v-if="online") Active now
-                  span(v-else) Offline now
+                  span(v-if="online") {{$t('chat.online')}}
+                  span(v-else) {{$t('chat.offline')}}
                 button.btn.back-to-mesg(title='Back')
                   i.ti-arrow-right
         #content.content
@@ -19,7 +19,7 @@
             .col-md-12
               .date
                 hr
-                span Yesterday
+                span {{$t('chat.beginning')}}
                 hr
               template(v-for="message in messages")
                 balloon(v-if="message.from === sender.username && message.to !== sender.username", :sentByOwner="true", :user="sender", :message="message.text", :date="message.time")

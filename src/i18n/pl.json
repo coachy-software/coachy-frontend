@@ -240,5 +240,13 @@
     "label_1": "Do zrobienia",
     "label_2": "W trakcie",
     "label_3": "Ukończone"
+  },
+  "chat": {
+    "beginning": "Początek",
+    "online": "Online teraz",
+    "offline": "Offline teraz",
+    "start_typing": "Zacznij pisać, aby otrzymać wiadomość...",
+    "search_conversations": "Szukaj konwersacji...",
+    "chats": "Rozmowy"
   }
 }
