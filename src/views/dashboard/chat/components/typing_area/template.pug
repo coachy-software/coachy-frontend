@@ -4,27 +4,26 @@
       form.text-area(@submit.prevent="performSubmit")
         textarea.form-control(:placeholder="$t('chat.start_typing')", rows="1", v-model="message", @keydown.enter.exact.prevent, @keyup.enter.exact="performSubmit")
         .add-smiles
-          i.fa.fa-smile-o(title='add icon', style="color: #2b2b2b")
-        .smiles-bunch
-          i.em.em---1
-          i.em.em-smiley
-          i.em.em-anguished
-          i.em.em-laughing
-          i.em.em-angry
-          i.em.em-astonished
-          i.em.em-blush
-          i.em.em-disappointed
-          i.em.em-worried
-          i.em.em-kissing_heart
-          i.em.em-rage
-          i.em.em-stuck_out_tongue
-          i.em.em-expressionless
-          i.em.em-bikini
-          i.em.em-christmas_tree
-          i.em.em-facepunch
-          i.em.em-pushpin
-          i.em.em-tada
-          i.em.em-us
-          i.em.em-rose
+          i.fa.fa-smile-o.fake-link(style="color: #2b2b2b", @click="openEmoticonsDialog")
+        .smiles-bunch#emoticons
+          i.em.em---1(@click="addEmoticon('👍')")
+          i.em.em-smiley(@click="addEmoticon('😀')")
+          i.em.em-anguished(@click="addEmoticon('😧')")
+          i.em.em-laughing(@click="addEmoticon('😂')")
+          i.em.em-angry(@click="addEmoticon('😠')")
+          i.em.em-astonished(@click="addEmoticon('😲')")
+          i.em.em-blush(@click="addEmoticon('😳')")
+          i.em.em-disappointed(@click="addEmoticon('😞')")
+          i.em.em-worried(@click="addEmoticon('😟')")
+          i.em.em-kissing_heart(@click="addEmoticon('😘')")
+          i.em.em-rage(@click="addEmoticon('😡')")
+          i.em.em-stuck_out_tongue(@click="addEmoticon('😜')")
+          i.em.em-expressionless(@click="addEmoticon('😑')")
+          i.em.em-bikini(@click="addEmoticon('👙')")
+          i.em.em-christmas_tree(@click="addEmoticon('🎄')")
+          i.em.em-facepunch(@click="addEmoticon('👊')")
+          i.em.em-pushpin(@click="addEmoticon('📌')")
+          i.em.em-tada(@click="addEmoticon('🎉')")
+          i.em.em-rose(@click="addEmoticon('🌹')")
         button.btn.send(type='submit')
           i.fe.fe-arrow-up-circle
