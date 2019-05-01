@@ -7,7 +7,7 @@ export default {
       this.$parent.$parent.performSubmit(this.message);
       this.message = '';
     },
-    openEmoticonsDialog() {
+    openEmoticonsModal() {
       document.getElementById('emoticons').classList.toggle('active')
     },
     addEmoticon(emoticon) {

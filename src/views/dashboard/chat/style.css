@@ -444,6 +444,7 @@ p {
   width: 100%;
   position: relative;
 }
+
 .main .chat {
   max-height: calc(100vh - 118px - 30px);
   background: #f5f7fb;
