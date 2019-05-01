@@ -12,8 +12,8 @@
                     router-link(:to="'/profile/' + this.$route.params.id") {{recipient.username}}
                   span(v-if="online") {{$t('chat.online')}}
                   span(v-else) {{$t('chat.offline')}}
-                button.btn.back-to-mesg(title='Back')
-                  i.ti-arrow-right
+                button.btn.back-to-mesg(title='Back', @click="backToChats")
+                  i.fe.fe-arrow-right
         #content.content
           .container
             .col-md-12

@@ -6,5 +6,10 @@ export default {
   components: {
     balloon: Balloon,
     'typing_area': TypingArea
+  },
+  methods: {
+    backToChats() {
+      document.getElementById('chat-dialog').style.right = '-100%';
+    }
   }
 }
