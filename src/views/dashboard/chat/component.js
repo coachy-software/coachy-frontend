@@ -47,6 +47,10 @@ export default {
   },
   methods: {
     performSubmit(messageContent) {
+      if (messageContent.length === 0) {
+        return;
+      }
+
       let stompClient = this.stompClient;
       let senderUsername = this.sender.username;
 
