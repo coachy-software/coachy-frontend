@@ -1,0 +1,8 @@
+span#list-chat-list.filterDiscussions.all.unread.single.fake-link(role='tab', @click="openConversation(user.identifier)")
+  img.avatar-md(:src="user.avatar", data-placement='top', alt='avatar')
+  .status.online
+  .data
+    h5 {{user.displayName || user.username}}
+    .new.bg-red.ml-2(v-if="ping")
+      span {{newMessagesCount}}
+    p {{lastMessage}}

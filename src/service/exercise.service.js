@@ -1,8 +1,8 @@
 import axios from "axios";
 import ObjectID from "bson-objectid";
-import {API_URL} from "@/utils/constants";
-import {obtainImage} from "@/utils/file.utils";
-import {multipartHeader} from "@/utils/headers";
+import {API_URL} from "@/util/constants";
+import {obtainImage} from "@/util/file.utils";
+import {multipartHeader} from "@/util/headers";
 import store from "@/store";
 
 export function addExercise(dayIndex, exerciseInstance, schedule) {

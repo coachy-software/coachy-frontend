@@ -1,9 +1,9 @@
 import axios from "axios";
-import {API_URL} from "@/utils/constants";
+import {API_URL} from "@/util/constants";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {SET_SCHEDULES} from "./index";
 import i18n from "@/i18n"
-import {authorization} from "@/utils/headers";
+import {authorization} from "@/util/headers";
 
 const create = ({commit}, payload) => {
   return new Promise((resolve, reject) => {

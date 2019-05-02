@@ -1,8 +1,8 @@
 import axios from "axios";
-import {API_URL} from "@/utils/constants";
+import {API_URL} from "@/util/constants";
 import {SET_TOKEN, SET_USER} from "./index";
 import {LOADING, NOT_LOADING, SET_STATUS} from "@/store/modules/loader";
-import {authorization} from "../../../utils/headers";
+import {authorization} from "@/util/headers";
 
 const login = ({commit}, payload) => {
   return new Promise((resolve, reject) => {

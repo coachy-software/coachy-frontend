@@ -1,6 +1,6 @@
 import axios from "axios";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
-import {API_URL} from "@/utils/constants";
+import {API_URL} from "@/util/constants";
 import store from '@/store'
 
 export function fetchAll() {

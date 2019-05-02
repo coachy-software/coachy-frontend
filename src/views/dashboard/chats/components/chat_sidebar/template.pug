@@ -1,8 +1,0 @@
-a#list-chat-list.filterDiscussions.all.unread.single(role='tab')
-  img.avatar-md(:src="avatar", data-placement='top', alt='avatar')
-  .status.online
-  .data
-    h5 {{displayName || username}}
-    .new.bg-red.ml-2(v-if="ping")
-      span {{newMessagesCount}}
-    p {{lastMessage}}

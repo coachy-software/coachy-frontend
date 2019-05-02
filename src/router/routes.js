@@ -1,5 +1,5 @@
-import dashboardRoutes from '@/views/dashboard/routes';
-import landingRoutes from '@/views/landing/routes';
-import loginRoutes from '@/views/login/routes';
+import dashboardRoutes from '@/view/dashboard/routes';
+import landingRoutes from '@/view/landing/routes';
+import loginRoutes from '@/view/login/routes';
 
 export default dashboardRoutes.concat(landingRoutes, loginRoutes);
