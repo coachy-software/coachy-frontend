@@ -27,6 +27,27 @@ export default {
     new PerfectScrollbar(containers[0], {wheelSpeed: 0.5});
   },
   methods: {
+    playNotificationSound() {
+      let audio = new Audio(chatNotificationSound);
+      audio.volume = 0.3;
+      audio.play();
+    },
+    titleAnimationInterval(baseTitle) {
+      let currentState = false;
+      let newTitle = `Masz nową wiadomość od ${baseTitle}`;
+
+      return setInterval(() => {
+        document.title = currentState ? baseTitle : newTitle;
+        currentState = !currentState;
+      }, 2000);
+    },
+    onFocus(baseTitle, titleAnimation) {
+      if (titleAnimation) {
+        clearInterval(titleAnimation);
+      }
+
+      document.title = baseTitle;
+    },
     loadChat() {
       this.messages = [];
 
@@ -45,33 +66,18 @@ export default {
 
           StompClient.connect({}, () => {
             StompClient.subscribe('/user/queue/private', msgOut => {
-              let currentState = false;
               let titleAnimation;
-
               this.messages.push(JSON.parse(msgOut.body));
 
               if (!document.hasFocus()) {
-                let audio = new Audio(chatNotificationSound);
-                audio.volume = 0.3;
-                audio.play();
-
-                let newTitle = `Masz nową wiadomość od ${baseTitle}`;
-                titleAnimation = setInterval(() => {
-                  document.title = currentState ? baseTitle : newTitle;
-                  currentState = !currentState;
-                }, 2000);
+                this.playNotificationSound();
+                titleAnimation = this.titleAnimationInterval(baseTitle);
               }
 
-              window.onfocus = () => {
-                if (titleAnimation) {
-                  clearInterval(titleAnimation);
-                }
-
-                document.title = baseTitle;
-              }
-
+              window.onfocus = this.onFocus(baseTitle, titleAnimation);
             });
           });
+
         })
       })
       .catch(() => this.$router.back())
