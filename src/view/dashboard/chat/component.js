@@ -3,6 +3,7 @@ import ChatDialog from "./components/chat_dialog/ChatDialog"
 import {API_URL} from "@/util/constants";
 import axios from "axios"
 import {StompClient} from "@/service/ws.js";
+import chatNotificationSound from "@/assets/sounds/chat.mp3";
 
 export default {
   data: () => ({
@@ -32,6 +33,8 @@ export default {
       this.$store.dispatch('user/get', {identifier: this.$route.params.id})
       .then(response => {
         this.recipient = response.data;
+        let baseTitle = this.recipient.displayName || this.recipient.username;
+        document.title = baseTitle;
 
         axios.get(`${API_URL}/users/me`, {
           headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
@@ -39,10 +42,34 @@ export default {
         })
         .then((ownDetails) => {
           this.sender = ownDetails.data;
+
           StompClient.connect({}, () => {
             StompClient.subscribe('/user/queue/private', msgOut => {
-              console.log(JSON.parse(msgOut.body));
+              let currentState = false;
+              let titleAnimation;
+
               this.messages.push(JSON.parse(msgOut.body));
+
+              if (!document.hasFocus()) {
+                let audio = new Audio(chatNotificationSound);
+                audio.volume = 0.3;
+                audio.play();
+
+                let newTitle = `Masz nową wiadomość od ${baseTitle}`;
+                titleAnimation = setInterval(() => {
+                  document.title = currentState ? baseTitle : newTitle;
+                  currentState = !currentState;
+                }, 2000);
+              }
+
+              window.onfocus = () => {
+                if (titleAnimation) {
+                  clearInterval(titleAnimation);
+                }
+
+                document.title = baseTitle;
+              }
+
             });
           });
         })

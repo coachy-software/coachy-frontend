@@ -40,7 +40,7 @@ export default [
         children: [
           route(':id', ChatView)
         ]
-      }),
+      }, {title: 'Wiadomości'}),
     ]
   }, {requiresAuth: true})
 ]

@@ -10,6 +10,12 @@ const router = new VueRouter({
   routes: routes
 });
 
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    document.title = to.meta.title || 'Coachy';
+  })
+});
+
 router.beforeEach((to, from, next) => {
   let requiresAuth = to.matched.some(value => value.meta.requiresAuth);
   let isLoggedIn = store.getters['user/isLoggedIn'];
