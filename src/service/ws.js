@@ -7,8 +7,6 @@ let WS;
 let StompClient;
 let isConnected = false;
 
-// StompClient.debug = () => {};
-
 export function subscribe(endpoint, callback) {
   if (isConnected) {
     StompClient.subscribe(endpoint, callback);
@@ -29,7 +27,8 @@ function connect(callback) {
   .then(() => {
     WS = new SockJS("http://localhost:3000/ws");
     StompClient = Stomp.over(WS);
-    StompClient.connect({}, () => callback(), () => isConnected = false)
+    StompClient.debug = () => {};
+    StompClient.connect({}, () => callback(), () => isConnected = false);
   });
 }
 
