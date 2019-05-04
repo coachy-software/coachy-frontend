@@ -10,6 +10,9 @@ export default {
   components: {
     'chat-sidebar': ChatSidebar
   },
+  mounted() {
+    // this.$store.dispatch('chat/init', {identifier: JSON.parse(localStorage.getItem('user')).identifier})
+  },
   methods: {
     changed() {
       this.$store.dispatch('user/searchUserByUsername', {username: this.searchQuery})

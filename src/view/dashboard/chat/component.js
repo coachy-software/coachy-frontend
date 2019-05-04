@@ -4,9 +4,11 @@ import {API_URL} from "@/util/constants";
 import axios from "axios"
 import {StompClient, subscribe} from "@/service/ws.js";
 import chatNotificationSound from "@/assets/sounds/chat.mp3";
+import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
+    identifier: ObjectID.generate(),
     stompClient: null,
     sender: '',
     recipient: '',
@@ -73,8 +75,28 @@ export default {
       let message = JSON.stringify({from: senderUsername, to: recipientUsername, text: messageContent});
 
       StompClient.send(`/app/chat.message.private`, {}, message);
+
+      this.addDiscussion(this.identifier, this.recipient, messageContent);
       this.messages.push(JSON.parse(message));
+
       this.scrollToBottom();
+      this.editDiscussion(this.identifier, this.recipient, messageContent);
+    },
+    addDiscussion(id, from, lastMessage) {
+      if (this.messages.length === 0) {
+        this.$store.dispatch('chat/add', {
+          identifier: id,
+          from: from,
+          lastMessage: lastMessage
+        });
+      }
+    },
+    editDiscussion(id, from, lastMessage) {
+      this.$store.dispatch('chat/update', {
+        identifier: id,
+        from: from,
+        lastMessage: lastMessage
+      });
     }
   }
 }

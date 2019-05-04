@@ -9,5 +9,5 @@
     #chats.list-group(role='tablist')
       template(v-if="searchQuery.length !== 0", v-for="suggestion in suggestions")
         chat-sidebar(:ping="false", :user="suggestion", lastMessage="")
-      template(v-else, v-for="conversation in conversations")
-        chat-sidebar(:ping="false", :user="conversation", lastMessage="Ostatnia wiadomość")
+      template(v-else, v-for="conversation in $store.state.chat.discussions")
+        chat-sidebar(:ping="false", :user="conversation.from", :lastMessage="conversation.lastMessage")
