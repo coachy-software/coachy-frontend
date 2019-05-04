@@ -3,12 +3,11 @@ import Stomp from "stompjs";
 import axios from "axios";
 import {API_URL} from "@/util/constants";
 
-const WS = new SockJS("http://localhost:3000/ws");
-const StompClient = Stomp.over(WS);
+let WS;
+let StompClient;
 let isConnected = false;
 
 // StompClient.debug = () => {};
-connect(() => isConnected = true);
 
 export function subscribe(endpoint, callback) {
   if (isConnected) {
@@ -27,7 +26,11 @@ function connect(callback) {
     headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
     withCredentials: true
   })
-  .then(() => StompClient.connect({}, () => callback(), () => isConnected = false));
+  .then(() => {
+    WS = new SockJS("http://localhost:3000/ws");
+    StompClient = Stomp.over(WS);
+    StompClient.connect({}, () => callback(), () => isConnected = false)
+  });
 }
 
 export {WS, StompClient};

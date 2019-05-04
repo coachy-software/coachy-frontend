@@ -15,6 +15,7 @@ export default {
       .then(() => {
         let location = this.$route.query.redirect || '/dashboard';
         this.$router.push(location);
+
         this.initData();
         notification.success(this.$t('login.logged_in'));
       })
