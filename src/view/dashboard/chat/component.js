@@ -32,6 +32,10 @@ export default {
       audio.volume = 0.3;
       audio.play();
     },
+    scrollToBottom() {
+      let element = document.querySelector('#content');
+      element.scrollTop = element.scrollHeight - 100;
+    },
     loadChat() {
       this.messages = [];
 
@@ -49,6 +53,7 @@ export default {
 
           subscribe('/user/queue/private', msgOut => {
             this.messages.push(JSON.parse(msgOut.body));
+            this.scrollToBottom();
 
             if (!document.hasFocus()) {
               this.playNotificationSound();
@@ -69,6 +74,7 @@ export default {
 
       StompClient.send(`/app/chat.message.private`, {}, message);
       this.messages.push(JSON.parse(message));
+      this.scrollToBottom();
     }
   }
 }
