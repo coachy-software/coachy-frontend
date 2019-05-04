@@ -2,7 +2,7 @@ import PerfectScrollbar from "perfect-scrollbar/dist/perfect-scrollbar.min";
 import ChatDialog from "./components/chat_dialog/ChatDialog"
 import {API_URL} from "@/util/constants";
 import axios from "axios"
-import {StompClient} from "@/service/ws.js";
+import {StompClient, subscribe} from "@/service/ws.js";
 import chatNotificationSound from "@/assets/sounds/chat.mp3";
 
 export default {
@@ -36,7 +36,7 @@ export default {
       let currentState = false;
       let newTitle = `Masz nową wiadomość od ${baseTitle}`;
 
-      return setInterval(() => {
+      setInterval(() => {
         document.title = currentState ? baseTitle : newTitle;
         currentState = !currentState;
       }, 2000);
@@ -63,20 +63,18 @@ export default {
         })
         .then((ownDetails) => {
           this.sender = ownDetails.data;
+          let titleAnimation;
 
-          StompClient.connect({}, () => {
-            StompClient.subscribe('/user/queue/private', msgOut => {
-              let titleAnimation;
-              this.messages.push(JSON.parse(msgOut.body));
+          subscribe('/user/queue/private', msgOut => {
+            this.messages.push(JSON.parse(msgOut.body));
 
-              if (!document.hasFocus()) {
-                this.playNotificationSound();
-                titleAnimation = this.titleAnimationInterval(baseTitle);
-              }
-
-              window.onfocus = this.onFocus(baseTitle, titleAnimation);
-            });
+            if (!document.hasFocus()) {
+              this.playNotificationSound();
+              titleAnimation = this.titleAnimationInterval(baseTitle);
+            }
           });
+
+          window.onfocus = this.onFocus(baseTitle, titleAnimation);
 
         })
       })
