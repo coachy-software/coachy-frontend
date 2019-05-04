@@ -32,30 +32,13 @@ export default {
       audio.volume = 0.3;
       audio.play();
     },
-    titleAnimationInterval(baseTitle) {
-      let currentState = false;
-      let newTitle = `Masz nową wiadomość od ${baseTitle}`;
-
-      setInterval(() => {
-        document.title = currentState ? baseTitle : newTitle;
-        currentState = !currentState;
-      }, 2000);
-    },
-    onFocus(baseTitle, titleAnimation) {
-      if (titleAnimation) {
-        clearInterval(titleAnimation);
-      }
-
-      document.title = baseTitle;
-    },
     loadChat() {
       this.messages = [];
 
       this.$store.dispatch('user/get', {identifier: this.$route.params.id})
       .then(response => {
         this.recipient = response.data;
-        let baseTitle = this.recipient.displayName || this.recipient.username;
-        document.title = baseTitle;
+        document.title = this.recipient.displayName || this.recipient.username;
 
         axios.get(`${API_URL}/users/me`, {
           headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
@@ -63,19 +46,14 @@ export default {
         })
         .then((ownDetails) => {
           this.sender = ownDetails.data;
-          let titleAnimation;
 
           subscribe('/user/queue/private', msgOut => {
             this.messages.push(JSON.parse(msgOut.body));
 
             if (!document.hasFocus()) {
               this.playNotificationSound();
-              titleAnimation = this.titleAnimationInterval(baseTitle);
             }
           });
-
-          window.onfocus = this.onFocus(baseTitle, titleAnimation);
-
         })
       })
       .catch(() => this.$router.back())
