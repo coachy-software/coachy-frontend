@@ -8,39 +8,26 @@ const init = ({commit}, payload) => {
   axios.get(`${API_URL}/conversations/${payload.identifier}?size=10`, authorization())
   .then(response => {
     let usersIds = new Set();
-    let conversations = response.data;
-    let promises = [];
+    let rawConversations = response.data;
+    let conversationPromises = [];
 
     new Promise((resolve) => {
-      let clientUsername = JSON.parse(localStorage.getItem('user')).username;
-      let targetUsername;
-
-      conversations.forEach(conversation => {
-        if (clientUsername !== conversation.senderName) {
-          targetUsername = conversation.senderName;
-        } else if (clientUsername !== conversation.recipientName) {
-          targetUsername = conversation.recipientName;
-        } else {
-          targetUsername = clientUsername;
-        }
-
-        let userPromise = searchUserByUsername({username: targetUsername}).then(result => {
-          conversation.user = result.data[0];
+      rawConversations.forEach(conversation => {
+        let targetUsername = obtainTargetUsername(conversation);
+        let userPromise = searchUserByUsername({username: targetUsername}).then(response => {
+          conversation.user = response.data[0];
 
           if (!usersIds.has(conversation.user.identifier)) {
-            usersIds.add(result.data[0].identifier);
+            usersIds.add(response.data[0].identifier);
             return conversation;
           }
         });
 
-        promises.push(userPromise);
+        conversationPromises.push(userPromise);
       });
 
-      return resolve(Promise.all(promises));
-    }).then(newConversations => {
-      commit(SET_DISCUSSIONS, newConversations.filter(conversation => conversation !== undefined && usersIds.has(conversation.user.identifier)));
-    });
-
+      return resolve(Promise.all(conversationPromises));
+    }).then(conversations => commit(SET_DISCUSSIONS, conversations.filter(conversation => conversation !== undefined)));
   });
 };
 
@@ -61,6 +48,21 @@ const update = ({commit, state}, payload) => {
 
   commit(SET_DISCUSSIONS, discussions);
 };
+
+function obtainTargetUsername(conversation) {
+  let clientUsername = JSON.parse(localStorage.getItem('user')).username;
+  let targetUsername;
+
+  if (clientUsername !== conversation.senderName) {
+    targetUsername = conversation.senderName;
+  } else if (clientUsername !== conversation.recipientName) {
+    targetUsername = conversation.recipientName;
+  } else {
+    targetUsername = clientUsername;
+  }
+
+  return targetUsername;
+}
 
 export default {
   init,
