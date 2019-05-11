@@ -96,22 +96,6 @@ const update = ({commit}) => {
   });
 };
 
-const searchUserByUsername = ({commit}, payload) => {
-  return new Promise((resolve, reject) => {
-    commit(SET_STATUS, LOADING, {root: true});
-
-    axios.get(`${API_URL}/users?size=8&username=${payload.username}`)
-    .then(response => {
-      commit(SET_STATUS, NOT_LOADING, {root: true});
-      resolve(response)
-    })
-    .catch(error => {
-      commit(SET_STATUS, NOT_LOADING, {root: true});
-      reject(error)
-    });
-  });
-};
-
 const get = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     commit(SET_STATUS, LOADING, {root: true});
@@ -133,7 +117,6 @@ export default {
   register,
   logout,
   update,
-  searchUserByUsername,
   get,
   remove
 }

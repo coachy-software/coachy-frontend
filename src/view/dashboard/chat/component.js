@@ -8,7 +8,7 @@ import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
-    identifier: ObjectID.generate(),
+    identifier: '',
     stompClient: null,
     sender: '',
     recipient: '',
@@ -39,6 +39,7 @@ export default {
       element.scrollTop = element.scrollHeight - 100;
     },
     loadChat() {
+      this.identifier = ObjectID.generate();
       this.messages = [];
 
       this.$store.dispatch('user/get', {identifier: this.$route.params.id})
@@ -54,7 +55,10 @@ export default {
           this.sender = ownDetails.data;
 
           subscribe('/user/queue/private', msgOut => {
-            this.messages.push(JSON.parse(msgOut.body));
+            let message = JSON.parse(msgOut.body);
+
+            this.addDiscussion(this.identifier, message.from, message.body);
+            this.messages.push(message);
             this.scrollToBottom();
 
             if (!document.hasFocus()) {
@@ -72,30 +76,35 @@ export default {
 
       let senderUsername = this.sender.username;
       let recipientUsername = this.recipient.username;
-      let message = JSON.stringify({from: senderUsername, to: recipientUsername, text: messageContent});
+
+      let message = JSON.stringify({from: senderUsername, to: recipientUsername, body: messageContent, date: new Date().toISOString()});
 
       StompClient.send(`/app/chat.message.private`, {}, message);
 
-      this.addDiscussion(this.identifier, this.recipient, messageContent);
+      this.addDiscussion(this.identifier, senderUsername, recipientUsername, messageContent);
       this.messages.push(JSON.parse(message));
 
       this.scrollToBottom();
-      this.editDiscussion(this.identifier, this.recipient, messageContent);
     },
-    addDiscussion(id, from, lastMessage) {
+    addDiscussion(id, senderName, recipientName, lastMessageId, lastMessageText, lastMessageDate) {
       if (this.messages.length === 0) {
         this.$store.dispatch('chat/add', {
           identifier: id,
-          from: from,
-          lastMessage: lastMessage
+          senderName: senderName,
+          recipientName: recipientName,
+          lastMessageId: lastMessageId,
+          lastMessageText: lastMessageText,
+          lastMessageDate: lastMessageDate
         });
+
+        return;
       }
-    },
-    editDiscussion(id, from, lastMessage) {
+
       this.$store.dispatch('chat/update', {
         identifier: id,
-        from: from,
-        lastMessage: lastMessage
+        lastMessageId: lastMessageId,
+        lastMessageText: lastMessageText,
+        lastMessageDate: lastMessageDate
       });
     }
   }

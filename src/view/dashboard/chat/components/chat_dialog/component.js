@@ -1,5 +1,6 @@
 import Balloon from '../balloon/Balloon'
 import TypingArea from "../typing_area/TypingArea"
+import moment from "moment";
 
 export default {
   props: ['recipient', 'sender', 'online', 'messages'],
@@ -10,6 +11,11 @@ export default {
   methods: {
     backToChats() {
       document.getElementById('chat-dialog').style.right = '-100%';
+    }
+  },
+  filters: {
+    moment: (date) => {
+      return moment(date).format('YYYY-MM-DD [|] HH:ss')
     }
   }
 }

@@ -5,4 +5,4 @@ span#list-chat-list.filterDiscussions.all.unread.single.fake-link(role='tab', @c
     h5 {{user.displayName || user.username}}
     .new.bg-red.ml-2(v-if="ping")
       span {{newMessagesCount}}
-    p {{lastMessage}}
+    p {{lastMessageText}}
