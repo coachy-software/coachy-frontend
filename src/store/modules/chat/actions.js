@@ -31,22 +31,11 @@ const init = ({commit}, payload) => {
   });
 };
 
-const add = ({commit, state}, payload) => {
-  let discussions = state.discussions;
+const update = ({commit, state}, payload) => {
+  let discussions = state.discussions.filter(discussion => discussion.user.identifier !== payload.user.identifier);
   discussions.push(payload);
 
-  commit(SET_DISCUSSIONS, discussions);
-};
-
-const update = ({commit, state}, payload) => {
-  let discussions = state.discussions.filter(discussion => discussion.identifier === payload.identifier)
-  .map(discussion => {
-    discussion.lastMessageText = payload.lastMessageText;
-    discussion.lastMessageId = payload.lastMessageId;
-    discussion.lastMessageDate = payload.lastMessageDate;
-  });
-
-  commit(SET_DISCUSSIONS, discussions);
+  commit(SET_DISCUSSIONS, discussions.reverse());
 };
 
 function obtainTargetUsername(conversation) {
@@ -66,6 +55,5 @@ function obtainTargetUsername(conversation) {
 
 export default {
   init,
-  add,
   update
 }

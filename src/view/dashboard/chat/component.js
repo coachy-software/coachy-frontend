@@ -57,7 +57,7 @@ export default {
           subscribe('/user/queue/private', msgOut => {
             let message = JSON.parse(msgOut.body);
 
-            this.addDiscussion(this.identifier, message.from, message.body);
+            this.addDiscussion(this.identifier, this.sender.username, this.recipient.name, ObjectID.generate(), message.body, new Date().toISOString());
             this.messages.push(message);
             this.scrollToBottom();
 
@@ -78,33 +78,22 @@ export default {
       let recipientUsername = this.recipient.username;
 
       let message = JSON.stringify({from: senderUsername, to: recipientUsername, body: messageContent, date: new Date().toISOString()});
+      this.addDiscussion(this.identifier, senderUsername, recipientUsername, ObjectID.generate(), messageContent, new Date().toISOString());
 
       StompClient.send(`/app/chat.message.private`, {}, message);
-
-      this.addDiscussion(this.identifier, senderUsername, recipientUsername, messageContent);
       this.messages.push(JSON.parse(message));
 
       this.scrollToBottom();
     },
     addDiscussion(id, senderName, recipientName, lastMessageId, lastMessageText, lastMessageDate) {
-      if (this.messages.length === 0) {
-        this.$store.dispatch('chat/add', {
-          identifier: id,
-          senderName: senderName,
-          recipientName: recipientName,
-          lastMessageId: lastMessageId,
-          lastMessageText: lastMessageText,
-          lastMessageDate: lastMessageDate
-        });
-
-        return;
-      }
-
       this.$store.dispatch('chat/update', {
         identifier: id,
+        senderName: senderName,
+        recipientName: recipientName,
         lastMessageId: lastMessageId,
         lastMessageText: lastMessageText,
-        lastMessageDate: lastMessageDate
+        lastMessageDate: lastMessageDate,
+        user: this.recipient
       });
     }
   }
