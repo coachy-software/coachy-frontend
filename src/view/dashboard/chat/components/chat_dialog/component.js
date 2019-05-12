@@ -15,7 +15,7 @@ export default {
   },
   filters: {
     moment: (date) => {
-      return moment(date).format('YYYY-MM-DD [|] HH:ss')
+      return moment(date).format('YYYY.MM.DD HH:ss')
     }
   }
 }

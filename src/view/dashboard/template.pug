@@ -6,7 +6,7 @@
           a.header-brand
           .d-flex.order-lg-2.ml-auto
             ProfileDropdown
-          a.header-toggler.d-lg-none.ml-3.ml-lg-0.dropdown-element(@click="toggleDropdown('mobile')")
+          a.header-toggler.d-lg-none.ml-3.ml-lg-0.dropdown-element.fake-link(@click="toggleDropdown('mobile')")
             span.header-toggler-icon
     .header.d-lg-flex.p-0.collapse(:class="{'show': this.dropdowns.mobile.open}")
       .container
