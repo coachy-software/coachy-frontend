@@ -6,12 +6,10 @@
           .container
             .col-md-12
               .inside
-                .status(:class="{'online': online, 'offline': !online}")
                 .data
                   h5
-                    router-link(:to="'/profile/' + this.$route.params.id") {{recipient.username}}
-                  span(v-if="online") {{$t('chat.online')}}
-                  span(v-else) {{$t('chat.offline')}}
+                    router-link(:to="'/profile/' + this.$route.params.id") {{recipient.displayName || recipient.username}}
+                  span(v-if="recipient") {{$t('accountType.' + recipient.accountType)}}
                 button.btn.back-to-mesg(title='Back', @click="backToChats")
                   i.fe.fe-arrow-right
         #content.content
