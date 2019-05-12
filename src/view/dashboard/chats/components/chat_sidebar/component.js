@@ -1,4 +1,5 @@
 import moment from "moment";
+import {getInitials} from "@/util/user.utils";
 
 export default {
   data: () => ({
@@ -15,6 +16,9 @@ export default {
       }
 
       this.$forceUpdate();
+    },
+    getInitials(user) {
+      return getInitials(user);
     }
   },
   filters: {
