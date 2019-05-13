@@ -4,7 +4,7 @@ import mutations from "./mutations";
 export const SET_DISCUSSIONS = 'SET_DISCUSSIONS';
 
 const state = {
-  discussions: []
+  discussions: JSON.parse(localStorage.getItem("conversations")) || []
 };
 
 export default {

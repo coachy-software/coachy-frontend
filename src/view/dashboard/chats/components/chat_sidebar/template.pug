@@ -1,7 +1,6 @@
 span#list-chat-list.filterDiscussions.all.unread.single.fake-link(role='tab', @click="openConversation(user.identifier)")
   img.avatar-md(v-if="user.avatar", :src="user.avatar", data-placement='top', alt='avatar')
   span.avatar-custom.avatar-md.avatar-blue.text-md-center(v-else) {{this.getInitials(this.user)}}
-  .status.online
   .data
     h5 {{user.displayName || user.username}}
     .new.bg-red.ml-2(v-if="ping")

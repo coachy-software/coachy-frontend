@@ -10,7 +10,7 @@ export default {
   components: {
     'chat-sidebar': ChatSidebar
   },
-  mounted() {
+  created() {
     this.$store.dispatch('chat/init', {identifier: JSON.parse(localStorage.getItem('user')).identifier})
   },
   methods: {

@@ -5,7 +5,7 @@ import {SET_DISCUSSIONS} from "./index";
 import {searchUserByUsername} from "@/service/user.service";
 
 const init = ({commit}, payload) => {
-  axios.get(`${API_URL}/conversations/${payload.identifier}?size=10`, authorization())
+  axios.get(`${API_URL}/conversations/${payload.identifier}`, authorization())
   .then(response => {
     let usersIds = new Set();
     let rawConversations = response.data;
@@ -27,15 +27,22 @@ const init = ({commit}, payload) => {
       });
 
       return resolve(Promise.all(conversationPromises));
-    }).then(conversations => commit(SET_DISCUSSIONS, conversations.filter(conversation => conversation !== undefined)));
+    }).then(conversations => {
+      let undefinedAwareConversations = conversations.filter(conversation => conversation !== undefined);
+
+      commit(SET_DISCUSSIONS, undefinedAwareConversations);
+      localStorage.setItem('conversations', JSON.stringify(undefinedAwareConversations))
+    });
   });
 };
 
 const update = ({commit, state}, payload) => {
   let discussions = state.discussions.filter(discussion => discussion.user.identifier !== payload.user.identifier);
   discussions.push(payload);
+  let sortedDiscussions = discussions.sort((a, b) => b.lastMessageDate - a.lastMessageDate);
 
-  commit(SET_DISCUSSIONS, discussions.reverse());
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
 };
 
 function obtainTargetUsername(conversation) {

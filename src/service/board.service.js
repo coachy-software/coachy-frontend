@@ -23,7 +23,8 @@ export function createBoard() {
     .then((response) => {
       axios.get(response.headers.location, authorization())
       .then(response => {
-        store.dispatch('user/fetchOne', {identifier: response.data.ownerId});
+        store.dispatch('user/get', {identifier: response.data.ownerId});
+        store.dispatch('user/update');
         resolve(response)
       })
     });
