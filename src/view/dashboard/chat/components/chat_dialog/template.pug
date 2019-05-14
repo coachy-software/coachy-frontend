@@ -21,6 +21,5 @@
                 hr
               template(v-for="message in messages")
                 balloon(v-if="message.senderName === sender.username", :sentByOwner="true", :user="sender", :message="message.body")
-                balloon(v-else-if="message.senderName === recipient.username", :sentByOwner="false", :user="recipient", :message="message.body")
-                //balloon(v-else, :sentByOwner="false", :user="recipient", :message="message.body")
+                balloon(v-else, :sentByOwner="false", :user="recipient", :message="message.body")
         typing_area

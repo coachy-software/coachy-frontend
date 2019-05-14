@@ -18,6 +18,12 @@ export default {
     'chat-dialog': ChatDialog
   },
   beforeRouteUpdate(to, from, next) {
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (to.params.id === user.identifier) {
+      next('/dashboard/chats');
+      return;
+    }
+
     next();
     this.loadChat();
   },
@@ -35,13 +41,13 @@ export default {
       element.scrollTop = element.scrollHeight;
     },
     loadChat() {
+      this.identifier = '';
+
       let containers = document.querySelectorAll('.main .chat .content');
       let perfectScrollbar = new PerfectScrollbar(containers[0], {wheelSpeed: 0.5});
 
       containers[0].scrollTop = 0;
       perfectScrollbar.update(containers[0]);
-
-      this.identifier = ObjectID.generate();
 
       this.$store.dispatch('user/get', {identifier: this.$route.params.id})
       .then(response => {
@@ -59,8 +65,11 @@ export default {
           subscribe('/user/queue/private', msgOut => {
             let message = JSON.parse(msgOut.body);
 
-            this.addDiscussion(this.identifier, this.sender.username, this.recipient.name, ObjectID.generate(), message.body, new Date().toISOString());
+            this.identifier = message.conversationId;
+            this.addOrUpdateDiscussion(message.conversationId, [this.recipient.username, this.sender.username], ObjectID.generate(), message.body,
+                new Date().toISOString());
             this.messages.push(message);
+            this.scrollToBottom();
 
             if (!document.hasFocus()) {
               this.playNotificationSound();
@@ -74,7 +83,10 @@ export default {
       let conversations = JSON.parse(localStorage.getItem('conversations'));
 
       conversations.filter(conversation => {
-        if (conversation.user.identifier === this.recipient.identifier) {
+        if (conversation.conversers.includes(this.sender.username) && conversation.conversers.includes(this.recipient.username)) {
+          console.log(conversation);
+
+          this.identifier = conversation.identifier;
           axios.get(`${API_URL}/messages/${conversation.identifier}`, authorization())
           .then(response => this.messages = response.data)
           .catch(() => this.messages = []);
@@ -92,20 +104,36 @@ export default {
 
       let senderUsername = this.sender.username;
       let recipientUsername = this.recipient.username;
+      let conversationId = this.identifier ||ObjectID.generate();
 
-      let websocketPayload = JSON.stringify({from: senderUsername, to: recipientUsername, body: messageContent, date: new Date().toISOString()});
-      this.addDiscussion(this.identifier, senderUsername, recipientUsername, ObjectID.generate(), messageContent, new Date().toISOString());
+      let websocketPayload = JSON.stringify({
+        from: senderUsername,
+        to: recipientUsername,
+        body: messageContent,
+        date: new Date().toISOString(),
+        conversationId: conversationId
+      });
+
+      this.addOrUpdateDiscussion(conversationId, [senderUsername, recipientUsername], ObjectID.generate(), messageContent, new Date().toISOString());
 
       StompClient.send(`/app/chat.message.private`, {}, websocketPayload);
       this.messages.push({senderName: senderUsername, body: messageContent});
 
       this.scrollToBottom();
     },
-    addDiscussion(id, senderName, recipientName, lastMessageId, lastMessageText, lastMessageDate) {
+    addOrUpdateDiscussion(id, conversers, lastMessageId, lastMessageText, lastMessageDate) {
+      if (this.messages.length === 0) {
+        this.$store.dispatch('chat/add', {
+          identifier: id,
+          conversers: conversers,
+          lastMessageId: lastMessageId,
+          lastMessageText: lastMessageText,
+          lastMessageDate: lastMessageDate,
+          user: this.recipient
+        });
+      }
+
       this.$store.dispatch('chat/update', {
-        identifier: id,
-        senderName: senderName,
-        recipientName: recipientName,
         lastMessageId: lastMessageId,
         lastMessageText: lastMessageText,
         lastMessageDate: lastMessageDate,

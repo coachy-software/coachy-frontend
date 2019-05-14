@@ -7,7 +7,6 @@ import {searchUserByUsername} from "@/service/user.service";
 const init = ({commit}, payload) => {
   axios.get(`${API_URL}/conversations/${payload.identifier}`, authorization())
   .then(response => {
-    let usersIds = new Set();
     let rawConversations = response.data;
     let conversationPromises = [];
 
@@ -16,11 +15,7 @@ const init = ({commit}, payload) => {
         let targetUsername = obtainTargetUsername(conversation);
         let userPromise = searchUserByUsername({username: targetUsername}).then(response => {
           conversation.user = response.data[0];
-
-          if (!usersIds.has(conversation.user.identifier)) {
-            usersIds.add(response.data[0].identifier);
-            return conversation;
-          }
+          return conversation;
         });
 
         conversationPromises.push(userPromise);
@@ -28,39 +23,56 @@ const init = ({commit}, payload) => {
 
       return resolve(Promise.all(conversationPromises));
     }).then(conversations => {
-      let undefinedAwareConversations = conversations.filter(conversation => conversation !== undefined);
-
-      commit(SET_DISCUSSIONS, undefinedAwareConversations);
-      localStorage.setItem('conversations', JSON.stringify(undefinedAwareConversations))
+      commit(SET_DISCUSSIONS, conversations);
+      localStorage.setItem('conversations', JSON.stringify(conversations))
     });
   });
 };
 
-const update = ({commit, state}, payload) => {
-  let discussions = state.discussions.filter(discussion => discussion.user.identifier !== payload.user.identifier);
+const add = ({commit, state}, payload) => {
+  let discussions = state.discussions;
   discussions.push(payload);
-  let sortedDiscussions = discussions.sort((a, b) => b.lastMessageDate - a.lastMessageDate);
+
+  let sortedDiscussions = sort(discussions);
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+};
+
+const update = ({commit, state}, payload) => {
+  state.discussions.filter(discussion => discussion.user.identifier === payload.user.identifier)
+  .map(discussion => {
+    console.log('test ' + JSON.stringify(discussion.user));
+    console.log('test ' + JSON.stringify(payload.user));
+
+    discussion.lastMessageId = payload.lastMessageId;
+    discussion.lastMessageText = payload.lastMessageText;
+    discussion.lastMessageDate = payload.lastMessageDate;
+  });
+
+  let sortedDiscussions = sort(state.discussions);
 
   commit(SET_DISCUSSIONS, sortedDiscussions);
   localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
 };
 
+function sort(discussions) {
+  return discussions.sort((a, b) => b.lastMessageDate - a.lastMessageDate);
+}
+
 function obtainTargetUsername(conversation) {
   let clientUsername = JSON.parse(localStorage.getItem('user')).username;
-  let targetUsername;
+  return conversation.conversers.filter((converser, index) => {
+    let conversers = conversation.conversers;
+    if (conversers[index + 1] && conversers[index + 1] === conversers[index]) {
+      return true;
+    }
 
-  if (clientUsername !== conversation.senderName) {
-    targetUsername = conversation.senderName;
-  } else if (clientUsername !== conversation.recipientName) {
-    targetUsername = conversation.recipientName;
-  } else {
-    targetUsername = clientUsername;
-  }
-
-  return targetUsername;
+    return converser !== clientUsername;
+  });
 }
 
 export default {
   init,
+  add,
   update
 }

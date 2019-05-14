@@ -38,9 +38,19 @@ export default [
       route('board', BoardView),
       route('chats', ChatsView, {
         children: [
-          route(':id', ChatView)
+          route(':id', ChatView, {beforeEnter: beforeEnterChat})
         ]
       }, {title: 'Wiadomości'}),
     ]
   }, {requiresAuth: true})
 ]
+
+function beforeEnterChat(to, from, next) {
+  let user = JSON.parse(localStorage.getItem('user'));
+  if (to.params.id === user.identifier) {
+    next('/dashboard/chats');
+    return;
+  }
+
+  next();
+}
