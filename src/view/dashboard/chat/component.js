@@ -12,7 +12,9 @@ export default {
     identifier: '',
     sender: '',
     recipient: '',
-    messages: []
+    messages: [],
+    typing: false,
+    typingInterval: null
   }),
   components: {
     'chat-dialog': ChatDialog
@@ -26,6 +28,7 @@ export default {
 
     next();
     this.updateAllActive(false);
+    this.killInterval();
     this.loadChat();
   },
   mounted() {
@@ -33,6 +36,11 @@ export default {
     this.loadChat();
   },
   methods: {
+    killInterval() {
+      if (this.typingInterval) {
+        clearInterval(this.typingInterval)
+      }
+    },
     playNotificationSound() {
       let audio = new Audio(chatNotificationSound);
       audio.volume = 0.3;
@@ -78,15 +86,22 @@ export default {
 
             if (!document.hasFocus()) {
               if (this.recipient.username !== message.from) {
-                console.log('bylem tu 1 xdd');
-
                 this.updatePing(true, {username: message.from});
-                console.log('bylem tu xdd');
               }
 
               this.playNotificationSound();
             }
           });
+
+          subscribe('/user/queue/typing', (msgOut) => {
+            let message = JSON.parse(msgOut.body);
+            if (message.from === this.recipient.username) {
+              this.typing = true;
+              this.scrollToBottom();
+            }
+          });
+
+          this.typingInterval = setInterval(() => this.typing = false, 3000);
         })
       })
       .catch(() => this.$router.back())
@@ -107,6 +122,13 @@ export default {
         this.messages = [];
         return true;
       });
+    },
+    changed() {
+      StompClient.send(`/app/chat.message.typing`, {}, JSON.stringify({
+        from: this.sender.username,
+        to: this.recipient.username,
+        conversationId: this.identifier
+      }));
     },
     performSubmit(messageContent) {
       if (messageContent.length === 0) {

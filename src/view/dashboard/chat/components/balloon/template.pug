@@ -2,7 +2,12 @@
   img.avatar-md(v-if="this.user.avatar !== '' && this.user.avatar !== null", :src='this.user.avatar', data-toggle='tooltip', data-placement='top', :title='this.user.username', alt='avatar')
   span.avatar-custom.avatar-md.avatar-blue.text-md-center(v-else) {{this.getInitials(this.user)}}
   .text-main
-    .text-group
+    .text.typing(v-if="typing")
+      .wave
+        span.dot
+        span.dot
+        span.dot
+    .text-group(v-else)
       .text(:class="{'me': this.sentByOwner}")
         p {{this.message}}
     span {{this.date}}

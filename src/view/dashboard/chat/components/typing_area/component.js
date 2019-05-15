@@ -12,6 +12,9 @@ export default {
     },
     addEmoticon(emoticon) {
       this.message += emoticon;
+    },
+    changed() {
+      this.$parent.$parent.changed();
     }
   }
 

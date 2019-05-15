@@ -2,7 +2,7 @@
   .col-md-12
     .bottom
       form.text-area(@submit.prevent="performSubmit")
-        textarea.form-control(:placeholder="$t('chat.start_typing')", rows="1", v-model="message", @keydown.enter.exact.prevent, @keyup.enter.exact="performSubmit")
+        textarea.form-control(:placeholder="$t('chat.start_typing')", rows="1", v-model="message", @input="changed", @keydown.enter.exact.prevent, @keyup.enter.exact="performSubmit")
         .add-smiles
           i.fa.fa-smile-o.fake-link(style="color: #2b2b2b", @click="openEmoticonsModal")
         .smiles-bunch#emoticons
