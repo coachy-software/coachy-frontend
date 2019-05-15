@@ -5,7 +5,7 @@ export default {
   data: () => ({
     properUser: {}
   }),
-  props: ['ping', 'newMessagesCount', 'user', 'lastMessageText', 'lastMessageDate'],
+  props: ['active', 'ping', 'user', 'lastMessageText', 'lastMessageDate'],
   methods: {
     openConversation(id) {
       this.$router.push(`/dashboard/chats/${id}`);

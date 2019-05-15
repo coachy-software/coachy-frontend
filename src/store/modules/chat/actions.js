@@ -29,6 +29,34 @@ const init = ({commit}, payload) => {
   });
 };
 
+const updateActive = ({commit, state}, payload) => {
+  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
+  .map(discussion => discussion.active = payload.active);
+
+  let sortedDiscussions = sort(state.discussions);
+
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+};
+
+const updatePing = ({commit, state}, payload) => {
+  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
+  .map(discussion => discussion.ping = payload.ping);
+
+  let sortedDiscussions = sort(state.discussions);
+
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+};
+
+const updateAllActive = ({commit, state}, payload) => {
+  state.discussions.map(discussion => discussion.active = payload.active);
+  let sortedDiscussions = sort(state.discussions);
+
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+};
+
 const add = ({commit, state}, payload) => {
   let discussions = state.discussions;
   discussions.push(payload);
@@ -39,11 +67,8 @@ const add = ({commit, state}, payload) => {
 };
 
 const update = ({commit, state}, payload) => {
-  state.discussions.filter(discussion => discussion.user.identifier === payload.user.identifier)
+  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
   .map(discussion => {
-    console.log('test ' + JSON.stringify(discussion.user));
-    console.log('test ' + JSON.stringify(payload.user));
-
     discussion.lastMessageId = payload.lastMessageId;
     discussion.lastMessageText = payload.lastMessageText;
     discussion.lastMessageDate = payload.lastMessageDate;
@@ -74,5 +99,8 @@ function obtainTargetUsername(conversation) {
 export default {
   init,
   add,
-  update
+  update,
+  updateActive,
+  updatePing,
+  updateAllActive
 }

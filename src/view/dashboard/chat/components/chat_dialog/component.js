@@ -3,7 +3,7 @@ import TypingArea from "../typing_area/TypingArea"
 import moment from "moment";
 
 export default {
-  props: ['recipient', 'sender', 'online', 'messages'],
+  props: ['recipient', 'sender', 'messages'],
   components: {
     balloon: Balloon,
     'typing_area': TypingArea

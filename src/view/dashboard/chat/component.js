@@ -25,9 +25,11 @@ export default {
     }
 
     next();
+    this.updateAllActive(false);
     this.loadChat();
   },
   mounted() {
+    this.updateAllActive(false);
     this.loadChat();
   },
   methods: {
@@ -44,7 +46,7 @@ export default {
       this.identifier = '';
 
       let containers = document.querySelectorAll('.main .chat .content');
-      let perfectScrollbar = new PerfectScrollbar(containers[0], {wheelSpeed: 0.5});
+      let perfectScrollbar = new PerfectScrollbar(containers[0], {wheelSpeed: 1});
 
       containers[0].scrollTop = 0;
       perfectScrollbar.update(containers[0]);
@@ -53,6 +55,8 @@ export default {
       .then(response => {
         this.recipient = response.data;
         document.title = this.recipient.displayName || this.recipient.username;
+        this.updateActive(true);
+        this.updatePing(false, this.recipient);
 
         axios.get(`${API_URL}/users/me`, {
           headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
@@ -67,11 +71,19 @@ export default {
 
             this.identifier = message.conversationId;
             this.addOrUpdateDiscussion(message.conversationId, [this.recipient.username, this.sender.username], ObjectID.generate(), message.body,
-                new Date().toISOString());
-            this.messages.push(message);
+                new Date().toISOString(), {username: message.from});
+
+            this.messages.push({body: message.body, conversationId: message.conversationId, identifier: message.identifier, senderName: message.from});
             this.scrollToBottom();
 
             if (!document.hasFocus()) {
+              if (this.recipient.username !== message.from) {
+                console.log('bylem tu 1 xdd');
+
+                this.updatePing(true, {username: message.from});
+                console.log('bylem tu xdd');
+              }
+
               this.playNotificationSound();
             }
           });
@@ -84,7 +96,6 @@ export default {
 
       conversations.filter(conversation => {
         if (conversation.conversers.includes(this.sender.username) && conversation.conversers.includes(this.recipient.username)) {
-          console.log(conversation);
 
           this.identifier = conversation.identifier;
           axios.get(`${API_URL}/messages/${conversation.identifier}`, authorization())
@@ -104,7 +115,7 @@ export default {
 
       let senderUsername = this.sender.username;
       let recipientUsername = this.recipient.username;
-      let conversationId = this.identifier ||ObjectID.generate();
+      let conversationId = this.identifier || ObjectID.generate();
 
       let websocketPayload = JSON.stringify({
         from: senderUsername,
@@ -114,14 +125,15 @@ export default {
         conversationId: conversationId
       });
 
-      this.addOrUpdateDiscussion(conversationId, [senderUsername, recipientUsername], ObjectID.generate(), messageContent, new Date().toISOString());
+      this.addOrUpdateDiscussion(conversationId, [senderUsername, recipientUsername], ObjectID.generate(), messageContent, new Date().toISOString(),
+          this.recipient);
 
       StompClient.send(`/app/chat.message.private`, {}, websocketPayload);
       this.messages.push({senderName: senderUsername, body: messageContent});
 
       this.scrollToBottom();
     },
-    addOrUpdateDiscussion(id, conversers, lastMessageId, lastMessageText, lastMessageDate) {
+    addOrUpdateDiscussion(id, conversers, lastMessageId, lastMessageText, lastMessageDate, user) {
       if (this.messages.length === 0) {
         this.$store.dispatch('chat/add', {
           identifier: id,
@@ -129,7 +141,7 @@ export default {
           lastMessageId: lastMessageId,
           lastMessageText: lastMessageText,
           lastMessageDate: lastMessageDate,
-          user: this.recipient
+          user: user
         });
       }
 
@@ -137,8 +149,23 @@ export default {
         lastMessageId: lastMessageId,
         lastMessageText: lastMessageText,
         lastMessageDate: lastMessageDate,
-        user: this.recipient
+        user: user
       });
+    },
+    updatePing(ping, user) {
+      this.$store.dispatch('chat/updatePing', {
+        user: user,
+        ping: ping
+      });
+    },
+    updateActive(active) {
+      this.$store.dispatch('chat/updateActive', {
+        user: this.recipient,
+        active: active
+      });
+    },
+    updateAllActive(active) {
+      this.$store.dispatch('chat/updateAllActive', {active: active});
     }
   }
 }
