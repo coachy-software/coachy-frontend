@@ -24,8 +24,8 @@
     "link": "/test",
     "dropdown": [
       {
-        "name": "Test 1",
-        "link": "/dashboard/home"
+        "name": "Kalkulator BMI",
+        "link": "/dashboard/bmi-calculator"
       },
       {
         "name": "Test 2",
