@@ -30,6 +30,10 @@
       {
         "name": "Kalkulator PPM",
         "link": "/dashboard/ppm-calculator"
+      },
+      {
+        "name": "Kalkulator spalanych kalorii",
+        "link": "/dashboard/burned-cal-calculator"
       }
     ]
   }

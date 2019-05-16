@@ -1,0 +1,36 @@
+.container
+  .page-header
+    h1.page-title {{$t('calculators.burned_cal_title')}}
+  form
+    .card.col-lg-12.card
+      .card-body
+        .row
+          .col-sm-5
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.weight')}}
+                input.form-control(type='text', v-model="weight")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.time')}}
+                input.form-control(type='number', v-model="time")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.activity_type')}}
+                select.form-control.custom-select(v-model="activityType")
+                  template(v-for="activity in activities")
+                    option(name="activity", :value="activity") {{activity.name}}
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.weight_unit')}}
+                .selectgroup.w-100
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='kg', v-model="weightUnit")
+                    span.selectgroup-button KG
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='lbs', v-model="weightUnit")
+                    span.selectgroup-button LBS
+          .col-sm-2
+          .col-sm-5(v-if="result !== 0")
+            .col-sm-10
+              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{result}} {{$t('calculators.cals_burned')}}

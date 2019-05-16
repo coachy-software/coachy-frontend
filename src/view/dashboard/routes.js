@@ -18,6 +18,7 @@ import ChatsView from '@/view/dashboard/chats/ChatsView';
 import ChatView from '@/view/dashboard/chat/ChatView';
 import BmiCalculatorView from '@/view/dashboard/bmi_calculator/BmiCalculatorView';
 import PpmCalculatorView from '@/view/dashboard/ppm_calculator/PpmCalculatorView';
+import BurnedCalCalculatorView from '@/view/dashboard/burned_cal_calculator/BurnedCalCalculatorView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -44,7 +45,8 @@ export default [
         ]
       }, {title: 'Wiadomości'}),
       route('bmi-calculator', BmiCalculatorView),
-      route('ppm-calculator', PpmCalculatorView)
+      route('ppm-calculator', PpmCalculatorView),
+      route('burned-cal-calculator', BurnedCalCalculatorView)
     ]
   }, {requiresAuth: true})
 ]

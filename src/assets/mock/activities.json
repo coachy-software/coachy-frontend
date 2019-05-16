@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Spanie",
+    "rate": 0.9
+  },
+  {
+    "name": "Oglądanie telewizji",
+    "rate": 1.0
+  },
+  {
+    "name": "Pisanie, praca biurowa",
+    "rate": 1.5
+  },
+  {
+    "name": "Spacerowanie - 2.7 km/h",
+    "rate": 2.3
+  },
+  {
+    "name": "Spacerowanie - 4 km/h",
+    "rate": 2.9
+  },
+  {
+    "name": "Jazda rowerem",
+    "rate": 3.0
+  },
+  {
+    "name": "Spacerowanie - 4.8 km/h",
+    "rate": 3.3
+  },
+  {
+    "name": "Ćwiczenia w domu - kalistenika, początkujący",
+    "rate": 3.5
+  },
+  {
+    "name": "Spacerowanie - 5.5 km/h",
+    "rate": 3.6
+  },
+  {
+    "name": "Jazda rowerem - 16 km/h",
+    "rate": 4.0
+  },
+  {
+    "name": "Aktywność seksualna",
+    "rate": 5.8
+  },
+  {
+    "name": "Jogging",
+    "rate": 7.0
+  },
+  {
+    "name": "Ćwiczenia w domu - kalistenika, zaawansowany",
+    "rate": 8.0
+  },
+  {
+    "name": "Jogging w miejscu",
+    "rate": 8.0
+  },
+  {
+    "name": "Jogging - 9 km/h",
+    "rate": 8.8
+  },
+  {
+    "name": "Skakanka 66/min",
+    "rate": 9.8
+  },
+  {
+    "name": "Skakanka 70/min",
+    "rate": 10.0
+  },
+  {
+    "name": "Skakanka 84/min",
+    "rate": 10.5
+  },
+  {
+    "name": "Skakanka 100/min",
+    "rate": 11.0
+  },
+  {
+    "name": "Yoga Hatha",
+    "rate": 3
+  },
+  {
+    "name": "Pilates",
+    "rate": 3.8
+  },
+  {
+    "name": "Łagodne rozciąganie",
+    "rate": 2.3
+  },
+  {
+    "name": "Aerobic",
+    "rate": 7.3
+  },
+  {
+    "name": "Bieganie - 14 km/h",
+    "rate": 12.3
+  },
+  {
+    "name": "Bieganie - 16 km/h",
+    "rate": 14.5
+  },
+  {
+    "name": "Bieganie 19 km/h",
+    "rate": 19.0
+  },
+  {
+    "name": "Bieganie 22 km/h",
+    "rate": 23.0
+  }
+]

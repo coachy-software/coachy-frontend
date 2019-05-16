@@ -259,6 +259,10 @@
     "woman": "Kobieta",
     "sex": "Płeć",
     "bmi_title": "Kalkulator BMI (Body Mass Index)",
-    "ppm_title": "Kalkulator PPM (Podstawowa Przemiana Materii)"
+    "ppm_title": "Kalkulator PPM (Podstawowa Przemiana Materii)",
+    "time": "Czas (w minutach)",
+    "activity_type": "Rodzaj aktywności",
+    "burned_cal_title": "Kalkulator spalanych kalorii",
+    "cals_burned": "spalonych kalorii"
   }
 }
