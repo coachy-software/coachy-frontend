@@ -253,6 +253,12 @@
     "weight": "Waga",
     "height": "Wzrost",
     "weight_unit": "Jednostka masy",
-    "height_unit": "Jednostka długości"
+    "height_unit": "Jednostka długości",
+    "age": "Wiek",
+    "man": "Mężczyzna",
+    "woman": "Kobieta",
+    "sex": "Płeć",
+    "bmi_title": "Kalkulator BMI (Body Mass Index)",
+    "ppm_title": "Kalkulator PPM (Podstawowa Przemiana Materii)"
   }
 }

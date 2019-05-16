@@ -1,6 +1,6 @@
 .container
   .page-header
-    h1.page-title {{$t('calculators.bmi_title')}}
+    h1.page-title {{$t('calculators.ppm_title')}}
   form
     .card.col-lg-12.card
       .card-body
@@ -14,6 +14,16 @@
               .form-group
                 label.form-label {{$t('calculators.height')}}
                 input.form-control(type='text', v-model="height")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.age')}}
+                input.form-control(type='text', v-model="age")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.sex')}}
+                select.form-control.custom-select(v-model="sex")
+                  option(name="sex", value="man") {{$t('calculators.man')}}
+                  option(name="sex", value="woman") {{$t('calculators.woman')}}
             .col-sm-12
               .form-group
                 label.form-label {{$t('calculators.weight_unit')}}
@@ -35,9 +45,9 @@
                     input.selectgroup-input(type='radio', name='height', value='inch', v-model="heightUnit")
                     span.selectgroup-button INCH
           .col-sm-2
-          .col-sm-5(v-if="bmi !== 0")
+          .col-sm-5(v-if="result !== 0")
             .col-sm-10
-              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{bmi}} BMI
+              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{result}} PPM
             .col-sm-12
-              img.m-5(v-if="bmi <= 24.9", src="@/assets/fit.svg" height="300px", width="300px")
-              img.m-5(v-else, src="@/assets/fat.svg" height="300px", width="300px")
+              img.m-5(v-if="isSleeping", src="@/assets/sleep.svg" height="300px", width="300px")
+              img.m-5(v-else, src="@/assets/sleep-2.svg" height="300px", width="300px")

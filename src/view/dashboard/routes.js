@@ -16,7 +16,8 @@ import PasswordTab from '@/view/dashboard/settings/component/password_tab/Passwo
 import AccountDeleteTab from '@/view/dashboard/settings/component/delete_account_tab/DeleteAccountTab';
 import ChatsView from '@/view/dashboard/chats/ChatsView';
 import ChatView from '@/view/dashboard/chat/ChatView';
-import BmiCalculatorView from "@/view/dashboard/bmi_calculator/BmiCalculatorView";
+import BmiCalculatorView from '@/view/dashboard/bmi_calculator/BmiCalculatorView';
+import PpmCalculatorView from '@/view/dashboard/ppm_calculator/PpmCalculatorView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -42,7 +43,8 @@ export default [
           route(':id', ChatView, {beforeEnter: beforeEnterChat})
         ]
       }, {title: 'Wiadomości'}),
-      route('bmi-calculator', BmiCalculatorView)
+      route('bmi-calculator', BmiCalculatorView),
+      route('ppm-calculator', PpmCalculatorView)
     ]
   }, {requiresAuth: true})
 ]
