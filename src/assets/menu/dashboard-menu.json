@@ -28,8 +28,8 @@
         "link": "/dashboard/bmi-calculator"
       },
       {
-        "name": "Test 2",
-        "link": "/"
+        "name": "Kalkulator PPM",
+        "link": "/dashboard/ppm-calculator"
       }
     ]
   }
