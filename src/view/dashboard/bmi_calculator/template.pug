@@ -1,0 +1,43 @@
+.container
+  .page-header
+    h1.page-title Kalkulator BMI
+  form
+    .card.col-lg-12.card
+      .card-body
+        .row
+          .col-sm-5
+            .col-sm-12
+              .form-group
+                label.form-label Waga
+                input.form-control(type='text', v-model="weight")
+            .col-sm-12
+              .form-group
+                label.form-label Wzrost
+                input.form-control(type='text', v-model="height")
+            .col-sm-12
+              .form-group
+                label.form-label Jednostka masy
+                .selectgroup.w-100
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='kg', v-model="weightUnit")
+                    span.selectgroup-button KG
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='lbs', v-model="weightUnit")
+                    span.selectgroup-button LBS
+            .col-sm-12
+              .form-group
+                label.form-label Jednostka długości
+                .selectgroup.w-100
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='height', value='cm', v-model="heightUnit")
+                    span.selectgroup-button CM
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='height', value='inch', v-model="heightUnit")
+                    span.selectgroup-button INCH
+          .col-sm-2
+          .col-sm-5(v-if="bmi !== 0")
+            .col-sm-10
+              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{bmi}} BMI
+            .col-sm-12
+              img.m-5(v-if="bmi <= 24.9", src="@/assets/fit.svg" height="300px", width="300px")
+              img.m-5(v-else, src="@/assets/fat.svg" height="300px", width="300px")
