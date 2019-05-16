@@ -248,5 +248,11 @@
     "start_typing": "Zacznij pisać, aby otrzymać wiadomość...",
     "search_conversations": "Szukaj konwersacji...",
     "chats": "Rozmowy"
+  },
+  "calculators": {
+    "weight": "Waga",
+    "height": "Wzrost",
+    "weight_unit": "Jednostka masy",
+    "height_unit": "Jednostka długości"
   }
 }

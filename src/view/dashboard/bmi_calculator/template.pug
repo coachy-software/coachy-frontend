@@ -8,15 +8,15 @@
           .col-sm-5
             .col-sm-12
               .form-group
-                label.form-label Waga
+                label.form-label {{$t('calculators.weight')}}
                 input.form-control(type='text', v-model="weight")
             .col-sm-12
               .form-group
-                label.form-label Wzrost
+                label.form-label {{$t('calculators.height')}}
                 input.form-control(type='text', v-model="height")
             .col-sm-12
               .form-group
-                label.form-label Jednostka masy
+                label.form-label {{$t('calculators.weight_unit')}}
                 .selectgroup.w-100
                   label.selectgroup-item
                     input.selectgroup-input(type='radio', name='weight', value='kg', v-model="weightUnit")
@@ -26,7 +26,7 @@
                     span.selectgroup-button LBS
             .col-sm-12
               .form-group
-                label.form-label Jednostka długości
+                label.form-label {{$t('calculators.height_unit')}}
                 .selectgroup.w-100
                   label.selectgroup-item
                     input.selectgroup-input(type='radio', name='height', value='cm', v-model="heightUnit")
