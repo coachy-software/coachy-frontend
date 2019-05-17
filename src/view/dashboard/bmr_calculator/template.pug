@@ -1,6 +1,6 @@
 .container
   .page-header
-    h1.page-title {{$t('calculators.ppm_title')}}
+    h1.page-title {{$t('calculators.bmr_title')}}
   form
     .card.col-lg-12.card
       .card-body
@@ -47,7 +47,7 @@
           .col-sm-2
           .col-sm-5(v-if="result !== 0")
             .col-sm-10
-              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{result}} PPM
+              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{result}} BMR
             .col-sm-12
               img.m-5(v-if="isSleeping", src="@/assets/images/sleep.svg" height="300px", width="300px")
               img.m-5(v-else, src="@/assets/images/sleep-2.svg" height="300px", width="300px")

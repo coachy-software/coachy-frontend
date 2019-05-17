@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Bezruch np. dla pacjenta chorego leżącego w łóżku",
+    "value": 1.2
+  },
+  {
+    "name": "Niska aktywność fizyczna",
+    "value": 1.4
+  },
+  {
+    "name": "Umiarkowa aktywnosć fizyczna",
+    "value": 1.6
+  },
+  {
+    "name": "Aktywny tryb życia",
+    "value": 1.75
+  },
+  {
+    "name": "Bardzo aktywny tryb życia",
+    "value": 2.0
+  },
+  {
+    "name": "Wyczynowe uprawianie sportu",
+    "value": 2.4
+  }
+]

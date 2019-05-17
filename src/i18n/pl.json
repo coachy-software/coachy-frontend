@@ -259,10 +259,16 @@
     "woman": "Kobieta",
     "sex": "Płeć",
     "bmi_title": "Kalkulator BMI (Body Mass Index)",
-    "ppm_title": "Kalkulator PPM (Podstawowa Przemiana Materii)",
+    "bmr_title": "Kalkulator BMR (Basal Metabolic Rate)",
     "time": "Czas (w minutach)",
     "activity_type": "Rodzaj aktywności",
     "burned_cal_title": "Kalkulator spalanych kalorii",
-    "cals_burned": "spalonych kalorii"
+    "cals_burned": "spalonych kalorii",
+    "daily_demand_title": "Kalkulator dziennego zapotrzebowania kalorycznego",
+    "pal": "Poziom aktywności fizycznej",
+    "purpose": "Cel",
+    "bulk": "Przybranie na masie (surplus 300 kcal)",
+    "reduce": "Zrzucenie wagi (deficyt 300 kcal)",
+    "your_demand": "Twoje dzienne zapotrzebowanie kaloryczne wynosi:"
   }
 }

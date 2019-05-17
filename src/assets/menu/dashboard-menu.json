@@ -24,16 +24,20 @@
     "link": "/test",
     "dropdown": [
       {
-        "name": "Kalkulator BMI",
+        "name": "BMI",
         "link": "/dashboard/bmi-calculator"
       },
       {
-        "name": "Kalkulator PPM",
-        "link": "/dashboard/ppm-calculator"
+        "name": "BMR",
+        "link": "/dashboard/bmr-calculator"
       },
       {
-        "name": "Kalkulator spalanych kalorii",
+        "name": "Aktywności fizyczne",
         "link": "/dashboard/burned-cal-calculator"
+      },
+      {
+        "name": "Zapotrzebowanie kaloryczne",
+        "link": "/dashboard/daily-demand-calculator"
       }
     ]
   }

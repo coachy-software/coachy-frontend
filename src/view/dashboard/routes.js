@@ -17,8 +17,9 @@ import AccountDeleteTab from '@/view/dashboard/settings/component/delete_account
 import ChatsView from '@/view/dashboard/chats/ChatsView';
 import ChatView from '@/view/dashboard/chat/ChatView';
 import BmiCalculatorView from '@/view/dashboard/bmi_calculator/BmiCalculatorView';
-import PpmCalculatorView from '@/view/dashboard/ppm_calculator/PpmCalculatorView';
+import BmrCalculatorView from '@/view/dashboard/bmr_calculator/BmrCalculatorView';
 import BurnedCalCalculatorView from '@/view/dashboard/burned_cal_calculator/BurnedCalCalculatorView';
+import DailyDemandCalculatorView from '@/view/dashboard/daily_demand_calculator/DailyDemandCalculatorView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -45,8 +46,9 @@ export default [
         ]
       }, {title: 'Wiadomości'}),
       route('bmi-calculator', BmiCalculatorView),
-      route('ppm-calculator', PpmCalculatorView),
-      route('burned-cal-calculator', BurnedCalCalculatorView)
+      route('bmr-calculator', BmrCalculatorView),
+      route('burned-cal-calculator', BurnedCalCalculatorView),
+      route('daily-demand-calculator', DailyDemandCalculatorView)
     ]
   }, {requiresAuth: true})
 ]

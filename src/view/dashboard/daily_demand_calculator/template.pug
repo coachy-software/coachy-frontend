@@ -1,0 +1,63 @@
+.container
+  .page-header
+    h1.page-title {{$t('calculators.daily_demand_title')}}
+  form
+    .card.col-lg-12.card
+      .card-body
+        .row
+          .col-sm-5
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.weight')}}
+                input.form-control(type='text', v-model="weight")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.height')}}
+                input.form-control(type='text', v-model="height")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.age')}}
+                input.form-control(type='text', v-model="age")
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.pal')}}
+                select.form-control.custom-select(v-model="typedPal")
+                  template(v-for="pal in pals")
+                    option(name="pal", :value="pal") {{pal.name}}
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.sex')}}
+                select.form-control.custom-select(v-model="sex")
+                  option(name="sex", value="man") {{$t('calculators.man')}}
+                  option(name="sex", value="woman") {{$t('calculators.woman')}}
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.purpose')}}
+                select.form-control.custom-select(v-model="purpose")
+                  option(name="purpose", value="bulk") {{$t('calculators.bulk')}}
+                  option(name="purpose", value="reduce") {{$t('calculators.reduce')}}
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.weight_unit')}}
+                .selectgroup.w-100
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='kg', v-model="weightUnit")
+                    span.selectgroup-button KG
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='weight', value='lbs', v-model="weightUnit")
+                    span.selectgroup-button LBS
+            .col-sm-12
+              .form-group
+                label.form-label {{$t('calculators.height_unit')}}
+                .selectgroup.w-100
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='height', value='cm', v-model="heightUnit")
+                    span.selectgroup-button CM
+                  label.selectgroup-item
+                    input.selectgroup-input(type='radio', name='height', value='inch', v-model="heightUnit")
+                    span.selectgroup-button INCH
+          .col-sm-2
+          .col-sm-5(v-if="result > 500")
+            .col-sm-10
+              h2.text-center.m-2.mb-5 {{$t('calculators.your_demand')}}
+              h1.text-center.m-2.font-weight-bold(style="color: #467fcf") {{result}} kcal
