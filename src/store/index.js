@@ -2,9 +2,10 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import user from "./modules/user";
-import loader from "./modules/loader"
-import schedule from "./modules/schedule"
-import chat from "./modules/chat"
+import loader from "./modules/loader";
+import schedule from "./modules/schedule";
+import chat from "./modules/chat";
+import headway from "./modules/headway";
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     user,
     loader,
     schedule,
-    chat
+    chat,
+    headway
   }
 });

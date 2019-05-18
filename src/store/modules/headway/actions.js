@@ -1,6 +1,7 @@
 import {SET_HEADWAYS} from "./index";
 import axios from "axios";
-import {API_URL} from "../../../util/constants";
+import {API_URL} from "@/util/constants";
+import {authorization} from "@/util/headers";
 
 const add = ({commit, state}, payload) => {
   let headways = state.headways;
@@ -15,13 +16,15 @@ const remove = ({commit, state}, payload) => {
 };
 
 const fetchAll = ({commit}, payload) => {
-  axios.get(`${API_URL}/headways/${payload.identifier}`)
+  axios.get(`${API_URL}/headways/by-owner/${payload.identifier}`, authorization())
   .then(response => setHeadways(commit, response.data))
 };
 
 function setHeadways(commit, payload) {
   commit(SET_HEADWAYS, payload);
   localStorage.setItem('headways', JSON.stringify(payload));
+
+  return payload;
 }
 
 export default {

@@ -272,6 +272,7 @@
     "your_demand": "Twoje dzienne zapotrzebowanie kaloryczne wynosi:"
   },
   "headways": {
-    "page_title": "Twój dziennik treningowy"
+    "page_title": "Twój dziennik treningowy",
+    "create": "Nowy"
   }
 }
