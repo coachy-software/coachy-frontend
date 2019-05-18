@@ -270,5 +270,8 @@
     "bulk": "Przybranie na masie (surplus 300 kcal)",
     "reduce": "Zrzucenie wagi (deficyt 300 kcal)",
     "your_demand": "Twoje dzienne zapotrzebowanie kaloryczne wynosi:"
+  },
+  "headways": {
+    "page_title": "Twój dziennik treningowy"
   }
 }
