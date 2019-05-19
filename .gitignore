@@ -92,4 +92,5 @@ typings/
 .next
 
 package-lock.json
+dist/
 yarn.lock
