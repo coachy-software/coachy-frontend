@@ -26,7 +26,7 @@ function connect(callback) {
       withCredentials: true
     })
     .then(() => {
-      WS = new SockJS("http://localhost:3000/ws");
+      WS = new SockJS("http://api.coachy.life/ws");
       StompClient = Stomp.over(WS);
       StompClient.debug = () => {
       };
