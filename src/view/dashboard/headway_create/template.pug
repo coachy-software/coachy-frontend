@@ -1,0 +1,26 @@
+.container
+  .page-header
+    h1.page-title {{$t('headways.page_title')}}
+  form
+    .card.col-lg-12
+      .card-header
+        h3.card-title {{$t('headway_create.page_title')}}
+      .card-body
+        #dimmer.dimmer(:class="{'active': isLoading}")
+          .loader
+          .dimmer-content
+            .row
+              .col-md-8
+                .col-sm-2
+                  .form-group
+                    label.form-label {{$t('headway_create.neck')}}
+                    input.form-control(type='text', v-model="weight")
+                .col-sm-2
+                  .form-group
+                    label.form-label {{$t('headway_create.neck')}}
+                    input.form-control(type='text', v-model="weight")
+              .col-md-4
+                .col-md-12
+                  img(src="@/assets/images/measurements.jpg")
+      .card-footer.text-right
+        button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('create_schedule.create')}}
