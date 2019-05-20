@@ -15,7 +15,7 @@ export default {
     this.$parent.currentTab = this.$parent.tabs.account.name;
 
     let user = this.$store.state.user.user;
-    this.language = this.$cookie.get('lang') || navigator.language.substring(0, 2) || 'en';
+    // this.language = this.$cookie.get('lang') || navigator.language.substring(0, 2) || 'en';
     this.username = user.username;
     this.email = user.email;
     this.avatar = user.avatar;
