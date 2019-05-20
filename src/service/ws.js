@@ -2,6 +2,7 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import axios from "axios";
 import {API_URL} from "@/util/constants";
+import {WS_URL} from "../util/constants";
 
 let WS;
 let StompClient;
@@ -26,7 +27,7 @@ function connect(callback) {
       withCredentials: true
     })
     .then(() => {
-      WS = new SockJS("http://api.coachy.life/ws");
+      WS = new SockJS(WS_URL);
       StompClient = Stomp.over(WS);
       StompClient.debug = () => {
       };
