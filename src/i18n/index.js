@@ -14,7 +14,8 @@ export const languages = {
 Vue.use(VueI18n);
 
 export default new VueI18n({
-  locale: VueCookie.get('lang') || navigator.language.substring(0, 2),
+  // locale: VueCookie.get('lang') || navigator.language.substring(0, 2),
+  locale: pl,
   fallbackLocale: fallbackLocale,
   messages: Object.assign(languages)
 });
