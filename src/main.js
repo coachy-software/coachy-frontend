@@ -13,10 +13,6 @@ Vue.use(Vuelidate);
 Vue.use(VueCookie);
 Vue.use(VueInstant);
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.VUE_APP_API_URL);
-console.log(process.env.VUE_APP_WS_URL);
-
 new Vue({
   store,
   router,
