@@ -5,6 +5,7 @@ import store from '@/store';
 import {updateAccountDetails} from '@/service/user.service';
 import {getErrorMessage} from "@/util/validation.utils";
 import i18n from "@/i18n";
+import {SET_STATUS, LOADING, NOT_LOADING} from "@/store/modules/loader";
 
 function updateUser(avatar) {
   let user = store.state.user.user;
@@ -60,9 +61,16 @@ export default {
       formData.append('file', this.file);
       formData.append('target', 'avatars');
 
+      store.commit(SET_STATUS, LOADING);
       axios.post(`${API_URL}/uploads`, formData, config)
-      .then(response => updateUser(response.headers.location))
-      .catch(error => notification.error(getErrorMessage('avatar_tab', error)));
+      .then(response => {
+        updateUser(response.headers.location);
+        store.commit(SET_STATUS, NOT_LOADING);
+      })
+      .catch(error => {
+        notification.error(getErrorMessage('avatar_tab', error));
+        store.commit(SET_STATUS, NOT_LOADING);
+      });
     },
     handleFileChange() {
       this.file = this.$refs.file.files[0];

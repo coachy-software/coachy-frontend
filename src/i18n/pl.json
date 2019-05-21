@@ -105,7 +105,8 @@
     "file": "Plik",
     "preview": "Podgląd",
     "reset": "Zresetuj",
-    "update": "Zaktualizuj"
+    "update": "Zaktualizuj",
+    "400": "Plik jest za duży"
   },
   "login_tab": {
     "updated": "Pomyślnie zaktualizowano",
