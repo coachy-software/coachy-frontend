@@ -119,8 +119,8 @@
 
   .main .chat .content {
     height: 100%;
-    min-height: 600px;
-    max-height: 600px
+    max-height: calc(100vh - 118px - 85px);
+    min-height: calc(100vh - 118px - 85px);
   }
 
   .navigation {
