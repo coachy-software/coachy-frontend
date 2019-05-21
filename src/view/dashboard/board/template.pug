@@ -12,11 +12,7 @@
   .board-container(v-else-if="!loading")
     .board
       .lists-container
-        draggable(
-          :options="{handle: '.move', animation: 150, group:'labels'}"
-          v-model="board.labels", :list='board.labels',
-          @change="onChange"
-        )
+        draggable(handle=".move", animation="150", group="labels", :list="board.labels", @change="onChange")
           template(v-for="(label, index) in board.labels")
             section.list-container
               .list-header
@@ -38,7 +34,7 @@
                         span.dropdown-item.fake-link(@click="openChangeNameModal(label)")
                           i.dropdown-icon.fe.fe-edit-3
                           |  {{$t('board.change_name')}}
-                draggable(:options="{animation: 150, group:'tasks'}", :list="label.tasks", v-model="label.tasks", @change="onChange")
+                draggable(animation="150", group="tasks", :list="label.tasks", @change="onChange")
                   task(v-for="task in label.tasks", :key="task.id", @click.native="openEditTaskModal(task, index)", :task="task")
               .item-entry
                 .input-group
