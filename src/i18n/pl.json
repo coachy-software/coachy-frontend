@@ -287,6 +287,7 @@
     "thigh":  "Udo",
     "calf": "Łydka",
     "images": "Zdjęcia",
-    "submit": "Stwórz"
+    "submit": "Stwórz",
+    "400": "Plik jest za duży"
   }
 }

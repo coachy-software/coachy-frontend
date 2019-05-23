@@ -1,10 +1,10 @@
 import {minValue, required} from "vuelidate/src/validators";
 import axios from "axios";
 import {obtainImage} from "@/util/file.utils";
-import {multipartHeader} from "@/util/headers";
+import {multipartHeader, trimLocationHeader} from "@/util/headers";
 import {API_URL} from "@/util/constants";
-import HeadwayService from "@/service/headway.service";
-import {trimLocationHeader} from "../../../util/headers";
+import {notification} from "../../../util/toastr.utils";
+import {getErrorMessage} from "../../../util/validation.utils";
 
 export default {
   data: () => ({
@@ -67,8 +67,10 @@ export default {
           images: images
         };
 
-        HeadwayService.create(data).then((response) => this.$router.push(`/dashboard/headways/${trimLocationHeader(response.headers.location)}`));
+        let urlToPush = (response) => `/dashboard/headways/${trimLocationHeader(response.headers.location)}`;
+        this.$store.dispatch('headway/add', data).then((response) => this.$router.push(urlToPush(response)));
       })
+      .catch(error => notification.error(getErrorMessage('headway_create', error)));
     },
     imageClickHandler(index) {
       document.getElementById('image' + index).toggleAttribute('checked');
