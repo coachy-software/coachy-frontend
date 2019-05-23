@@ -290,7 +290,10 @@
     "submit": "Stwórz",
     "400": "Plik jest za duży",
     "go_on": "Przejdź",
-    "asc": "Od najstarszego do najnowszego",
-    "desc": "Od najnowszego do najstarszego"
+    "asc": "Rosnąco",
+    "desc": "Malejąco"
+  },
+  "headway": {
+    "page_title": "Podsumowanie "
   }
 }

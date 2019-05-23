@@ -14,4 +14,12 @@
     width: 92%;
     height: 92%;
   }
+
+  .no-items-info {
+    height: 100%;
+    margin-top: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>

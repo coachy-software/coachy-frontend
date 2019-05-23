@@ -22,6 +22,7 @@ import BurnedCalCalculatorView from '@/view/dashboard/burned_cal_calculator/Burn
 import DailyDemandCalculatorView from '@/view/dashboard/daily_demand_calculator/DailyDemandCalculatorView';
 import HeadwaysView from '@/view/dashboard/headways/HeadwaysView';
 import HeadwayCreateView from '@/view/dashboard/headway_create/HeadwayCreateView';
+import HeadwayView from '@/view/dashboard/headway/HeadwayView';
 
 export default [
   route('/dashboard', DashboardLayout, {
@@ -52,7 +53,8 @@ export default [
       route('burned-cal-calculator', BurnedCalCalculatorView),
       route('daily-demand-calculator', DailyDemandCalculatorView),
       route('headway-journals', HeadwaysView),
-      route('headway-journals/new', HeadwayCreateView)
+      route('headway-journals/new', HeadwayCreateView),
+      route('headway-journals/:id', HeadwayView)
     ]
   }, {requiresAuth: true})
 ]

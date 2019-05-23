@@ -1,0 +1,41 @@
+.container
+  .page-header
+    h1.page-title {{$t('headway.page_title')}}
+    .card.col-lg-12
+      .card-body
+        #dimmer.dimmer(:class="{'active': isLoading}")
+          .loader
+          .dimmer-content
+            .row
+              .col-sm-4
+                .col-sm-8
+                  .form-group
+                    h3
+                      |{{$t('headway_create.neck')}}
+                      p(style="color: red;") 0 cm
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.arm')}}
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.forearm')}}
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.wrist')}}
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.chest')}}
+              .col-sm-2
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.waist')}}
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.thigh')}}
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.calf')}}
+              .col-sm-4
+                .form-group
+              .col-sm-4
+                .col-md-12

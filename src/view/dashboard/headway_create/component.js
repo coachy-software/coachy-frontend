@@ -67,7 +67,7 @@ export default {
           images: images
         };
 
-        let urlToPush = (response) => `/dashboard/headways/${trimLocationHeader(response.headers.location)}`;
+        let urlToPush = (response) => `/dashboard/headway-journals/${trimLocationHeader(response.headers.location)}`;
         this.$store.dispatch('headway/add', data).then((response) => this.$router.push(urlToPush(response)));
       })
       .catch(error => notification.error(getErrorMessage('headway_create', error)));
