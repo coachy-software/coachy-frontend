@@ -3,12 +3,16 @@ import moment from "moment";
 export default {
   data: () => ({
     headways: [],
-    order: 'desc'
+    order: 'desc',
+    loading: true
   }),
   created() {
     let userIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
     this.$store.dispatch('headway/fetchAll', {identifier: userIdentifier})
-    .then(response => this.headways = response);
+    .then(response => {
+      this.headways = response;
+      this.loading = false;
+    });
   },
   computed: {
     sortedHeadways() {

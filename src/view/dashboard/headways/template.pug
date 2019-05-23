@@ -1,27 +1,31 @@
-.container
-  .page-header
-    h1.page-title {{this.$t('headways.page_title')}}
-    .page-options.d-flex
-      select.form-control.custom-select.w-auto.mr-3(v-model='order')
-        option(value='asc') {{$t('headway_create.asc')}}
-        option(value='desc') {{$t('headway_create.desc')}}
-      .btn-list.text-right
-        button.btn.btn-primary(type='button', @click="$router.push('/dashboard/headway-journals/new')")
-          i.fe.fe-plus.mr-2
-          | {{this.$t('headways.create')}}
-  .row.row-cards
-    template(v-for="headway in sortedHeadways")
-      .col-lg-3
-        .card.p-3
-          span.mb-3
-            img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
-            img.rounded.headway_image.default(v-else, src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg")
-          .dropdown-divider
-          .d-flex.align-items-center.px-2
-            div
-              span.icon
-                i.fe.fe-calendar.mr-1
-                | {{headway.createdAt | moment}}
-            .ml-auto.text-muted
-              button.btn.btn-secondary {{$t('headway_create.go_on')}}
+div
+  .container.text-center(v-if="loading")
+    .mt-9.dimmer.active
+      .loader
+  .container(v-else)
+    .page-header
+      h1.page-title {{this.$t('headways.page_title')}}
+      .page-options.d-flex
+        select.form-control.custom-select.w-auto.mr-3(v-model='order')
+          option(value='asc') {{$t('headway_create.asc')}}
+          option(value='desc') {{$t('headway_create.desc')}}
+        .btn-list.text-right
+          button.btn.btn-primary(type='button', @click="$router.push('/dashboard/headway-journals/new')")
+            i.fe.fe-plus.mr-2
+            | {{this.$t('headways.create')}}
+    .row.row-cards
+      template(v-for="headway in sortedHeadways")
+        .col-lg-3
+          .card.p-3
+            span.mb-3
+              img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
+              img.rounded.headway_image.default(v-else, src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg")
+            .dropdown-divider
+            .d-flex.align-items-center.px-2
+              div
+                span.icon
+                  i.fe.fe-calendar.mr-1
+                  | {{headway.createdAt | moment}}
+              .ml-auto.text-muted
+                button.btn.btn-secondary {{$t('headway_create.go_on')}}
 
