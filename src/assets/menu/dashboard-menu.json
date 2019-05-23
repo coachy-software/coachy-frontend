@@ -12,6 +12,12 @@
     "link": "/dashboard/schedules"
   },
   {
+    "name": "Dziennik progresu",
+    "icon": "fe fe-trending-up",
+    "type": "NORMAL",
+    "link": "/dashboard/headway-journals"
+  },
+  {
     "name": "Lista zadań",
     "icon": "fa fa-list",
     "type": "NORMAL",
@@ -21,7 +27,6 @@
     "name": "Kalkulatory",
     "icon": "fa fa-calculator",
     "type": "DROPDOWN",
-    "link": "/test",
     "dropdown": [
       {
         "name": "BMI",

@@ -288,6 +288,9 @@
     "calf": "Łydka",
     "images": "Zdjęcia",
     "submit": "Stwórz",
-    "400": "Plik jest za duży"
+    "400": "Plik jest za duży",
+    "go_on": "Przejdź",
+    "asc": "Od najstarszego do najnowszego",
+    "desc": "Od najnowszego do najstarszego"
   }
 }

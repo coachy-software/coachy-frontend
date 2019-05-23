@@ -11,7 +11,7 @@
   }
 
   .headway_image.default {
-    width: 65.715%;
-    height: 65.75%;
+    width: 92%;
+    height: 92%;
   }
 </style>
