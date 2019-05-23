@@ -1,4 +1,10 @@
-import {required} from "vuelidate/src/validators";
+import {minValue, required} from "vuelidate/src/validators";
+import axios from "axios";
+import {obtainImage} from "@/util/file.utils";
+import {multipartHeader} from "@/util/headers";
+import {API_URL} from "@/util/constants";
+import HeadwayService from "@/service/headway.service";
+import {trimLocationHeader} from "../../../util/headers";
 
 export default {
   data: () => ({
@@ -11,7 +17,8 @@ export default {
     waistMeasurement: 0,
     thighMeasurement: 0,
     calfMeasurement: 0,
-    images: []
+    images: [],
+    imagesPreviews: []
   }),
   computed: {
     isLoading() {
@@ -19,6 +26,67 @@ export default {
     }
   },
   validations: {
-    neckMeasurement: {required}
+    neckMeasurement: {required, minValue: minValue(10)},
+    armMeasurement: {required, minValue: minValue(10)},
+    forearmMeasurement: {required, minValue: minValue(10)},
+    wristMeasurement: {required, minValue: minValue(10)},
+    chestMeasurement: {required, minValue: minValue(10)},
+    waistMeasurement: {required, minValue: minValue(10)},
+    thighMeasurement: {required, minValue: minValue(10)},
+    calfMeasurement: {required, minValue: minValue(10)}
+  },
+  methods: {
+    uploadFiles() {
+      let promises = [];
+
+      return new Promise((resolve) => {
+        this.images.filter(image => image.active).forEach(image => {
+          let uploadPromise = axios.post(`${API_URL}/uploads`,
+              obtainImage(image.file, 'headway_images'),
+              multipartHeader()
+          ).then(response => response.headers.location);
+
+          promises.push(uploadPromise);
+        });
+
+        return resolve(Promise.all(promises));
+      });
+    },
+    createHeadway() {
+      this.uploadFiles().then(images => {
+        let data = {
+          ownerId: JSON.parse(localStorage.getItem('user')).identifier,
+          neckMeasurement: this.neckMeasurement,
+          armMeasurement: this.armMeasurement,
+          forearmMeasurement: this.forearmMeasurement,
+          wristMeasurement: this.wristMeasurement,
+          chestMeasurement: this.chestMeasurement,
+          waistMeasurement: this.waistMeasurement,
+          thighMeasurement: this.thighMeasurement,
+          calfMeasurement: this.calfMeasurement,
+          images: images
+        };
+
+        HeadwayService.create(data).then((response) => this.$router.push(`/dashboard/headways/${trimLocationHeader(response.headers.location)}`));
+      })
+    },
+    imageClickHandler(index) {
+      document.getElementById('image' + index).toggleAttribute('checked');
+      this.images[index].active = !this.images[index].active;
+    },
+    handleFileChange() {
+      this.images = Array.from(this.$refs.images.files);
+
+      for (let i = 0; i < this.images.length; i++) {
+        this.getBase64(this.images[i]);
+        this.images[i] = {file: this.images[i], active: true};
+      }
+    },
+    getBase64(file) {
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = () => this.imagesPreviews.push({file: reader.result, active: true});
+    }
   }
 }

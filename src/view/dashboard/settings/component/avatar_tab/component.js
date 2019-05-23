@@ -82,6 +82,6 @@ export default {
         this.filePreview = event.target.result;
       };
       reader.readAsDataURL(this.filePreview);
-    },
+    }
   }
 }

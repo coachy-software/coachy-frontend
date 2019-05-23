@@ -14,3 +14,7 @@ export function authorization() {
     }
   }
 }
+
+export function trimLocationHeader(location) {
+  return location.substring(location.lastIndexOf('/') + 1);
+}

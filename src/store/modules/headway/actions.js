@@ -16,7 +16,7 @@ const remove = ({commit, state}, payload) => {
 };
 
 const fetchAll = ({commit}, payload) => {
-  axios.get(`${API_URL}/headways/by-owner/${payload.identifier}`, authorization())
+  return axios.get(`${API_URL}/headways/by-owner/${payload.identifier}`, authorization())
   .then(response => setHeadways(commit, response.data))
 };
 

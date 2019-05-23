@@ -11,11 +11,12 @@
       .col-sm-6.col-lg-4
         .card.p-3
           span.mb-3
-            img.rounded(v-if="headway.images[0]", :src="headway.images[0]")
-            img.rounded(src="@/assets/images/no-image.png")
-          .d-flex.align-items-center.px-2
+            img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
+            img.rounded.headway_image.default(v-else, src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg")
+          .dropdown-divider
+          .d-flex.align-items-center.px-2.mt-2
             .ml-auto.text-muted
-              span.icon.d-none.d-md-inline-block.ml-3
+              span.icon
                 i.fe.fe-calendar.mr-1
-                | {{headway.createdAt}}
+                | {{headway.createdAt | moment}}
 

@@ -1,7 +1,7 @@
 .container
   .page-header
     h1.page-title {{$t('headways.page_title')}}
-  form
+  form(@submit.prevent="createHeadway")
     .card.col-lg-12
       .card-header
         h3.card-title {{$t('headway_create.page_title')}}
@@ -10,17 +10,55 @@
           .loader
           .dimmer-content
             .row
-              .col-md-8
-                .col-sm-2
+              .col-sm-2
+                .col-sm-8
                   .form-group
                     label.form-label {{$t('headway_create.neck')}}
-                    input.form-control(type='text', v-model="weight")
-                .col-sm-2
+                    input.form-control(type='number', v-model="neckMeasurement")
+                .col-sm-8
                   .form-group
-                    label.form-label {{$t('headway_create.neck')}}
-                    input.form-control(type='text', v-model="weight")
-              .col-md-4
+                    label.form-label {{$t('headway_create.arm')}}
+                    input.form-control(type='number', v-model="armMeasurement")
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.forearm')}}
+                    input.form-control(type='number', v-model="forearmMeasurement")
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.wrist')}}
+                    input.form-control(type='number', v-model="wristMeasurement")
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.chest')}}
+                    input.form-control(type='number', v-model="chestMeasurement")
+              .col-sm-2
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.waist')}}
+                    input.form-control(type='number', v-model="waistMeasurement")
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.thigh')}}
+                    input.form-control(type='number', v-model="thighMeasurement")
+                .col-sm-8
+                  .form-group
+                    label.form-label {{$t('headway_create.calf')}}
+                    input.form-control(type='number', v-model="calfMeasurement")
+              .col-sm-4
+                .form-group
+                  .custom-file
+                    label.form-label {{$t('headway_create.images')}}
+                    input(type="file", id="images", accept="image/png, image/jpeg", ref="images", @change="handleFileChange", multiple)
+                .form-group.mt-2
+                  .row.gutters-sm
+                    template(v-for="(image, index) in imagesPreviews")
+                      .col-6.col-sm-4
+                        label.imagecheck.mb-4
+                          input.imagecheck-input(:id="'image' + index", name='imagecheck', type='checkbox', :value="index" :checked="image.active", @click="imageClickHandler(index)")
+                          figure.imagecheck-figure
+                            img.imagecheck-image(style="height: 118px; weight: 118px", :src="image.file")
+              .col-sm-4
                 .col-md-12
                   img(src="@/assets/images/measurements.jpg")
       .card-footer.text-right
-        button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('create_schedule.create')}}
+        button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('headway_create.submit')}}

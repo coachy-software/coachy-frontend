@@ -275,5 +275,18 @@
   "headways": {
     "page_title": "Twój dziennik treningowy",
     "create": "Nowy"
+  },
+  "headway_create": {
+    "page_title": "Stwórz podsumowanie",
+    "neck": "Szyja / kark",
+    "arm": "Ramię",
+    "forearm": "Przedramie",
+    "wrist": "Nadgarstek",
+    "chest": "Klatka",
+    "waist": "Talia",
+    "thigh":  "Udo",
+    "calf": "Łydka",
+    "images": "Zdjęcia",
+    "submit": "Stwórz"
   }
 }
