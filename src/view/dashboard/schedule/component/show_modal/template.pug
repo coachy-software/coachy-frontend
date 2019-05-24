@@ -30,6 +30,6 @@ div
               Slide(v-for="image in exercise.template.exampleImages", :key="image")
                 img(:src="image", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
   sweet-modal(ref="exerciseImage")
-    img(:src="modalImage")
+    img.modal-image(:src="modalImage")
   sweet-modal(ref="exerciseBrief")
     pre.text-justify {{modalBriefDescription}}
