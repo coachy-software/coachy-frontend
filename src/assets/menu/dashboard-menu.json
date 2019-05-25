@@ -14,8 +14,17 @@
   {
     "name": "Dziennik progresu",
     "icon": "fe fe-trending-up",
-    "type": "NORMAL",
-    "link": "/dashboard/headway-journals"
+    "type": "DROPDOWN",
+    "dropdown": [
+      {
+        "name": "Bodybuilding",
+        "link": "/dashboard/headway-journals?type=BUILD"
+      },
+      {
+        "name": "Powerbuilding",
+        "link": "/dashboard/headway-journals?type=STRENGTH"
+      }
+    ]
   },
   {
     "name": "Lista zadań",
