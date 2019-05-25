@@ -20,12 +20,11 @@ export default {
     HeadwayService.fetchOne({identifier: this.$route.params.id})
     .then(response => {
       this.headway = response.data;
-      this.isLoading = false;
+      this.headway.measurements = this.headway.measurements.sort((a, b) => a.name.localeCompare(b.name));
 
       this.calculateProgress();
+      this.isLoading = false;
     });
-  },
-  mounted() {
   },
   methods: {
     openImageModal(modalImage) {
@@ -33,24 +32,17 @@ export default {
       this.$refs['image-modal'].open();
     },
     calculateProgress() {
-      let headways = JSON.parse(localStorage.getItem('headways')).filter(headway => headway.identifier !== this.headway.identifier);
-      let lastHeadway = headways[0];
+      let rawHeadways = JSON.parse(localStorage.getItem('headways'));
 
-      console.log(this.headway.forearmMeasurement)
-      console.log(lastHeadway.forearmMeasurement)
-      console.log(this.headway.forearmMeasurement - lastHeadway.forearmMeasurement)
+      if (rawHeadways.length > 1) {
+        let headways = rawHeadways.filter(headway => headway.identifier !== this.headway.identifier);
+        let lastHeadway = headways[0];
 
-      if (lastHeadway) {
-        this.progress = {
-          neckMeasurement: this.headway.neckMeasurement - lastHeadway.neckMeasurement,
-          armMeasurement: this.headway.armMeasurement - lastHeadway.armMeasurement,
-          forearmMeasurement: this.headway.forearmMeasurement - lastHeadway.forearmMeasurement,
-          wristMeasurement: this.headway.wristMeasurement - lastHeadway.wristMeasurement,
-          chestMeasurement: this.headway.chestMeasurement - lastHeadway.chestMeasurement,
-          waistMeasurement: this.headway.waistMeasurement - lastHeadway.waistMeasurement,
-          thighMeasurement: this.headway.thighMeasurement - lastHeadway.thighMeasurement,
-          calfMeasurement: this.headway.calfMeasurement - lastHeadway.calfMeasurement,
-        }
+        lastHeadway.measurements.sort((a, b) => a.name.localeCompare(b.name));
+        this.headway.measurements.forEach((measurement, index) => {
+          let difference = measurement.value - lastHeadway.measurements[index].value;
+          this.progress.push({name: measurement.name, value: difference})
+        });
       }
     }
   },

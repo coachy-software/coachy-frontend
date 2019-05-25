@@ -5,18 +5,19 @@ import {multipartHeader, trimLocationHeader} from "@/util/headers";
 import {API_URL} from "@/util/constants";
 import {notification} from "../../../util/toastr.utils";
 import {getErrorMessage} from "../../../util/validation.utils";
+import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
     ownerId: {},
-    neckMeasurement: 0,
-    armMeasurement: 0,
-    forearmMeasurement: 0,
-    wristMeasurement: 0,
-    chestMeasurement: 0,
-    waistMeasurement: 0,
-    thighMeasurement: 0,
-    calfMeasurement: 0,
+    neck: 0,
+    arm: 0,
+    forearm: 0,
+    wrist: 0,
+    chest: 0,
+    waist: 0,
+    thigh: 0,
+    calf: 0,
     images: [],
     imagesPreviews: []
   }),
@@ -26,14 +27,14 @@ export default {
     }
   },
   validations: {
-    neckMeasurement: {required, minValue: minValue(10)},
-    armMeasurement: {required, minValue: minValue(10)},
-    forearmMeasurement: {required, minValue: minValue(10)},
-    wristMeasurement: {required, minValue: minValue(10)},
-    chestMeasurement: {required, minValue: minValue(10)},
-    waistMeasurement: {required, minValue: minValue(10)},
-    thighMeasurement: {required, minValue: minValue(10)},
-    calfMeasurement: {required, minValue: minValue(10)}
+    neck: {required, minValue: minValue(10)},
+    arm: {required, minValue: minValue(10)},
+    forearm: {required, minValue: minValue(10)},
+    wrist: {required, minValue: minValue(10)},
+    chest: {required, minValue: minValue(10)},
+    waist: {required, minValue: minValue(10)},
+    thigh: {required, minValue: minValue(10)},
+    calf: {required, minValue: minValue(10)}
   },
   methods: {
     uploadFiles() {
@@ -56,14 +57,17 @@ export default {
       this.uploadFiles().then(images => {
         let data = {
           ownerId: JSON.parse(localStorage.getItem('user')).identifier,
-          neckMeasurement: this.neckMeasurement,
-          armMeasurement: this.armMeasurement,
-          forearmMeasurement: this.forearmMeasurement,
-          wristMeasurement: this.wristMeasurement,
-          chestMeasurement: this.chestMeasurement,
-          waistMeasurement: this.waistMeasurement,
-          thighMeasurement: this.thighMeasurement,
-          calfMeasurement: this.calfMeasurement,
+          measurements: [
+            {id: ObjectID.generate(), name: 'neck', value: this.neck},
+            {id: ObjectID.generate(), name: 'arm', value: this.arm},
+            {id: ObjectID.generate(), name: 'forearm', value: this.forearm},
+            {id: ObjectID.generate(), name: 'wrist', value: this.wrist},
+            {id: ObjectID.generate(), name: 'chest', value: this.chest},
+            {id: ObjectID.generate(), name: 'waist', value: this.waist},
+            {id: ObjectID.generate(), name: 'thigh', value: this.thigh},
+            {id: ObjectID.generate(), name: 'calf', value: this.calf}
+          ],
+          type: "BUILD",
           images: images
         };
 

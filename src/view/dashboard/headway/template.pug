@@ -9,63 +9,27 @@ div
           .dimmer-content
             .row
               .col-sm-2
-                .col-sm-8
+                .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index <= 5")
                   .form-group
-                    label.form-label {{$t('headway_create.neck')}}:
+                    label.form-label {{$t('headway_create.' + measurement.name)}}:
                     p
-                      | {{headway.neckMeasurement}}
-                      span.text-green.mr-1.ml-4 {{progress.neckMeasurement}}
-                      i.fe.fe-chevron-up.text-green
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.arm')}}:
-                    p
-                      | {{headway.armMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.forearm')}}:
-                    p
-                      | {{headway.forearmMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.wrist')}}:
-                    p
-                      | {{headway.wristMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.chest')}}:
-                    p
-                      | {{headway.chestMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
+                      | {{measurement.value}}
+                      span(v-if="progress.length !== 0")
+                        span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+                          i.fe.fe-chevron-up.text-green
+                        span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+                          i.fe.fe-chevron-down.text-red
               .col-sm-2
-                .col-sm-8
+                .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index > 5")
                   .form-group
-                    label.form-label {{$t('headway_create.waist')}}:
+                    label.form-label {{$t('headway_create.' + measurement.name)}}:
                     p
-                      | {{headway.waistMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.thigh')}}:
-                    p
-                      | {{headway.thighMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.calf')}}:
-                    p
-                      | {{headway.calfMeasurement}}
-                      span.text-red.mr-1.ml-4 -2
-                      i.fe.fe-chevron-down.text-red
+                      | {{measurement.value}}
+                      span(v-if="progress.length !== 0")
+                        span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+                          i.fe.fe-chevron-up.text-green
+                        span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+                          i.fe.fe-chevron-down.text-red
               .col-sm-8
                 template(v-if="headway.images && headway.images.length !== 0")
                   Carousel(:scrollPerPage="true" :perPageCustom="[[480, 2], [768, 3]]", :navigationEnabled="true", :autoplay="true").mt-5
