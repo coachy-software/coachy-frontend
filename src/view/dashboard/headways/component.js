@@ -1,6 +1,9 @@
 import moment from "moment";
 
 export default {
+  props: {
+    type: {required: true}
+  },
   data: () => ({
     headways: [],
     order: 'desc',

@@ -18,11 +18,12 @@ div
     .row.row-cards
       template(v-for="headway in sortedHeadways")
         .col-lg-3
-          .card.p-3
-            span.mb-3
-              img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
-              img.rounded.headway_image.default(v-else, src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg")
-            .dropdown-divider
+          .card.p-3(v-if="type === headway.type")
+            template(v-if="headway.type === 'BUILD'")
+              span.mb-3
+                img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
+                img.rounded.headway_image.default(v-else, src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg")
+              .dropdown-divider
             .d-flex.align-items-center.px-2
               div
                 span.icon

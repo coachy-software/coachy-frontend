@@ -24,6 +24,25 @@ import HeadwaysView from '@/view/dashboard/headways/HeadwaysView';
 import HeadwayCreateView from '@/view/dashboard/headway_create/HeadwayCreateView';
 import HeadwayView from '@/view/dashboard/headway/HeadwayView';
 
+const beforeEnterChat = (to, from, next) => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  if (to.params.id === user.identifier) {
+    next('/dashboard/chats');
+    return;
+  }
+
+  next();
+};
+
+const beforeEnterHeadways = (to, from, next) => {
+  if (to.query.type !== 'BUILD' && to.query.type !== 'STRENGTH') {
+    next(from.path);
+    return;
+  }
+
+  next();
+};
+
 export default [
   route('/dashboard', DashboardLayout, {
     children: [
@@ -52,19 +71,9 @@ export default [
       route('bmr-calculator', BmrCalculatorView),
       route('burned-cal-calculator', BurnedCalCalculatorView),
       route('daily-demand-calculator', DailyDemandCalculatorView),
-      route('headway-journals', HeadwaysView),
+      route('headway-journals', HeadwaysView, {props: (route) => ({type: route.query.type}), beforeEnter: beforeEnterHeadways}),
       route('headway-journals/new', HeadwayCreateView),
       route('headway-journals/:id', HeadwayView)
     ]
   }, {requiresAuth: true})
 ]
-
-function beforeEnterChat(to, from, next) {
-  let user = JSON.parse(localStorage.getItem('user'));
-  if (to.params.id === user.identifier) {
-    next('/dashboard/chats');
-    return;
-  }
-
-  next();
-}
