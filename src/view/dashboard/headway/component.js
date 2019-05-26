@@ -1,28 +1,29 @@
 import HeadwayService from "@/service/headway.service";
-import {Carousel, Slide} from 'vue-carousel';
-import {SweetModal, SweetModalTab} from "sweet-modal-vue";
 import moment from "moment";
+import Strength from "./component/strength/StrengthView";
+import Build from "./component/build/BuildView";
+import {SweetModal, SweetModalTab} from "sweet-modal-vue";
 
 export default {
   data: () => ({
-    isLoading: true,
     headway: {},
+    isLoading: true,
     modalImage: '',
-    progress: []
+    isBuildLoading: true
   }),
   components: {
-    Carousel,
-    Slide,
+    Build,
+    Strength,
     sweetModal: SweetModal,
     sweetModalTab: SweetModalTab
   },
-  created() {
+  mounted() {
     HeadwayService.fetchOne({identifier: this.$route.params.id})
     .then(response => {
       this.headway = response.data;
       this.headway.measurements = this.headway.measurements.sort((a, b) => a.name.localeCompare(b.name));
 
-      this.calculateProgress();
+      this.isBuildLoading = false;
       this.isLoading = false;
     });
   },
@@ -30,20 +31,6 @@ export default {
     openImageModal(modalImage) {
       this.modalImage = modalImage;
       this.$refs['image-modal'].open();
-    },
-    calculateProgress() {
-      let rawHeadways = JSON.parse(localStorage.getItem('headways'));
-
-      if (rawHeadways.length > 1) {
-        let headways = rawHeadways.filter(headway => headway.identifier !== this.headway.identifier);
-        let lastHeadway = headways[0];
-
-        lastHeadway.measurements.sort((a, b) => a.name.localeCompare(b.name));
-        this.headway.measurements.forEach((measurement, index) => {
-          let difference = measurement.value - lastHeadway.measurements[index].value;
-          this.progress.push({name: measurement.name, value: difference})
-        });
-      }
     }
   },
   filters: {

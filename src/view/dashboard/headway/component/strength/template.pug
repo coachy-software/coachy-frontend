@@ -1,0 +1,9 @@
+.row(v-if="headway.type === 'STRENGTH'")
+  .col-sm-2
+    .col-sm-8(v-for="(measurement, index) in headway.measurements")
+      .form-group
+        label.form-label {{measurement.name}}:
+        p
+          | {{measurement.value}}
+  .col-sm-2
+  .col-sm-8

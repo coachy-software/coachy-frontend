@@ -1,0 +1,29 @@
+.row(v-if="headway.type === 'BUILD'")
+  .col-sm-2
+    .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index <= 5")
+      .form-group
+        label.form-label {{$t('headway_create.' + measurement.name)}}:
+        p
+          | {{measurement.value}}
+          span(v-if="progress.length !== 0")
+            span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+              i.fe.fe-chevron-up.text-green
+            span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+              i.fe.fe-chevron-down.text-red
+  .col-sm-2
+    .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index > 5")
+      .form-group
+        label.form-label {{$t('headway_create.' + measurement.name)}}:
+        p
+          | {{measurement.value}}
+          span(v-if="progress.length !== 0")
+            span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+              i.fe.fe-chevron-up.text-green
+            span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+              i.fe.fe-chevron-down.text-red
+  .col-sm-8
+    template(v-if="headway.images && headway.images.length !== 0")
+      Carousel(:scrollPerPage="true" :perPageCustom="[[480, 2], [768, 3]]", :navigationEnabled="true", :autoplay="true").mt-5
+        Slide(v-for="image in headway.images", :key="image")
+          img(:src="image", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
+    h1.text-center(v-else) {{$t('headway.no_images')}}
