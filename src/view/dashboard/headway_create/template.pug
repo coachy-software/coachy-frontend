@@ -9,7 +9,13 @@
         #dimmer.dimmer(:class="{'active': isLoading}")
           .loader
           .dimmer-content
-            .row
+            .col-sm-4
+              .form-group
+                label.form-label {{$t('headway_create.type')}}
+                select.form-control.custom-select(v-model="type")
+                  option(name="type", value="BUILD") Bodybuilding
+                  option(name="type", value="STRENGTH") Powerbuilding
+            .row(v-if="type === 'BUILD'")
               .col-sm-2
                 .col-sm-8
                   .form-group
@@ -60,5 +66,37 @@
               .col-sm-4
                 .col-md-12
                   img(src="@/assets/images/measurements.jpg")
+            .row(v-else)
+              .col-sm-5
+                .col-sm-12
+                  .form-group
+                    .custom-switches-stacked.mt-5
+                      label.custom-switch
+                        input.custom-switch-input(type='checkbox', name='copy_from', v-model="copyFromSchedule")
+                        span.custom-switch-indicator
+                        span.custom-switch-description {{$t('headway_create.copy_from')}}
+                template(v-if="!copyFromSchedule")
+                  .col-sm-12(v-for="measurement in measurements")
+                    .form-group
+                      .row.gutters-xs
+                        .col.col-sm-4
+                          input.form-control(type="text", placeholder="Nazwa boju", v-model="measurement.name", required)
+                        .col.col-sm-3
+                          input.form-control(type='text', placeholder="Weight", v-model="measurement.value", required)
+                        .col.col-sm-3
+                          input.form-control(type='text', placeholder="Reps", v-model="measurement.reps", required)
+                  .col-sm-12
+                    form(@submit.prevent="appendToMeasurements")
+                      .form-group
+                        .row.gutters-xs
+                          .col.col-sm-4
+                            input.form-control(type="text", placeholder="Nazwa boju", v-model='name', required)
+                          .col.col-sm-3
+                            input.form-control(type='number', placeholder="Weight", v-model='weight', required)
+                          .col.col-sm-3
+                            input.form-control(type='number', placeholder="Reps", v-model="reps", required)
+                          span.col-auto
+                            button.btn.btn-secondary(type='submit')
+                              i.fe.fe-plus
       .card-footer.text-right
-        button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('headway_create.submit')}}
+        button.btn.btn-primary(type='submit', :disabled="(type === 'BUILD' && $v.$invalid) || measurements.length <= 0") {{$t('headway_create.submit')}}

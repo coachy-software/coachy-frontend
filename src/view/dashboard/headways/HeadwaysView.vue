@@ -22,4 +22,7 @@
     align-items: center;
     justify-content: center;
   }
+  .hidden {
+    display: none;
+  }
 </style>

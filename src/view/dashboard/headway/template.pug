@@ -7,7 +7,7 @@ div
         #dimmer.dimmer(:class="{'active': isLoading}")
           .loader
           .dimmer-content
-            .row
+            .row(v-if="headway.type === 'BUILD'")
               .col-sm-2
                 .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index <= 5")
                   .form-group
@@ -36,5 +36,20 @@ div
                     Slide(v-for="image in headway.images", :key="image")
                       img(:src="image", @click=`openImageModal(image)`, style="width: 300px; max-width: 100%;")
                 h1.text-center(v-else) {{$t('headway.no_images')}}
+            .row(v-else)
+              .col-sm-2
+                .col-sm-8(v-for="(measurement, index) in headway.measurements")
+                  .form-group
+                    label.form-label {{measurement.name}}:
+                    p
+                      | {{measurement.value}}
+                      span(v-if="progress.length !== 0")
+                        span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+                          i.fe.fe-chevron-up.text-green
+                        span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+                          i.fe.fe-chevron-down.text-red
+              .col-sm-2
+              .col-sm-8
+                // TODO chart
   sweet-modal(ref="image-modal")
     img.modal-image(:src="modalImage")

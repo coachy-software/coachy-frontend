@@ -274,7 +274,10 @@
   },
   "headways": {
     "page_title": "Twój dziennik treningowy",
-    "create": "Nowy"
+    "create": "Nowy",
+    "go_on": "Przejdź",
+    "asc": "Rosnąco",
+    "desc": "Malejąco"
   },
   "headway_create": {
     "page_title": "Stwórz podsumowanie",
@@ -289,9 +292,8 @@
     "images": "Zdjęcia",
     "submit": "Stwórz",
     "400": "Plik jest za duży",
-    "go_on": "Przejdź",
-    "asc": "Rosnąco",
-    "desc": "Malejąco"
+    "type": "Typ",
+    "copy_from": "Skopiuj z twojego planu treningowego"
   },
   "headway": {
     "page_title": "Podsumowanie ",

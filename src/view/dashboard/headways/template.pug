@@ -7,8 +7,8 @@ div
       h1.page-title {{this.$t('headways.page_title')}}
       .page-options.d-flex
         select.form-control.custom-select.w-auto(v-model='order')
-          option(value='asc') {{$t('headway_create.asc')}}
-          option(value='desc') {{$t('headway_create.desc')}}
+          option(value='asc') {{$t('headways.asc')}}
+          option(value='desc') {{$t('headways.desc')}}
         .btn-list.text-right.ml-2
           button.btn.btn-primary(type='button', @click="$router.push('/dashboard/headway-journals/new')")
             i.fe.fe-plus.mr-2
@@ -17,8 +17,8 @@ div
       h2.text-center.text-default Nie masz żadnych podsumowań
     .row.row-cards
       template(v-for="headway in sortedHeadways")
-        .col-lg-3
-          .card.p-3(v-if="type === headway.type")
+        .col-lg-3(v-if="type === headway.type")
+          .card.p-3
             template(v-if="headway.type === 'BUILD'")
               span.mb-3
                 img.rounded.headway_image(v-if="headway.images[0]", :src="headway.images[0]")
@@ -31,4 +31,4 @@ div
                   | {{headway.createdAt | moment}}
               .ml-auto.text-muted
                 router-link(:to="'/dashboard/headway-journals/' + headway.identifier")
-                  button.btn.btn-secondary {{$t('headway_create.go_on')}}
+                  button.btn.btn-secondary {{$t('headways.go_on')}}

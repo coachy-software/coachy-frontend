@@ -3,8 +3,8 @@ import axios from "axios";
 import {obtainImage} from "@/util/file.utils";
 import {multipartHeader, trimLocationHeader} from "@/util/headers";
 import {API_URL} from "@/util/constants";
-import {notification} from "../../../util/toastr.utils";
-import {getErrorMessage} from "../../../util/validation.utils";
+import {notification} from "@/util/toastr.utils";
+import {getErrorMessage} from "@/util/validation.utils";
 import ObjectID from "bson-objectid";
 
 export default {
@@ -18,8 +18,14 @@ export default {
     waist: 0,
     thigh: 0,
     calf: 0,
+    type: 'BUILD',
     images: [],
-    imagesPreviews: []
+    imagesPreviews: [],
+    copyFromSchedule: false,
+    measurements: [],
+    name: '',
+    weight: '',
+    reps: ''
   }),
   computed: {
     isLoading() {
@@ -37,6 +43,9 @@ export default {
     calf: {required, minValue: minValue(10)}
   },
   methods: {
+    appendToMeasurements() {
+      this.measurements.push({id: ObjectID.generate(), name: this.name, value: this.weight, reps: this.reps})
+    },
     uploadFiles() {
       let promises = [];
 
@@ -57,19 +66,21 @@ export default {
       this.uploadFiles().then(images => {
         let data = {
           ownerId: JSON.parse(localStorage.getItem('user')).identifier,
-          measurements: [
-            {id: ObjectID.generate(), name: 'neck', value: this.neck},
-            {id: ObjectID.generate(), name: 'arm', value: this.arm},
-            {id: ObjectID.generate(), name: 'forearm', value: this.forearm},
-            {id: ObjectID.generate(), name: 'wrist', value: this.wrist},
-            {id: ObjectID.generate(), name: 'chest', value: this.chest},
-            {id: ObjectID.generate(), name: 'waist', value: this.waist},
-            {id: ObjectID.generate(), name: 'thigh', value: this.thigh},
-            {id: ObjectID.generate(), name: 'calf', value: this.calf}
-          ],
-          type: "BUILD",
+          type: this.type,
           images: images
         };
+        
+        let buildMeasurements = [
+          {id: ObjectID.generate(), name: 'neck', value: this.neck},
+          {id: ObjectID.generate(), name: 'arm', value: this.arm},
+          {id: ObjectID.generate(), name: 'forearm', value: this.forearm},
+          {id: ObjectID.generate(), name: 'wrist', value: this.wrist},
+          {id: ObjectID.generate(), name: 'chest', value: this.chest},
+          {id: ObjectID.generate(), name: 'waist', value: this.waist},
+          {id: ObjectID.generate(), name: 'thigh', value: this.thigh},
+          {id: ObjectID.generate(), name: 'calf', value: this.calf}
+        ];
+        this.type === 'BUILD' ? data.measurements = buildMeasurements : data.measurements = this.measurements;
 
         let urlToPush = (response) => `/dashboard/headway-journals/${trimLocationHeader(response.headers.location)}`;
         this.$store.dispatch('headway/add', data).then((response) => this.$router.push(urlToPush(response)));
