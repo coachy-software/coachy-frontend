@@ -15,57 +15,7 @@
                 select.form-control.custom-select(v-model="type")
                   option(name="type", value="BUILD") Bodybuilding
                   option(name="type", value="STRENGTH") Powerbuilding
-            .row(v-if="type === 'BUILD'")
-              .col-sm-2
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.neck')}}
-                    input.form-control(type='number', v-model="neck")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.arm')}}
-                    input.form-control(type='number', v-model="arm")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.forearm')}}
-                    input.form-control(type='number', v-model="forearm")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.wrist')}}
-                    input.form-control(type='number', v-model="wrist")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.chest')}}
-                    input.form-control(type='number', v-model="chest")
-              .col-sm-2
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.waist')}}
-                    input.form-control(type='number', v-model="waist")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.thigh')}}
-                    input.form-control(type='number', v-model="thigh")
-                .col-sm-8
-                  .form-group
-                    label.form-label {{$t('headway_create.calf')}}
-                    input.form-control(type='number', v-model="calf")
-              .col-sm-4
-                .form-group
-                  .custom-file
-                    label.form-label {{$t('headway_create.images')}}
-                    input(type="file", id="images", accept="image/png, image/jpeg", ref="images", @change="handleFileChange", multiple)
-                .form-group.mt-2
-                  .row.gutters-sm
-                    template(v-for="(image, index) in imagesPreviews")
-                      .col-6.col-sm-4
-                        label.imagecheck.mb-4
-                          input.imagecheck-input(:id="'image' + index", name='imagecheck', type='checkbox', :value="index" :checked="image.active", @click="imageClickHandler(index)")
-                          figure.imagecheck-figure
-                            img.imagecheck-image(style="height: 118px; weight: 118px", :src="image.file")
-              .col-sm-4
-                .col-md-12
-                  img(src="@/assets/images/measurements.jpg")
+            Build(v-if="type === 'BUILD'")
             .row(v-else)
               .col-sm-5
                 .col-sm-12
@@ -99,4 +49,4 @@
                             button.btn.btn-secondary(type='submit')
                               i.fe.fe-plus
       .card-footer.text-right
-        button.btn.btn-primary(type='submit', :disabled="(type === 'BUILD' && $v.$invalid) || measurements.length <= 0") {{$t('headway_create.submit')}}
+        button.btn.btn-primary(type='submit') {{$t('headway_create.submit')}}

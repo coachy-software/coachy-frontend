@@ -1,0 +1,23 @@
+.row
+  template(v-for="_index in 2")
+    .col-sm-2
+      .col-sm-8(v-for="(measurement, index) in measurements", v-if="(index <= 5 && _index === 1) || (index > 5 && _index !== 1)")
+        .form-group
+          label.form-label {{$t('headway_create.' + measurement.name)}}
+          input.form-control(type='number', v-model="measurement.value", min=10)
+  .col-sm-4
+    .form-group
+      .custom-file
+        label.form-label {{$t('headway_create.images')}}
+        input(type="file", id="images", accept="image/png, image/jpeg", ref="images", @change="handleFileChange", multiple)
+    .form-group.mt-2
+      .row.gutters-sm
+        template(v-for="(image, index) in imagesPreviews")
+          .col-6.col-sm-4
+            label.imagecheck.mb-4
+              input.imagecheck-input(:id="'image' + index", name='imagecheck', type='checkbox', :value="index" :checked="image.active", @click="imageClickHandler(index)")
+              figure.imagecheck-figure
+                img.imagecheck-image(style="height: 118px; weight: 118px", :src="image.file")
+  .col-sm-4
+    .col-md-12
+      img(src="@/assets/images/measurements.jpg")
