@@ -15,7 +15,7 @@
                 select.form-control.custom-select(v-model="type")
                   option(name="type", value="BUILD") Bodybuilding
                   option(name="type", value="STRENGTH") Powerbuilding
-            Build(v-if="type === 'BUILD'")
-            Strength(v-else)
+            Build(v-if="type === 'BUILD'", ref="build")
+            Strength(v-else, ref="strength")
       .card-footer.text-right
         button.btn.btn-primary(type='submit') {{$t('headway_create.submit')}}
