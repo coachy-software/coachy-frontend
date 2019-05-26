@@ -9,7 +9,6 @@ export default {
     headway: {},
     isLoading: true,
     modalImage: '',
-    isBuildLoading: true
   }),
   components: {
     Build,
@@ -22,8 +21,6 @@ export default {
     .then(response => {
       this.headway = response.data;
       this.headway.measurements = this.headway.measurements.sort((a, b) => a.name.localeCompare(b.name));
-
-      this.isBuildLoading = false;
       this.isLoading = false;
     });
   },

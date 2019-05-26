@@ -7,7 +7,7 @@ div
         #dimmer.dimmer(:class="{'active': isLoading}")
           .loader
           .dimmer-content
-            Build(v-if="!isBuildLoading && headway.type === 'BUILD'", :headway="headway")
+            Build(v-if="!isLoading && headway.type === 'BUILD'", :headway="headway")
             Strength(:headway="headway")
   sweet-modal(ref="image-modal")
     img.modal-image(:src="modalImage")
