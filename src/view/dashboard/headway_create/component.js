@@ -6,21 +6,16 @@ import {notification} from "@/util/toastr.utils";
 import {getErrorMessage} from "@/util/validation.utils";
 import ObjectID from "bson-objectid";
 import Build from "./component/build/BuildView";
+import Strength from "./component/strength/StrengthView";
+
 
 export default {
   data: () => ({
-    ownerId: {},
-    type: 'BUILD',
-    images: [],
-    imagesPreviews: [],
-    copyFromSchedule: false,
-    measurements: [],
-    name: '',
-    weight: '',
-    reps: ''
+    type: 'BUILD'
   }),
   components: {
-    Build
+    Build,
+    Strength
   },
   computed: {
     isLoading() {
@@ -28,9 +23,6 @@ export default {
     }
   },
   methods: {
-    appendToMeasurements() {
-      this.measurements.push({id: ObjectID.generate(), name: this.name, value: this.weight, reps: this.reps})
-    },
     uploadFiles() {
       let promises = [];
 

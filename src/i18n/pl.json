@@ -293,7 +293,10 @@
     "submit": "Stwórz",
     "400": "Plik jest za duży",
     "type": "Typ",
-    "copy_from": "Skopiuj z twojego planu treningowego"
+    "copy_from": "Skopiuj z twojego planu treningowego",
+    "choose_schedule": "Wybierz plan",
+    "choose_day": "Wybierz dzień",
+    "results": "Wyniki"
   },
   "headway": {
     "page_title": "Podsumowanie ",
