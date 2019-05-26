@@ -48,17 +48,18 @@
           select.form-control.custom-select(v-model="typedDay", @change="onDaysChange")
             option(value="default", disabled, selected) Select your option
             option(v-for="(day, index) in typedScheduleValue.days", name="days", :value="index") {{day.name}}
-      .col-sm-12
-        label.form-label {{$t('headway_create.results')}}
-      .col-sm-12(v-if="typedDay !== 'default'", v-for="measurement in measurements")
-        .form-group
-          .row.gutters-xs
-            .col.col-sm-4
-              input.form-control(type="text", placeholder="Nazwa boju", v-model="measurement.name", required)
-            .col.col-sm-3
-              input.form-control(type='text', placeholder="Weight", v-model="measurement.value", required)
-            .col.col-sm-3
-              input.form-control(type='text', placeholder="Reps", v-model="measurement.reps", required)
-            span.col-auto
-              button.btn.btn-secondary(type='button', @click="removeFromMeasurements(measurement.id)")
-                i.fe.fe-minus
+      template(v-if="typedDay !== 'default' && measurements.length !== 0")
+        .col-sm-12
+          label.form-label {{$t('headway_create.results')}}
+        .col-sm-12(v-for="measurement in measurements")
+          .form-group
+            .row.gutters-xs
+              .col.col-sm-4
+                input.form-control(type="text", placeholder="Nazwa boju", v-model="measurement.name", required)
+              .col.col-sm-3
+                input.form-control(type='text', placeholder="Weight", v-model="measurement.value", required)
+              .col.col-sm-3
+                input.form-control(type='text', placeholder="Reps", v-model="measurement.reps", required)
+              span.col-auto
+                button.btn.btn-secondary(type='button', @click="removeFromMeasurements(measurement.id)")
+                  i.fe.fe-minus
