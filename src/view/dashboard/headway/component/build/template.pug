@@ -1,27 +1,17 @@
 div
   .row
-    .col-sm-2
-      .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index <= 5")
-        .form-group
-          label.form-label {{$t('headway_create.' + measurement.name)}}:
-          p
-            | {{measurement.value}}
-            span(v-if="progress.length !== 0")
-              span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
-                i.fe.fe-chevron-up.text-green
-              span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
-                i.fe.fe-chevron-down.text-red
-    .col-sm-2
-      .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="index > 5")
-        .form-group
-          label.form-label {{$t('headway_create.' + measurement.name)}}:
-          p
-            | {{measurement.value}}
-            span(v-if="progress.length !== 0")
-              span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
-                i.fe.fe-chevron-up.text-green
-              span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
-                i.fe.fe-chevron-down.text-red
+    template(v-for="_index in 2")
+      .col-sm-2
+        .col-sm-8(v-for="(measurement, index) in headway.measurements", v-if="(index <= (headway.measurements.length / 2) && _index === 1) || (index > (headway.measurements.length / 2) && _index !== 1)")
+          .form-group
+            label.form-label {{$t('headway_create.' + measurement.name)}}:
+            p
+              | {{measurement.value}}
+              span(v-if="progress.length !== 0")
+                span.text-green.mr-1.ml-4(v-if="progress[index].value > 0") {{progress[index].value}}
+                  i.fe.fe-chevron-up.text-green
+                span.text-red.mr-1.ml-4(v-else-if="progress[index].value < 0") {{progress[index].value}}
+                  i.fe.fe-chevron-down.text-red
     .col-sm-8
       template(v-if="headway.images && headway.images.length !== 0")
         Carousel(:scrollPerPage="true" :perPageCustom="[[480, 2], [768, 3]]", :navigationEnabled="true", :autoplay="true").mt-5
