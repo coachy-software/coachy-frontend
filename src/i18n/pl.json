@@ -277,7 +277,8 @@
     "create": "Nowy",
     "go_on": "Przejdź",
     "asc": "Rosnąco",
-    "desc": "Malejąco"
+    "desc": "Malejąco",
+    "no_results": "Nie masz żadnych podsumowań"
   },
   "headway_create": {
     "page_title": "Stwórz podsumowanie",
@@ -296,10 +297,16 @@
     "copy_from": "Skopiuj z twojego planu treningowego",
     "choose_schedule": "Wybierz plan",
     "choose_day": "Wybierz dzień",
-    "results": "Wyniki"
+    "results": "Wyniki",
+    "exercise_name": "Nazwa boju",
+    "weight": "Ciężar",
+    "reps": "Powtórzenia",
+    "default_select": "Wybierz swoją opcję"
   },
   "headway": {
     "page_title": "Podsumowanie ",
-    "no_images": "Nie masz żadnych zdjęć"
+    "no_images": "Nie masz żadnych zdjęć",
+    "volume": "objętości",
+    "choose_exercise_alert": "Wybierz ćwiczenie, którego progres chcesz zobaczyć za pomocą tej ikonki"
   }
 }

@@ -36,7 +36,7 @@ export default {
         data: {columns: this.columns, type: 'area', names: {'data1': this.name}},
         axis: {x: {padding: {left: 0, right: 0}, show: false}},
         legend: {position: 'inset', padding: 0, inset: {anchor: 'top-left', x: 20, y: 8, step: 10}},
-        tooltip: {format: {title: () => '', value: (value) => value + " kg objętości"}},
+        tooltip: {format: {title: () => '', value: (value) => value + ' kg ' + this.$i18n.t('headway.volume')}},
         padding: {bottom: 0, left: -1, right: -1},
         point: {show: false}
       };

@@ -11,5 +11,5 @@
   .col-sm-8
     .alert.alert-icon.alert-warning(role='alert')
       i.fe.fe-alert-triangle.mr-2(aria-hidden='true')
-      | Wybierz ćwiczenie, którego progres chcesz zobaczyć za pomocą tej ikonki #[span.fa.fa-area-chart.ml-2(style="color: #2b2b2b;")]
+      | {{$t('headway.choose_exercise_alert')}} #[span.fa.fa-area-chart.ml-2(style="color: #2b2b2b;")]
     vue-c3.c3#chart-development-activity(:handler="handler")

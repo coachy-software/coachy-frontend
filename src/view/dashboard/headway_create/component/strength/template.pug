@@ -14,11 +14,11 @@
         .form-group
           .row.gutters-xs
             .col.col-sm-4
-              input.form-control(type="text", placeholder="Nazwa boju", v-model="measurement.name", required)
+              input.form-control(type="text", :placeholder="$t('headway_create.exercise_name')", v-model="measurement.name", required)
             .col.col-sm-3
-              input.form-control(type='text', placeholder="Weight", v-model="measurement.value", required)
+              input.form-control(type='text', :placeholder="$t('headway_create.weight')", v-model="measurement.value", required)
             .col.col-sm-3
-              input.form-control(type='text', placeholder="Reps", v-model="measurement.reps", required)
+              input.form-control(type='text', :placeholder="$t('headway_create.reps')", v-model="measurement.reps", required)
             span.col-auto
               button.btn.btn-secondary(type='button', @click="removeFromMeasurements(measurement.id)")
                 i.fe.fe-minus
@@ -27,11 +27,11 @@
           .form-group
             .row.gutters-xs
               .col.col-sm-4
-                input.form-control(type="text", placeholder="Nazwa boju", v-model='name', required)
+                input.form-control(type="text", :placeholder="$t('headway_create.exercise_name')", v-model='name', required)
               .col.col-sm-3
-                input.form-control(type='number', placeholder="Weight", v-model='weight', required)
+                input.form-control(type='number', :placeholder="$t('headway_create.weight')", v-model='weight', required)
               .col.col-sm-3
-                input.form-control(type='number', placeholder="Reps", v-model="reps", required)
+                input.form-control(type='number', :placeholder="$t('headway_create.reps')", v-model="reps", required)
               span.col-auto
                 button.btn.btn-secondary(type='submit')
                   i.fe.fe-plus
@@ -40,13 +40,13 @@
         .form-group
           label.form-label {{$t('headway_create.choose_schedule')}}
           select.form-control.custom-select(v-model="typedSchedule", @change="onScheduleChange")
-            option(value="default", disabled, selected) Select your option
+            option(value="default", disabled, selected) {{$t('headway_create.default_select')}}
             option(v-for="schedule in schedules", name="schedule", :value="schedule.identifier") {{schedule.name}}
       .col-sm-12(v-if="typedSchedule !== 'default'")
         .form-group
           label.form-label {{$t('headway_create.choose_day')}}
           select.form-control.custom-select(v-model="typedDay", @change="onDaysChange")
-            option(value="default", disabled, selected) Select your option
+            option(value="default", disabled, selected) {{$t('headway_create.default_select')}}
             option(v-for="(day, index) in typedScheduleValue.days", name="days", :value="index") {{day.name}}
       template(v-if="typedDay !== 'default' && measurements.length !== 0")
         .col-sm-12
@@ -55,11 +55,11 @@
           .form-group
             .row.gutters-xs
               .col.col-sm-4
-                input.form-control(type="text", placeholder="Nazwa boju", v-model="measurement.name", required)
+                input.form-control(type="text", :placeholder="$t('headway_create.exercise_name')", v-model="measurement.name", required)
               .col.col-sm-3
-                input.form-control(type='text', placeholder="Weight", v-model="measurement.value", required)
+                input.form-control(type='text', :placeholder="$t('headway_create.weight')", v-model="measurement.value", required)
               .col.col-sm-3
-                input.form-control(type='text', placeholder="Reps", v-model="measurement.reps", required)
+                input.form-control(type='text', :placeholder="$t('headway_create.reps')", v-model="measurement.reps", required)
               span.col-auto
                 button.btn.btn-secondary(type='button', @click="removeFromMeasurements(measurement.id)")
                   i.fe.fe-minus

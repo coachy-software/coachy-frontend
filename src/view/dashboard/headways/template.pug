@@ -14,7 +14,7 @@ div
             i.fe.fe-plus.mr-2
             | {{this.$t('headways.create')}}
     .no-items-info(v-if="headways.length === 0")
-      h2.text-center.text-default Nie masz żadnych podsumowań
+      h2.text-center.text-default {{$t('headways.no_results')}}
     .row.row-cards
       template(v-for="headway in sortedHeadways")
         .col-lg-3(v-if="type === headway.type")
