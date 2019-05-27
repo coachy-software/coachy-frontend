@@ -24,6 +24,8 @@ export default {
 
       let headways = JSON.parse(localStorage.getItem('headways'));
 
+      headways = headways.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
       headways.filter(headway => headway.type === 'STRENGTH').forEach(headway => {
         headway.measurements.filter(measurement => measurement.name === name).forEach(measurement => {
           this.columns[0].push(measurement.value * measurement.reps);
