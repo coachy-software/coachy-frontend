@@ -13,7 +13,7 @@ const add = async ({commit, state}, payload) => {
     let request = await axios.post(`${API_URL}/headways`, payload, authorization());
 
     headways.push(payload);
-    setHeadways(commit, payload);
+    setHeadways(commit, headways);
     commit(SET_STATUS, NOT_LOADING, {root: true});
 
     return request;

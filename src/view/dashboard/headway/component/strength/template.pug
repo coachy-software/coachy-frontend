@@ -1,10 +1,15 @@
 .row
-  .col-sm-2
-    .col-sm-8(v-for="(measurement, index) in headway.measurements")
-      .form-group
-        label.form-label {{measurement.name}}:
-        p
-          | {{measurement.value}}
-  .col-sm-2
+  template(v-for="_index in 2")
+    .col-sm-2
+      .col-sm-12(v-for="(measurement, index) in headway.measurements", v-if="(index <= (headway.measurements.length / 2) && _index === 1) || (index > (headway.measurements.length / 2) && _index !== 1)")
+        .form-group
+          label.form-label {{measurement.name}}:
+          p
+            | {{measurement.value}} kg * {{measurement.reps}}
+            span.text-green.mr-1.ml-4(@click="changeChart(measurement.name)")
+              i.fa.fa-area-chart.fake-link(style="color: #2b2b2b;")
   .col-sm-8
+    .alert.alert-icon.alert-warning(role='alert')
+      i.fe.fe-alert-triangle.mr-2(aria-hidden='true')
+      | Wybierz ćwiczenie, którego progres chcesz zobaczyć za pomocą tej ikonki #[span.fa.fa-area-chart.ml-2(style="color: #2b2b2b;")]
     vue-c3.c3#chart-development-activity(:handler="handler")
