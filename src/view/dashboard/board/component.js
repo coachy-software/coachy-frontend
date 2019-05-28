@@ -1,6 +1,7 @@
 import Task from './component/task/Task';
 import EditTaskModal from './component/edit_task/EditTaskModal';
 import ChangeNameModal from './component/change_name/ChangeNameModal';
+import DeleteModal from './component/delete/DeleteModal';
 import draggable from 'vuedraggable'
 import {
   addLabel,
@@ -25,6 +26,7 @@ export default {
     Task,
     EditTaskModal,
     ChangeNameModal,
+    DeleteModal,
     draggable
   },
   created() {
@@ -70,10 +72,13 @@ export default {
       addLabel(this.board);
     },
     removeLabel(labelIdentifier) {
-      removeLabel(this.board, labelIdentifier);
+      removeLabel(this.board, labelIdentifier, this.$refs.deleteModal);
     },
     editLabelName() {
       editLabelName(this.board, this.$refs.changeNameModal);
+    },
+    openDeleteModal(labelIdentifier) {
+      this.$refs.deleteModal.openModal(labelIdentifier);
     },
     openEditTaskModal(task, labelIndex) {
       this.$refs.taskEditModal.openModal(task, labelIndex);

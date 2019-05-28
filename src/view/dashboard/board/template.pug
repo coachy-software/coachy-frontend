@@ -28,7 +28,7 @@
                       span.icon.fake-link(:id="label.identifier", @click="toggleOptions(label.identifier)")
                         i.fe.fe-more-vertical
                       .dropdown-menu.dropdown-menu-right(:id="label.identifier + '.settings'", @mouseleave="toggleOptions(label.identifier)")
-                        span.dropdown-item.fake-link(@click="removeLabel(label.identifier)")
+                        span.dropdown-item.fake-link(@click="openDeleteModal(label.identifier)")
                           i.dropdown-icon.fe.fe-trash-2
                           |  {{$t('board.delete')}}
                         span.dropdown-item.fake-link(@click="openChangeNameModal(label)")
@@ -49,4 +49,5 @@
                 i.fe.fe-plus.ml-2
   edit-task-modal(ref="taskEditModal")
   change-name-modal(ref="changeNameModal")
+  delete-modal(ref="deleteModal")
 

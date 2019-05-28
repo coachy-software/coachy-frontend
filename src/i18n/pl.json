@@ -240,7 +240,10 @@
     "update": "Zaktualizuj",
     "label_1": "Do zrobienia",
     "label_2": "W trakcie",
-    "label_3": "Ukończone"
+    "label_3": "Ukończone",
+    "yes": "Tak",
+    "no": "Nie",
+    "are_you_sure": "Czy jesteś pewien?"
   },
   "chat": {
     "beginning": "Początek",

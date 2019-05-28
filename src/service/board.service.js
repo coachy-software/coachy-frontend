@@ -60,9 +60,10 @@ export function addLabel(board) {
   update(board);
 }
 
-export function removeLabel(board, labelIdentifier) {
+export function removeLabel(board, labelIdentifier, modalInstance) {
   board.labels = board.labels.filter(label => labelIdentifier !== label.identifier);
   update(board);
+  modalInstance.closeModal();
 }
 
 export function editTask(board, labelIndex, taskInstance) {

@@ -1,0 +1,7 @@
+sweet-modal(overlay-theme='dark', modal-theme='light', ref="deleteModal", blocking)
+  form(@submit.prevent="$parent.removeLabel(identifier)")
+    .card-body
+      h1 {{$t('board.are_you_sure')}}
+      div(style="display: flex; justify-content: center;")
+        button.btn.btn-square.btn-gray.btn-lg(type='button', @click="closeModal") {{$t('board.no')}}
+        button.btn.btn-square.btn-danger.btn-lg.ml-2(type='submit') {{$t('board.yes')}}
