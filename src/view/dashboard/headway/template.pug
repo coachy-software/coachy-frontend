@@ -6,7 +6,7 @@ div
         .btn-list.text-right
           button.btn.btn-outline-danger(type='button', @click="deleteHeadway")
             i.fe.fe-trash-2.mr-2
-            | Usuń
+            | {{$t('headway.delete')}}
     .card.col-lg-12
       .card-body
         #dimmer.dimmer(:class="{'active': isLoading}")
