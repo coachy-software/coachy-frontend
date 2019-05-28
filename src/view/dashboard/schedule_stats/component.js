@@ -6,7 +6,8 @@ import SetsChart from './component/sets/SetsChart';
 export default {
   data: () => ({
     schedule: {},
-    isReady: false
+    isReady: false,
+    isLoading: true
   }),
   components: {
     'muscles-groups-chart': MusclesGroupsChart,

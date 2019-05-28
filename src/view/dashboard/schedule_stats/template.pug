@@ -1,7 +1,10 @@
 .container
   .page-header
     h1.page-title {{$t('schedule_stats.page_title')}}
-  .row.row-cards
-    muscles-groups-chart(v-if="isReady", :schedule="schedule")
-    reps-chart(v-if="isReady", :schedule="schedule")
-    sets-chart(v-if="isReady", :schedule="schedule")
+  #dimmer.dimmer(:class="{'active': isLoading}")
+    .loader
+    .dimmer-content
+      .row.row-cards
+        muscles-groups-chart(v-if="isReady", :schedule="schedule")
+        reps-chart(v-if="isReady", :schedule="schedule")
+        sets-chart(v-if="isReady", :schedule="schedule")

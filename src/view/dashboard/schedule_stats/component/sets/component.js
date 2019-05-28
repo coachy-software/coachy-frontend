@@ -55,5 +55,6 @@ export default {
     };
 
     this.handler.$emit('init', options);
+    this.$parent.isLoading = false;
   }
 }

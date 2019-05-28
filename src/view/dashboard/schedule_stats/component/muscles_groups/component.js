@@ -4,7 +4,7 @@ import musclesGroups from "@/assets/mock/muscles-groups";
 
 export default {
   data: () => ({
-    handler: new Vue()
+    handler: new Vue(),
   }),
   props: ['schedule'],
   components: {
@@ -58,5 +58,6 @@ export default {
     };
 
     this.handler.$emit('init', options);
+    this.$parent.isLoading = false;
   }
 }
