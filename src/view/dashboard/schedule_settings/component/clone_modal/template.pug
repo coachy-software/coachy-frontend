@@ -1,17 +1,19 @@
-sweet-modal(overlay-theme='light', modal-theme='light', ref="scheduleCloneModal")
-  .form-group
-    label {{$t('create_schedule.charge')}}
-      span.form-required *
-    vue-instant(
-      :suggestOnAllWords='true',
-      :suggestion-attribute='suggestionAttribute',
-      v-model='charge',
-      :show-autocomplete='true',
-      :autofocus='false',
-      :suggestions='suggestions',
-      type='custom',
-      @input='changed',
-      :placeholder="this.$t('create_schedule.charge_placeholder')"
-    )
+sweet-modal(overlay-theme='dark', modal-theme='light', ref="scheduleCloneModal", blocking)
+  form(@submit.prevent="cloneSchedule")
+    .card-body
+      .form-group
+        label {{$t('create_schedule.charge')}}
+          span.form-required *
+        vue-instant(
+          :suggestOnAllWords='true',
+          :suggestion-attribute='suggestionAttribute',
+          v-model='charge',
+          :show-autocomplete='true',
+          :autofocus='false',
+          :suggestions='suggestions',
+          type='custom',
+          @input='changed',
+          :placeholder="this.$t('create_schedule.charge_placeholder')"
+        )
   .card-footer
-    button.btn.btn-primary.float-right(slot='button', @click="cloneSchedule", :disabled="suggestions.length === 0") {{$t('schedule_settings.clone')}}
+    button.btn.btn-primary.float-right(type="submit", :disabled="suggestions.length === 0") {{$t('schedule_settings.clone')}}

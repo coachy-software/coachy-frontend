@@ -36,12 +36,13 @@
                           |  {{$t('board.change_name')}}
                 draggable(animation="150", group="tasks", :list="label.tasks", @change="onChange")
                   task(v-for="task in label.tasks", :key="task.id", @click.native="openEditTaskModal(task, index)", :task="task")
-              .item-entry
-                .input-group
-                  input.form-control(type='text', :placeholder="$t('board.new_task')", :ref="label.identifier + '_input'", @keyup.enter="addTask(label.identifier + '_input', index)", required)
-                  span.input-group-append
-                    button.btn.btn-primary(type='button', @click="addTask(label.identifier + '_input', index)")
-                      i.fe.fe-plus
+              form(@submit.prevent="addTask(label.identifier + '_input', index)")
+                .item-entry
+                  .input-group
+                    input.form-control(type='text', :placeholder="$t('board.new_task')", :ref="label.identifier + '_input'", required)
+                    span.input-group-append
+                      button.btn.btn-primary(type='submit')
+                        i.fe.fe-plus
           section.list-container.mdi-opacity
             .list-header
               button.btn.btn-link.text-center(type="button", @click="addLabel") {{$t('board.add_label')}}

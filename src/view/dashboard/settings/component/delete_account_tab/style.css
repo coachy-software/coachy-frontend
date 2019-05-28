@@ -3,3 +3,6 @@
   padding-bottom: 48px !important;
 }
 
+.sweet-modal .sweet-box-actions .sweet-action-close:hover {
+  background-color: #467fcf;
+}
