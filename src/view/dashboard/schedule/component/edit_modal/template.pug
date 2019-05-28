@@ -64,19 +64,20 @@ div
       button.btn.btn-outline-primary.float-right.ml-2(slot='button', @click="$parent.editExercise(dayIndex)", :disabled="$v.$invalid || (!customTemplate && suggestions.length === 0)") {{$t('schedule.update')}}
       button.btn.btn-outline-danger.float-right(slot='button', @click="$parent.removeExercise(dayIndex, exercise.identifier)") {{$t('schedule.remove')}}
   sweet-modal(ref="imagesManagerModal")
-    template(v-if="exercise.template")
-      .row
-        .col-md-4
-          .form-group
-            input(type="file", id="avatar", accept="image/png, image/jpeg", ref="exampleImages", multiple)
-        .col-md-8.text-md-right
-          button.btn.btn-primary(@click="addExerciseImage") {{$t('schedule.update')}}
-      .dropdown-divider.mb-4
-      .row.row-cards
-        .col-md-3(v-for="(image, imageIndex) in exercise.template.exampleImages", :key="image")
-          .card.p-2
-            span.mb-1
-              img.rounded(:src="image", :style="{'background-image': 'url(' + image + ')'}")
-            .d-flex.align-items-center.px-2
-              button.btn.btn-danger.btn-block(@click="removeExerciseImage(imageIndex)") {{$t('schedule.delete')}}
-                i.fe.fe-trash-2.ml-2
+    form(v-if="exercise.template", @submit.prevent="addExerciseImage")
+      .card-body
+        .row
+          .col-md-4
+            .form-group
+              input(type="file", id="avatar", accept="image/png, image/jpeg", ref="exampleImages", multiple)
+          .col-md-8.text-md-right
+            button.btn.btn-primary(type="submit") {{$t('schedule.update')}}
+        .dropdown-divider.mb-4
+        .row.row-cards
+          .col-md-3(v-for="(image, imageIndex) in exercise.template.exampleImages", :key="image")
+            .card.p-2
+              span.mb-1
+                img.rounded(:src="image", :style="{'background-image': 'url(' + image + ')'}")
+              .d-flex.align-items-center.px-2
+                button.btn.btn-danger.btn-block(type="button", @click="removeExerciseImage(imageIndex)") {{$t('schedule.delete')}}
+                  i.fe.fe-trash-2.ml-2

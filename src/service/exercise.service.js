@@ -54,7 +54,6 @@ export function editExercise(dayIndex, exerciseInstance, schedule) {
   );
 
   store.dispatch('schedule/update', schedule);
-
   closeModal(exerciseInstance);
 }
 
@@ -69,6 +68,7 @@ export function addExerciseImage(dayIndex, exerciseIndex, exerciseInstance, imag
       schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages = exampleImages.concat(imageUrls);
       store.dispatch('schedule/update', schedule);
 
+      imagesInstance.value = '';
       return resolve(schedule.days[dayIndex].exercises[exerciseIndex].template.exampleImages);
     });
   })
