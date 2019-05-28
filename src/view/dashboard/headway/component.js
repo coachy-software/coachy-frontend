@@ -12,6 +12,12 @@ export default {
     Build,
     Strength
   },
+  methods: {
+    deleteHeadway() {
+      this.$store.dispatch('headway/remove', {identifier: this.headway.identifier})
+      .then(() => this.$router.push('/dashboard/headway-journals?type=' + this.headway.type.toUpperCase()));
+    }
+  },
   mounted() {
     HeadwayService.fetchOne({identifier: this.$route.params.id})
     .then(response => {

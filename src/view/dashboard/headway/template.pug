@@ -2,6 +2,11 @@ div
   .container
     .page-header
       h1.page-title {{$t('headway.page_title')}} {{headway.createdAt | moment}}
+      .page-options.d-flex
+        .btn-list.text-right
+          button.btn.btn-outline-danger(type='button', @click="deleteHeadway")
+            i.fe.fe-trash-2.mr-2
+            | Usuń
     .card.col-lg-12
       .card-body
         #dimmer.dimmer(:class="{'active': isLoading}")

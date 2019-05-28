@@ -24,8 +24,11 @@ const add = async ({commit, state}, payload) => {
 };
 
 const remove = ({commit, state}, payload) => {
-  let headways = state.headways.filter(headway => headway.identifier !== payload.identifier);
-  setHeadways(commit, headways);
+  axios.delete(`${API_URL}/headways/${payload.identifier}`, authorization())
+  .then(() => {
+    let headways = state.headways.filter(headway => headway.identifier !== payload.identifier);
+    setHeadways(commit, headways)
+  });
 };
 
 const fetchAll = ({commit}, payload) => {
