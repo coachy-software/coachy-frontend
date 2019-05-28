@@ -26,24 +26,14 @@
                   option(name="sex", value="woman") {{$t('calculators.woman')}}
             .col-sm-12
               .form-group
-                label.form-label {{$t('calculators.weight_unit')}}
+                label.form-label {{$t('calculators.unit_system')}}
                 .selectgroup.w-100
                   label.selectgroup-item
-                    input.selectgroup-input(type='radio', name='weight', value='kg', v-model="weightUnit")
-                    span.selectgroup-button KG
+                    input.selectgroup-input(type='radio', name='system', value='metric', v-model="unitSystem")
+                    span.selectgroup-button METRIC
                   label.selectgroup-item
-                    input.selectgroup-input(type='radio', name='weight', value='lbs', v-model="weightUnit")
-                    span.selectgroup-button LBS
-            .col-sm-12
-              .form-group
-                label.form-label {{$t('calculators.height_unit')}}
-                .selectgroup.w-100
-                  label.selectgroup-item
-                    input.selectgroup-input(type='radio', name='height', value='cm', v-model="heightUnit")
-                    span.selectgroup-button CM
-                  label.selectgroup-item
-                    input.selectgroup-input(type='radio', name='height', value='inch', v-model="heightUnit")
-                    span.selectgroup-button INCH
+                    input.selectgroup-input(type='radio', name='system', value='imperial', v-model="unitSystem")
+                    span.selectgroup-button IMPERIAL
           .col-sm-2
           .col-sm-5(v-if="result !== 0")
             .col-sm-10

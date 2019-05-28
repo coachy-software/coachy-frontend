@@ -1,7 +1,6 @@
 export default {
   data: () => ({
-    weightUnit: 'kg',
-    heightUnit: 'cm',
+    unitSystem: 'metric',
     weight: 0,
     height: 0,
   }),
@@ -24,10 +23,10 @@ export default {
       return this.parseToFloat(this.roundToDecimalPlace(this.obtainWeight() / Math.pow(this.obtainHeight() / 100, 2), 2));
     },
     obtainWeight() {
-      return this.weightUnit === 'lbs' ? this.lbsToKg(this.weight) : this.weight;
+      return this.unitSystem === 'imperial' ? this.lbsToKg(this.weight) : this.weight;
     },
     obtainHeight() {
-      return this.heightUnit === 'inch' ? this.inchesToCm(this.height) : this.height;
+      return this.unitSystem === 'imperial' ? this.inchesToCm(this.height) : this.height;
     },
     parseToFloat(weight) {
       let parsedValue = parseFloat(weight);

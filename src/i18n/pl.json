@@ -253,8 +253,7 @@
   "calculators": {
     "weight": "Waga",
     "height": "Wzrost",
-    "weight_unit": "Jednostka masy",
-    "height_unit": "Jednostka długości",
+    "unit_system": "System miar",
     "age": "Wiek",
     "man": "Mężczyzna",
     "woman": "Kobieta",
