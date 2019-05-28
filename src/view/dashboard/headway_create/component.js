@@ -6,6 +6,7 @@ import {notification} from "@/util/toastr.utils";
 import {getErrorMessage} from "@/util/validation.utils";
 import Build from "./component/build/BuildView";
 import Strength from "./component/strength/StrengthView";
+import ObjectID from "bson-objectid";
 
 export default {
   data: () => ({
@@ -54,9 +55,16 @@ export default {
         return;
       }
 
+      let strengthInstance = this.$refs.strength;
+      let strengthMeasurements = strengthInstance.measurements;
+
+      if (strengthInstance.weightSwitch) {
+        strengthMeasurements.push({id: ObjectID.generate(), name: this.$i18n.t('headway_create.weight'), value: strengthInstance.userWeight})
+      }
+
       let data = {
         ownerId: JSON.parse(localStorage.getItem('user')).identifier,
-        measurements: this.$refs.strength.measurements,
+        measurements: strengthMeasurements,
         type: this.type
       };
 

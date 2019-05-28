@@ -299,9 +299,10 @@
     "choose_day": "Wybierz dzień",
     "results": "Wyniki",
     "exercise_name": "Nazwa boju",
-    "weight": "Ciężar",
+    "weight": "Waga",
     "reps": "Powtórzenia",
-    "default_select": "Wybierz swoją opcję"
+    "default_select": "Wybierz swoją opcję",
+    "weight_switch": "Dodaj aktualną wagę"
   },
   "headway": {
     "page_title": "Podsumowanie ",

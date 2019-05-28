@@ -10,7 +10,8 @@ export default {
       {id: ObjectID.generate(), name: 'chest', value: 0},
       {id: ObjectID.generate(), name: 'waist', value: 0},
       {id: ObjectID.generate(), name: 'thigh', value: 0},
-      {id: ObjectID.generate(), name: 'calf', value: 0}
+      {id: ObjectID.generate(), name: 'calf', value: 0},
+      {id: ObjectID.generate(), name: 'weight', value: 0}
     ],
     imagesPreviews: [],
     images: []

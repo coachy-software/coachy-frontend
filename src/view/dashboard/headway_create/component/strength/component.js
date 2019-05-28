@@ -10,7 +10,9 @@ export default {
     schedules: [],
     typedSchedule: 'default',
     typedScheduleValue: {},
-    typedDay: 'default'
+    typedDay: 'default',
+    weightSwitch: false,
+    userWeight: ''
   }),
   mounted() {
     this.schedules = JSON.parse(localStorage.getItem('schedules'));

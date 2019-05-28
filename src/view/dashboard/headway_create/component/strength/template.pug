@@ -63,3 +63,15 @@
               span.col-auto
                 button.btn.btn-secondary(type='button', @click="removeFromMeasurements(measurement.id)")
                   i.fe.fe-minus
+  .col-sm-5
+    .col-sm-12
+      .form-group
+        .custom-switches-stacked.mt-5
+          label.custom-switch
+            input.custom-switch-input(type='checkbox', name='weight_switch', v-model="weightSwitch")
+            span.custom-switch-indicator
+            span.custom-switch-description {{$t('headway_create.weight_switch')}}
+    .col-sm-12(v-if="weightSwitch")
+      .form-group
+        label.form-label {{$t('headway_create.weight')}}
+        input.form-control(type='number', v-model="userWeight" min=10, :placeholder="$t('headway_create.weight')")
