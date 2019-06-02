@@ -137,7 +137,8 @@
     "confirmation": "Przepisz nazwę użytkownika"
   },
   "dropdowns": {
-    "mark_all": "Oznacz wszystkie jako przeczytane"
+    "see_all": "Zobacz wszystkie",
+    "no_notifications": "Nie masz żadnych powiadomień"
   },
   "settings": {
     "page_title": "Ustawienia"
