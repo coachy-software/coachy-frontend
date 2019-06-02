@@ -52,6 +52,8 @@
   import {subscribe} from "@/service/ws";
   import moment from "moment";
   import logo from "@/assets/dark-logo.svg";
+  import chatNotificationSound from "@/assets/sounds/chat.mp3";
+  import {Howl, Howler} from "howler";
 
   export default {
     data: () => ({
@@ -59,11 +61,22 @@
       logo: logo
     }),
     created() {
-      subscribe('/user/queue/notifications', (output) => this.notifications.push(JSON.parse(output.body)));
+      subscribe('/user/queue/notifications', (output) => {
+        this.notifications.push(JSON.parse(output.body));
+        this.playNotificationSound();
+      });
     },
     filters: {
       moment: (date) => {
         return moment(date).format('DD-MM-YYYY HH:mm:ss');
+      }
+    },
+    methods: {
+      playNotificationSound() {
+        const sound = new Howl({src: [chatNotificationSound]});
+
+        sound.play();
+        Howler.volume(0.3);
       }
     }
   }

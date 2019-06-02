@@ -6,6 +6,7 @@ import chatNotificationSound from "@/assets/sounds/chat.mp3";
 import ObjectID from "bson-objectid";
 import {authorization} from "@/util/headers";
 import PerfectScrollbar from "perfect-scrollbar/dist/perfect-scrollbar.min";
+import {Howl, Howler} from "howler";
 
 export default {
   data: () => ({
@@ -42,9 +43,10 @@ export default {
       }
     },
     playNotificationSound() {
-      let audio = new Audio(chatNotificationSound);
-      audio.volume = 0.3;
-      audio.play();
+      const sound = new Howl({src: [chatNotificationSound]});
+
+      sound.play();
+      Howler.volume(0.3);
     },
     scrollToBottom() {
       let element = document.querySelector('#content');
