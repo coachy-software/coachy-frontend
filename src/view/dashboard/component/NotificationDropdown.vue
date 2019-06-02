@@ -11,15 +11,16 @@
           router-link.dropdown-item.d-flex(to="javascript:;")
             span.avatar.mr-3.align-self-center(:style="{'background-image': `url(${logo})`}")
             div
-              | {{notification.content}}
+              |  {{notification.content}}
               .small.text-muted {{notification.createdAt | moment}}
         template(v-else)
           router-link.dropdown-item.d-flex(to="javascript:;")
-            span.avatar.mr-3.align-self-center(:style="{'background-image': `url(${logo})`}")
-            div
-              strong {{notification.senderName}}
-              |  {{notification.content}}
-              .small.text-muted {{notification.createdAt | moment}}
+            span.avatar.mr-3.align-self-center.dropdown-avatar(:style="{'background-image': `url(${notification.senderAvatar})`}")
+            .wrap-content Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
+            button.btn.btn-icon.btn-primary.btn-secondary(type='button')
+              i.fe.fe-check
+            button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
+              i.fe.fe-x
       .dropdown-divider
       router-link.dropdown-item.text-center.text-muted-dark(to="/") {{$t('dropdowns.see_all')}}
 </template>
@@ -31,7 +32,20 @@
   }
 
   .dropdown-menu {
-    min-width: 30rem;
+    width: 30rem;
+  }
+
+  .dropdown-avatar {
+    min-width: 2rem !important;
+    min-height: 2rem !important;
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  .wrap-content {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;;
   }
 </style>
 <script>
