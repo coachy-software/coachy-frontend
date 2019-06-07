@@ -316,7 +316,9 @@
   },
   "notifications": {
     "page_title": "Powiadomienia",
-    "asc": "Rosnąco",
-    "desc": "Malejąco"
+    "next": "Następna",
+    "previous": "Poprzednia",
+    "content": "Treść",
+    "sent_date": "Wysłane: "
   }
 }
