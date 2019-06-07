@@ -23,6 +23,7 @@ import DailyDemandCalculatorView from '@/view/dashboard/daily_demand_calculator/
 import HeadwaysView from '@/view/dashboard/headways/HeadwaysView';
 import HeadwayCreateView from '@/view/dashboard/headway_create/HeadwayCreateView';
 import HeadwayView from '@/view/dashboard/headway/HeadwayView';
+import NotificationsView from '@/view/dashboard/notifications/NotificationsView';
 
 const beforeEnterChat = (to, from, next) => {
   let user = JSON.parse(localStorage.getItem('user'));
@@ -73,7 +74,8 @@ export default [
       route('daily-demand-calculator', DailyDemandCalculatorView),
       route('headway-journals', HeadwaysView, {props: (route) => ({type: route.query.type}), beforeEnter: beforeEnterHeadways}),
       route('headway-journals/new', HeadwayCreateView),
-      route('headway-journals/:id', HeadwayView)
+      route('headway-journals/:id', HeadwayView),
+      route('notifications', NotificationsView, {props: (route) => ({page: route.query.page})})
     ]
   }, {requiresAuth: true})
 ]

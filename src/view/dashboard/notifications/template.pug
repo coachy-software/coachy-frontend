@@ -1,0 +1,370 @@
+div
+  .container.text-center(v-if="loading")
+    .mt-9.dimmer.active
+      .loader
+  .container(v-else)
+    .page-header
+      h1.page-title {{this.$t('notifications.page_title')}}
+      .page-options.d-flex
+        select.form-control.custom-select.w-auto(v-model='order')
+          option(value='asc') {{$t('notifications.asc')}}
+          option(value='desc') {{$t('notifications.desc')}}
+    .card
+      .table-responsive
+        table.table.table-hover.table-outline.table-vcenter.text-nowrap.card-table
+          thead
+            tr
+              th.text-center.w-1
+                i.icon-people
+              th User
+              th Usage
+              th.text-center Payment
+              th Activity
+              th.text-center Satisfaction
+              th.text-center
+                i.icon-settings
+          tbody
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/26.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Elizabeth Martin
+                .small.text-muted
+                  | Registered: Mar 7, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 42%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-yellow(role='progressbar', style='width: 42%', aria-valuenow='42', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-visa
+              td
+                .small.text-muted Last login
+                div 4 minutes ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.42', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 42%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown', aria-expanded='false')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right(x-placement='bottom-end', style='position: absolute; transform: translate3d(15px, 20px, 0px); top: 0px; left: 0px; will-change: transform;')
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/17.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Michelle Schultz
+                .small.text-muted
+                  | Registered: Feb 19, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 0%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-red(role='progressbar', style='width: 0%', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-googlewallet
+              td
+                .small.text-muted Last login
+                div 5 minutes ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.0', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 0%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/21.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Crystal Austin
+                .small.text-muted
+                  | Registered: Mar 26, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 96%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-green(role='progressbar', style='width: 96%', aria-valuenow='96', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-mastercard
+              td
+                .small.text-muted Last login
+                div a minute ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.96', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 96%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/male/32.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Douglas Ray
+                .small.text-muted
+                  | Registered: Jan 4, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 6%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-red(role='progressbar', style='width: 6%', aria-valuenow='6', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-shopify
+              td
+                .small.text-muted Last login
+                div a minute ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.06', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 6%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/12.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Teresa Reyes
+                .small.text-muted
+                  | Registered: Feb 21, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 36%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-red(role='progressbar', style='width: 36%', aria-valuenow='36', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-ebay
+              td
+                .small.text-muted Last login
+                div 2 minutes ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.36', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 36%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/4.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Emma Wade
+                .small.text-muted
+                  | Registered: Mar 8, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 7%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-red(role='progressbar', style='width: 7%', aria-valuenow='7', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-paypal
+              td
+                .small.text-muted Last login
+                div a minute ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.07', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 7%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/female/27.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Carol Henderson
+                .small.text-muted
+                  | Registered: Feb 10, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 80%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-green(role='progressbar', style='width: 80%', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-visa
+              td
+                .small.text-muted Last login
+                div 9 minutes ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.8', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 80%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link
+            tr
+              td.text-center
+                .avatar.d-block(style='background-image: url(demo/faces/male/20.jpg)')
+                  span.avatar-status.bg-green
+              td
+                div Christopher Harvey
+                .small.text-muted
+                  | Registered: Jan 10, 2019
+              td
+                .clearfix
+                  .float-left
+                    strong 83%
+                  .float-right
+                    small.text-muted Jun 11, 2015 - Jul 10, 2015
+                .progress.progress-xs
+                  .progress-bar.bg-green(role='progressbar', style='width: 83%', aria-valuenow='83', aria-valuemin='0', aria-valuemax='100')
+              td.text-center
+                i.payment.payment-googlewallet
+              td
+                .small.text-muted Last login
+                div 8 minutes ago
+              td.text-center
+                .mx-auto.chart-circle.chart-circle-xs(data-value='0.83', data-thickness='3', data-color='blue')
+                  canvas(width='40', height='40')
+                  .chart-circle-value 83%
+              td.text-center
+                .item-action.dropdown
+                  a.icon(href='javascript:void(0)', data-toggle='dropdown')
+                    i.fe.fe-more-vertical
+                  .dropdown-menu.dropdown-menu-right
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-tag
+                      |  Action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-edit-2
+                      |  Another action
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-message-square
+                      |  Something else here
+                    .dropdown-divider
+                    a.dropdown-item(href='javascript:void(0)')
+                      i.dropdown-icon.fe.fe-link
+                      |  Separated link

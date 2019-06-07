@@ -313,5 +313,10 @@
     "volume": "objętości",
     "choose_exercise_alert": "Wybierz ćwiczenie, którego progres chcesz zobaczyć za pomocą tej ikonki",
     "delete": "Usuń"
+  },
+  "notifications": {
+    "page_title": "Powiadomienia",
+    "asc": "Rosnąco",
+    "desc": "Malejąco"
   }
 }
