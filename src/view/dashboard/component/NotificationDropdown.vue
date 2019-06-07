@@ -6,16 +6,16 @@
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.notification.open}")
       div(v-if="notifications.length === 0")
         p.text-center.mt-2 {{$t('dropdowns.no_notifications')}}
-      div(v-else, v-for="notification in notifications")
+      div(v-else, v-for="notification in sortedNotifications")
         template(v-if="notification.type === 'ALERT'")
-          router-link.dropdown-item.d-flex(to="javascript:;")
-            span.avatar.mr-3.align-self-center(:style="{'background-image': `url(${logo})`}")
-            div
-              |  {{notification.content}}
+          .dropdown-item.d-flex
+            span.avatar.mr-3.align-self-center.dropdown-avatar(:style="{'background-image': `url(${logo})`}")
+            .wrap-content {{notification.content}}
               .small.text-muted {{notification.createdAt | moment}}
         template(v-else)
-          router-link.dropdown-item.d-flex(to="javascript:;")
-            span.avatar.mr-3.align-self-center.dropdown-avatar(:style="{'background-image': `url(${notification.senderAvatar})`}")
+          .dropdown-item.d-flex
+            span.avatar.mr-3.align-self-center.dropdown-avatar(v-if="notification.senderAvatar !== null", :style="{'background-image': `url(${notification.senderAvatar})`}")
+            span.avatar.mr-3.align-self-center.dropdown-avatar.avatar-blue(v-else) {{getInitials(notification.senderName)}}
             .wrap-content Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
             button.btn.btn-icon.btn-primary.btn-secondary(type='button')
               i.fe.fe-check
@@ -25,8 +25,8 @@
       router-link.dropdown-item.text-center.text-muted-dark(to="/") {{$t('dropdowns.see_all')}}
 </template>
 <style scoped>
-  .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
+  .dropdown-item.active, .dropdown-item:active, .dropdown-item:focus {
+    color: #16181b !important;
     text-decoration: none;
     background-color: #f8f9fa !important;
   }
@@ -46,7 +46,12 @@
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     white-space: normal !important;;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
+
 </style>
 <script>
   import {subscribe} from "@/service/ws";
@@ -54,6 +59,8 @@
   import logo from "@/assets/dark-logo.svg";
   import chatNotificationSound from "@/assets/sounds/chat.mp3";
   import {Howl, Howler} from "howler";
+  import NotificationService from "@/service/notifications.service";
+  import {getInitials} from "@/util/user.utils";
 
   export default {
     data: () => ({
@@ -61,10 +68,21 @@
       logo: logo
     }),
     created() {
+      let userIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
+
+      NotificationService.fetchAll({identifier: userIdentifier, page: 0, size: 5})
+      .then(response => this.notifications = response.data.content);
+
       subscribe('/user/queue/notifications', (output) => {
         this.notifications.push(JSON.parse(output.body));
         this.playNotificationSound();
       });
+    },
+    computed: {
+      sortedNotifications() {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        return this.notifications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      }
     },
     filters: {
       moment: (date) => {
@@ -72,6 +90,9 @@
       }
     },
     methods: {
+      getInitials(username) {
+        return getInitials({username: username});
+      },
       playNotificationSound() {
         const sound = new Howl({src: [chatNotificationSound]});
 
