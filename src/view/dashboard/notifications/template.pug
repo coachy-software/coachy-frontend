@@ -27,12 +27,14 @@ div
                     | {{$t('notifications.sent_date')}} {{notification.createdAt | moment}}
               td
                 .small.text-muted {{$t('notifications.content')}}
-                div 5 {{notification.content}}
-              td(style="width: 1%", v-if="notification.type !== 'ALERT'")
-                button.btn.btn-icon.btn-primary.btn-secondary(type='button')
-                  i.fe.fe-check
-                button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
-                  i.fe.fe-x
+                div(v-if="notification.type === 'SCHEDULE_REQUEST'") Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
+                div(v-else) {{notification.content}}
+              td(style="width: 1%")
+                template(v-if="notification.type !== 'ALERT'")
+                  button.btn.btn-icon.btn-primary.btn-secondary(type='button')
+                    i.fe.fe-check
+                  button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
+                    i.fe.fe-x
     .btn-list.text-right.mb-5
       router-link.btn.btn-secondary(:to="`?page=${parsedPage - 1}`", tag="button" :disabled="isFirst") {{$t('notifications.previous')}}
 
