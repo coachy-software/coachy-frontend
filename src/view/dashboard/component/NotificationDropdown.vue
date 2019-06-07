@@ -81,7 +81,7 @@
     computed: {
       sortedNotifications() {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        return this.notifications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        return this.notifications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).filter((notification, index) => index <= 4);
       }
     },
     filters: {
