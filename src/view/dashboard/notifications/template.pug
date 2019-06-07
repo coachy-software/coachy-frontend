@@ -35,9 +35,8 @@ div
                     i.fe.fe-check
                   button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
                     i.fe.fe-x
-    .btn-list.text-right.mb-5
+    .btn-list.text-right.mb-5(v-if="totalPages > 1")
       router-link.btn.btn-secondary(:to="`?page=${parsedPage - 1}`", tag="button" :disabled="isFirst") {{$t('notifications.previous')}}
-
       router-link.btn.m-0.mb-2(:class="{'btn-secondary': parsedPage !== 1, 'btn-primary': parsedPage === 1}", :to="`?page=1`") 1
 
       template(v-if="parsedPage > 2 && parsedPage + 1 < totalPages")
@@ -48,5 +47,4 @@ div
         router-link.btn.btn-primary.m-0.mb-2(:to="`?page=${page}`") {{page}}
 
       router-link.btn.m-0.mb-2(:class="{'btn-secondary': parsedPage !== totalPages, 'btn-primary': parsedPage === totalPages}", :to="`?page=${totalPages}`") {{totalPages}}
-
       router-link.btn.btn-secondary(:to="`?page=${parsedPage + 1}`", tag="button" :disabled="isLast").ml-2 {{$t('notifications.next')}}
