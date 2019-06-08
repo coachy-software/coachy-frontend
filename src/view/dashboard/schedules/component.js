@@ -5,18 +5,23 @@ import store from "@/store";
 export default {
   data: () => ({
     isCoach: store.state.user.user.accountType === 'COACH',
-    userIdentifier: store.state.user.user.identifier,
-    schedules: []
+    userIdentifier: store.state.user.user.identifier
   }),
   methods: {
     fetchAll() {
       fetchAll();
+    },
+    loadSchedules() {
+      return this.$store.state.schedule.schedules.filter(schedule => !(this.userIdentifier !== schedule.creator && !schedule.accepted));
     }
   },
   created() {
-    this.schedules = this.$store.state.schedule.schedules.filter(schedule => !(this.userIdentifier !== schedule.creator && !schedule.accepted));
+    this.loadSchedules();
   },
   computed: {
+    schedules() {
+      return this.loadSchedules();
+    },
     isLoading() {
       return this.$store.getters['loader/isLoading'];
     },
