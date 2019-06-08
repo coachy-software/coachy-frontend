@@ -19,22 +19,27 @@
             th {{this.$t('schedule.created')}}
             th {{this.$t('schedule.updated')}}
             th
-            th(v-if="isCoach")
+            th
         tbody(v-if="!isEmpty")
           tr(v-for="schedule in this.$store.state.schedule.schedules")
-            td
+            td(style="width: 1%")
               span.text-muted {{schedule.name}}
-            td
+            td(style="width: 1%")
               | {{$t(`boolean.${schedule.active}`)}}
-            td
+            td(style="width: 1%")
               | {{schedule.createdAt | moment}}
-            td
+            td(style="width: 1%")
               | {{schedule.updatedAt | moment}}
-            td.text-right
-              router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
-            td(v-if="isCoach && userIdentifier === schedule.creator")
-              router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
-                i.fe.fe-edit
+            template(v-if="isCoach && userIdentifier === schedule.creator")
+              td.text-right
+                router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
+                  i.fe.fe-edit
+              td.text-right
+                router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
+            template(v-else)
+              td.text-right
+              td.text-right(style="width: 1%")
+                router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
         tbody(v-else)
           tr
             th {{this.$t('schedule.no_schedules')}}
