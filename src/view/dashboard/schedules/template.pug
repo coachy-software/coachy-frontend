@@ -21,7 +21,7 @@
             th
             th
         tbody(v-if="!isEmpty")
-          tr(v-for="schedule in this.$store.state.schedule.schedules")
+          tr(v-for="schedule in schedules")
             td(style="width: 1%")
               span.text-muted {{schedule.name}}
             td(style="width: 1%")
@@ -34,7 +34,7 @@
               td.text-right
                 router-link.icon(:to="'/dashboard/schedules/' + schedule.identifier + '/settings'")
                   i.fe.fe-edit
-              td.text-right
+              td.text-right(style="width: 1%")
                 router-link.btn.btn-secondary.btn-sm(:to="'/dashboard/schedules/' + schedule.identifier") {{$t('schedule.show')}}
             template(v-else)
               td.text-right
