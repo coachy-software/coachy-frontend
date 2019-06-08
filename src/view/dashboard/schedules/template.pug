@@ -23,7 +23,10 @@
         tbody(v-if="!isEmpty")
           tr(v-for="schedule in schedules")
             td(style="width: 1%")
-              span.text-muted {{schedule.name}}
+              span {{schedule.name}}
+              template(v-if="userIdentifier === schedule.creator")
+                .small.text-muted(v-if="!schedule.accepted") {{$t('schedule.unapproved')}}
+                .small.text-muted(v-else) {{$t('schedule.approved')}}
             td(style="width: 1%")
               | {{$t(`boolean.${schedule.active}`)}}
             td(style="width: 1%")

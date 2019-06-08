@@ -183,7 +183,9 @@
     "brief_placeholder": "Opcjonalny opis",
     "manage_images": "Zarządzaj grafikami",
     "delete": "Usuń",
-    "lack": "Brak"
+    "lack": "Brak",
+    "approved": "Zaakceptowany",
+    "unapproved": "Niezaakceptowany"
   },
   "create_schedule": {
     "page_title": "Twoje plany treningowe",
