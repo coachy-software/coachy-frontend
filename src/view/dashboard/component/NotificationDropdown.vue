@@ -22,7 +22,7 @@
             button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
               i.fe.fe-x
       .dropdown-divider
-      router-link.dropdown-item.text-center.text-muted-dark(to="notifications") {{$t('dropdowns.see_all')}}
+      router-link.dropdown-item.text-center.text-muted-dark(to="/dashboard/notifications") {{$t('dropdowns.see_all')}}
 </template>
 <style scoped>
   .dropdown-item.active, .dropdown-item:active, .dropdown-item:focus {

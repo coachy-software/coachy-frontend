@@ -27,7 +27,7 @@ div
                     | {{$t('notifications.sent_date')}} {{notification.createdAt | moment}}
               td
                 .small.text-muted {{$t('notifications.content')}}
-                div(v-if="notification.type === 'SCHEDULE_REQUEST'") Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
+                div(v-if="notification.type === 'SCHEDULE_REQUEST'") {{$t('notifications.schedule-alert-1')}} #[strong {{notification.senderName}}] {{$t('notifications.schedule-alert-2')}}
                 div(v-else) {{notification.content}}
               td(style="width: 1%")
                 template(v-if="notification.type !== 'ALERT'")

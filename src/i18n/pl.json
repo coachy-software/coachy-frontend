@@ -321,6 +321,8 @@
     "next": "Następna",
     "previous": "Poprzednia",
     "content": "Treść",
-    "sent_date": "Wysłane: "
+    "sent_date": "Wysłane: ",
+    "schedule-alert-1": "Otrzymałeś plan treningowy od użytkownika",
+    "schedule-alert-2": "czy chcesz go zaakceptować?"
   }
 }
