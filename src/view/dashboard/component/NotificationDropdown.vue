@@ -1,8 +1,8 @@
 <template lang="pug">
-  .dropdown.d-none.d-md-flex.dropdown-element(:class="{'show': this.$parent.dropdowns.notification.open}", @click="$parent.toggleDropdown('notification')")
+  .dropdown.d-none.d-md-flex.dropdown-element(id="notification-dropdown", :class="{'show': this.$parent.dropdowns.notification.open}", @click="toggleDropdown")
     .a.nav-link.icon.dropdown-element
       i.fe.fe-bell
-      span.nav-unread
+      span.nav-unread(v-show="hasAnyUnread")
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.notification.open}")
       div(v-if="notifications.length === 0")
         p.text-center.mt-2 {{$t('dropdowns.no_notifications')}}
@@ -65,16 +65,22 @@
   export default {
     data: () => ({
       notifications: [],
-      logo: logo
+      logo: logo,
+      hasAnyUnread: false,
+      userIdentifier: {}
     }),
     created() {
-      let userIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
+      this.userIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
 
-      NotificationService.fetchAll({identifier: userIdentifier, page: 0, size: 5})
+      NotificationService.hasAnyUnread({identifier: this.userIdentifier})
+      .then(response => this.hasAnyUnread = response.data.hasUnread);
+
+      NotificationService.fetchAll({identifier: this.userIdentifier, page: 0, size: 5})
       .then(response => this.notifications = response.data.content);
 
       subscribe('/user/queue/notifications', (output) => {
         this.notifications.push(JSON.parse(output.body));
+        this.hasAnyUnread = true;
         this.playNotificationSound();
       });
     },
@@ -90,6 +96,17 @@
       }
     },
     methods: {
+      toggleDropdown() {
+        this.$parent.toggleDropdown('notification');
+        this.hasAnyUnread = false;
+
+        let notificationDropdown = document.getElementById('notification-dropdown');
+
+        if (!notificationDropdown.classList.contains('show')) {
+          NotificationService.markAsRead({identifier: this.userIdentifier})
+          .then(() => this.hasAnyUnread = false)
+        }
+      },
       getInitials(username) {
         return getInitials({username: username});
       },
