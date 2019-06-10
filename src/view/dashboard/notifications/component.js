@@ -2,6 +2,8 @@ import NotificationService from "@/service/notifications.service";
 import logo from "@/assets/dark-logo.svg";
 import moment from "moment";
 import {getInitials} from "@/util/user.utils";
+import ScheduleService from "@/service/schedule.service";
+import {notification} from "@/util/toastr.utils";
 
 export default {
   props: {
@@ -32,6 +34,19 @@ export default {
     }
   },
   methods: {
+    accept(notificationContent) {
+      let content = JSON.parse(notificationContent);
+      ScheduleService.accept({identifier: content.scheduleId, token: content.token})
+      .then(() => notification.success(this.$t('notifications.accepted')))
+      .catch(() => notification.error(this.$t('notifications.already_voted')));
+    },
+    reject(notificationContent) {
+      let content = JSON.parse(notificationContent);
+
+      ScheduleService.reject({identifier: content.scheduleId, token: content.token})
+      .then(() => notification.success(this.$t('notifications.rejected')))
+      .catch(() => notification.error(this.$t('notifications.already_voted')));
+    },
     getInitials(username) {
       return getInitials({username: username});
     },

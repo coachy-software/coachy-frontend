@@ -323,6 +323,9 @@
     "content": "Treść",
     "sent_date": "Wysłane: ",
     "schedule-alert-1": "Otrzymałeś plan treningowy od użytkownika",
-    "schedule-alert-2": "czy chcesz go zaakceptować?"
+    "schedule-alert-2": "czy chcesz go zaakceptować?",
+    "accepted": "Pomyślnie zaakceptowano plan",
+    "rejected": "Odrzucono plan",
+    "already_voted": "Ten plan został już zaakceptowany/odrzucony"
   }
 }

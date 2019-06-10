@@ -17,9 +17,9 @@
             span.avatar.mr-3.align-self-center.dropdown-avatar(v-if="notification.senderAvatar !== null", :style="{'background-image': `url(${notification.senderAvatar})`}")
             span.avatar.mr-3.align-self-center.dropdown-avatar.avatar-blue(v-else) {{getInitials(notification.senderName)}}
             .wrap-content Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
-            button.btn.btn-icon.btn-primary.btn-secondary(type='button')
+            button.btn.btn-icon.btn-primary.btn-secondary(type='button', @click="accept(notification.content)")
               i.fe.fe-check
-            button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
+            button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button', @click="reject(notification.content)")
               i.fe.fe-x
       .dropdown-divider
       router-link.dropdown-item.text-center.text-muted-dark(to="/dashboard/notifications") {{$t('dropdowns.see_all')}}
@@ -60,7 +60,9 @@
   import chatNotificationSound from "@/assets/sounds/chat.mp3";
   import {Howl, Howler} from "howler";
   import NotificationService from "@/service/notifications.service";
+  import ScheduleService from "@/service/schedule.service";
   import {getInitials} from "@/util/user.utils";
+  import {notification} from "@/util/toastr.utils";
 
   export default {
     data: () => ({
@@ -96,6 +98,19 @@
       }
     },
     methods: {
+      accept(notificationContent) {
+        let content = JSON.parse(notificationContent);
+        ScheduleService.accept({identifier: content.scheduleId, token: content.token})
+        .then(() => notification.success(this.$t('notifications.accepted')))
+        .catch(() => notification.error(this.$t('notifications.already_voted')));
+      },
+      reject(notificationContent) {
+        let content = JSON.parse(notificationContent);
+
+        ScheduleService.reject({identifier: content.scheduleId, token: content.token})
+        .then(() => notification.success(this.$t('notifications.rejected')))
+        .catch(() => notification.error(this.$t('notifications.already_voted')));
+      },
       toggleDropdown() {
         this.$parent.toggleDropdown('notification');
         this.hasAnyUnread = false;

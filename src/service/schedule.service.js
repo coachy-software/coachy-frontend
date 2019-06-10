@@ -2,6 +2,7 @@ import axios from "axios";
 import {LOADING, SET_STATUS, NOT_LOADING} from "@/store/modules/loader";
 import {API_URL} from "@/util/constants";
 import store from '@/store'
+import {authorization} from "../util/headers";
 
 export function fetchAll() {
   store.commit(SET_STATUS, LOADING, {root: true});
@@ -45,4 +46,18 @@ export function fetchAll() {
     store.commit(SET_STATUS, NOT_LOADING, {root: true});
   });
 }
+
+const accept = async (payload) => {
+  return await axios.post(`${API_URL}/schedules/${payload.identifier}/accept`, {token: payload.token}, authorization());
+};
+
+const reject = async (payload) => {
+  return await axios.post(`${API_URL}/schedules/${payload.identifier}/reject`, {token: payload.token}, authorization());
+};
+
+export default {
+  accept,
+  reject
+}
+
 

@@ -31,9 +31,9 @@ div
                 div(v-else) {{notification.content}}
               td(style="width: 1%")
                 template(v-if="notification.type !== 'ALERT'")
-                  button.btn.btn-icon.btn-primary.btn-secondary(type='button')
+                  button.btn.btn-icon.btn-primary.btn-secondary(type='button', @click="accept(notification.content)")
                     i.fe.fe-check
-                  button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button')
+                  button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button', @click="reject(notification.content)")
                     i.fe.fe-x
     .btn-list.text-right.mb-5(v-if="totalPages > 1")
       router-link.btn.btn-secondary(:to="`?page=${parsedPage - 1}`", tag="button" :disabled="isFirst") {{$t('notifications.previous')}}
