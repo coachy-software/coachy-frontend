@@ -1,4 +1,4 @@
-import pals from "@/assets/mock/pals";
+import pals from "@/assets/initials/pals";
 
 export default {
   data: () => ({

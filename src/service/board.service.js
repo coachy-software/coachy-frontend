@@ -4,7 +4,7 @@ import {authorization} from "@/util/headers";
 import store from "@/store";
 import ObjectID from "bson-objectid";
 import i18n from "@/i18n";
-import rawTasks from "@/assets/mock/tasks.json";
+import rawTasks from "@/assets/initials/tasks.json";
 
 export function createBoard() {
   return new Promise(resolve => {

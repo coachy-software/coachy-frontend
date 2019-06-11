@@ -1,6 +1,6 @@
 import {SweetModal, SweetModalTab} from 'sweet-modal-vue'
 import {required, maxLength} from "vuelidate/src/validators";
-import musclesGroups from "@/assets/mock/muscles-groups.json";
+import musclesGroups from "@/assets/initials/muscles-groups.json";
 import axios from "axios";
 import {API_URL} from "@/util/constants";
 import {removeExerciseImage, addExerciseImage} from "@/service/exercise.service";

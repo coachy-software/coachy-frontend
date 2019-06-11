@@ -1,4 +1,4 @@
-import activitiesMock from "@/assets/mock/activities";
+import activitiesInitials from "@/assets/initials/activities";
 
 export default {
   data: () => ({
@@ -9,7 +9,7 @@ export default {
     activities: []
   }),
   mounted() {
-    this.activities = activitiesMock;
+    this.activities = activitiesInitials;
   },
   computed: {
     result() {

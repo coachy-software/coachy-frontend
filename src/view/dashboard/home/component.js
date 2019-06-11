@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueC3 from "vue-c3";
 import moment from "moment";
-import summary from "@/assets/mock/summary.json";
+import summary from "@/assets/initials/summary.json";
 
 export default {
   data: () => ({
