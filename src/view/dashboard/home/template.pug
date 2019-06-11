@@ -1,3 +1,31 @@
 .container
   .page-header
     h1.page-title You are now in Dashboard
+  #dimmer.dimmer(:class="{'active': isLoading}")
+    .loader
+    .dimmer-content
+      .row
+        template(v-for="element in summaryElements")
+          .col-sm-3
+            .card
+              .card-body.text-center
+                .h5.text-nowrap {{element.name}}
+                  span.ml-3
+                    i(:class="element.icon")
+                .display-4.font-weight-bold.mb-4 {{element.value}}
+      .row
+        .col-lg-6
+          .card
+            .card-header
+              h3.card-title Development Activity
+            vue-c3.c3#chart-development-activity(:handler="handler")
+            .table-responsive
+              table.table.card-table.table-striped.table-vcenter
+                thead
+                  tr
+                    th Waga
+                    th Data
+                tbody
+                  tr(v-for="measurement in findWeightMeasurements(5)")
+                    td(style="width: 100%") {{measurement.value}} kg
+                    td.text-nowrap {{measurement.date | moment}}

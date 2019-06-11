@@ -327,5 +327,8 @@
     "accepted": "Pomyślnie zaakceptowano plan",
     "rejected": "Odrzucono plan",
     "already_voted": "Ten plan został już zaakceptowany/odrzucony"
+  },
+  "home": {
+    "weight": "Waga"
   }
 }

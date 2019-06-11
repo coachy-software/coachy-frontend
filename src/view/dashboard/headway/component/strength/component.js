@@ -23,7 +23,6 @@ export default {
       this.columns = [['data1', 0]];
 
       let headways = JSON.parse(localStorage.getItem('headways'));
-
       headways = headways.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
       headways.filter(headway => headway.type === 'STRENGTH').forEach(headway => {
