@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Utworzone plany",
+    "icon": "fe fe-clipboard",
+    "value": 0
+  },
+  {
+    "name": "Przeprowadzone konwersacje",
+    "icon": "fe fe-message-circle",
+    "value": 0
+  },
+  {
+    "name": "Utworzone diety",
+    "icon": "fa fa-utensils",
+    "value": 0
+  },
+  {
+    "name": "Utworzone podsumowania",
+    "icon": "fe fe-trending-up",
+    "value": 0
+  }
+]

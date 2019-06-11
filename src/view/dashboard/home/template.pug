@@ -23,8 +23,8 @@
               table.table.card-table.table-striped.table-vcenter
                 thead
                   tr
-                    th Waga
-                    th Data
+                    th {{$t('home.weight')}}
+                    th {{$t('home.date')}}
                 tbody
                   tr(v-for="measurement in findWeightMeasurements(5)")
                     td(style="width: 100%") {{measurement.value}} kg

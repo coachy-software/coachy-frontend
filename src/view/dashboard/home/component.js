@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueC3 from "vue-c3";
 import moment from "moment";
+import summary from "@/assets/mock/summary.json";
 
 export default {
   data: () => ({
@@ -8,12 +9,7 @@ export default {
     columns: [['data1', 0]],
     weightProgress: [],
     isLoading: true,
-    summaryElements: [
-      {name: "Utworzone plany", icon: "fe fe-clipboard", value: 0},
-      {name: "Przeprowadzone konwersacje", icon: "fe fe-message-circle", value: 0},
-      {name: "Utworzone diety", icon: "fa fa-utensils", value: 0},
-      {name: "Utworzone podsumowania", icon: "fe fe-trending-up", value: 0}
-    ]
+    summaryElements: summary
   }),
   components: {
     VueC3

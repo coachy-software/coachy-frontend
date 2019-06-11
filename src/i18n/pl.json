@@ -329,6 +329,7 @@
     "already_voted": "Ten plan został już zaakceptowany/odrzucony"
   },
   "home": {
-    "weight": "Waga"
+    "weight": "Waga",
+    "date": "Data"
   }
 }
