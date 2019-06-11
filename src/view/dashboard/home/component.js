@@ -6,7 +6,7 @@ import summary from "@/assets/initials/summary.json";
 export default {
   data: () => ({
     handler: new Vue(),
-    columns: [['data1', 0]],
+    columns: [['data1']],
     weightProgress: [],
     isLoading: true,
     summaryElements: summary
@@ -29,6 +29,10 @@ export default {
       this.columns[0].push(measurement.value);
       this.weightProgress.push({value: measurement.value, date: headway.createdAt})
     }));
+
+    if (this.weightProgress.length === 1) {
+      this.columns[0][2] = this.weightProgress[0].value;
+    }
 
     let options = {
       data: {columns: this.columns, type: 'area', names: {'data1': this.$t('home.weight')}},
