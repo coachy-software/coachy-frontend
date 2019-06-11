@@ -29,9 +29,9 @@
               .col.col-sm-4
                 input.form-control(type="text", :placeholder="$t('headway_create.exercise_name')", v-model='name', required)
               .col.col-sm-3
-                input.form-control(type='number', :placeholder="$t('headway_create.weight')", v-model='weight', required)
+                input.form-control(type='number', step=".01", :placeholder="$t('headway_create.weight')", v-model='weight', required)
               .col.col-sm-3
-                input.form-control(type='number', :placeholder="$t('headway_create.reps')", v-model="reps", required)
+                input.form-control(type='number', step=".01", :placeholder="$t('headway_create.reps')", v-model="reps", required)
               span.col-auto
                 button.btn.btn-secondary(type='submit')
                   i.fe.fe-plus
@@ -74,4 +74,4 @@
     .col-sm-12(v-if="weightSwitch")
       .form-group
         label.form-label {{$t('headway_create.weight')}}
-        input.form-control(type='number', v-model="userWeight" min=10, :placeholder="$t('headway_create.weight')")
+        input.form-control(type='number', step=".01", v-model="userWeight" min=10, :placeholder="$t('headway_create.weight')")

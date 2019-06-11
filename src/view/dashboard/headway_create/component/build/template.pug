@@ -4,7 +4,7 @@
       .col-sm-8(v-for="(measurement, index) in measurements", v-if="(index <= 5 && _index === 1) || (index > 5 && _index !== 1)")
         .form-group
           label.form-label {{$t('headway_create.' + measurement.name)}}
-          input.form-control(type='number', v-model="measurement.value", min=10)
+          input.form-control(type='number', step=".01", v-model="measurement.value", min=10)
   .col-sm-4
     .form-group
       .custom-file

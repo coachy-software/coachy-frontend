@@ -330,6 +330,7 @@
   },
   "home": {
     "weight": "Waga",
-    "date": "Data"
+    "date": "Data",
+    "chart_name": "Waga ciała"
   }
 }
