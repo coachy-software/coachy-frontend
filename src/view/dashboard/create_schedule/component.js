@@ -3,8 +3,8 @@ import {getErrorMessage} from "@/util/validation.utils";
 import {notification} from "@/util/toastr.utils";
 import {maxLength, required} from "vuelidate/src/validators";
 import {fetchAll} from "@/service/schedule.service";
-import axios from "axios";
-import {API_URL} from "@/util/constants";
+import Selectize from 'vue2-selectize'
+import {searchUserByUsername} from "@/service/user.service";
 
 export default {
   data: () => ({
@@ -12,6 +12,7 @@ export default {
     note: "",
     charge: "",
     active: true,
+    suggestions: [],
     days: [
       {trainingDay: true, exercises: []},
       {trainingDay: true, exercises: []},
@@ -21,15 +22,34 @@ export default {
       {trainingDay: true, exercises: []},
       {trainingDay: true, exercises: []}
     ],
-    suggestionAttribute: 'username',
-    suggestions: []
+    settings: {}
   }),
+  created() {
+    this.settings = {
+      render: {
+        option: (item, escape) => {
+          let parsedItem = JSON.parse(item.value);
+          return `<div><span class="image"><img src="${escape(parsedItem.avatar)}" alt=""></span><span class="title">${escape(
+              parsedItem.displayName || parsedItem.username)}</span></div>`;
+        },
+      },
+      load: (query, callback) => {
+        if (!query.length) {
+          return callback();
+        }
+        searchUserByUsername({username: encodeURIComponent(query)}).then(result => this.suggestions = result.data);
+      }
+    };
+  },
+  components: {
+    Selectize
+  },
   methods: {
     createSchedule() {
       store.dispatch('schedule/create', {
         name: this.name,
         creator: JSON.parse(localStorage.getItem('user')).identifier,
-        charge: this.suggestions[0].identifier,
+        charge: JSON.parse(this.charge).identifier,
         note: this.note,
         active: this.active,
         days: this.days
@@ -46,15 +66,6 @@ export default {
       .catch(error => {
         notification.error(getErrorMessage('create_schedule', error))
       });
-    },
-    changed: function () {
-      let that = this;
-
-      this.suggestions = [];
-      axios.get(`${API_URL}/users?username=${this.charge}`)
-      .then(function (response) {
-        response.data.forEach((rawCharge) => that.suggestions.push(rawCharge))
-      })
     }
   },
   computed: {

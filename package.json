@@ -29,6 +29,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
     "howler": "^2.1.2",
+    "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "perfect-scrollbar": "^1.4.0",
@@ -52,6 +53,7 @@
     "vue-i18n": "^8.11.2",
     "vue-instant": "^1.0.4",
     "vue-template-compiler": "^2.6.10",
+    "vue2-selectize": "^1.1.7",
     "vuedraggable": "^2.21.0",
     "vuelidate": "^0.7.4",
     "webstomp-client": "^1.2.6"
