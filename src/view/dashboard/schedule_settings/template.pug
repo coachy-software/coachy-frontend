@@ -10,37 +10,44 @@
           .loader
           .dimmer-content
             .row
-              .form-group.col-sm-8.col-md-5
+              .form-group.col-sm-6
                 label.form-label
                   | {{this.$t('create_schedule.name')}}
                   span.form-required *
                 input.form-control(:class="{'is-invalid': $v.name.$error}", type='text', :placeholder="this.$t('create_schedule.name_placeholder')", v-model.trim="$v.name.$model")
                 .invalid-feedback(v-if="!$v.name.required") {{$t('validation.name_required')}}
+
+              .form-group.col-sm-6
                 .custom-switches-stacked.mt-5
                   label.custom-switch
                     input.custom-switch-input(type='checkbox', name='custom-switch-checkbox' checked, v-model="active")
                     span.custom-switch-indicator
                     span.custom-switch-description {{this.$t('create_schedule.active')}}
-              .form-group.col-sm-12.col-md-7
+
+              .form-group.col-sm-6
                 label.form-label
                   | {{this.$t('create_schedule.note')}}
                   span.form-label-small {{note.length}}/1000
                 textarea.form-control(rows='6', :placeholder="this.$t('create_schedule.complete_note')", v-model.trim="$v.note.$model", maxlength=1000)
                   | test sdasda
-              .form-group.col-sm-12.col-md-12
+
+              .form-group.col-sm-6
+                label.form-label {{$t('schedule_settings.actions')}}
+                .btn-list
+                  a.btn.btn-secondary(href='javascript:;', @click="openDeleteModal") {{this.$t('schedule_settings.delete')}}
+                    i.fe.fe-trash-2.ml-2
+                  a.btn.btn-secondary(href='javascript:;', @click="openCloneModal") {{$t('schedule_settings.clone')}}
+                    i.fe.fe-copy.ml-2
+
+              .form-group.col-sm-12
                 label.form-label {{this.$t('create_schedule.training_days')}}
                 .selectgroup.selectgroup-pills
                   template(v-for="(day, key, index) in this.$t('days')")
                     label.selectgroup-item
                       input.selectgroup-input(type='checkbox', :name="key", v-model="days[index].trainingDay")
                       span.selectgroup-button {{day}}
-              .form-group.col-sm-2
-                label.form-label {{this.$t('schedule_settings.delete')}}
-                button.btn.btn-danger(type="button", @click="openDeleteModal") {{this.$t('schedule_settings.delete')}}
-                  i.fe.fe-trash-2.ml-2
+
       .card-footer.text-right
-        button.btn.btn-primary(type="button", @click="openCloneModal") Sklonuj
-          i.fe.fe-copy.ml-2
         button.btn.btn-primary.ml-2(type='submit', :disabled="this.$v.$invalid") {{this.$t('schedule_settings.submit')}}
   schedule-delete-modal(ref="scheduleDeleteModal", :scheduleName="schedule.name")
   schedule-clone-modal(ref="scheduleCloneModal", :schedule="schedule")
