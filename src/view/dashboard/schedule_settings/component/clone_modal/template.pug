@@ -4,16 +4,8 @@ sweet-modal(overlay-theme='dark', modal-theme='light', ref="scheduleCloneModal",
       .form-group
         label {{$t('create_schedule.charge')}}
           span.form-required *
-        vue-instant(
-          :suggestOnAllWords='true',
-          :suggestion-attribute='suggestionAttribute',
-          v-model='charge',
-          :show-autocomplete='true',
-          :autofocus='false',
-          :suggestions='suggestions',
-          type='custom',
-          @input='changed',
-          :placeholder="this.$t('create_schedule.charge_placeholder')"
-        )
-  .card-footer
-    button.btn.btn-primary.float-right(type="submit", :disabled="suggestions.length === 0") {{$t('schedule_settings.clone')}}
+        selectize#select-users.form-control.custom-select(v-model="charge", :settings="settings", name="user").mt-2
+          template(v-for="suggestion in suggestions")
+            option(:value='JSON.stringify(suggestion)') {{suggestion.username}}
+    .card-footer
+      button.btn.btn-primary.float-right(type="submit", :disabled="charge === ''") {{$t('schedule_settings.clone')}}
