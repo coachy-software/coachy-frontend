@@ -55,7 +55,7 @@ div
               .form-group
                 .custom-file
                   label.form-label {{$t('schedule.example_images')}}
-                  button.btn.btn-primary(@click="$refs.imagesManagerModal.open()") {{$t('schedule.manage_images')}}
+                  button.btn.btn-secondary(@click="$refs.imagesManagerModal.open()") {{$t('schedule.manage_images')}}
             .col-md-12
               .form-group
                 label.form-label {{$t('schedule.brief')}}
@@ -80,5 +80,5 @@ div
               span.mb-1
                 img.rounded.modal-image(:src="image")
               .d-flex.align-items-center.px-2
-                button.btn.btn-danger.btn-block(type="button", @click="removeExerciseImage(imageIndex)") {{$t('schedule.delete')}}
+                button.btn.btn-secondary.btn-block(type="button", @click="removeExerciseImage(imageIndex)") {{$t('schedule.delete')}}
                   i.fe.fe-trash-2.ml-2
