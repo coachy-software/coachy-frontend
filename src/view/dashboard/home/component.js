@@ -15,13 +15,17 @@ export default {
     VueC3
   },
   created() {
-    this.summaryElements[0].value = JSON.parse(localStorage.getItem("schedules")).length;
-    this.summaryElements[1].value = JSON.parse(localStorage.getItem("conversations")).length;
+    let parsedConversations = JSON.parse(localStorage.getItem("conversations")) || [];
+    let parsedSchedules = JSON.parse(localStorage.getItem("schedules")) || [];
+    let parsedHeadways = JSON.parse(localStorage.getItem("headways")) || [];
+
+    this.summaryElements[0].value = parsedSchedules.length;
+    this.summaryElements[1].value = parsedConversations.length;
     this.summaryElements[2].value = 0;
-    this.summaryElements[3].value = JSON.parse(localStorage.getItem("headways")).length;
+    this.summaryElements[3].value = parsedHeadways.length;
   },
   mounted() {
-    let headways = JSON.parse(localStorage.getItem('headways'));
+    let headways = JSON.parse(localStorage.getItem('headways')) || [];
     headways = headways.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
     headways.forEach(headway => headway.measurements.filter(measurement => measurement.name === this.$t('home.weight'))
