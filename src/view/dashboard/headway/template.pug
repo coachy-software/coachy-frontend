@@ -4,6 +4,9 @@ div
       h1.page-title {{$t('headway.page_title')}} {{headway.createdAt | moment}}
       .page-options.d-flex
         .btn-list.text-right
+          button.btn.btn-outline-primary(type='button', @click="openModal")
+            i.fe.fe-share-2.mr-2
+            | {{$t('headway.share')}}
           button.btn.btn-outline-danger(type='button', @click="deleteHeadway")
             i.fe.fe-trash-2.mr-2
             | {{$t('headway.delete')}}
@@ -15,3 +18,13 @@ div
             template(v-if="!isLoading")
               Build(v-if="headway.type === 'BUILD'", :headway="headway")
               Strength(v-else, :headway="headway")
+  sweet-modal(overlay-theme='dark', modal-theme='light', ref="modal", blocking)
+    form(@submit.prevent="share")
+      .card-body
+        .form-group
+          label {{$t('headway.shareTo_label')}}
+          selectize#select-users.form-control.custom-select(v-model="shareToUser", :settings="settings", name="user").mt-2
+            template(v-for="suggestion in suggestions")
+              option(:value='JSON.stringify(suggestion)') {{suggestion.username}}
+      .card-footer
+        button.btn.btn-primary.float-right(type="submit", :disabled="shareToUser === ''") {{$t('headway.share')}}

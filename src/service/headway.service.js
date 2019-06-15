@@ -6,6 +6,11 @@ const fetchOne = async (payload) => {
   return await axios.get(`${API_URL}/headways/${payload.identifier}`, authorization());
 };
 
+const share = async (payload) => {
+  return await axios.post(`${API_URL}/headways/${payload.identifier}/share`, {"shareTo": payload.shareTo},authorization());
+};
+
 export default {
-  fetchOne
+  fetchOne,
+  share
 }
