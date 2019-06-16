@@ -2,7 +2,7 @@ div
   .container
     .page-header
       h1.page-title {{$t('headway.page_title')}} {{headway.createdAt | moment}}
-      .page-options.d-flex
+      .page-options.d-flex(v-if="isOwner")
         .btn-list.text-right
           button.btn.btn-outline-primary(type='button', @click="openModal")
             i.fe.fe-share-2.mr-2

@@ -13,7 +13,8 @@ export default {
     isLoading: true,
     suggestions: [],
     settings: {},
-    shareToUser: ''
+    shareToUser: '',
+    isOwner: false
   }),
   components: {
     Build,
@@ -39,6 +40,8 @@ export default {
         searchUserByUsername({username: encodeURIComponent(query)}).then(result => this.suggestions = result.data);
       }
     };
+
+    this.fetchOne(this.$route.params.id);
   },
   methods: {
     share() {
@@ -58,19 +61,25 @@ export default {
     },
     closeModal() {
       this.$refs.modal.close();
+    },
+    fetchOne(id) {
+      HeadwayService.fetchOne({identifier: id})
+      .then(response => {
+        this.headway = response.data;
+        this.headway.measurements = this.headway.measurements.sort((a, b) => a.name.localeCompare(b.name));
+
+        this.isOwner = JSON.parse(localStorage.getItem('user')).identifier === this.headway.ownerId;
+        this.isLoading = false;
+      });
     }
-  },
-  mounted() {
-    HeadwayService.fetchOne({identifier: this.$route.params.id})
-    .then(response => {
-      this.headway = response.data;
-      this.headway.measurements = this.headway.measurements.sort((a, b) => a.name.localeCompare(b.name));
-      this.isLoading = false;
-    });
   },
   filters: {
     moment: (date) => {
       return moment(date).format('DD-MM-YYYY HH:mm:ss');
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.fetchOne(to.params.id);
+    next();
   }
 }
