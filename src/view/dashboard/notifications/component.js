@@ -34,6 +34,13 @@ export default {
     }
   },
   methods: {
+    translateAlert(alertContent) {
+      let text = this.parseAlertContent(alertContent).text;
+      return this.$te('notifications.' + text) ? this.$t('notifications.' + text) : text;
+    },
+    parseAlertContent(alertContent) {
+      return JSON.parse(alertContent);
+    },
     accept(notificationContent) {
       let content = JSON.parse(notificationContent);
       ScheduleService.accept({identifier: content.scheduleId, token: content.token})

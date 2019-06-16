@@ -28,13 +28,16 @@ div
               td
                 .small.text-muted {{$t('notifications.content')}}
                 div(v-if="notification.type === 'SCHEDULE_REQUEST'") {{$t('notifications.schedule-alert-1')}} #[strong {{notification.senderName}}] {{$t('notifications.schedule-alert-2')}}
-                div(v-else) {{notification.content}}
+                div(v-else) #[strong {{notification.senderName}}] {{translateAlert(notification.content)}}
               td(style="width: 1%")
                 template(v-if="notification.type !== 'ALERT'")
                   button.btn.btn-icon.btn-primary.btn-secondary(type='button', @click="accept(notification.content)")
                     i.fe.fe-check
                   button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button', @click="reject(notification.content)")
                     i.fe.fe-x
+                template(v-else)
+                  router-link.btn.btn-icon.btn-primary.btn-secondary(:to="'/dashboard' + parseAlertContent(notification.content).link")
+                    i.fe.fe-eye
     .btn-list.text-right.mb-5(v-if="totalPages > 1")
       router-link.btn.btn-secondary(:to="`?page=${parsedPage - 1}`", tag="button" :disabled="isFirst") {{$t('notifications.previous')}}
       router-link.btn.m-0.mb-2(:class="{'btn-secondary': parsedPage !== 1, 'btn-primary': parsedPage === 1}", :to="`?page=1`") 1

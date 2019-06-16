@@ -331,7 +331,8 @@
     "schedule-alert-2": "czy chcesz go zaakceptować?",
     "accepted": "Pomyślnie zaakceptowano plan",
     "rejected": "Odrzucono plan",
-    "already_voted": "Ten plan został już zaakceptowany/odrzucony"
+    "already_voted": "Ten plan został już zaakceptowany/odrzucony",
+    "headway_shared": "udostępnił ci swoje podsumowanie, kliknij aby zobaczyć"
   },
   "home": {
     "weight": "Waga",

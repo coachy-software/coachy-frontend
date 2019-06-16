@@ -8,9 +8,9 @@
         p.text-center.mt-2 {{$t('dropdowns.no_notifications')}}
       div(v-else, v-for="notification in sortedNotifications")
         template(v-if="notification.type === 'ALERT'")
-          .dropdown-item.d-flex
+          router-link.dropdown-item.d-flex(:to="'/dashboard' + parseAlertContent(notification.content).link")
             span.avatar.mr-3.align-self-center.dropdown-avatar(:style="{'background-image': `url(${logo})`}")
-            .wrap-content {{notification.content}}
+            .wrap-content #[strong {{notification.senderName}}] {{translateAlert(notification.content)}}
               .small.text-muted {{notification.createdAt | moment}}
         template(v-else)
           .dropdown-item.d-flex
@@ -98,6 +98,13 @@
       }
     },
     methods: {
+      translateAlert(alertContent) {
+        let text = this.parseAlertContent(alertContent).text;
+        return this.$te('notifications.' + text) ? this.$t('notifications.' + text) : text;
+      },
+      parseAlertContent(alertContent) {
+        return JSON.parse(alertContent);
+      },
       accept(notificationContent) {
         let content = JSON.parse(notificationContent);
         ScheduleService.accept({identifier: content.scheduleId, token: content.token})
