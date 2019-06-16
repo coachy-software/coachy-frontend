@@ -1,6 +1,6 @@
 [
   {
-    "name": "Utworzone plany",
+    "name": "Plany treningowe",
     "icon": "fe fe-clipboard",
     "value": 0
   },
@@ -10,7 +10,7 @@
     "value": 0
   },
   {
-    "name": "Utworzone diety",
+    "name": "Plany żywienia",
     "icon": "fa fa-utensils",
     "value": 0
   },
