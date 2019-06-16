@@ -9,7 +9,8 @@ export default {
     columns: [['data1']],
     weightProgress: [],
     isLoading: true,
-    summaryElements: summary
+    summaryElements: summary,
+    unreadNotifications: {}
   }),
   components: {
     VueC3
@@ -23,6 +24,8 @@ export default {
     this.summaryElements[1].value = parsedConversations.length;
     this.summaryElements[2].value = 0;
     this.summaryElements[3].value = parsedHeadways.length;
+
+    this.unreadNotifications = JSON.parse(localStorage.getItem('unreadNotifications')) || {hasUnread: false};
   },
   mounted() {
     let headways = JSON.parse(localStorage.getItem('headways')) || [];

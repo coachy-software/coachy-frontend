@@ -75,7 +75,10 @@
       this.userIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
 
       NotificationService.hasAnyUnread({identifier: this.userIdentifier})
-      .then(response => this.hasAnyUnread = response.data.hasUnread);
+      .then(response => {
+        this.hasAnyUnread = response.data.hasUnread;
+        localStorage.setItem('unreadNotifications', JSON.stringify(response.data));
+      });
 
       NotificationService.fetchAll({identifier: this.userIdentifier, page: 0, size: 5})
       .then(response => this.notifications = response.data.content);
@@ -83,6 +86,13 @@
       subscribe('/user/queue/notifications', (output) => {
         this.notifications.push(JSON.parse(output.body));
         this.hasAnyUnread = true;
+
+        let unreadNotifications = JSON.parse(localStorage.getItem('unreadNotifications'));
+        unreadNotifications.hasUnread = true;
+        unreadNotifications.count += 1;
+
+        localStorage.setItem('unreadNotifications', JSON.stringify(unreadNotifications));
+
         this.playNotificationSound();
       });
     },
@@ -126,7 +136,10 @@
 
         if (!notificationDropdown.classList.contains('show')) {
           NotificationService.markAsRead({identifier: this.userIdentifier})
-          .then(() => this.hasAnyUnread = false)
+          .then(() => {
+            this.hasAnyUnread = false;
+            localStorage.setItem('unreadNotifications', JSON.stringify({hasUnread: false}));
+          })
         }
       },
       getInitials(username) {

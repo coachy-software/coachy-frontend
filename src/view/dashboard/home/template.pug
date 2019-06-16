@@ -14,7 +14,7 @@
                     i(:class="element.icon")
                 .display-4.font-weight-bold.mb-4 {{element.value}}
       .row
-        .col-lg-6
+        .col-sm-6
           .card
             .card-header
               h3.card-title {{$t('home.chart_name')}}
@@ -29,3 +29,18 @@
                   tr(v-for="measurement in findWeightMeasurements(5)")
                     td(style="width: 100%") {{measurement.value}} kg
                     td.text-nowrap {{measurement.date | moment}}
+        .col-sm-6
+          .card.p-3
+            .d-flex.align-items-center(v-if="unreadNotifications.hasUnread")
+              span.stamp.stamp-md.bg-red.mr-3
+                i.fe.fe-bell
+              div
+                h4.m-0
+                  router-link(to='/dashboard/notifications')
+                    | {{unreadNotifications.count}}
+                    small.ml-2 Nieodebranych notyfikacji
+            .d-flex.align-items-center(v-else)
+              span.stamp.stamp-md.bg-green.mr-3
+                i.fe.fe-bell-off
+              div
+                | Nie masz nieodebranych notyfikacji
