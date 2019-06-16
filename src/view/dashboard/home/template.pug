@@ -19,7 +19,10 @@
             .card-header
               h3.card-title {{$t('home.chart_name')}}
             vue-c3.c3#chart-development-activity(:handler="handler")
-            .table-responsive
+            div(v-if="!weightChart")
+              h4.m-4
+                small {{$t('home.no_weight_data')}}
+            .table-responsive(v-else)
               table.table.card-table.table-striped.table-vcenter
                 thead
                   tr

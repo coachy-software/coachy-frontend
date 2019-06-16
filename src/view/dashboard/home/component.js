@@ -10,7 +10,8 @@ export default {
     weightProgress: [],
     isLoading: true,
     summaryElements: summary,
-    unreadNotifications: {}
+    unreadNotifications: {},
+    weightChart: false
   }),
   components: {
     VueC3
@@ -28,6 +29,8 @@ export default {
     this.unreadNotifications = JSON.parse(localStorage.getItem('unreadNotifications')) || {hasUnread: false};
   },
   mounted() {
+    this.weightChart = true;
+
     let headways = JSON.parse(localStorage.getItem('headways')) || [];
     headways = headways.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
@@ -37,8 +40,10 @@ export default {
       this.weightProgress.push({value: measurement.value, date: headway.createdAt})
     }));
 
-    if (this.weightProgress.length === 1) {
-      this.columns[0][2] = this.weightProgress[0].value;
+    if (this.weightProgress.length <= 1) {
+      this.weightChart = false;
+      this.isLoading = false;
+      return;
     }
 
     let options = {

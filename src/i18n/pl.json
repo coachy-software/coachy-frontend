@@ -339,6 +339,7 @@
     "date": "Data",
     "chart_name": "Waga ciała",
     "unreadNotifications": "Nieprzeczytanych notyfikacji",
-    "noUnreadNotifications": "Nie masz nieprzeczytanych notyfikacji"
+    "noUnreadNotifications": "Nie masz nieprzeczytanych notyfikacji",
+    "no_weight_data": "Brak danych dotyczących twojej wagi"
   }
 }
