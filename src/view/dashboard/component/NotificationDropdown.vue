@@ -16,7 +16,7 @@
           .dropdown-item.d-flex
             span.avatar.mr-3.align-self-center.dropdown-avatar(v-if="notification.senderAvatar !== null", :style="{'background-image': `url(${notification.senderAvatar})`}")
             span.avatar.mr-3.align-self-center.dropdown-avatar.avatar-blue(v-else) {{getInitials(notification.senderName)}}
-            .wrap-content Otrzymałeś plan treningowy od użytkownika #[strong {{notification.senderName}}] czy chcesz go zaakceptować?
+            .wrap-content {{$t('notifications.schedule-alert-1')}} #[strong {{notification.senderName}}] {{$t('notifications.schedule-alert-2')}}
             button.btn.btn-icon.btn-primary.btn-secondary(type='button', @click="accept(notification.content)")
               i.fe.fe-check
             button.btn.btn-icon.btn-primary.btn-secondary.ml-1(type='button', @click="reject(notification.content)")

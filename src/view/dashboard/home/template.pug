@@ -1,6 +1,6 @@
 .container
   .page-header
-    h1.page-title You are now in Dashboard
+    h1.page-title Dashboard
   #dimmer.dimmer(:class="{'active': isLoading}")
     .loader
     .dimmer-content
@@ -38,9 +38,9 @@
                 h4.m-0
                   router-link(to='/dashboard/notifications')
                     | {{unreadNotifications.count}}
-                    small.ml-2 Nieodebranych notyfikacji
+                    small.ml-2 {{$t('home.unreadNotifications')}}
             .d-flex.align-items-center(v-else)
               span.stamp.stamp-md.bg-green.mr-3
                 i.fe.fe-bell-off
               div
-                | Nie masz nieodebranych notyfikacji
+                | {{$t('home.noUnreadNotifications')}}

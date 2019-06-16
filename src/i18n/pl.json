@@ -337,6 +337,8 @@
   "home": {
     "weight": "Waga",
     "date": "Data",
-    "chart_name": "Waga ciała"
+    "chart_name": "Waga ciała",
+    "unreadNotifications": "Nieprzeczytanych notyfikacji",
+    "noUnreadNotifications": "Nie masz nieprzeczytanych notyfikacji"
   }
 }
