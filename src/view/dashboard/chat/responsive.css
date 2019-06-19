@@ -117,12 +117,6 @@
     display: block;
   }
 
-  .main .chat .content {
-    height: 100% !important;
-    min-height: 600px;
-    max-height: 600px
-  }
-
   .navigation {
     position: fixed;
     z-index: 99;

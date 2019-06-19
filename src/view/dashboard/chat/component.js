@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.updateAllActive(false);
-    this.loadChat();
+    // this.loadChat();
   },
   methods: {
     killInterval() {
