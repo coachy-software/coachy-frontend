@@ -2,27 +2,37 @@ import axios from "axios";
 import {API_URL} from "@/util/constants";
 import {authorization} from "@/util/headers";
 import {SET_DISCUSSIONS} from "./index";
-import {searchUserByUsername} from "@/service/user.service";
+import {trimLocationHeader} from "../../../util/headers";
+import * as _ from "underscore";
+import {searchUserByUsername} from "../../../service/user.service";
 
-const init = ({commit}, payload) => {
-  axios.get(`${API_URL}/conversations/${payload.identifier}`, authorization())
-  .then(response => {
-    let rawConversations = response.data;
-    let conversationPromises = [];
+const saveConversations = ({commit}, payload) => {
+  let sortedConversations = sort(payload.conversations);
+  commit(SET_DISCUSSIONS, sortedConversations);
+  localStorage.setItem('conversations', JSON.stringify(sortedConversations))
+};
 
-    new Promise((resolve) => {
-      rawConversations.forEach(conversation => {
-        let targetUsername = obtainTargetUsername(conversation);
-        let userPromise = searchUserByUsername({username: targetUsername}).then(response => {
-          conversation.user = response.data[0];
-          return conversation;
-        });
+const updateConversation = ({commit, state}, payload) => {
+  state.discussions.filter(conversation => conversation.identifier === payload.conversationId)
+  .map(conversation => payload.mappingHandler(conversation));
 
-        conversationPromises.push(userPromise);
-      });
+  let sortedDiscussions = sort(state.discussions);
 
-      return resolve(Promise.all(conversationPromises));
-    }).then(conversations => {
+  commit(SET_DISCUSSIONS, sortedDiscussions);
+  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+};
+
+const init = async ({commit}, payload) => {
+  let response = await axios.get(`${API_URL}/conversations/by-converser/${payload.identifier}`, authorization());
+
+  let conversations = response.data;
+
+  conversations.forEach(conversation => {
+    let targetUsername = conversation.conversers.filter(converser => converser !== payload.username);
+    searchUserByUsername({username: targetUsername})
+    .then(response => {
+      conversation.user = response.data[0];
+
       commit(SET_DISCUSSIONS, conversations);
       localStorage.setItem('conversations', JSON.stringify(conversations))
     });
@@ -30,23 +40,11 @@ const init = ({commit}, payload) => {
 };
 
 const updateActive = ({commit, state}, payload) => {
-  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
-  .map(discussion => discussion.active = payload.active);
-
-  let sortedDiscussions = sort(state.discussions);
-
-  commit(SET_DISCUSSIONS, sortedDiscussions);
-  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+  updateConversation({commit, state}, {conversationId: payload.conversationId, mappingHandler: (conversation) => conversation.active = payload.active});
 };
 
 const updatePing = ({commit, state}, payload) => {
-  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
-  .map(discussion => discussion.ping = payload.ping);
-
-  let sortedDiscussions = sort(state.discussions);
-
-  commit(SET_DISCUSSIONS, sortedDiscussions);
-  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+  updateConversation({commit, state}, {conversationId: payload.conversationId, mappingHandler: (conversation) => conversation.ping = payload.ping});
 };
 
 const updateAllActive = ({commit, state}, payload) => {
@@ -57,48 +55,60 @@ const updateAllActive = ({commit, state}, payload) => {
   localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
 };
 
-const add = ({commit, state}, payload) => {
-  let discussions = state.discussions;
-  discussions.push(payload);
+const load = ({commit, state}, payload) => {
+  let conversations = state.discussions;
 
-  let sortedDiscussions = sort(discussions);
-  commit(SET_DISCUSSIONS, sortedDiscussions);
-  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
+  return axios.post(`${API_URL}/conversations`, {conversers: payload.conversers}, authorization())
+  .then(response => {
+    if (response.status === 200) {
+      let conversation = response.data;
+      conversation.user = payload.recipient;
+
+      pushIfAbsent(conversation, conversations);
+
+      saveConversations({commit}, {conversations: conversations});
+      return response.data;
+    }
+
+    let conversationId = trimLocationHeader(response.headers.location);
+
+    return axios.get(`${API_URL}/conversations/${conversationId}`, authorization())
+    .then(response => {
+      let conversation = response.data;
+      conversation.user = payload.recipient;
+
+      pushIfAbsent(conversation, conversations);
+
+      saveConversations({commit}, {conversations: conversations});
+      return response.data;
+    });
+  });
+};
+
+const pushIfAbsent = (conversation, conversations) => {
+  if (_.findWhere(conversations, {identifier: conversation.identifier}) === undefined) {
+    conversations.push(conversation);
+  }
 };
 
 const update = ({commit, state}, payload) => {
-  state.discussions.filter(discussion => discussion.user.username === payload.user.username)
-  .map(discussion => {
-    discussion.lastMessageId = payload.lastMessageId;
-    discussion.lastMessageText = payload.lastMessageText;
-    discussion.lastMessageDate = payload.lastMessageDate;
+  updateConversation({commit, state}, {
+    conversationId: payload.conversationId, mappingHandler: (conversation) => {
+      conversation.lastMessageId = payload.lastMessageId;
+      conversation.lastMessageText = payload.lastMessageText;
+      conversation.lastMessageDate = payload.lastMessageDate;
+      conversation.user = payload.user;
+    }
   });
-
-  let sortedDiscussions = sort(state.discussions);
-
-  commit(SET_DISCUSSIONS, sortedDiscussions);
-  localStorage.setItem('conversations', JSON.stringify(sortedDiscussions))
 };
 
 function sort(discussions) {
   return discussions.sort((a, b) => b.lastMessageDate - a.lastMessageDate);
 }
 
-function obtainTargetUsername(conversation) {
-  let clientUsername = JSON.parse(localStorage.getItem('user')).username;
-  return conversation.conversers.filter((converser, index) => {
-    let conversers = conversation.conversers;
-    if (conversers[index + 1] && conversers[index + 1] === conversers[index]) {
-      return true;
-    }
-
-    return converser !== clientUsername;
-  });
-}
-
 export default {
   init,
-  add,
+  load,
   update,
   updateActive,
   updatePing,

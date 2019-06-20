@@ -1,21 +1,22 @@
 import ChatDialog from "./components/chat_dialog/ChatDialog"
 import {API_URL} from "@/util/constants";
 import axios from "axios"
-import {StompClient, subscribe} from "@/service/ws.js";
+import {StompClient} from "@/service/ws.js";
 import chatNotificationSound from "@/assets/sounds/chat.mp3";
 import ObjectID from "bson-objectid";
-import {authorization} from "@/util/headers";
-import PerfectScrollbar from "perfect-scrollbar/dist/perfect-scrollbar.min";
 import {Howl, Howler} from "howler";
+import ConversationService from "@/service/conversation.service";
+import {subscribe} from "../../../service/ws";
+import "perfect-scrollbar/dist/perfect-scrollbar.min";
 
 export default {
   data: () => ({
-    identifier: '',
     sender: '',
     recipient: '',
     messages: [],
     typing: false,
-    typingInterval: null
+    typingInterval: null,
+    conversationId: {}
   }),
   components: {
     'chat-dialog': ChatDialog
@@ -27,16 +28,47 @@ export default {
       return;
     }
 
-    next();
+    this.setupRecipientAndSender(to.params.id);
+    this.loadChat();
+
     this.updateAllActive(false);
     this.killInterval();
-    this.loadChat();
+
+    next();
   },
-  mounted() {
+  created() {
+    this.setupRecipientAndSender(this.$route.params.id)
+    .then(() => this.loadChat());
+
+    onfocus = () => this.updatePing(false);
+
     this.updateAllActive(false);
-    // this.loadChat();
   },
   methods: {
+    setupRecipientAndSender(id) {
+      this.sender = JSON.parse(localStorage.getItem('user'));
+      return this.$store.dispatch("user/get", {identifier: id})
+      .then(response => this.recipient = response.data);
+    },
+    typingHandler(msgOut) {
+      let message = JSON.parse(msgOut.body);
+
+      if (message.from === this.recipient.username) {
+        this.typing = true;
+      }
+    },
+    privateHandler(msgOut) {
+      let message = JSON.parse(msgOut.body);
+      // add or update discussion
+
+      this.messages.push({body: message.body, conversationId: message.conversationId, identifier: message.identifier, senderName: message.from});
+      this.updateLastMessage(ObjectID.generate(), message.body, new Date().toISOString(), message.conversationId);
+
+      if (!document.hasFocus()) {
+        this.updatePing(true);
+        this.playNotificationSound();
+      }
+    },
     killInterval() {
       if (this.typingInterval) {
         clearInterval(this.typingInterval)
@@ -44,29 +76,18 @@ export default {
     },
     playNotificationSound() {
       const sound = new Howl({src: [chatNotificationSound]});
+      Howler.volume(0.3);
 
       sound.play();
-      Howler.volume(0.3);
-    },
-    scrollToBottom() {
-      let element = document.querySelector('#content');
-      element.scrollTop = element.scrollHeight;
     },
     loadChat() {
-      this.identifier = '';
-
-      let containers = document.querySelectorAll('.main .chat .content');
-      let perfectScrollbar = new PerfectScrollbar(containers[0], {wheelSpeed: 1});
-
-      containers[0].scrollTop = 0;
-      perfectScrollbar.update(containers[0]);
-
-      this.$store.dispatch('user/get', {identifier: this.$route.params.id})
+      this.$store.dispatch('chat/load', {conversers: [this.recipient.username, this.sender.username], recipient: this.recipient})
       .then(response => {
-        this.recipient = response.data;
-        document.title = this.recipient.displayName || this.recipient.username;
+        this.conversationId = response.identifier;
+        this.loadMessages(this.conversationId);
+
         this.updateActive(true);
-        this.updatePing(false, this.recipient);
+        this.updatePing(false);
 
         axios.get(`${API_URL}/users/me`, {
           headers: {'Authorization': `Basic ${localStorage.getItem('token')}`},
@@ -74,56 +95,17 @@ export default {
         })
         .then((ownDetails) => {
           this.sender = ownDetails.data;
-          this.loadMessages();
-
-          subscribe('/user/queue/private', msgOut => {
-            let message = JSON.parse(msgOut.body);
-
-            this.identifier = message.conversationId;
-            this.addOrUpdateDiscussion(message.conversationId, [this.recipient.username, this.sender.username], ObjectID.generate(), message.body,
-                new Date().toISOString(), {username: message.from});
-
-            this.messages.push({body: message.body, conversationId: message.conversationId, identifier: message.identifier, senderName: message.from});
-            this.scrollToBottom();
-
-            if (!document.hasFocus()) {
-              if (this.recipient.username !== message.from) {
-                this.updatePing(true, {username: message.from});
-              }
-
-              this.playNotificationSound();
-            }
-          });
-
-          subscribe('/user/queue/typing', (msgOut) => {
-            let message = JSON.parse(msgOut.body);
-            if (message.from === this.recipient.username) {
-              this.typing = true;
-              this.scrollToBottom();
-            }
-          });
-
           this.typingInterval = setInterval(() => this.typing = false, 3000);
+
+          subscribe('/user/queue/private', msgOut => this.privateHandler(msgOut));
+          subscribe('/user/queue/typing', (msgOut) => this.typingHandler(msgOut));
         })
-      })
-      .catch(() => this.$router.back())
+      });
     },
     loadMessages() {
-      let conversations = JSON.parse(localStorage.getItem('conversations'));
-
-      conversations.filter(conversation => {
-        if (conversation.conversers.includes(this.sender.username) && conversation.conversers.includes(this.recipient.username)) {
-
-          this.identifier = conversation.identifier;
-          axios.get(`${API_URL}/messages/${conversation.identifier}`, authorization())
-          .then(response => this.messages = response.data)
-          .catch(() => this.messages = []);
-          return true;
-        }
-
-        this.messages = [];
-        return true;
-      });
+      ConversationService.fetchMessages({identifier: this.conversationId})
+      .then(response => this.messages = response.data)
+      .catch(() => this.messages = []);
     },
     changed() {
       StompClient.send(`/app/chat.message.typing`, {}, JSON.stringify({
@@ -139,53 +121,39 @@ export default {
 
       let senderUsername = this.sender.username;
       let recipientUsername = this.recipient.username;
-      let conversationId = this.identifier || ObjectID.generate();
 
       let websocketPayload = JSON.stringify({
         from: senderUsername,
         to: recipientUsername,
         body: messageContent,
         date: new Date().toISOString(),
-        conversationId: conversationId
+        conversationId: this.conversationId
       });
 
-      this.addOrUpdateDiscussion(conversationId, [senderUsername, recipientUsername], ObjectID.generate(), messageContent, new Date().toISOString(),
-          this.recipient);
-
+      this.updateLastMessage(ObjectID.generate(), messageContent, new Date().toISOString(), this.conversationId);
       StompClient.send(`/app/chat.message.private`, {}, websocketPayload);
+
       this.messages.push({senderName: senderUsername, body: messageContent});
-
-      this.scrollToBottom();
     },
-    addOrUpdateDiscussion(id, conversers, lastMessageId, lastMessageText, lastMessageDate, user) {
-      if (this.messages.length === 0) {
-        this.$store.dispatch('chat/add', {
-          identifier: id,
-          conversers: conversers,
-          lastMessageId: lastMessageId,
-          lastMessageText: lastMessageText,
-          lastMessageDate: lastMessageDate,
-          user: user
-        });
-      }
-
+    updateLastMessage(lastMessageId, lastMessageText, lastMessageDate) {
       this.$store.dispatch('chat/update', {
         lastMessageId: lastMessageId,
         lastMessageText: lastMessageText,
         lastMessageDate: lastMessageDate,
-        user: user
+        conversationId: this.conversationId,
+        user: this.recipient
       });
     },
-    updatePing(ping, user) {
+    updatePing(ping) {
       this.$store.dispatch('chat/updatePing', {
-        user: user,
-        ping: ping
+        ping: ping,
+        conversationId: this.conversationId
       });
     },
     updateActive(active) {
       this.$store.dispatch('chat/updateActive', {
-        user: this.recipient,
-        active: active
+        active: active,
+        conversationId: this.conversationId
       });
     },
     updateAllActive(active) {

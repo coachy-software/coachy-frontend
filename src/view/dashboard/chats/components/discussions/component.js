@@ -11,7 +11,8 @@ export default {
     'chat-sidebar': ChatSidebar
   },
   created() {
-    this.$store.dispatch('chat/init', {identifier: JSON.parse(localStorage.getItem('user')).identifier})
+    let user = JSON.parse(localStorage.getItem('user'));
+    this.$store.dispatch('chat/init', {identifier: user.identifier, username: user.username})
   },
   methods: {
     changed() {
