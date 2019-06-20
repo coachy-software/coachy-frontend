@@ -13,6 +13,11 @@ export default {
       document.getElementById('chat-dialog').style.right = '-100%';
     }
   },
+  computed: {
+    isLoading() {
+      return this.$store.getters['loader/isLoading'];
+    }
+  },
   filters: {
     moment: (date) => {
       return moment(date).format('YYYY.MM.DD HH:ss')

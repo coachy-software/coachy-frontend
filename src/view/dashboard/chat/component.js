@@ -14,7 +14,8 @@ export default {
     messages: [],
     typing: false,
     typingInterval: null,
-    conversationId: {}
+    conversationId: {},
+    isLoading: true
   }),
   components: {
     'chat-dialog': ChatDialog
@@ -88,9 +89,14 @@ export default {
       });
     },
     loadMessages() {
-      ConversationService.fetchMessages({identifier: this.conversationId})
-      .then(response => this.messages = response.data)
+      const handler = () => ConversationService.fetchMessages({identifier: this.conversationId})
+      .then(response => {
+        this.messages = response.data;
+        this.isLoading = false;
+      })
       .catch(() => this.messages = []);
+
+      setTimeout(handler, 1500);
     },
     changed() {
       WebsocketService.send(`/app/chat.message.typing`, JSON.stringify({

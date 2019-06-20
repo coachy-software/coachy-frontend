@@ -13,14 +13,17 @@
                 button.btn.back-to-mesg(title='Back', @click="backToChats")
                   i.fe.fe-arrow-right
         #content.content
-          .container
-            .col-md-12
-              .date
-                hr
-                span {{$t('chat.beginning')}}
-                hr
-              template(v-for="message in messages")
-                balloon(v-if="message.senderName === sender.username", :sentByOwner="true", :user="sender", :message="message.body", :typing="false")
-                balloon(v-else-if="message.senderName === recipient.username", :sentByOwner="false", :user="recipient", :message="message.body" :typing="false")
-              balloon(v-if="typing", :sentByOwner="false", :user="recipient", :typing="typing")
+          #dimmer.dimmer(:class="{'active': isLoading || $parent.isLoading}")
+            .loader
+            .dimmer-content
+              .container
+                .col-md-12
+                  .date
+                    hr
+                    span {{$t('chat.beginning')}}
+                    hr
+                  template(v-for="message in messages")
+                    balloon(v-if="message.senderName === sender.username", :sentByOwner="true", :user="sender", :message="message.body", :typing="false")
+                    balloon(v-else-if="message.senderName === recipient.username", :sentByOwner="false", :user="recipient", :message="message.body" :typing="false")
+                  balloon(v-if="typing", :sentByOwner="false", :user="recipient", :typing="typing")
         typing_area
