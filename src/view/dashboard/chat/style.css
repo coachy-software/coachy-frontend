@@ -578,13 +578,13 @@ p {
   max-height: calc(100vh - 218px);
   overflow-y: scroll;
   overflow-style: none;
-  overflow-x: hidden;
+  overflow-x: none;
   flex-direction: column-reverse;
   position: relative;
 }
 
 .main .chat .content::-webkit-scrollbar {
-  display: none;
+  /*display: none;*/
 }
 
 .main .chat .content .date {
