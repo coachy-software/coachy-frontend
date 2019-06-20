@@ -54,7 +54,6 @@
 
 </style>
 <script>
-  import {subscribe} from "@/service/ws";
   import moment from "moment";
   import logo from "@/assets/dark-logo.svg";
   import chatNotificationSound from "@/assets/sounds/chat.mp3";
@@ -63,6 +62,7 @@
   import ScheduleService from "@/service/schedule.service";
   import {getInitials} from "@/util/user.utils";
   import {notification} from "@/util/toastr.utils";
+  import WebsocketService from "@/service/ws";
 
   export default {
     data: () => ({
@@ -83,7 +83,7 @@
       NotificationService.fetchAll({identifier: this.userIdentifier, page: 0, size: 5})
       .then(response => this.notifications = response.data.content);
 
-      subscribe('/user/queue/notifications', (output) => {
+      WebsocketService.subscribe('/user/queue/notifications', (output) => {
         this.notifications.push(JSON.parse(output.body));
         this.hasAnyUnread = true;
 

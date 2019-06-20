@@ -1,13 +1,11 @@
 import ChatDialog from "./components/chat_dialog/ChatDialog"
 import {API_URL} from "@/util/constants";
 import axios from "axios"
-import {StompClient} from "@/service/ws.js";
-import chatNotificationSound from "@/assets/sounds/chat.mp3";
 import ObjectID from "bson-objectid";
-import {Howl, Howler} from "howler";
 import ConversationService from "@/service/conversation.service";
-import {subscribe} from "../../../service/ws";
+import WebsocketService from "@/service/ws";
 import "perfect-scrollbar/dist/perfect-scrollbar.min";
+import * as _ from "underscore";
 
 export default {
   data: () => ({
@@ -38,7 +36,13 @@ export default {
   },
   created() {
     this.setupRecipientAndSender(this.$route.params.id)
-    .then(() => this.loadChat());
+    .then(() => {
+      this.$watch(that => [that.$parent.messages], () => {
+        let parentMessages = this.$parent.messages.filter(message => message.senderName === this.recipient.username);
+        this.messages = _.union(this.messages, parentMessages)
+      }, {immediate: true});
+      this.loadChat()
+    });
 
     onfocus = () => this.updatePing(false);
 
@@ -57,28 +61,10 @@ export default {
         this.typing = true;
       }
     },
-    privateHandler(msgOut) {
-      let message = JSON.parse(msgOut.body);
-      // add or update discussion
-
-      this.messages.push({body: message.body, conversationId: message.conversationId, identifier: message.identifier, senderName: message.from});
-      this.updateLastMessage(ObjectID.generate(), message.body, new Date().toISOString(), message.conversationId);
-
-      if (!document.hasFocus()) {
-        this.updatePing(true);
-        this.playNotificationSound();
-      }
-    },
     killInterval() {
       if (this.typingInterval) {
         clearInterval(this.typingInterval)
       }
-    },
-    playNotificationSound() {
-      const sound = new Howl({src: [chatNotificationSound]});
-      Howler.volume(0.3);
-
-      sound.play();
     },
     loadChat() {
       this.$store.dispatch('chat/load', {conversers: [this.recipient.username, this.sender.username], recipient: this.recipient})
@@ -97,8 +83,7 @@ export default {
           this.sender = ownDetails.data;
           this.typingInterval = setInterval(() => this.typing = false, 3000);
 
-          subscribe('/user/queue/private', msgOut => this.privateHandler(msgOut));
-          subscribe('/user/queue/typing', (msgOut) => this.typingHandler(msgOut));
+          WebsocketService.subscribe('/user/queue/typing', msgOut => this.typingHandler(msgOut));
         })
       });
     },
@@ -108,7 +93,7 @@ export default {
       .catch(() => this.messages = []);
     },
     changed() {
-      StompClient.send(`/app/chat.message.typing`, {}, JSON.stringify({
+      WebsocketService.send(`/app/chat.message.typing`, JSON.stringify({
         from: this.sender.username,
         to: this.recipient.username,
         conversationId: this.identifier
@@ -130,19 +115,10 @@ export default {
         conversationId: this.conversationId
       });
 
-      this.updateLastMessage(ObjectID.generate(), messageContent, new Date().toISOString(), this.conversationId);
-      StompClient.send(`/app/chat.message.private`, {}, websocketPayload);
+      this.$parent.updateLastMessage(ObjectID.generate(), messageContent, new Date().toISOString(), this.conversationId);
+      WebsocketService.send(`/app/chat.message.private`, websocketPayload);
 
       this.messages.push({senderName: senderUsername, body: messageContent});
-    },
-    updateLastMessage(lastMessageId, lastMessageText, lastMessageDate) {
-      this.$store.dispatch('chat/update', {
-        lastMessageId: lastMessageId,
-        lastMessageText: lastMessageText,
-        lastMessageDate: lastMessageDate,
-        conversationId: this.conversationId,
-        user: this.recipient
-      });
     },
     updatePing(ping) {
       this.$store.dispatch('chat/updatePing', {

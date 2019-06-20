@@ -2,9 +2,9 @@ import axios from "axios";
 import {API_URL} from "@/util/constants";
 import {authorization} from "@/util/headers";
 import {SET_DISCUSSIONS} from "./index";
-import {trimLocationHeader} from "../../../util/headers";
+import {trimLocationHeader} from "@/util/headers";
 import * as _ from "underscore";
-import {searchUserByUsername} from "../../../service/user.service";
+import {searchUserByUsername} from "@/service/user.service";
 
 const saveConversations = ({commit}, payload) => {
   let sortedConversations = sort(payload.conversations);
@@ -23,8 +23,10 @@ const updateConversation = ({commit, state}, payload) => {
 };
 
 const init = async ({commit}, payload) => {
-  let response = await axios.get(`${API_URL}/conversations/by-converser/${payload.identifier}`, authorization());
+  commit(SET_DISCUSSIONS, []);
+  localStorage.setItem('conversations', JSON.stringify([]));
 
+  let response = await axios.get(`${API_URL}/conversations/by-converser/${payload.identifier}`, authorization());
   let conversations = response.data;
 
   conversations.forEach(conversation => {
@@ -32,9 +34,8 @@ const init = async ({commit}, payload) => {
     searchUserByUsername({username: targetUsername})
     .then(response => {
       conversation.user = response.data[0];
-
       commit(SET_DISCUSSIONS, conversations);
-      localStorage.setItem('conversations', JSON.stringify(conversations))
+      localStorage.setItem('conversations', JSON.stringify(conversations));
     });
   });
 };
@@ -97,7 +98,6 @@ const update = ({commit, state}, payload) => {
       conversation.lastMessageId = payload.lastMessageId;
       conversation.lastMessageText = payload.lastMessageText;
       conversation.lastMessageDate = payload.lastMessageDate;
-      conversation.user = payload.user;
     }
   });
 };
