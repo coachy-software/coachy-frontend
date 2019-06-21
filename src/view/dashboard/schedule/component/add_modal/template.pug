@@ -1,4 +1,4 @@
-sweet-modal(overlay-theme='light', modal-theme='light', ref="exerciseAddModal")
+sweet-modal(overlay-theme='dark', modal-theme='light', ref="exerciseAddModal", blocking)
   h3.card-title {{$t('schedule.add_exercise')}}
   form(@submit.prevent="$parent.addExercise(dayIndex)")
     .card-body

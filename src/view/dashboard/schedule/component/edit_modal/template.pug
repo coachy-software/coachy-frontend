@@ -1,5 +1,5 @@
 div
-  sweet-modal(overlay-theme='light', modal-theme='light', ref="exerciseEditModal")
+  sweet-modal(overlay-theme='dark', modal-theme='light', ref="exerciseEditModal", blocking)
     h3.card-title {{$t('schedule.edit_exercise')}}
     form(@submit.prevent="$parent.editExercise(dayIndex)", name="edit_form")
       .card-body
