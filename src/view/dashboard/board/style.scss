@@ -53,8 +53,11 @@ $column-width: 330px;
   cursor: grab;
 }
 
-.list-header {
+.list-header, h4 {
   font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .item-entry {
