@@ -247,7 +247,8 @@
     "label_3": "Ukończone",
     "yes": "Tak",
     "no": "Nie",
-    "are_you_sure": "Czy jesteś pewien?"
+    "are_you_sure": "Czy jesteś pewien?",
+    "new_column": "Nowa kolumna"
   },
   "chat": {
     "beginning": "Początek",

@@ -20,3 +20,5 @@ div
               color-picker(style="right: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 10%", v-model="color")
       .card-footer
         button.btn.btn-outline-primary.float-right(type="submit", :disabled="$v.$invalid") {{$t('board.update')}}
+        button.btn.btn-outline-danger.float-right.mr-2(type="button", @click="$parent.removeTask(labelIndex)") {{$t('board.delete')}}
+          i.fe.fe-trash-2.ml-2

@@ -56,7 +56,7 @@ export function addTask(task, labelIndex, board) {
 }
 
 export function addLabel(board) {
-  board.labels.push({identifier: ObjectID.generate(), name: 'Nowa kolumna', tasks: []});
+  board.labels.push({identifier: ObjectID.generate(), name: i18n.t('board.new_column'), tasks: []});
   update(board);
 }
 
@@ -74,6 +74,12 @@ export function editTask(board, labelIndex, taskInstance) {
     task.content = taskInstance.content;
   });
 
+  update(board);
+  taskInstance.closeModal();
+}
+
+export function removeTask(board, labelIndex, taskInstance) {
+  board.labels[labelIndex].tasks = board.labels[labelIndex].tasks.filter(task => taskInstance.task.identifier !== task.identifier);
   update(board);
   taskInstance.closeModal();
 }

@@ -3,16 +3,7 @@ import EditTaskModal from './component/edit_task/EditTaskModal';
 import ChangeNameModal from './component/change_name/ChangeNameModal';
 import DeleteModal from './component/delete/DeleteModal';
 import draggable from 'vuedraggable'
-import {
-  addLabel,
-  addTask,
-  createBoard,
-  editLabelName,
-  editTask,
-  fetch,
-  removeLabel,
-  update
-} from '@/service/board.service';
+import {addLabel, addTask, createBoard, editLabelName, editTask, fetch, removeLabel, removeTask, update} from '@/service/board.service';
 import ObjectID from 'bson-objectid';
 
 export default {
@@ -73,6 +64,9 @@ export default {
     },
     removeLabel(labelIdentifier) {
       removeLabel(this.board, labelIdentifier, this.$refs.deleteModal);
+    },
+    removeTask(labelIndex) {
+      removeTask(this.board, labelIndex, this.$refs.taskEditModal);
     },
     editLabelName() {
       editLabelName(this.board, this.$refs.changeNameModal);
