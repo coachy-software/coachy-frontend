@@ -6,6 +6,7 @@ import {notification} from "@/util/toastr.utils";
 import {searchUserByUsername} from "@/service/user.service";
 import {SweetModal, SweetModalTab} from "sweet-modal-vue";
 import Selectize from "vue2-selectize";
+import DeleteModal from "./component/delete/DeleteModal";
 
 export default {
   data: () => ({
@@ -21,8 +22,8 @@ export default {
     Strength,
     sweetModal: SweetModal,
     sweetModalTab: SweetModalTab,
-    Selectize
-
+    Selectize,
+    DeleteModal
   },
   created() {
     this.settings = {

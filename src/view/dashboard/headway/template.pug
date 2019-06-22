@@ -7,7 +7,7 @@ div
           button.btn.btn-outline-primary(type='button', @click="openModal")
             i.fe.fe-share-2.mr-2
             | {{$t('headway.share')}}
-          button.btn.btn-outline-danger(type='button', @click="deleteHeadway")
+          button.btn.btn-outline-danger(type='button', @click="$refs['delete-modal'].openModal")
             i.fe.fe-trash-2.mr-2
             | {{$t('headway.delete')}}
     .card.col-lg-12
@@ -28,3 +28,4 @@ div
               option(:value='JSON.stringify(suggestion)') {{suggestion.username}}
       .card-footer
         button.btn.btn-primary.float-right(type="submit", :disabled="shareToUser === ''") {{$t('headway.share')}}
+  delete-modal(ref="delete-modal")
