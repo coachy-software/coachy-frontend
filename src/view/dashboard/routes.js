@@ -24,6 +24,7 @@ import HeadwaysView from '@/view/dashboard/headways/HeadwaysView';
 import HeadwayCreateView from '@/view/dashboard/headway_create/HeadwayCreateView';
 import HeadwayView from '@/view/dashboard/headway/HeadwayView';
 import NotificationsView from '@/view/dashboard/notifications/NotificationsView';
+import ProfileView from '@/view/dashboard/profile/ProfileView';
 
 const beforeEnterChat = (to, from, next) => {
   let user = JSON.parse(localStorage.getItem('user'));
@@ -75,7 +76,8 @@ export default [
       route('headway-journals', HeadwaysView, {props: (route) => ({type: route.query.type}), beforeEnter: beforeEnterHeadways}),
       route('headway-journals/new', HeadwayCreateView),
       route('headway-journals/:id', HeadwayView),
-      route('notifications', NotificationsView, {props: (route) => ({page: route.query.page})})
+      route('notifications', NotificationsView, {props: (route) => ({page: route.query.page})}),
+      route('profiles/:id', ProfileView)
     ]
   }, {requiresAuth: true})
 ]
