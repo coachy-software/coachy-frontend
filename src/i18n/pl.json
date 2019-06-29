@@ -358,6 +358,8 @@
     "followed": "Zaobserowano użytkownika ",
     "unfollowed": "Przestałeś obserwować użytkownika ",
     "request_revision": "Poproś o korektę",
-    "change_visibility": "Zmień widoczność"
+    "change_visibility": "Zmień widoczność",
+    "add_recommendation": "Dodaj rekomendację",
+    "share": "Udostępnij link"
   }
 }

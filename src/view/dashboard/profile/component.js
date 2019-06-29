@@ -1,6 +1,7 @@
 import ProfileService from "@/service/profile.service"
 import {getInitials} from "@/util/user.utils";
 import {notification} from "@/util/toastr.utils";
+import ShareModal from "./modals/ShareModal";
 
 export default {
   data: () => ({
@@ -21,6 +22,9 @@ export default {
     following: [],
     isLoading: true
   }),
+  components: {
+    ShareModal
+  },
   created() {
     this.fetchOne(this.$route.params.id);
   },
