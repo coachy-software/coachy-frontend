@@ -356,6 +356,8 @@
     "followers": "Obserwujący",
     "recommendations": "Rekomendacje",
     "followed": "Zaobserowano użytkownika ",
-    "unfollowed": "Przestałeś obserwować użytkownika "
+    "unfollowed": "Przestałeś obserwować użytkownika ",
+    "request_revision": "Poproś o korektę",
+    "change_visibility": "Zmień widoczność"
   }
 }

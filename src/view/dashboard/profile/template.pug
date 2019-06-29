@@ -23,9 +23,13 @@ div
                 button.btn.btn-primary(type='button', v-else, @click="unfollow").mr-1
                   i.fe.fe-user-minus.mr-2
                   | {{$t('profile.unfollow')}}
-                button.btn.btn-outline-primary(type='button')
-                  i.fe.fe-plus.mr-2
-                  | {{$t('profile.more')}}
+                .dropdown
+                  button.btn.btn-outline-primary(type='button', @click="toggleMoreMenu")
+                    i.fe.fe-plus.mr-2
+                    | {{$t('profile.more')}}
+                  .dropdown-menu#more_menu
+                    a.dropdown-item(href='#') Dodaj rekomendację
+                    a.dropdown-item(href='#') Udostępnij
         .row
           .col-sm-4
             .col-sm-12
@@ -80,12 +84,15 @@ div
                     i.fe.fe-star.ml-2
                     i.fe.fe-star.ml-2
                     i.fe.fe-star.ml-2
-                ul.list-group.card-list-group
+
+                ul.list-group.card-list-group(v-if="recommendations.length === 0")
+                  li.list-group-item.py-5
+                    | {{$t('profile.none')}}
+                ul.list-group.card-list-group(v-else)
                   li.list-group-item.py-5(v-for="index in 4", :class="{'recommendation': isProfileOwner}",)
-                    template(v-if="isProfileOwner")
-                      .btn-list.text-center.mt-7
-                        button.recommendation-button.btn.btn-secondary.btn-md Poproś o korektę
-                        button.recommendation-button.btn.btn-secondary.btn-md Zmień widoczność
+                    .btn-list.text-center.mt-7
+                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.requst_revision')}}
+                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.change_visibility')}}
                     .media
                       .media-object.avatar.avatar-md.mr-4(style='background-image: url(demo/faces/male/16.jpg)')
                       .media-body

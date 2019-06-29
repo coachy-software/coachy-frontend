@@ -14,6 +14,7 @@ export default {
     location: '',
     services: [],
     socialLinks: [],
+    recommendations: [],
     isFollowing: false,
     isProfileOwner: false,
     followers: [],
@@ -38,6 +39,7 @@ export default {
       .then(response => {
         ProfileService.fetchFollowers({identifier: id}).then(response => this.followers = response.data.followers);
         ProfileService.fetchFollowing({identifier: id}).then(response => this.following = response.data.following);
+        ProfileService.fetchRecommendations({identifier: id}).then(response => this.recommendations = response.data);
 
         this.$store.dispatch('user/get', {identifier: id})
         .then(response => {
@@ -80,6 +82,9 @@ export default {
         this.followers = this.followers.filter(follower => follower.identifier !== JSON.parse(localStorage.getItem('user')).identifier);
         notification.success(this.$t('profile.unfollowed') + this.username);
       });
+    },
+    toggleMoreMenu() {
+      document.getElementById('more_menu').classList.toggle('show');
     }
   }
 
