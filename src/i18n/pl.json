@@ -295,7 +295,7 @@
     "wrist": "Nadgarstek",
     "chest": "Klatka",
     "waist": "Talia",
-    "thigh":  "Udo",
+    "thigh": "Udo",
     "calf": "Łydka",
     "images": "Zdjęcia",
     "submit": "Stwórz",
@@ -342,5 +342,17 @@
     "unreadNotifications": "Nieprzeczytanych notyfikacji",
     "noUnreadNotifications": "Nie masz nieprzeczytanych notyfikacji",
     "no_weight_data": "Brak danych dotyczących twojej wagi"
+  },
+  "profile": {
+    "none": "Brak danych",
+    "follow": "Obserwuj",
+    "more": "Więcej",
+    "bio_empty": "Ten użytkownik nie uzupełnij jeszcze swojego podsumowania",
+    "location": "Lokalizacja:",
+    "site": "Witryna",
+    "services": "Usługi",
+    "following": "Obserwowani",
+    "followers": "Obserwujący",
+    "recommendations": "Rekomendacje"
   }
 }

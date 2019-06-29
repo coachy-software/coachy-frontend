@@ -40,4 +40,13 @@
     opacity: 1;
   }
 
+  .card-profile-img {
+    min-width: 8rem !important;
+    min-height: 8rem !important;
+    max-width: 8rem !important;
+    max-height: 8rem !important;
+    line-height: 7rem;
+    font-size: 2.5rem;
+  }
+
 </style>
