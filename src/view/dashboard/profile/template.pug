@@ -11,17 +11,21 @@ div
           .card.card-profile
             .card-body.text-center
               img.card-profile-img(v-if="avatar", :src='avatar')
-              span.avatar.avatar-blue.avatar-lg.text-center.card-profile-img(v-else) {{getInitials()}}
+              span.avatar.avatar-blue.avatar-lg.text-center.card-profile-img(v-else) {{getInitials(username, displayName)}}
               h3.mb-3 {{displayName || username}}
               h4.mb-3(style="font-weight: 500") {{title || $t('profile.none')}}
               p.mb-4
                 | {{bio || $t('profile.bio_empty')}}
-              button.btn.btn-primary(type='button').mr-1
-                i.fe.fe-user-plus.mr-2
-                | {{$t('profile.follow')}}
-              button.btn.btn-outline-primary(type='button')
-                i.fe.fe-plus.mr-2
-                | {{$t('profile.more')}}
+              template(v-if="!isProfileOwner")
+                button.btn.btn-primary(type='button', v-if="!isFollowing", @click="follow").mr-1
+                  i.fe.fe-user-plus.mr-2
+                  | {{$t('profile.follow')}}
+                button.btn.btn-primary(type='button', v-else, @click="unfollow").mr-1
+                  i.fe.fe-user-minus.mr-2
+                  | {{$t('profile.unfollow')}}
+                button.btn.btn-outline-primary(type='button')
+                  i.fe.fe-plus.mr-2
+                  | {{$t('profile.more')}}
         .row
           .col-sm-4
             .col-sm-12
@@ -50,28 +54,22 @@ div
                   h3.card-title {{$t('profile.following')}}
                 .card-body
                   .avatar-list.avatar-list-stacked
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/12.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/21.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/29.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/2.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg +8
+                    template(v-for="(followingUser, index) in following")
+                      router-link(:to="'/dashboard/profiles/' + followingUser.identifier", v-if="index <= 6")
+                        span.avatar.avatar-lg(v-if="followingUser.avatar", :style="{'background-image': `url(${followingUser.avatar})`}")
+                        span.avatar.avatar-lg.avatar-blue(v-else) {{getInitials(followingUser.username, followingUser.displayName)}}
+                      span.avatar.avatar-lg(v-if="following.length >= 7 && index === following.length - 1") +{{following.length - 7}}
             .col-sm-12
               .card
                 .card-header
                   h3.card-title {{$t('profile.followers')}}
                 .card-body
                   .avatar-list.avatar-list-stacked
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/12.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/21.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/29.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/female/2.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg(style='background-image: url(./demo/faces/male/34.jpg)')
-                    span.avatar.avatar-lg +8
+                    template(v-for="(follower, index) in followers")
+                      router-link(:to="'/dashboard/profiles/' + follower.identifier", v-if="index <= 6")
+                        span.avatar.avatar-lg(v-if="follower.avatar", :style="{'background-image': `url(${follower.avatar})`}")
+                        span.avatar.avatar-lg.avatar-blue(v-else) {{getInitials(follower.username, follower.displayName)}}
+                      span.avatar.avatar-lg(v-if="followers.length >= 7 && index === followers.length - 1") +{{followers.length - 7}}
           .col-sm-8
             .col-sm-12
               .card
@@ -83,10 +81,11 @@ div
                     i.fe.fe-star.ml-2
                     i.fe.fe-star.ml-2
                 ul.list-group.card-list-group
-                  li.list-group-item.py-5(v-for="index in 4")
-                    .btn-list.text-center.mt-7
-                      button.recommendation-button.btn.btn-secondary.btn-md Poproś o korektę
-                      button.recommendation-button.btn.btn-secondary.btn-md Zmień widoczność
+                  li.list-group-item.py-5(v-for="index in 4", :class="{'recommendation': isProfileOwner}",)
+                    template(v-if="isProfileOwner")
+                      .btn-list.text-center.mt-7
+                        button.recommendation-button.btn.btn-secondary.btn-md Poproś o korektę
+                        button.recommendation-button.btn.btn-secondary.btn-md Zmień widoczność
                     .media
                       .media-object.avatar.avatar-md.mr-4(style='background-image: url(demo/faces/male/16.jpg)')
                       .media-body

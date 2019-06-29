@@ -1,7 +1,7 @@
 <template lang="pug" src="./template.pug"></template>
 <script src="./component.js"></script>
 <style scoped>
-  .list-group-item {
+  .recommendation {
     background: rgba(0, 0, 0, 0);
     transition: background 0.5s ease;
   }
@@ -21,7 +21,7 @@
     transition: opacity .2s, visibility .2s;
   }
 
-  .list-group-item:hover {
+  .recommendation:hover {
     display: block;
     background: rgba(0, 0, 0, .3);
     -webkit-user-select: none;
@@ -30,12 +30,12 @@
     user-select: none;
   }
 
-  .list-group-item:hover .avatar {
+  .recommendation:hover .avatar {
     display: block;
     opacity: 0.1;
   }
 
-  .list-group-item:hover .recommendation-button {
+  .recommendation:hover .recommendation-button {
     visibility: visible;
     opacity: 1;
   }

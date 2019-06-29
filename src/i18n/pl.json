@@ -346,6 +346,7 @@
   "profile": {
     "none": "Brak danych",
     "follow": "Obserwuj",
+    "unfollow": "Przestań obserwować",
     "more": "Więcej",
     "bio_empty": "Ten użytkownik nie uzupełnij jeszcze swojego podsumowania",
     "location": "Lokalizacja:",
@@ -353,6 +354,8 @@
     "services": "Usługi",
     "following": "Obserwowani",
     "followers": "Obserwujący",
-    "recommendations": "Rekomendacje"
+    "recommendations": "Rekomendacje",
+    "followed": "Zaobserowano użytkownika ",
+    "unfollowed": "Przestałeś obserwować użytkownika "
   }
 }

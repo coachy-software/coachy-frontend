@@ -14,8 +14,18 @@ const fetchFollowers = async (payload) => {
   return await axios.get(`${API_URL}/profiles/${payload.identifier}/followers`, authorization())
 };
 
+const follow = async (payload) => {
+  return await axios.post(`${API_URL}/profiles/${payload.identifier}/follow`,{}, authorization())
+};
+
+const unfollow = async (payload) => {
+  return await axios.post(`${API_URL}/profiles/${payload.identifier}/unfollow`,{}, authorization())
+};
+
 export default {
   fetchOne,
   fetchFollowing,
-  fetchFollowers
+  fetchFollowers,
+  follow,
+  unfollow
 }
