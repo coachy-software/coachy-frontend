@@ -58,7 +58,7 @@ div
                       router-link(:to="'/dashboard/profiles/' + followingUser.identifier", v-if="index <= 6")
                         span.avatar.avatar-lg(v-if="followingUser.avatar", :style="{'background-image': `url(${followingUser.avatar})`}")
                         span.avatar.avatar-lg.avatar-blue(v-else) {{getInitials(followingUser.username, followingUser.displayName)}}
-                      span.avatar.avatar-lg(v-if="following.length >= 7 && index === following.length - 1") +{{following.length - 7}}
+                      span.avatar.avatar-lg(v-if="following.length > 7 && index === following.length - 1") +{{following.length - 7}}
             .col-sm-12
               .card
                 .card-header
@@ -69,7 +69,7 @@ div
                       router-link(:to="'/dashboard/profiles/' + follower.identifier", v-if="index <= 6")
                         span.avatar.avatar-lg(v-if="follower.avatar", :style="{'background-image': `url(${follower.avatar})`}")
                         span.avatar.avatar-lg.avatar-blue(v-else) {{getInitials(follower.username, follower.displayName)}}
-                      span.avatar.avatar-lg(v-if="followers.length >= 7 && index === followers.length - 1") +{{followers.length - 7}}
+                      span.avatar.avatar-lg(v-if="followers.length > 7 && index === followers.length - 1") +{{followers.length - 7}}
           .col-sm-8
             .col-sm-12
               .card

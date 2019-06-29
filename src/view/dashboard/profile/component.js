@@ -41,7 +41,7 @@ export default {
 
         this.$store.dispatch('user/get', {identifier: id})
         .then(response => {
-          ({username: this.username, displayName: this.displayName, avatar: this.avatar} = response.data)
+          ({username: this.username, displayName: this.displayName, avatar: this.avatar} = response.data);
           this.isLoading = false;
         });
 
@@ -69,14 +69,16 @@ export default {
       ProfileService.follow({identifier: this.$route.params.id})
       .then(() => {
         this.isFollowing = true;
-        notification.success(this.$t('profile.followed') + this.username)
+        this.followers.push(JSON.parse(localStorage.getItem('user')));
+        notification.success(this.$t('profile.followed') + this.username);
       });
     },
     unfollow() {
       ProfileService.unfollow({identifier: this.$route.params.id})
       .then(() => {
         this.isFollowing = false;
-        notification.success(this.$t('profile.unfollowed') + this.username)
+        this.followers = this.followers.filter(follower => follower.identifier !== JSON.parse(localStorage.getItem('user')).identifier);
+        notification.success(this.$t('profile.unfollowed') + this.username);
       });
     }
   }
