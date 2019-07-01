@@ -333,7 +333,9 @@
     "accepted": "Pomyślnie zaakceptowano plan",
     "rejected": "Odrzucono plan",
     "already_voted": "Ten plan został już zaakceptowany/odrzucony",
-    "headway_shared": "udostępnił ci swoje podsumowanie, kliknij aby zobaczyć"
+    "headway_shared": "udostępnił ci swoje podsumowanie, kliknij aby zobaczyć",
+    "followed": "cię zaobserwował, kliknij aby przejść do profilu",
+    "got_recommendation": "zostawił ci rekomendację, kliknij by zobaczyć"
   },
   "home": {
     "weight": "Waga",
