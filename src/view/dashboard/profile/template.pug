@@ -89,7 +89,7 @@ div
                   li.list-group-item.py-5
                     | {{$t('profile.none')}}
                 ul.list-group.card-list-group(v-else)
-                  li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}",)
+                  li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}", v-if="isProfileOwner || !isProfileOwner && recommendation.visible")
                     .btn-list.text-center.mt-7
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.change_visibility')}}

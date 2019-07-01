@@ -72,6 +72,8 @@ export default {
               }
             });
           });
+          
+          this.isLoading = false;
         });
 
         this.$store.dispatch('user/get', {identifier: id})
