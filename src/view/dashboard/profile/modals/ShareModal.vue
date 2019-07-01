@@ -4,7 +4,7 @@
       .input-group
         input.form-control#link_input(name='url', type='text', :value='concatenateLocationWithRoute()' readonly)
         span.input-group-append.ml-0
-        button.btn.btn-secondary(type='button', @click="copyLink") Skopiuj
+        button.btn.btn-secondary(type='button', @click="copyLink") {{$t('profile.copy')}}
 
 </template>
 <script>
@@ -29,11 +29,7 @@
         element.focus();
         element.select();
 
-        try {
-          document.execCommand('copy');
-        } catch (error) {
-          console.error(error);
-        }
+        document.execCommand('copy');
       }
     }
   }

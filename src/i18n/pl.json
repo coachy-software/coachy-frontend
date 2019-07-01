@@ -360,6 +360,17 @@
     "request_revision": "Poproś o korektę",
     "change_visibility": "Zmień widoczność",
     "add_recommendation": "Dodaj rekomendację",
-    "share": "Udostępnij link"
+    "share": "Udostępnij link",
+    "copy": "Skopiuj",
+    "rate": "Ocena: ",
+    "content": "Zawartość ",
+    "content_placeholder": "Wypełnij zawartość",
+    "rating": "Ocena",
+    "min_rating": "Minimalna wartość to 1",
+    "max_rating": "Maksymalna wartość to 10",
+    "content_required": "Zawartość jest wymagana",
+    "submit": "Dodaj",
+    "recommendation_created": "Utworzyłeś rekomendację",
+    "recommendation_faild": "Wystąpił błąd podczas tworzenia rekomendacji"
   }
 }

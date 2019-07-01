@@ -28,7 +28,7 @@ div
                     i.fe.fe-plus.mr-2
                     | {{$t('profile.more')}}
                   .dropdown-menu#more_menu
-                    span.dropdown-item() {{$t('profile.add_recommendation')}}
+                    span.dropdown-item(@click="$refs['add-recommendation-modal'].openModal()") {{$t('profile.add_recommendation')}}
                     span.dropdown-item(@click="$refs['share-modal'].openModal()") {{$t('profile.share')}}
         .row
           .col-sm-4
@@ -89,18 +89,19 @@ div
                   li.list-group-item.py-5
                     | {{$t('profile.none')}}
                 ul.list-group.card-list-group(v-else)
-                  li.list-group-item.py-5(v-for="index in 4", :class="{'recommendation': isProfileOwner}",)
+                  li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}",)
                     .btn-list.text-center.mt-7
-                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.requst_revision')}}
+                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.change_visibility')}}
                     .media
-                      .media-object.avatar.avatar-md.mr-4(style='background-image: url(demo/faces/male/16.jpg)')
+                      .media-object.avatar.avatar-md.mr-4(:style="{'background-image': `url(${recommendation.avatar})`}")
                       .media-body
                         .media-heading
-                          small.float-right.text-muted 4 min
-                          h5 Peter Richards
-                        div
-                          | Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras
-                          | justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes,
-                          | nascetur ridiculus mus.
+                          small.float-right.text-muted {{recommendation.lastModifiedDate | moment}}
+                          h5 {{recommendation.fromUsername}}
+                        div {{recommendation.content}}
+                        .media-bottom
+                          .float-right.text-muted {{$t('profile.rate')}}
+                            span.font-weight-bold {{recommendation.rating}}/10
   share-modal(ref="share-modal", :link="$route.fullPath")
+  add-recommendation-modal(ref="add-recommendation-modal", :profileUserId="$route.params.id")
