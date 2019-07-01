@@ -52,7 +52,7 @@ div
                     button.btn.btn-instagram.btn-sm.mr-1
                       span.fe.fe-instagram.mr-1
                       |  Follow
-            .col-sm-12
+            .col-sm-12(v-if="following.length > 0")
               .card
                 .card-header
                   h3.card-title {{$t('profile.following')}}
@@ -63,7 +63,7 @@ div
                         span.avatar.avatar-lg(v-if="followingUser.avatar", :style="{'background-image': `url(${followingUser.avatar})`}")
                         span.avatar.avatar-lg.avatar-blue(v-else) {{getInitials(followingUser.username, followingUser.displayName)}}
                       span.avatar.avatar-lg(v-if="following.length > 7 && index === following.length - 1") +{{following.length - 7}}
-            .col-sm-12
+            .col-sm-12(v-if="followers.length > 0")
               .card
                 .card-header
                   h3.card-title {{$t('profile.followers')}}
