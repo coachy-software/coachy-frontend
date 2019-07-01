@@ -1,5 +1,5 @@
 <template lang="pug">
-  sweet-modal(overlay-theme='dark', modal-theme='light', ref="modal")
+  sweet-modal(overlay-theme='dark', modal-theme='light', ref="modal", blocking)
     h3.card-title {{$t('profile.add_recommendation')}}
     form(@submit.prevent="postRecommendation")
       .card-body
