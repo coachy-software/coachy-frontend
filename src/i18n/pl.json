@@ -371,6 +371,7 @@
     "content_required": "Zawartość jest wymagana",
     "submit": "Dodaj",
     "recommendation_created": "Utworzyłeś rekomendację",
-    "recommendation_faild": "Wystąpił błąd podczas tworzenia rekomendacji"
+    "recommendation_faild": "Wystąpił błąd podczas tworzenia rekomendacji",
+    "content_max": "Zawartość nie może być dłuższa niż 300 znaków"
   }
 }

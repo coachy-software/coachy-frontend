@@ -1,6 +1,7 @@
 import axios from "axios";
 import {API_URL} from "@/util/constants";
 import {authorization} from "@/util/headers";
+import ObjectID from "bson-objectid";
 
 const fetchOne = async (payload) => {
   return await axios.get(`${API_URL}/profiles/${payload.identifier}`, authorization())
@@ -30,6 +31,10 @@ const createRecommendation = async (payload) => {
   return await axios.post(`${API_URL}/recommendations`, payload, authorization());
 };
 
+const fetchRecommendation = async (payload) => {
+  return await axios.get(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}`, authorization())
+};
+
 export default {
   fetchOne,
   fetchFollowing,
@@ -37,5 +42,6 @@ export default {
   follow,
   unfollow,
   fetchRecommendations,
-  createRecommendation
+  createRecommendation,
+  fetchRecommendation
 }

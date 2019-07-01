@@ -10,6 +10,7 @@
                 span.form-required *
               textarea.form-control(:class="{'is-invalid': $v.content.$error}", :placeholder="$t('profile.content_placeholder')", v-model.trim="$v.content.$model")
               .invalid-feedback(v-if="!$v.content.required") {{$t('profile.content_required')}}
+              .invalid-feedback(v-if="!$v.content.maxLength") {{$t('profile.content_max')}}
             .form-group
               label.form-check-label {{$t('profile.rating')}}
                 span.form-required *
@@ -21,9 +22,10 @@
 </template>
 <script>
   import {SweetModal, SweetModalTab} from "sweet-modal-vue";
-  import {maxValue, minValue, required} from "vuelidate/src/validators";
+  import {maxLength, maxValue, minValue, required} from "vuelidate/src/validators";
   import ProfileService from "@/service/profile.service"
   import {notification} from "@/util/toastr.utils";
+  import {trimLocationHeader} from "@/util/headers";
 
   export default {
     props: ['profileUserId'],
@@ -43,11 +45,26 @@
         this.$refs.modal.close();
       },
       postRecommendation() {
+        // TODO it's terrible
         let creatorIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
         ProfileService.createRecommendation({profileUserId: this.profileUserId, from: creatorIdentifier, content: this.content, rating: this.rating})
-        .then(() => {
-          notification.success(this.$t('profile.recommendation_created'));
-          this.closeModal()
+        .then((response) => {
+          ProfileService.fetchRecommendation({identifier: trimLocationHeader(response.headers.location)})
+          .then((result) => {
+            let recommendations = this.$parent.recommendations;
+            let recommendation = result.data;
+
+            this.$store.dispatch('user/get', {identifier: result.data.from}).then((response) => {
+              recommendation.avatar = response.data.avatar;
+              recommendation.fromUsername = response.data.username;
+
+              recommendations.push(recommendation);
+              this.$parent.recommendations = recommendations.sort((a, b) => b.rating - a.rating);
+
+              notification.success(this.$t('profile.recommendation_created'));
+              this.closeModal()
+            });
+          });
         })
         .catch(() => {
           notification.error(this.$t('profile.recommendation_failed'));
@@ -56,7 +73,7 @@
       }
     },
     validations: {
-      content: {required},
+      content: {required, maxLenght: maxLength(300)},
       rating: {minValue: minValue(1), maxValue: maxValue(10)}
     }
   }
