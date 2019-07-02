@@ -94,7 +94,8 @@ div
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
                       button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['change-visibility-modal'].openModal()") {{$t('profile.change_visibility')}}
                     .media
-                      .media-object.avatar.avatar-md.mr-4(:style="{'background-image': `url(${recommendation.from.avatar})`}")
+                      .media-object.avatar.avatar-md.mr-4(v-if="recommendation.avatar", :style="{'background-image': `url(${recommendation.from.avatar})`}")
+                      span.media-object.avatar.avatar-md.avatar-blue.text-center.mr-4(v-else) {{getInitials(recommendation.from.username, recommendation.from.displayName)}}
                       .media-body
                         .media-heading
                           small.float-right.text-muted {{recommendation.lastModifiedDate | moment}}

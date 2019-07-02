@@ -45,25 +45,19 @@
         this.$refs.modal.close();
       },
       postRecommendation() {
-        // TODO it's terrible
         let creatorIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
+
         ProfileService.createRecommendation({profileUserId: this.profileUserId, from: creatorIdentifier, content: this.content, rating: this.rating})
         .then((response) => {
           ProfileService.fetchRecommendation({identifier: trimLocationHeader(response.headers.location)})
           .then((result) => {
             let recommendations = this.$parent.recommendations;
-            let recommendation = result.data;
 
-            this.$store.dispatch('user/get', {identifier: result.data.from}).then((response) => {
-              recommendation.avatar = response.data.avatar;
-              recommendation.fromUsername = response.data.username;
+            recommendations.push(result.data);
+            this.$parent.recommendations = recommendations.sort((a, b) => b.rating - a.rating);
 
-              recommendations.push(recommendation);
-              this.$parent.recommendations = recommendations.sort((a, b) => b.rating - a.rating);
-
-              notification.success(this.$t('profile.recommendation_created'));
-              this.closeModal()
-            });
+            notification.success(this.$t('profile.recommendation_created'));
+            this.closeModal()
           });
         })
         .catch(() => {

@@ -374,6 +374,9 @@
     "submit": "Dodaj",
     "recommendation_created": "Utworzyłeś rekomendację",
     "recommendation_faild": "Wystąpił błąd podczas tworzenia rekomendacji",
-    "content_max": "Zawartość nie może być dłuższa niż 300 znaków"
+    "content_max": "Zawartość nie może być dłuższa niż 300 znaków",
+    "visible": "Widoczna",
+    "invisible": "Niewidoczna",
+    "visibility_changed": "Zmieniono status widoczności"
   }
 }

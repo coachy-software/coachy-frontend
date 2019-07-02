@@ -35,6 +35,10 @@ const fetchRecommendation = async (payload) => {
   return await axios.get(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}`, authorization())
 };
 
+const changeVisibility = async (payload) => {
+  return await axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/visibility`, payload, authorization)
+};
+
 export default {
   fetchOne,
   fetchFollowing,
@@ -43,5 +47,6 @@ export default {
   unfollow,
   fetchRecommendations,
   createRecommendation,
-  fetchRecommendation
+  fetchRecommendation,
+  changeVisibility
 }
