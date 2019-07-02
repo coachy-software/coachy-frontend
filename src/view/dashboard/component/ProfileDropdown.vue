@@ -7,7 +7,7 @@
         small.text-muted.d-block.mt-1 {{this.$t('accountType.' + this.accountType)}}
     .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow(:class="{'show': this.$parent.dropdowns.profile.open}")
       div(v-for="value in menu")
-        router-link.dropdown-item(:to="value.link")
+        router-link.dropdown-item(:to="translateLinkValue(value.link)")
           i.dropdown-icon(:class="value.icon")
           |  {{value.name}}
         .dropdown-divider(v-if="value.divider")
@@ -24,6 +24,11 @@
     }),
     components: {
       Avatar: () => import('@/view/dashboard/component/Avatar')
+    },
+    methods: {
+      translateLinkValue(link) {
+        return link.replace('{id}', store.state.user.user.identifier);
+      }
     }
   }
 </script>

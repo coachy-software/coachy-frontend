@@ -1,5 +1,10 @@
 [
   {
+    "name": "Profil",
+    "icon": "fe fe-user",
+    "link": "/dashboard/profiles/{id}"
+  },
+  {
     "name": "Ustawienia",
     "icon": "fe fe-settings",
     "link": "/dashboard/settings"
