@@ -92,16 +92,17 @@ div
                   li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}", v-if="isProfileOwner || !isProfileOwner && recommendation.visible")
                     .btn-list.text-center.mt-7
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
-                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.change_visibility')}}
+                      button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['change-visibility-modal'].openModal()") {{$t('profile.change_visibility')}}
                     .media
-                      .media-object.avatar.avatar-md.mr-4(:style="{'background-image': `url(${recommendation.avatar})`}")
+                      .media-object.avatar.avatar-md.mr-4(:style="{'background-image': `url(${recommendation.from.avatar})`}")
                       .media-body
                         .media-heading
                           small.float-right.text-muted {{recommendation.lastModifiedDate | moment}}
-                          h5 {{recommendation.fromUsername}}
+                          h5 {{recommendation.from.displayName || recommendation.from.username}}
                         div {{recommendation.content}}
                         .media-bottom
                           .float-right.text-muted {{$t('profile.rate')}}
                             span.font-weight-bold {{recommendation.rating}}/10
   share-modal(ref="share-modal", :link="$route.fullPath")
   add-recommendation-modal(ref="add-recommendation-modal", :profileUserId="$route.params.id")
+  change-visibility-modal(ref="change-visibility-modal")
