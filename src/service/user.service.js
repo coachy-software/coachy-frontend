@@ -85,5 +85,5 @@ export function changePassword(payload) {
 }
 
 export async function searchUserByUsername(payload) {
-  return await axios.get(`${API_URL}/users?size=8&username=${payload.username}`);
+  return await axios.get(`${API_URL}/users?size=8&username=${payload.username}`, authorization());
 }

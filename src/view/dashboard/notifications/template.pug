@@ -18,9 +18,10 @@ div
           tbody(v-for="(notification, index) in notifications", v-if="index <= numberOfElements")
             tr
               td.text-center(style="width: 1%")
-                .avatar.d-block.text-center(v-if="notification.senderName === 'Coachy'", :style="{'background-image': `url(${logo})`}")
-                span.avatar.d-block.avatar-blue.text-center(v-else-if="notification.senderAvatar === null") {{getInitials(notification.senderName)}}
-                .avatar.d-block.text-center(v-else, :style="{'background-image': `url(${notification.senderAvatar})`}")
+                router-link(:to="'/dashboard/profiles/' + (notification.senderId || userIdentifier)")
+                  .avatar.d-block.text-center(v-if="notification.senderName === 'Coachy'", :style="{'background-image': `url(${logo})`}")
+                  span.avatar.d-block.avatar-blue.text-center(v-else-if="notification.senderAvatar === null") {{getInitials(notification.senderName)}}
+                  .avatar.d-block.text-center(v-else, :style="{'background-image': `url(${notification.senderAvatar})`}")
               td(style="width: 10%")
                 div {{notification.senderName}}
                   .small.text-muted
