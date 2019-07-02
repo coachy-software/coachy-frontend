@@ -13,6 +13,10 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    top: 40%;
+    bottom: 0;
+    margin-top: auto !important;
+    margin-bottom: auto;
   }
 
   .list-group-item .recommendation-button {
