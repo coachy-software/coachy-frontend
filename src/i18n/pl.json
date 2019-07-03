@@ -377,6 +377,8 @@
     "content_max": "Zawartość nie może być dłuższa niż 300 znaków",
     "visible": "Widoczna",
     "invisible": "Niewidoczna",
-    "visibility_changed": "Zmieniono status widoczności"
+    "visibility": "Widoczność",
+    "visibility_changed": "Zmieniono status widoczności",
+    "submit_visibility": "Zmień"
   }
 }

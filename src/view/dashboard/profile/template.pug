@@ -92,7 +92,7 @@ div
                   li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}", v-if="isProfileOwner || !isProfileOwner && recommendation.visible")
                     .btn-list.text-center.mt-7
                       button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
-                      button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['change-visibility-modal'].openModal()") {{$t('profile.change_visibility')}}
+                      button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['change-visibility-modal'].openModal(recommendation.id)") {{$t('profile.change_visibility')}}
                     .media
                       router-link(:to="'/dashboard/profiles/' + recommendation.from.identifier")
                         .media-object.avatar.avatar-md.mr-4(v-if="recommendation.avatar", :style="{'background-image': `url(${recommendation.from.avatar})`}")
@@ -106,5 +106,5 @@ div
                           .float-right.text-muted {{$t('profile.rate')}}
                             span.font-weight-bold {{recommendation.rating}}/10
   share-modal(ref="share-modal", :link="$route.fullPath")
-  add-recommendation-modal(ref="add-recommendation-modal", :profileUserId="$route.params.id")
+  add-recommendation-modal(ref="add-recommendation-modal")
   change-visibility-modal(ref="change-visibility-modal")

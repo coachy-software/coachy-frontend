@@ -11,7 +11,8 @@
               select.form-control.custom-select(v-model="visible")
                 option(:value="true") {{$t('profile.visible')}}
                 option(:value="false") {{$t('profile.invisible')}}
-
+      .card-footer
+        button.btn.btn-primary.float-right(type='submit') {{$t('profile.submit_visibility')}}
 </template>
 <script>
   import {SweetModal, SweetModalTab} from "sweet-modal-vue";
@@ -20,20 +21,26 @@
 
   export default {
     data: () => ({
-      visible: true
+      visible: true,
+      recommendationId: ''
     }),
     components: {
       SweetModal,
       SweetModalTab
     },
     methods: {
-      openModal() {
+      openModal(recommendationId) {
+        this.recommendationId = recommendationId;
         this.$refs.modal.open();
       },
-      changeVisiblity() {
-        ProfileService.changeVisibility({visible: this.visible})
+      closeModal() {
+        this.$refs.modal.close();
+      },
+      changeVisibility() {
+        ProfileService.changeVisibility({visible: this.visible, identifier: this.recommendationId})
         .then(() => {
-          notification.success(this.$t('profile.visibility_changed'))
+          notification.success(this.$t('profile.visibility_changed'));
+          this.closeModal();
         })
       }
     }

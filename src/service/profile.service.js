@@ -4,39 +4,39 @@ import {authorization} from "@/util/headers";
 import ObjectID from "bson-objectid";
 
 const fetchOne = async (payload) => {
-  return await axios.get(`${API_URL}/profiles/${payload.identifier}`, authorization())
+  return axios.get(`${API_URL}/profiles/${payload.identifier}`, authorization());
 };
 
 const fetchFollowing = async (payload) => {
-  return await axios.get(`${API_URL}/profiles/${payload.identifier}/following`, authorization())
+  return axios.get(`${API_URL}/profiles/${payload.identifier}/following`, authorization());
 };
 
 const fetchFollowers = async (payload) => {
-  return await axios.get(`${API_URL}/profiles/${payload.identifier}/followers`, authorization())
+  return axios.get(`${API_URL}/profiles/${payload.identifier}/followers`, authorization());
 };
 
 const follow = async (payload) => {
-  return await axios.post(`${API_URL}/profiles/${payload.identifier}/follow`, {}, authorization())
+  return axios.post(`${API_URL}/profiles/${payload.identifier}/follow`, {}, authorization());
 };
 
 const unfollow = async (payload) => {
-  return await axios.post(`${API_URL}/profiles/${payload.identifier}/unfollow`, {}, authorization())
+  return axios.post(`${API_URL}/profiles/${payload.identifier}/unfollow`, {}, authorization());
 };
 
 const fetchRecommendations = async (payload) => {
-  return await axios.get(`${API_URL}/profiles/${payload.identifier}/recommendations`, authorization())
+  return axios.get(`${API_URL}/profiles/${payload.identifier}/recommendations`, authorization());
 };
 
 const createRecommendation = async (payload) => {
-  return await axios.post(`${API_URL}/recommendations`, payload, authorization());
+  return axios.post(`${API_URL}/recommendations`, payload, authorization());
 };
 
 const fetchRecommendation = async (payload) => {
-  return await axios.get(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}`, authorization())
+  return axios.get(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}`, authorization());
 };
 
 const changeVisibility = async (payload) => {
-  return await axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/visibility`, payload, authorization)
+  return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/visibility`, {visible: payload.visible}, authorization());
 };
 
 export default {

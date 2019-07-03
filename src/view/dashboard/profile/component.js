@@ -1,8 +1,9 @@
-import ProfileService from "@/service/profile.service"
+import ProfileService from "@/service/profile.service";
 import {getInitials} from "@/util/user.utils";
 import {notification} from "@/util/toastr.utils";
 import ShareModal from "./modals/ShareModal";
-import AddRecommendationModal from "./modals/AddRecommendationModal"
+import AddRecommendationModal from "./modals/AddRecommendationModal";
+import ChangeVisibilityModal from "./modals/ChangeVisibilityModal";
 import moment from "moment";
 
 export default {
@@ -26,7 +27,8 @@ export default {
   }),
   components: {
     ShareModal,
-    AddRecommendationModal
+    AddRecommendationModal,
+    ChangeVisibilityModal
   },
   created() {
     this.fetchOne(this.$route.params.id);

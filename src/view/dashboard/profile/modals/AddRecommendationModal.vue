@@ -28,7 +28,6 @@
   import {trimLocationHeader} from "@/util/headers";
 
   export default {
-    props: ['profileUserId'],
     data: () => ({
       content: '',
       rating: 0
@@ -47,7 +46,7 @@
       postRecommendation() {
         let creatorIdentifier = JSON.parse(localStorage.getItem('user')).identifier;
 
-        ProfileService.createRecommendation({profileUserId: this.profileUserId, from: creatorIdentifier, content: this.content, rating: this.rating})
+        ProfileService.createRecommendation({profileUserId: this.$route.params.id, from: creatorIdentifier, content: this.content, rating: this.rating})
         .then((response) => {
           ProfileService.fetchRecommendation({identifier: trimLocationHeader(response.headers.location)})
           .then((result) => {
