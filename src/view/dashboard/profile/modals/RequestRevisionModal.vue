@@ -11,6 +11,7 @@
   import ProfileService from "@/service/profile.service";
   import {notification} from "@/util/toastr.utils";
   import {SweetModal, SweetModalTab} from "sweet-modal-vue";
+  import {getErrorMessage} from "@/util/validation.utils";
 
   export default {
     data: () => ({
@@ -32,6 +33,10 @@
         ProfileService.requestRevision({identifier: this.recommendationId})
         .then(() => {
           notification.success(this.$t('profile.request_revision_notification'));
+          this.closeModal();
+        })
+        .catch(error => {
+          notification.error(getErrorMessage('profile', error));
           this.closeModal();
         })
       }

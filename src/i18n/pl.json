@@ -384,6 +384,7 @@
     "are_you_sure": "Czy jesteś pewien?",
     "yes": "Tak",
     "no": "Nie",
-    "request_revision_notification": "Wysłano prośbę o poprawę rekomendacji"
+    "request_revision_notification": "Wysłano prośbę o poprawę rekomendacji",
+    "409": "Już wysłałeś prośbę"
   }
 }
