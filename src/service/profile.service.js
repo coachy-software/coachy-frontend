@@ -39,6 +39,10 @@ const changeVisibility = async (payload) => {
   return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/visibility`, {visible: payload.visible}, authorization());
 };
 
+const requestRevision = async (payload) => {
+  return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/request-revision`, {}, authorization());
+};
+
 export default {
   fetchOne,
   fetchFollowing,
@@ -48,5 +52,6 @@ export default {
   fetchRecommendations,
   createRecommendation,
   fetchRecommendation,
-  changeVisibility
+  changeVisibility,
+  requestRevision
 }

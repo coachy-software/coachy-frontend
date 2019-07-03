@@ -333,9 +333,10 @@
     "accepted": "Pomyślnie zaakceptowano plan",
     "rejected": "Odrzucono plan",
     "already_voted": "Ten plan został już zaakceptowany/odrzucony",
-    "headway_shared": "udostępnił ci swoje podsumowanie, kliknij aby zobaczyć",
-    "followed": "cię zaobserwował, kliknij aby przejść do profilu",
-    "got_recommendation": "zostawił ci rekomendację, kliknij by zobaczyć"
+    "headway_shared": "udostępnił Ci swoje podsumowanie, kliknij aby zobaczyć",
+    "followed": "zaobserwował Cię, kliknij aby przejść do profilu",
+    "got_recommendation": "zostawił Ci rekomendację, kliknij by zobaczyć",
+    "requests_change": "składa prośbę o korektę rekomendacji"
   },
   "home": {
     "weight": "Waga",
@@ -379,6 +380,10 @@
     "invisible": "Niewidoczna",
     "visibility": "Widoczność",
     "visibility_changed": "Zmieniono status widoczności",
-    "submit_visibility": "Zmień"
+    "submit_visibility": "Zmień",
+    "are_you_sure": "Czy jesteś pewien?",
+    "yes": "Tak",
+    "no": "Nie",
+    "request_revision_notification": "Wysłano prośbę o poprawę rekomendacji"
   }
 }

@@ -91,7 +91,7 @@ div
                 ul.list-group.card-list-group(v-else)
                   li.list-group-item.py-5(v-for="recommendation in recommendations", :class="{'recommendation': isProfileOwner}", v-if="isProfileOwner || !isProfileOwner && recommendation.visible")
                     .btn-list.text-center.mt-7
-                      button.recommendation-button.btn.btn-secondary.btn-md {{$t('profile.request_revision')}}
+                      button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['request-revision-modal'].openModal(recommendation.id)") {{$t('profile.request_revision')}}
                       button.recommendation-button.btn.btn-secondary.btn-md(@click="$refs['change-visibility-modal'].openModal(recommendation.id)") {{$t('profile.change_visibility')}}
                     .media
                       router-link(:to="'/dashboard/profiles/' + recommendation.from.identifier")
@@ -108,3 +108,4 @@ div
   share-modal(ref="share-modal", :link="$route.fullPath")
   add-recommendation-modal(ref="add-recommendation-modal")
   change-visibility-modal(ref="change-visibility-modal")
+  request-revision-modal(ref="request-revision-modal")
