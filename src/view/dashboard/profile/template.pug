@@ -2,7 +2,8 @@ div
   .map-header
     .map-header-layer(style="position: relative; overflow: hidden; z-index: -1;")
       div(style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);")
-        img(src="@/assets/images/default-profile-background.jpeg", style="object-fit: cover !important;")
+        img(v-if="bannerUrl !== null", :src="bannerUrl", style="object-fit: cover !important;")
+        img(v-else, src="@/assets/images/default-profile-background.jpeg", style="object-fit: cover !important;")
   .container
     #dimmer.dimmer(:class="{'active': isLoading}")
       .loader

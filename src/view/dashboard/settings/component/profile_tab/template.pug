@@ -54,5 +54,10 @@ div
                   span.input-icon-addon
                     i.fe.fe-twitter
                   input.form-control(type='text', :placeholder="$t('profile.account_name')", v-model="socialLinks[2].link")
+            .col-sm-6
+              .form-group
+                .custom-file
+                  label.form-label {{$t('avatar_tab.file')}}
+                  input(type="file", id="banner", name="banner", accept="image/png, image/jpeg", ref="file")
     .card-footer.text-right
       button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('profile.update')}}

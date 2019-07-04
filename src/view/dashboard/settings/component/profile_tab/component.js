@@ -1,6 +1,10 @@
 import {url, maxLength} from "vuelidate/src/validators";
 import ProfileService from "@/service/profile.service";
 import {notification} from "@/util/toastr.utils";
+import axios from "axios";
+import {API_URL} from "@/util/constants";
+import {multipartHeader} from "@/util/headers";
+import {obtainImage} from "@/util/file.utils";
 
 export default {
   data: () => ({
@@ -45,6 +49,20 @@ export default {
     update() {
       this.isLoading = true;
 
+      let files = this.$refs.file.files;
+
+      if (files.length === 1) {
+        axios.post(`${API_URL}/uploads`, obtainImage(files[0], 'banners'), multipartHeader())
+        .then(response => {
+          this.bannerUrl = response.headers.location;
+          this.handleUpdate();
+        });
+        return;
+      }
+
+      this.handleUpdate();
+    },
+    handleUpdate() {
       ProfileService.update({
         identifier: this.userIdentifier,
         location: this.location,
