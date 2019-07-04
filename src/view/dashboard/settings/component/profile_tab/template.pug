@@ -59,5 +59,12 @@ div
                 .custom-file
                   label.form-label {{$t('avatar_tab.file')}}
                   input(type="file", id="banner", name="banner", accept="image/png, image/jpeg", ref="file")
+            .col-md-6
+              .form-group
+                .custom-switches-stacked.mt-5
+                  label.custom-switch
+                    input.custom-switch-input(type='checkbox', name='custom-switch-checkbox', v-model="resetBanner")
+                    span.custom-switch-indicator
+                    span.custom-switch-description {{$t('profile.delete_banner')}}
     .card-footer.text-right
       button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('profile.update')}}

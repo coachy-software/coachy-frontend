@@ -399,6 +399,7 @@
     "bio_max": "Podsumowanie nie może mieć więcej niż 500 znaków",
     "bio": "Podsumowanie",
     "updated": "Zakutalizowano profil",
-    "account_name": "Nazwa konta"
+    "account_name": "Nazwa konta",
+    "delete_banner": "Usuń banner"
   }
 }

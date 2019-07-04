@@ -21,7 +21,8 @@ export default {
     services: [],
     userIdentifier: JSON.parse(localStorage.getItem('user')).identifier,
     isLoading: false,
-    serviceToAdd: ''
+    serviceToAdd: '',
+    resetBanner: false
   }),
   created() {
     this.isLoading = true;
@@ -48,7 +49,6 @@ export default {
   methods: {
     update() {
       this.isLoading = true;
-
       let files = this.$refs.file.files;
 
       if (files.length === 1) {
@@ -70,7 +70,7 @@ export default {
         bio: this.bio,
         title: this.title,
         socialLinks: this.socialLinks.sort(),
-        bannerUrl: this.bannerUrl,
+        bannerUrl: this.resetBanner ?  '' : this.bannerUrl,
         services: this.services
       }).then(() => {
         this.isLoading = false;
