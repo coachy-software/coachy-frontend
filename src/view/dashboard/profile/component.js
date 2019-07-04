@@ -83,7 +83,7 @@ export default {
         this.isLoading = false;
       }).catch(() => {
         this.isLoading = false;
-        this.$router.back()
+        this.$router.back();
       });
     },
     follow() {

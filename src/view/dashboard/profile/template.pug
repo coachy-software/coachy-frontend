@@ -40,7 +40,7 @@ div
                   p {{$t('profile.site')}}
                     span(style="font-weight: 500").ml-1
                       a(:href="website", target="_blank") {{website || $t('profile.none')}}
-                  p {{$t('profile.services')}}
+                  p(v-show="services !== null") {{$t('profile.services')}}
                     span.tag.ml-1.mb-2(v-for="service in services") {{service}}
                   div.mt-6
                     button.btn.btn-twitter.btn-sm.mr-1
