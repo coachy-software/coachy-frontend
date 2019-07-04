@@ -18,7 +18,7 @@
               .invalid-feedback(v-if="!$v.rating.minValue") {{$t('profile.min_rating')}}
               .invalid-feedback(v-if="!$v.rating.maxValue") {{$t('profile.max_rating')}}
       .card-footer
-        button.btn.btn-primary.float-right(type="submit", :disabled="$v.$invalid") {{$t('profile.submit')}}
+        button.btn.btn-primary.float-right(type="submit", :disabled="$v.$invalid") {{$t('profile.edit')}}
 </template>
 <script>
   import {SweetModal, SweetModalTab} from "sweet-modal-vue";
