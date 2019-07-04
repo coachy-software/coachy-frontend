@@ -25,6 +25,7 @@ import HeadwayCreateView from '@/view/dashboard/headway_create/HeadwayCreateView
 import HeadwayView from '@/view/dashboard/headway/HeadwayView';
 import NotificationsView from '@/view/dashboard/notifications/NotificationsView';
 import ProfileView from '@/view/dashboard/profile/ProfileView';
+import EditRecommendationModal from '@/view/dashboard/profile/modals/EditRecommendationModal';
 
 const beforeEnterChat = (to, from, next) => {
   let user = JSON.parse(localStorage.getItem('user'));
@@ -77,7 +78,11 @@ export default [
       route('headway-journals/new', HeadwayCreateView),
       route('headway-journals/:id', HeadwayView),
       route('notifications', NotificationsView, {props: (route) => ({page: route.query.page})}),
-      route('profiles/:id', ProfileView)
+      route('profiles/:id', ProfileView, {
+        children: [
+          route('edit-recommendation/:recommendationId', EditRecommendationModal)
+        ]
+      })
     ]
   }, {requiresAuth: true})
 ]

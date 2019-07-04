@@ -374,7 +374,7 @@
     "content_required": "Zawartość jest wymagana",
     "submit": "Dodaj",
     "recommendation_created": "Utworzyłeś rekomendację",
-    "recommendation_faild": "Wystąpił błąd podczas tworzenia rekomendacji",
+    "recommendation_failed": "Wystąpił błąd podczas tworzenia rekomendacji",
     "content_max": "Zawartość nie może być dłuższa niż 300 znaków",
     "visible": "Widoczna",
     "invisible": "Niewidoczna",
@@ -385,6 +385,9 @@
     "yes": "Tak",
     "no": "Nie",
     "request_revision_notification": "Wysłano prośbę o poprawę rekomendacji",
-    "409": "Już wysłałeś prośbę"
+    "409": "Już wysłałeś prośbę",
+    "edit_recommendation": "Edytuj rekomendację",
+    "recommendation_changed_notification": "Rekomendacja została edytowana",
+    "recommendation_changed_failed_notification": "Wystąpił błąd podczas tworzenia notyfikacji"
   }
 }

@@ -3,44 +3,49 @@ import {API_URL} from "@/util/constants";
 import {authorization} from "@/util/headers";
 import ObjectID from "bson-objectid";
 
-const fetchOne = async (payload) => {
+const fetchOne = async payload => {
   return axios.get(`${API_URL}/profiles/${payload.identifier}`, authorization());
 };
 
-const fetchFollowing = async (payload) => {
+const fetchFollowing = async payload => {
   return axios.get(`${API_URL}/profiles/${payload.identifier}/following`, authorization());
 };
 
-const fetchFollowers = async (payload) => {
+const fetchFollowers = async payload => {
   return axios.get(`${API_URL}/profiles/${payload.identifier}/followers`, authorization());
 };
 
-const follow = async (payload) => {
+const follow = async payload => {
   return axios.post(`${API_URL}/profiles/${payload.identifier}/follow`, {}, authorization());
 };
 
-const unfollow = async (payload) => {
+const unfollow = async payload => {
   return axios.post(`${API_URL}/profiles/${payload.identifier}/unfollow`, {}, authorization());
 };
 
-const fetchRecommendations = async (payload) => {
+const fetchRecommendations = async payload => {
   return axios.get(`${API_URL}/profiles/${payload.identifier}/recommendations`, authorization());
 };
 
-const createRecommendation = async (payload) => {
+const createRecommendation = async payload => {
   return axios.post(`${API_URL}/recommendations`, payload, authorization());
 };
 
-const fetchRecommendation = async (payload) => {
+const fetchRecommendation = async payload => {
   return axios.get(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}`, authorization());
 };
 
-const changeVisibility = async (payload) => {
+const changeVisibility = async payload => {
   return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/visibility`, {visible: payload.visible}, authorization());
 };
 
-const requestRevision = async (payload) => {
+const requestRevision = async payload => {
   return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/request-revision`, {}, authorization());
+};
+
+const commitRevision = async payload => {
+  return axios.post(`${API_URL}/profiles/${ObjectID.generate()}/recommendations/${payload.identifier}/commit-revision`,
+      {content: payload.content, rating: payload.rating}, authorization());
 };
 
 export default {
@@ -53,5 +58,6 @@ export default {
   createRecommendation,
   fetchRecommendation,
   changeVisibility,
-  requestRevision
+  requestRevision,
+  commitRevision
 }
