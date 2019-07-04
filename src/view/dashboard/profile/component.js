@@ -18,7 +18,11 @@ export default {
     bannerUrl: '',
     location: '',
     services: [],
-    socialLinks: [],
+    socialLinks: [
+      {name: 'Instagram', link: ''},
+      {name: 'Facebook', link: ''},
+      {name: 'Twitter', link: ''}
+    ],
     recommendations: [],
     isFollowing: false,
     isProfileOwner: false,
@@ -80,6 +84,7 @@ export default {
           socialLinks: this.socialLinks
         } = result);
 
+        this.socialLinks = this.socialLinks.sort();
         this.isLoading = false;
       }).catch(() => {
         this.isLoading = false;

@@ -4,6 +4,11 @@
     "icon": "fe fe-settings",
     "link": "/dashboard/settings/account"
   },
+  "profile": {
+    "name": "Profil",
+    "icon": "fe fe-user",
+    "link": "/dashboard/settings/profile"
+  },
   "avatar": {
     "name": "Avatar",
     "icon": "fe fe-image",
@@ -11,7 +16,7 @@
   },
   "login": {
     "name": "Login",
-    "icon": "fa fa-user-circle",
+    "icon": "fa fa-key",
     "link": "/dashboard/settings/login"
   },
   "password": {

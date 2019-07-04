@@ -1,0 +1,58 @@
+div
+  form(@submit.prevent="update")
+    .card-body
+      #dimmer.dimmer(:class="{'active': isLoading}")
+        .loader
+        .dimmer-content
+          h3.card-title {{$t('profile.settings_card_title')}}
+          .row
+            .col-sm-6
+              .form-group
+                label.form-label {{$t('profile.location')}}
+                input.form-control(type='text', :placeholder="$t('profile.location')", v-model="location")
+            .col-sm-6
+              .form-group
+                label.form-label {{$t('profile.site')}}
+                input.form-control(:class="{'is-invalid': $v.website.$error}", type='text', :placeholder="$t('profile.site')", v-model.trim="$v.website.$model")
+                .invalid-feedback(v-if="!$v.website.url") {{$t('validation.url')}}
+            .col-sm-6
+              .form-group
+                label.form-label {{$t('profile.bio')}}
+                textarea.form-control(:class="{'is-invalid': $v.bio.$error}", rows='4', :placeholder="$t('profile.bio')", v-model.trim="$v.bio.$model", maxlength=501)
+                .invalid-feedback(v-if="!$v.bio.maxLength") {{$t('profile.bio_max')}}
+            .col-sm-6
+              .form-group
+                label.form-label Tytuł profilu
+                input.form-control(type="text", placeholder="Tytuł profilu", v-model="title")
+            .col-sm-8
+              .form-group
+                label.form-label {{$t('profile.services')}}
+                .input-group
+                  input.form-control(type='text', :placeholder="$t('profile.services_placeholder')", v-model="serviceToAdd")
+                  span.input-group-append
+                    button.btn.btn-secondary(type='button', @click="addService") {{$t('profile.add')}}
+              .form-group(v-if="services !== null")
+                .selectize-input.items.not-full.has-options.has-items
+                  .tags.text-left
+                    template(v-for="service in services")
+                      span.tag
+                        | {{service}}
+                        span.tag-addon.fake-link(@click="removeService(service)")
+                          i.fe.fe-x
+            .col-sm-4
+              .form-group
+                label.form-label {{$t('profile.social_media')}}
+                .input-icon
+                  span.input-icon-addon
+                    i.fe.fe-instagram
+                  input.form-control(type='text', :placeholder="$t('profile.account_name')", v-model="socialLinks[0].link").mb-2
+                .input-icon
+                  span.input-icon-addon
+                    i.fe.fe-facebook
+                  input.form-control(type='text', :placeholder="$t('profile.account_name')", v-model="socialLinks[1].link").mb-2
+                .input-icon
+                  span.input-icon-addon
+                    i.fe.fe-twitter
+                  input.form-control(type='text', :placeholder="$t('profile.account_name')", v-model="socialLinks[2].link")
+    .card-footer.text-right
+      button.btn.btn-primary(type='submit', :disabled="$v.$invalid") {{$t('profile.update')}}

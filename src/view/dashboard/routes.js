@@ -14,6 +14,7 @@ import BoardView from '@/view/dashboard/board/BoardView';
 import LoginTab from '@/view/dashboard/settings/component/login_tab/LoginTab';
 import PasswordTab from '@/view/dashboard/settings/component/password_tab/PasswordTab';
 import AccountDeleteTab from '@/view/dashboard/settings/component/delete_account_tab/DeleteAccountTab';
+import ProfileTab from '@/view/dashboard/settings/component/profile_tab/ProfileTab';
 import ChatsView from '@/view/dashboard/chats/ChatsView';
 import ChatView from '@/view/dashboard/chat/ChatView';
 import BmiCalculatorView from '@/view/dashboard/bmi_calculator/BmiCalculatorView';
@@ -56,7 +57,8 @@ export default [
           route('avatar', AvatarTab),
           route('login', LoginTab),
           route('password', PasswordTab),
-          route('delete_account', AccountDeleteTab)
+          route('delete_account', AccountDeleteTab),
+            route('profile', ProfileTab)
         ]
       }),
       route('schedules', SchedulesView),

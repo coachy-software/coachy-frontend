@@ -35,23 +35,26 @@ div
             .col-sm-12
               .card
                 .card-body(style="font-weight: 600")
-                  p {{$t('profile.location')}}
+                  p {{$t('profile.location')}}:
                     span.tag.ml-2 {{location || $t('profile.none')}}
-                  p {{$t('profile.site')}}
+                  p {{$t('profile.site')}}:
                     span(style="font-weight: 500").ml-1
                       a(:href="website", target="_blank") {{website || $t('profile.none')}}
-                  p(v-show="services !== null") {{$t('profile.services')}}
+                  p(v-show="services !== null") {{$t('profile.services')}}:
                     span.tag.ml-1.mb-2(v-for="service in services") {{service}}
                   div.mt-6
-                    button.btn.btn-twitter.btn-sm.mr-1
-                      span.fe.fe-twitter.mr-1
-                      |  Follow
-                    button.btn.btn-facebook.btn-sm.mr-1
-                      span.fe.fe-facebook.mr-1
-                      |  Like
-                    button.btn.btn-instagram.btn-sm.mr-1
-                      span.fe.fe-instagram.mr-1
-                      |  Follow
+                    a(:href="'https://www.instagram.com/' + socialLinks[0].link", target="_blank")
+                      button.btn.btn-outline-primary.btn-instagram.btn-sm.mr-1
+                        span.fe.fe-instagram.mr-1
+                        |  Follow
+                    a(:href="'https://www.facebook.com/' + socialLinks[1].link", target="_blank")
+                      button.btn.btn-facebook.btn-sm.mr-1
+                        span.fe.fe-facebook.mr-1
+                        |  Like
+                    a(:href="'https://twitter.com/' + socialLinks[2].link", target="_blank")
+                      button.btn.btn-twitter.btn-sm.mr-1
+                        span.fe.fe-twitter.mr-1
+                        |  Follow
             .col-sm-12(v-if="following.length > 0")
               .card
                 .card-header

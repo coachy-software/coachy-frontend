@@ -22,7 +22,8 @@
     "password_minLength": "Hasło musi mieć minimum 6 znaki",
     "confirm_password": "Hasła muszą być takie same",
     "name_required": "Nazwa jest wymagana",
-    "charge_required": "Nazwa konta podopiecznego jest wymagana"
+    "charge_required": "Nazwa konta podopiecznego jest wymagana",
+    "url": "Zły format adresu"
   },
   "login": {
     "bad_credentials": "Niepoprawne dane logowania",
@@ -352,7 +353,7 @@
     "unfollow": "Przestań obserwować",
     "more": "Więcej",
     "bio_empty": "Ten użytkownik nie uzupełnij jeszcze swojego podsumowania",
-    "location": "Lokalizacja:",
+    "location": "Lokalizacja",
     "site": "Witryna",
     "services": "Usługi",
     "following": "Obserwowani",
@@ -388,6 +389,16 @@
     "409": "Już wysłałeś prośbę",
     "edit_recommendation": "Edytuj rekomendację",
     "recommendation_changed_notification": "Rekomendacja została edytowana",
-    "recommendation_changed_failed_notification": "Wystąpił błąd podczas tworzenia notyfikacji"
+    "recommendation_changed_failed_notification": "Wystąpił błąd podczas tworzenia notyfikacji",
+    "settings_card_title": "Edytuj profil",
+    "update": "Zaktualizuj",
+    "default_select": "Wybierz swoją opcję",
+    "services_placeholder": "Dodaj usługę",
+    "add": "Dodaj",
+    "social_media": "Media społecznościowe",
+    "bio_max": "Podsumowanie nie może mieć więcej niż 500 znaków",
+    "bio": "Podsumowanie",
+    "updated": "Zakutalizowano profil",
+    "account_name": "Nazwa konta"
   }
 }
