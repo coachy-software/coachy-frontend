@@ -3,6 +3,7 @@
 
 ## Directory-based project format:
 .idea/
+.vscode/
 *.css.map
 
 ## File-based project format:

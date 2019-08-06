@@ -5,9 +5,7 @@
 </template>
 
 <script>
-  export default {
-    mounted() {
-      this.$router.push('/dashboard');
-    }
-  }
+export default {
+  name: 'landing-layout',
+}
 </script>
