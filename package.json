@@ -38,7 +38,7 @@
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.0",
     "sockjs": "^0.3.19",
     "sockjs-client": "^1.3.0",
     "stompjs": "^2.3.3",
